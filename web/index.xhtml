@@ -3,6 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    
     <h:head>
         <title>SIIM-Inicio</title>
         <meta charset="utf-8"/>
@@ -13,9 +15,13 @@
         <!-- css personalizados -->
         <link rel="stylesheet" href="css/main.css"/>
     </h:head>
+    
+    
     <h:body>
         <div class="container-fluid">
-            <!-- Navegación -->
+            
+<!-- Navegación -->
+
             <nav class="navbar navbar-expand-md navbar-light bg-light">
                 <div class="container">
                     <a class="navbar-brand" href="#">
@@ -26,7 +32,8 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <!-- Botonoes de la barra de navegación -->
+<!-- Botonoes de la barra de navegación -->
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
@@ -44,22 +51,9 @@
                             <li class="nav-item active">
                                 <a class="nav-link" id="btn-abrir-popup" style="color: rgb(219, 129, 45)">Ingresar</a>
                             </li>
-                            <!-- Formulario de Ingreso -->
-                            <div class="overlay" id="overlay">
-                                <div class="popup" id="popup">
-                                    <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
-                                    <h3>INGRESAR</h3>
-                                    <h4>Ingrese Usuario y Contraseña.</h4>
-                                    <form action="">
-                                        <div class="contenedor-inputs">
-                                            <input type="text" placeholder="Nombre"/>
-                                            <input type="email" placeholder="Correo"/>
-                                        </div>
-                                        <input type="submit" class="btn-submit" value="Ingresar"/>
-                                    </form>
-                                </div>
-                            </div>
-                            <!--Desplegable para Selección de idioma -->
+                            
+<!--Desplegable para Selección de idioma -->
+
                             <li class="nav-item active dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Idioma</a>
@@ -71,297 +65,355 @@
                     </div>
                 </div>
             </nav>
+            
+<!--Header tipo carrusel-->
 
-<!-- HEADER -->
-<header class="main-header">
-  <div class="background-overlay text-white py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h1>Nuestros servicios</h1>
-          <p>Somos una empresa dedicada a labores de apoyo y asesoría a empresas de tipo industrial, en donde a través del outsourcing, ofrecemos servicios de fabricación, mecanizado y mantenimiento de:
-          </p>
-          <ul>
-            <li>Repuestos y partes para maquinaria</li>
-            <li>Troqueles para Corte y Doblado</li>
-            <li>Moldes y Accesorios</li>
-            <li>Diseño de Troqueles, Moldes, Galgas de Calibración y Control, Dispositivos para Fabricación y Ensamble de Piezas</li>
-            <li>Dispositivos de ensamble</li>
-            <li>Galgas para Verificación</li>
-            <li>Electrodos de soldadura y erosión</li>
-            <li>Herraminetas para punzonado de lámina</li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <img src="" alt="Obrero" class="img-fluid" style="max-height:56%; margin-top: 30px"/>
-        </div>     
-      </div> 
-    </div>
-  </div>
-</header>
-<!---->
+            <div class="bd-example">
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="5"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="6"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="7"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="img/Engranes.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Repuestos y partes para maquinaria</h5>
+<!--                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>-->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/Troquel_doblado.jpg" style="max-height: 550px" class="d-block w-100" alt="..."/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Troqueles para Corte y Doblado</h5>
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/Moldes.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Moldes y Accesorios</h5>
+<!--                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>-->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/Diseño planos.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Diseño de Troqueles, Moldes, Galgas de Calibración y Control,Dispositivos para Fabricación y Ensamble de Piezas</h5>
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/Fresado.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Dispositivos de ensamble</h5>
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/Galgas.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Galgas para verificación</h5>
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/Soldadura.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Electrodos de soldadura y erosión</h5>
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/Punzonadora.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Herramientas para punzonado de lamina</h5>
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            
+<!--Formulario de ingreso-->
+
+            <div class="overlay" id="overlay">
+                <div class="popup" id="popup">
+                    <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                    <h3>INGRESAR</h3>
+                    <h4>Ingrese Usuario y Contraseña.</h4>
+                    <form action="">
+                        <div class="contenedor-inputs">
+                            <input type="text" placeholder="Nombre"/>
+                            <input type="email" placeholder="Correo"/>
+                        </div>
+                        <input type="submit" class="btn-submit" value="Ingresar"/>
+                    </form>
+                </div>
+            </div>
+
 <!--Registrate-->
-<!---->
-<section id="Regístrate" style="background:#f0f0e0;">
-  <div class="container py-2"/>
-    <h1 style="text-align: center; color: rgb(219, 129, 45)">Regístrate</h1>
-    <hr/>
-    <form>
-      <form class="needs-validation" novalidate="">
 
-       <!-- primera linea -->
-       <div class="form-row">
-        <div class="col-md-4 mb-3">
-          <label for="validationCustom01">Primer Nombre</label>
-          <input type="text" class="form-control" id="validationCustom01" placeholder="" required=""/>
-          <div class="valid-feedback">
-            Looks good!
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="validationCustom01">Segundo Nombre</label>
-          <input type="text" class="form-control" id="validationCustom02" placeholder=""/>
-          <div class="valid-feedback">
-            Looks good!
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="validationCustom03">Primer Apellido</label>
-          <input type="text" class="form-control" id="validationCustom03" placeholder="" required=""/>
-          <div class="valid-feedback">
-            Looks good!
-          </div>
-        </div>
-      </div>
+            <section id="Regístrate" style="background:#f0f0e0;">
+                <div class="container py-5">
+                    <h1 style="text-align: center; color: rgb(219, 129, 45)">Regístrate</h1>
+                    <hr/>
+                    <form>
+                        <form class="needs-validation" novalidate="">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">Primer Nombre</label>
+                                    <input type="text" class="form-control" id="validationCustom01" placeholder="" required=""/>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">Segundo Nombre</label>
+                                    <input type="text" class="form-control" id="validationCustom02" placeholder=""/>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom03">Primer Apellido</label>
+                                    <input type="text" class="form-control" id="validationCustom03" placeholder="" required=""/>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom04" style="column-rule: currentColor">Segundo Apellido</label>
+                                    <input type="text" class="form-control" id="validationCustom04" placeholder=""/>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-8 mb-3">
+                                    <label for="validationCustomUsername">Correo</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                        </div>
+                                        <input type="email" class="form-control" id="validationCustomUsername" placeholder="" aria-describedby="inputGroupPrepend" required=""/>
+                                        <div class="invalid-feedback">
+                                            Please choose a username.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom05">Nombre de la Empresa</label>
+                                    <input type="text" class="form-control" id="validationCustom05" placeholder="" required=""/>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid state.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom06">Nit</label>
+                                    <input type="text" class="form-control" id="validationCustom06" placeholder="" required=""/>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid zip.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom07">Direccion</label>
+                                    <input type="text" class="form-control" id="validationCustom07" placeholder="" required=""/>
+                                    <div class="invalid-feedback">
+                                        Por favor ingrese una ciudad valida.
+                                    </div>
+                                </div>    
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationCustom08">Ciudad</label>
+                                    <input type="text" class="form-control" id="validationCustom08" placeholder="" required=""/>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid state.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationCustom09">Telefono</label>
+                                    <input type="text" class="form-control" id="validationCustom09" placeholder="" required=""/>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid zip.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="exampleInputPassword1">Contraseña</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required=""/>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid zip.
+                                    </div>
+                                </div>
+                                <div class="col-md-5 mb-3">
+                                    <label for="exampleInputPassword1">Confirmar Contraseña</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required=""/>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid zip.
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required=""/>
+                                    <label class="form-check-label" for="invalidCheck">
+                                        Aceptar los términos y condiciones.
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        You must agree before submitting.
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit" style="background:rgb(50, 51, 142); border: none; ">Registrarse</button>
+                        </form>  
+                    </form>
+                </div>
+            </section>
 
-       <div class="form-row">
-
-           <div class="col-md-4 mb-3">
-               <label for="validationCustom04" style="column-rule: currentColor">Segundo Apellido</label>
-               <input type="text" class="form-control" id="validationCustom04" placeholder=""/>
-               <div class="valid-feedback">
-                   Looks good!
-               </div>
-           </div>
-
-          <div class="col-md-8 mb-3">
-            <label for="validationCustomUsername">Correo</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupPrepend">@</span>
-              </div>
-              <input type="email" class="form-control" id="validationCustomUsername" placeholder="" aria-describedby="inputGroupPrepend" required=""/>
-              <div class="invalid-feedback">
-                Please choose a username.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row">
-
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom05">Nombre de la Empresa</label>
-            <input type="text" class="form-control" id="validationCustom05" placeholder="" required=""/>
-            <div class="invalid-feedback">
-              Please provide a valid state.
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom06">Nit</label>
-            <input type="text" class="form-control" id="validationCustom06" placeholder="" required=""/>
-            <div class="invalid-feedback">
-              Please provide a valid zip.
-            </div>
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <label for="validationCustom07">Direccion</label>
-            <input type="text" class="form-control" id="validationCustom07" placeholder="" required=""/>
-            <div class="invalid-feedback">
-              Por favor ingrese una ciudad valida.
-            </div>
-          </div>    
-          <div class="col-md-3 mb-3">
-            <label for="validationCustom08">Ciudad</label>
-            <input type="text" class="form-control" id="validationCustom08" placeholder="" required=""/>
-            <div class="invalid-feedback">
-              Please provide a valid state.
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="validationCustom09">Telefono</label>
-            <input type="text" class="form-control" id="validationCustom09" placeholder="" required=""/>
-            <div class="invalid-feedback">
-              Please provide a valid zip.
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row">
-
-          <div class="col-md-5 mb-3">
-            <label for="exampleInputPassword1">Contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required=""/>
-            <div class="invalid-feedback">
-              Please provide a valid zip.
-            </div>
-          </div>
-
-          <div class="col-md-5 mb-3">
-            <label for="exampleInputPassword1">Confirmar Contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required=""/>
-            <div class="invalid-feedback">
-              Please provide a valid zip.
-            </div>
-          </div>
-          
-        </div>
-
-        <div class="form-group">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required=""/>
-            <label class="form-check-label" for="invalidCheck">
-              Aceptar los términos y condiciones.
-            </label>
-            <div class="invalid-feedback">
-              You must agree before submitting.
-            </div>
-          </div>
-        </div>
-        <button class="btn btn-primary" type="submit" style="background:rgb(50, 51, 142); border: none; ">Registrarse</button>
-      </form>  
-    </form>
-</section>
-<!---->
 <!--Conócenos-->
-<!---->
-<section id="conocenos" class="py-2" style="background: currentColor;">
-  <div class="container" style="padding: 30px">
-    <div class="row">
-      <div class="col-md-6">
-          <img src="img/Nuestra historia.png" alt="Brújula" class="img-fluid img-responsive" style="max-width: 200px; float: center; margin-left: 160px; margin-top: 30px"/>       
-      </div>
-      <div class="col-md-6">
-        <h3 style="color: rgb(50, 51, 142)">Nuestra historia...</h3>
-        <hr/>
-        <p class="text-justify" style="color: white">DYM Mecanizados S.A.S., es una empresa creada en el año 2007 especializada en mantenimiento industrial; cuyo objeto comercial se encuentra enmarcado en tres divisiones de servicio: Mantenimiento y reparación especializado de maquinaria y equipo, fabricación de máquinas formadoras de metal y/o máquinas herramientas y fabricación de otros productos elaborados en metal NCP.
-        Nuestra organización cuenta con los recursos necesarios y propios para el desarrollo de nuestro objeto, permitiendo responder técnica y económicamente a nuestros clientes en la ejecución de nuestros servicios realizados con alto compromiso de calidad, salud ocupacional, medio ambiente y responsabilidad social. 
-        </p>
-      </div>
-    </div>    
-  </div>
-</section>
-<section class="py-2">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h3>
-          <span style="color: rgb(219, 129, 45)">Misión</span>
-        </h3>
-        <hr/>
-        <p>Basados en nuestros principios corporativos nos comprometemos hacía la excelencia en el cumplimiento y satisfacción de los requisitos establecidos por el cliente, la eficiencia, la innovación y el talento humano.
-        </p>
-      </div>
-      <div class="col-md-6">
-          <img src="img/Misión-gráfico.png" alt="Gráfico" class="img-fluid" style="max-width: 400px; float: right;"/>
-      </div>
-    </div>    
-  </div>
-</section>
-<section class="py-4"  style="background: currentColor;">
-  <div class="container" style="padding: 30px">
-    <div class="row">
-      <div class="col-md-6">
-        <img src="img/Visión-mundo.png" style="max-width: 300px; margin-left: 120px; margin-top:" alt="Planeta"/>
-      </div>
-      <div class="col-md-6">
-        <h3 style="color: rgb(50, 51, 142)">Visión</h3>
-        <hr/>
-        <p style="text-align: justify; color: white">Consolidar los esfuerzos de la organización en las diferentes unidades de negocio; con el fin de incursionar en nuevos mercados a nivel nacional e internacional para obtener en el año 2020 un mayor posicionamiento y reconocimiento en la Industria. 
-        </p>        
-      </div>
-    </div>    
-  </div>
-</section>
 
+            <section id="conocenos" class="py-2" style="background: currentColor;">
+              <div class="container" style="padding: 30px">
+                <div class="row">
+                  <div class="col-md-6">
+                      <img src="img/Nuestra historia.png" alt="Brújula" class="img-fluid img-responsive" style="max-width: 200px; float: center; margin-left: 160px; margin-top: 30px"/>       
+                  </div>
+                  <div class="col-md-6">
+                    <h3 style="color: rgb(50, 51, 142)">Nuestra historia...</h3>
+                    <hr/>
+                    <p class="text-justify" style="color: white">DYM Mecanizados S.A.S., es una empresa creada en el año 2007 especializada en mantenimiento industrial; cuyo objeto comercial se encuentra enmarcado en tres divisiones de servicio: Mantenimiento y reparación especializado de maquinaria y equipo, fabricación de máquinas formadoras de metal y/o máquinas herramientas y fabricación de otros productos elaborados en metal NCP.
+                    Nuestra organización cuenta con los recursos necesarios y propios para el desarrollo de nuestro objeto, permitiendo responder técnica y económicamente a nuestros clientes en la ejecución de nuestros servicios realizados con alto compromiso de calidad, salud ocupacional, medio ambiente y responsabilidad social. 
+                    </p>
+                  </div>
+                </div>    
+              </div>
+            </section>
+            <section class="py-2">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3>
+                      <span style="color: rgb(219, 129, 45)">Misión</span>
+                    </h3>
+                    <hr/>
+                    <p>Basados en nuestros principios corporativos nos comprometemos hacía la excelencia en el cumplimiento y satisfacción de los requisitos establecidos por el cliente, la eficiencia, la innovación y el talento humano.
+                    </p>
+                  </div>
+                  <div class="col-md-6">
+                      <img src="img/Misión-gráfico.png" alt="Gráfico" class="img-fluid" style="max-width: 400px; float: right;"/>
+                  </div>
+                </div>    
+              </div>
+            </section>
+            <section class="py-4"  style="background: currentColor;">
+              <div class="container" style="padding: 30px">
+                <div class="row">
+                  <div class="col-md-6">
+                    <img src="img/Visión-mundo.png" style="max-width: 300px; margin-left: 120px; margin-top:" alt="Planeta"/>
+                  </div>
+                  <div class="col-md-6">
+                    <h3 style="color: rgb(50, 51, 142)">Visión</h3>
+                    <hr/>
+                    <p style="text-align: justify; color: white">Consolidar los esfuerzos de la organización en las diferentes unidades de negocio; con el fin de incursionar en nuevos mercados a nivel nacional e internacional para obtener en el año 2020 un mayor posicionamiento y reconocimiento en la Industria. 
+                    </p>        
+                  </div>
+                </div>    
+              </div>
+            </section>
 
-<!---->
 <!--Contactanos-->
-<!---->
-<section id="contactanos" class="py-2">
-  <div class="row text-center">
-    <div class="col-md-6">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.434766646834!2d-74.11680068573548!3d4.694272196590324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9b3cfa1b7d0b%3A0x1832023d506aec9f!2sDYM+Mecanizados+SAS!5e0!3m2!1ses!2sco!4v1557499032350!5m2!1ses!2sco" width="600" height="600" frameborder="0" style="border:0" allowfullscreen="">
-      </iframe>
-    </div>
-    <div class="col-md-6">
-      <h2>Comunícate con nosotros</h2>
-      <br/>
-      <h4>
-        <span style="color: rgb(50, 51, 142)">División</span>
-        <br/>
-        <span style="color: rgb(219, 129, 45)">Ejecutiva</span>
-      </h4>
-      <p>
-        JOSE DANIEL BAUTISTA BAREÑO
-        <br/>
-        Gerente 
-        <br/>
-        Móvil +57 312 449 9898
-        <br/>
-        gerencia@dymmecanizados.com
-      </p>
-      <hr/>
-     <h4>
-        <span style="color: rgb(50, 51, 142)">División</span>
-        <br/>
-        <span style="color: rgb(219, 129, 45)">Administrativa</span>
-      </h4>
-      <p>
-        LUZ MARY PARRA GUTIEREZ
-        <br/>
-        Asistente administrativa
-        <br/>
-        Móvil (57) 315 783 5132 administrativa@dymmecanizados.com 
-      </p>
-      <hr/>
-      <h4>
-        <span style="color: rgb(50, 51, 142)">División</span>
-        <br/>
-        <span style="color: rgb(219, 129, 45)">Oficinas</span>
-      </h4>
-      <p>
-        Carrera 93 No. 68 – 95 Bogotá D.C. PBX: +57 (1) 805 43 52
-        <br/>
-        Móvil +57 312 449 9898
-        <br/>
-        DYM MECANIZADOS S.A.S.
-        <br/>
-        NIT 901.000.399-1 
-      </p>
-    </div>
-  </div>
-</section>
 
+            <section id="contactanos" class="py-2">
+                <div class="row text-center">
+                    <div class="col-md-6">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.434766646834!2d-74.11680068573548!3d4.694272196590324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9b3cfa1b7d0b%3A0x1832023d506aec9f!2sDYM+Mecanizados+SAS!5e0!3m2!1ses!2sco!4v1557499032350!5m2!1ses!2sco" width="600" height="600" frameborder="0" style="border:0" allowfullscreen="">
+                        </iframe>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Comunícate con nosotros</h2>
+                        <br/>
+                        <h4>
+                            <span style="color: rgb(50, 51, 142)">División</span>
+                            <br/>
+                            <span style="color: rgb(219, 129, 45)">Ejecutiva</span>
+                        </h4>
+                        <p>
+                            JOSE DANIEL BAUTISTA BAREÑO
+                            <br/>
+                            Gerente 
+                            <br/>
+                            Móvil +57 312 449 9898
+                            <br/>
+                            gerencia@dymmecanizados.com
+                        </p>
+                        <hr/>
+                        <h4>
+                            <span style="color: rgb(50, 51, 142)">División</span>
+                            <br/>
+                            <span style="color: rgb(219, 129, 45)">Administrativa</span>
+                        </h4>
+                        <p>
+                            LUZ MARY PARRA GUTIEREZ
+                            <br/>
+                            Asistente administrativa
+                            <br/>
+                            Móvil (57) 315 783 5132 administrativa@dymmecanizados.com 
+                        </p>
+                        <hr/>
+                        <h4>
+                            <span style="color: rgb(50, 51, 142)">División</span>
+                            <br/>
+                            <span style="color: rgb(219, 129, 45)">Oficinas</span>
+                        </h4>
+                        <p>
+                            Carrera 93 No. 68 – 95 Bogotá D.C. PBX: +57 (1) 805 43 52
+                            <br/>
+                            Móvil +57 312 449 9898
+                            <br/>
+                            DYM MECANIZADOS S.A.S.
+                            <br/>
+                            NIT 901.000.399-1 
+                        </p>
+                    </div>
+                </div>
+            </section>
 
 <!-- FOOTER -->
-<section class="bg-dark text-white" style="max-height: 100px ">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-md-12">
-        <img src="img/Logo SIIM.svg" class="img-responsive img-fluid" style="max-height: 60px" alt="LogO SIIM"/>
-        <p>Sistema de Información para la Industria Metalmecánica</p>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
+
+            <section class="bg-dark text-white" style="max-height: 70px ">
+              <div class="container text-center">
+                <div class="row">
+                  <div class="col-md-12">
+                    <img src="img/Logo SIIM.svg" class="img-responsive img-fluid" style="max-height: 40px; padding-top: 5px " alt="Logo SIIM"/>
+                    <p style="text-height: 8px">Sistema de Información para la Industria Metalmecánica</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+        </div>
 <!--JavaScript Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="js/popup.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="js/popup.js"></script>
     </h:body>
 </html>
 
