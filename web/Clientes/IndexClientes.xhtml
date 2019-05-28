@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../Template/completeTemplate.xhtml"
+                xmlns:html5="http://xmlns.jcp.org/jsf/passthrough">
+    <div id="wrapper">
+        <!--    
+        <ui:define name="left">      
+             left    
+        </ui:define>
+        -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <!--
+                <ui:define name="top">
+                    top
+                </ui:define>
+                --> 
+                <ui:define name="content">
+                    <ui:include src="SolicitudCotizacion.xhtml"></ui:include>
+                    <!--    <img src="../img/Logo SIIM GRIS-BLANCO.svg" style="max-width:50%; max-height: 50%"></img>-->
+                </ui:define>
+            </div>
+            <!--
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+            -->
+        </div>
+    </div>
+
+</ui:composition>

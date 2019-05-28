@@ -5,6 +5,19 @@
   border-radius: 5%;
 }
 /* ------------------------- */
+/* Carrusel  */
+/* ------------------------- */
+.carousel-caption h5 {
+    text-align: right !important;
+    background: #000 !important;
+    opacity: 0.6 !important;
+    filter: alpha(opacity=60)!important;
+    padding: 0.75em 1em! important;
+    font-size: 2em !important;
+    text-transform: uppercase !important;
+    text-shadow: 2px 2px 1px #000 !important;
+}
+/* ------------------------- */
 /* POPUP INGRESAR */
 /* ------------------------- */
 

@@ -5,116 +5,108 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:component>
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142)" >
 
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
+                <!-- Logo -->
+                <a class="d-flex align-items-center justify-content-center" href="index.html">                 
+                    <div>
+                        <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
                     </div>
-                    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
                 </a>
 
-                <!-- Divider -->
+                <!-- División -->
                 <hr class="sidebar-divider my-0"/>
 
-                <!-- Nav Item - Dashboard -->
+                <!-- Tablero principal -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
+                        <span>Tablero principal</span></a>
                 </li>
 
-                <!-- Divider -->
+                <!-- División -->
                 <hr class="sidebar-divider"/>
 
-                <!-- Heading -->
+                <!-- Cabecera -->
                 <div class="sidebar-heading">
-                    Interface
+                    Interfaz
                 </div>
 
-                <!-- Nav Item - Pages Collapse Menu -->
+                <!-- Menú de configuración de perfil -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-cog"></i>
-                        <span>Components</span>
+                        <span>Configuración de perfil</span>
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Components:</h6>
-                            <a class="collapse-item" href="buttons.html">Buttons</a>
-                            <a class="collapse-item" href="cards.html">Cards</a>
+                            <h6 class="collapse-header">Editar perfil:</h6>
+                            <a class="collapse-item" href="buttons.html">Cambiar imágen</a>
+                            <a class="collapse-item" href="cards.html">Modificar información</a>
                         </div>
                     </div>
                 </li>
 
-                <!-- Nav Item - Utilities Collapse Menu -->
+                <!-- Menú utilerías  -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                         <i class="fas fa-fw fa-wrench"></i>
-                        <span>Utilities</span>
+                        <span>Utilerías</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Utilities:</h6>
-                            <a class="collapse-item" href="utilities-color.html">Colors</a>
-                            <a class="collapse-item" href="utilities-border.html">Borders</a>
-                            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                            <a class="collapse-item" href="utilities-other.html">Other</a>
+                            <h6 class="collapse-header">Descargar utilerías:</h6>
+                            <a class="collapse-item" href="">Winrar</a>
+                            <a class="collapse-item" href="">Adobe acrobat</a>
+                            <a class="collapse-item" href="">Otros...</a>
                         </div>
                     </div>
                 </li>
 
-                <!-- Divider -->
+                <!-- División -->
                 <hr class="sidebar-divider"/>
 
-                <!-- Heading -->
+                <!--Cabecera -->
                 <div class="sidebar-heading">
-                    Addons
+                    Enlaces
                 </div>
 
-                <!-- Nav Item - Pages Collapse Menu -->
+                <!-- Menú páginas -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                         <i class="fas fa-fw fa-folder"></i>
-                        <span>Pages</span>
+                        <span>Páginas</span>
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Login Screens:</h6>
-                            <a class="collapse-item" href="login.html">Login</a>
-                            <a class="collapse-item" href="register.html">Register</a>
-                            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                            <h6 class="collapse-header">Páginas de inicio:</h6>
+                            <a class="collapse-item" href="login.html">Inicio de sesión</a>
+                            <a class="collapse-item" href="register.html">Registro</a>
+                            <a class="collapse-item" href="forgot-password.html">Olvido de contraseña</a>
                             <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Other Pages:</h6>
-                            <a class="collapse-item" href="404.html">404 Page</a>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
+                            <h6 class="collapse-header">Otras páginas:</h6>
+                            <a class="collapse-item" href="404.html">Página de error 404</a>
+                            <a class="collapse-item" href="blank.html">Página de error 500</a>
                         </div>
                     </div>
                 </li>
 
-                <!-- Nav Item - Charts -->
+                <!-- Informes -->
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span></a>
+                        <span>Informes</span></a>
                 </li>
 
-                <!-- Nav Item - Tables -->
+                <!-- Tablas -->
                 <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" href="">
                         <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
+                        <span>Tablas</span></a>
                 </li>
 
-                <!-- Divider -->
+                <!-- División -->
                 <hr class="sidebar-divider d-none d-md-block"></hr>
-
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
-
             </ul>
     </ui:component>
 
