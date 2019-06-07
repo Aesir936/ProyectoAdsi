@@ -8,9 +8,9 @@ package edu.ProyectoAdsi.entidades;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -25,46 +25,45 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Aesir936
  */
 @Entity
-@Table(name = "procesos_internos")
+@Table(name = "tbl_procesos_internos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ProcesosInternos.findAll", query = "SELECT p FROM ProcesosInternos p")})
 public class ProcesosInternos implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ProcesosInternosPK procesosInternosPK;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_tipos_procesos")
+    private Integer idTiposProcesos;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "tiempo_ejecucion")
     private String tiempoEjecucion;
-    @JoinColumn(name = "procesos_id_procesos", referencedColumnName = "id_procesos", insertable = false, updatable = false)
+    @JoinColumn(name = "procesos_id_procesos", referencedColumnName = "id_procesos")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Procesos procesos;
+    private Procesos procesosIdProcesos;
 
     public ProcesosInternos() {
     }
 
-    public ProcesosInternos(ProcesosInternosPK procesosInternosPK) {
-        this.procesosInternosPK = procesosInternosPK;
+    public ProcesosInternos(Integer idTiposProcesos) {
+        this.idTiposProcesos = idTiposProcesos;
     }
 
-    public ProcesosInternos(ProcesosInternosPK procesosInternosPK, String tiempoEjecucion) {
-        this.procesosInternosPK = procesosInternosPK;
+    public ProcesosInternos(Integer idTiposProcesos, String tiempoEjecucion) {
+        this.idTiposProcesos = idTiposProcesos;
         this.tiempoEjecucion = tiempoEjecucion;
     }
 
-    public ProcesosInternos(int idTiposProcesos, int procesosIdProcesos) {
-        this.procesosInternosPK = new ProcesosInternosPK(idTiposProcesos, procesosIdProcesos);
+    public Integer getIdTiposProcesos() {
+        return idTiposProcesos;
     }
 
-    public ProcesosInternosPK getProcesosInternosPK() {
-        return procesosInternosPK;
-    }
-
-    public void setProcesosInternosPK(ProcesosInternosPK procesosInternosPK) {
-        this.procesosInternosPK = procesosInternosPK;
+    public void setIdTiposProcesos(Integer idTiposProcesos) {
+        this.idTiposProcesos = idTiposProcesos;
     }
 
     public String getTiempoEjecucion() {
@@ -75,18 +74,18 @@ public class ProcesosInternos implements Serializable {
         this.tiempoEjecucion = tiempoEjecucion;
     }
 
-    public Procesos getProcesos() {
-        return procesos;
+    public Procesos getProcesosIdProcesos() {
+        return procesosIdProcesos;
     }
 
-    public void setProcesos(Procesos procesos) {
-        this.procesos = procesos;
+    public void setProcesosIdProcesos(Procesos procesosIdProcesos) {
+        this.procesosIdProcesos = procesosIdProcesos;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (procesosInternosPK != null ? procesosInternosPK.hashCode() : 0);
+        hash += (idTiposProcesos != null ? idTiposProcesos.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +96,7 @@ public class ProcesosInternos implements Serializable {
             return false;
         }
         ProcesosInternos other = (ProcesosInternos) object;
-        if ((this.procesosInternosPK == null && other.procesosInternosPK != null) || (this.procesosInternosPK != null && !this.procesosInternosPK.equals(other.procesosInternosPK))) {
+        if ((this.idTiposProcesos == null && other.idTiposProcesos != null) || (this.idTiposProcesos != null && !this.idTiposProcesos.equals(other.idTiposProcesos))) {
             return false;
         }
         return true;
@@ -105,7 +104,7 @@ public class ProcesosInternos implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.ProyectoAdsi.entidades.ProcesosInternos[ procesosInternosPK=" + procesosInternosPK + " ]";
+        return "edu.ProyectoAdsi.entidades.ProcesosInternos[ idTiposProcesos=" + idTiposProcesos + " ]";
     }
     
 }

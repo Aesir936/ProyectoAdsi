@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Aesir936
  */
 @Entity
-@Table(name = "cotizaciones")
+@Table(name = "tbl_cotizaciones")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Cotizaciones.findAll", query = "SELECT c FROM Cotizaciones c")})
@@ -60,14 +60,14 @@ public class Cotizaciones implements Serializable {
     @NotNull
     @Column(name = "plano")
     private short plano;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cotizacionesIdCotizaciones", fetch = FetchType.LAZY)
-    private Collection<ArchivosAdjuntos> archivosAdjuntosCollection;
     @JoinColumn(name = "id_estado_cotizacion", referencedColumnName = "id_estado_cotizacion")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EstadosCotizaciones idEstadoCotizacion;
     @JoinColumn(name = "id_ordenes_de_trabajo", referencedColumnName = "id_ordenes_de_trabajo")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private OrdenesDeTrabajo idOrdenesDeTrabajo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cotizacionesIdCotizaciones", fetch = FetchType.LAZY)
+    private Collection<ArchivosAdjuntos> archivosAdjuntosCollection;
 
     public Cotizaciones() {
     }
@@ -115,15 +115,6 @@ public class Cotizaciones implements Serializable {
         this.plano = plano;
     }
 
-    @XmlTransient
-    public Collection<ArchivosAdjuntos> getArchivosAdjuntosCollection() {
-        return archivosAdjuntosCollection;
-    }
-
-    public void setArchivosAdjuntosCollection(Collection<ArchivosAdjuntos> archivosAdjuntosCollection) {
-        this.archivosAdjuntosCollection = archivosAdjuntosCollection;
-    }
-
     public EstadosCotizaciones getIdEstadoCotizacion() {
         return idEstadoCotizacion;
     }
@@ -138,6 +129,15 @@ public class Cotizaciones implements Serializable {
 
     public void setIdOrdenesDeTrabajo(OrdenesDeTrabajo idOrdenesDeTrabajo) {
         this.idOrdenesDeTrabajo = idOrdenesDeTrabajo;
+    }
+
+    @XmlTransient
+    public Collection<ArchivosAdjuntos> getArchivosAdjuntosCollection() {
+        return archivosAdjuntosCollection;
+    }
+
+    public void setArchivosAdjuntosCollection(Collection<ArchivosAdjuntos> archivosAdjuntosCollection) {
+        this.archivosAdjuntosCollection = archivosAdjuntosCollection;
     }
 
     @Override

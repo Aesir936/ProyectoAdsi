@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Aesir936
  */
 @Entity
-@Table(name = "bolsas_de_tiempo")
+@Table(name = "tbl_bolsas_de_tiempo")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "BolsasDeTiempo.findAll", query = "SELECT b FROM BolsasDeTiempo b")})
@@ -54,9 +54,9 @@ public class BolsasDeTiempo implements Serializable {
     @NotNull
     @Column(name = "cantidad_horas")
     private int cantidadHoras;
-    @JoinColumn(name = "clientes_usuarios_idusuarios", referencedColumnName = "usuarios_idusuarios")
+    @JoinColumn(name = "tbl_clientes_codigo_clientes", referencedColumnName = "codigo_clientes")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Cliente clientesUsuariosIdusuarios;
+    private Clientes tblClientesCodigoClientes;
 
     public BolsasDeTiempo() {
     }
@@ -104,12 +104,12 @@ public class BolsasDeTiempo implements Serializable {
         this.cantidadHoras = cantidadHoras;
     }
 
-    public Cliente getClientesUsuariosIdusuarios() {
-        return clientesUsuariosIdusuarios;
+    public Clientes getTblClientesCodigoClientes() {
+        return tblClientesCodigoClientes;
     }
 
-    public void setClientesUsuariosIdusuarios(Cliente clientesUsuariosIdusuarios) {
-        this.clientesUsuariosIdusuarios = clientesUsuariosIdusuarios;
+    public void setTblClientesCodigoClientes(Clientes tblClientesCodigoClientes) {
+        this.tblClientesCodigoClientes = tblClientesCodigoClientes;
     }
 
     @Override

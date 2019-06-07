@@ -22,5 +22,9 @@ public interface UsuariosFacadeLocal {
     List<Usuarios> findRange(int[] range);
 
     int count();
+
+    public boolean insertUsuario(Usuarios newUser);
+
+    public int consultarId(String numeroDoc);
     
 }

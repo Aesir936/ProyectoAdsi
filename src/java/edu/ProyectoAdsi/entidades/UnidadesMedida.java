@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Aesir936
  */
 @Entity
-@Table(name = "unidades_medida")
+@Table(name = "tbl_unidades_medida")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UnidadesMedida.findAll", query = "SELECT u FROM UnidadesMedida u")})

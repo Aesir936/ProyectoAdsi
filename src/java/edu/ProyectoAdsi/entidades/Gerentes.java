@@ -12,12 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,67 +24,49 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Aesir936
  */
 @Entity
-@Table(name = "gerentes")
+@Table(name = "tbl_gerentes")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Gerentes.findAll", query = "SELECT g FROM Gerentes g")})
 public class Gerentes implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "codigo_gerente")
-    private int codigoGerente;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "usuarios_idusuarios")
-    private String usuariosIdusuarios;
-    @JoinColumn(name = "usuarios_idusuarios", referencedColumnName = "id_usuarios", insertable = false, updatable = false)
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
-    private Usuarios usuarios;
+    @Column(name = "codigo_gerente")
+    private Integer codigoGerente;
+    @JoinColumn(name = "usuarios_idusuarios", referencedColumnName = "id_usuarios")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Usuarios usuariosIdusuarios;
 
     public Gerentes() {
     }
 
-    public Gerentes(String usuariosIdusuarios) {
-        this.usuariosIdusuarios = usuariosIdusuarios;
-    }
-
-    public Gerentes(String usuariosIdusuarios, int codigoGerente) {
-        this.usuariosIdusuarios = usuariosIdusuarios;
+    public Gerentes(Integer codigoGerente) {
         this.codigoGerente = codigoGerente;
     }
 
-    public int getCodigoGerente() {
+    public Integer getCodigoGerente() {
         return codigoGerente;
     }
 
-    public void setCodigoGerente(int codigoGerente) {
+    public void setCodigoGerente(Integer codigoGerente) {
         this.codigoGerente = codigoGerente;
     }
 
-    public String getUsuariosIdusuarios() {
+    public Usuarios getUsuariosIdusuarios() {
         return usuariosIdusuarios;
     }
 
-    public void setUsuariosIdusuarios(String usuariosIdusuarios) {
+    public void setUsuariosIdusuarios(Usuarios usuariosIdusuarios) {
         this.usuariosIdusuarios = usuariosIdusuarios;
-    }
-
-    public Usuarios getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(Usuarios usuarios) {
-        this.usuarios = usuarios;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (usuariosIdusuarios != null ? usuariosIdusuarios.hashCode() : 0);
+        hash += (codigoGerente != null ? codigoGerente.hashCode() : 0);
         return hash;
     }
 
@@ -96,7 +77,7 @@ public class Gerentes implements Serializable {
             return false;
         }
         Gerentes other = (Gerentes) object;
-        if ((this.usuariosIdusuarios == null && other.usuariosIdusuarios != null) || (this.usuariosIdusuarios != null && !this.usuariosIdusuarios.equals(other.usuariosIdusuarios))) {
+        if ((this.codigoGerente == null && other.codigoGerente != null) || (this.codigoGerente != null && !this.codigoGerente.equals(other.codigoGerente))) {
             return false;
         }
         return true;
@@ -104,7 +85,7 @@ public class Gerentes implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.ProyectoAdsi.entidades.Gerentes[ usuariosIdusuarios=" + usuariosIdusuarios + " ]";
+        return "edu.ProyectoAdsi.entidades.Gerentes[ codigoGerente=" + codigoGerente + " ]";
     }
     
 }

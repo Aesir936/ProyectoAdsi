@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Aesir936
  */
 @Entity
-@Table(name = "ordenes_de_trabajo")
+@Table(name = "tbl_ordenes_de_trabajo")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OrdenesDeTrabajo.findAll", query = "SELECT o FROM OrdenesDeTrabajo o")})
@@ -61,13 +61,13 @@ public class OrdenesDeTrabajo implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "tiempo_total_fabricacion")
     private String tiempoTotalFabricacion;
-    @JoinColumn(name = "estados_ordenes_de_trabajo_id_estados_ordenes_de_trabajo", referencedColumnName = "id_estados_ordenes_de_trabajo")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private EstadosOrdenesDeTrabajo estadosOrdenesDeTrabajoIdEstadosOrdenesDeTrabajo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenesDeTrabajo", fetch = FetchType.LAZY)
-    private Collection<OrdenesDeTrabajoHasProcesos> ordenesDeTrabajoHasProcesosCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrdenesDeTrabajo", fetch = FetchType.LAZY)
     private Collection<Cotizaciones> cotizacionesCollection;
+    @JoinColumn(name = "estados_ordenes_de_trabajo", referencedColumnName = "id_estados_ordenes_de_trabajo")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private EstadosOrdenesDeTrabajo estadosOrdenesDeTrabajo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrdenesDeTrabajo", fetch = FetchType.LAZY)
+    private Collection<OrdenesDeTrabajoHasTblProcesos> ordenesDeTrabajoHasTblProcesosCollection;
 
     public OrdenesDeTrabajo() {
     }
@@ -115,23 +115,6 @@ public class OrdenesDeTrabajo implements Serializable {
         this.tiempoTotalFabricacion = tiempoTotalFabricacion;
     }
 
-    public EstadosOrdenesDeTrabajo getEstadosOrdenesDeTrabajoIdEstadosOrdenesDeTrabajo() {
-        return estadosOrdenesDeTrabajoIdEstadosOrdenesDeTrabajo;
-    }
-
-    public void setEstadosOrdenesDeTrabajoIdEstadosOrdenesDeTrabajo(EstadosOrdenesDeTrabajo estadosOrdenesDeTrabajoIdEstadosOrdenesDeTrabajo) {
-        this.estadosOrdenesDeTrabajoIdEstadosOrdenesDeTrabajo = estadosOrdenesDeTrabajoIdEstadosOrdenesDeTrabajo;
-    }
-
-    @XmlTransient
-    public Collection<OrdenesDeTrabajoHasProcesos> getOrdenesDeTrabajoHasProcesosCollection() {
-        return ordenesDeTrabajoHasProcesosCollection;
-    }
-
-    public void setOrdenesDeTrabajoHasProcesosCollection(Collection<OrdenesDeTrabajoHasProcesos> ordenesDeTrabajoHasProcesosCollection) {
-        this.ordenesDeTrabajoHasProcesosCollection = ordenesDeTrabajoHasProcesosCollection;
-    }
-
     @XmlTransient
     public Collection<Cotizaciones> getCotizacionesCollection() {
         return cotizacionesCollection;
@@ -139,6 +122,23 @@ public class OrdenesDeTrabajo implements Serializable {
 
     public void setCotizacionesCollection(Collection<Cotizaciones> cotizacionesCollection) {
         this.cotizacionesCollection = cotizacionesCollection;
+    }
+
+    public EstadosOrdenesDeTrabajo getEstadosOrdenesDeTrabajo() {
+        return estadosOrdenesDeTrabajo;
+    }
+
+    public void setEstadosOrdenesDeTrabajo(EstadosOrdenesDeTrabajo estadosOrdenesDeTrabajo) {
+        this.estadosOrdenesDeTrabajo = estadosOrdenesDeTrabajo;
+    }
+
+    @XmlTransient
+    public Collection<OrdenesDeTrabajoHasTblProcesos> getOrdenesDeTrabajoHasTblProcesosCollection() {
+        return ordenesDeTrabajoHasTblProcesosCollection;
+    }
+
+    public void setOrdenesDeTrabajoHasTblProcesosCollection(Collection<OrdenesDeTrabajoHasTblProcesos> ordenesDeTrabajoHasTblProcesosCollection) {
+        this.ordenesDeTrabajoHasTblProcesosCollection = ordenesDeTrabajoHasTblProcesosCollection;
     }
 
     @Override

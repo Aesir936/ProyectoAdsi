@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Aesir936
  */
 @Entity
-@Table(name = "procesos")
+@Table(name = "tbl_procesos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Procesos.findAll", query = "SELECT p FROM Procesos p")})
@@ -44,12 +44,12 @@ public class Procesos implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre_procesos")
     private String nombreProcesos;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procesos", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procesosIdProcesos", fetch = FetchType.LAZY)
     private Collection<ProcesosExternos> procesosExternosCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procesos", fetch = FetchType.LAZY)
-    private Collection<OrdenesDeTrabajoHasProcesos> ordenesDeTrabajoHasProcesosCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procesos", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procesosIdProcesos", fetch = FetchType.LAZY)
     private Collection<ProcesosInternos> procesosInternosCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProcesos", fetch = FetchType.LAZY)
+    private Collection<OrdenesDeTrabajoHasTblProcesos> ordenesDeTrabajoHasTblProcesosCollection;
 
     public Procesos() {
     }
@@ -89,21 +89,21 @@ public class Procesos implements Serializable {
     }
 
     @XmlTransient
-    public Collection<OrdenesDeTrabajoHasProcesos> getOrdenesDeTrabajoHasProcesosCollection() {
-        return ordenesDeTrabajoHasProcesosCollection;
-    }
-
-    public void setOrdenesDeTrabajoHasProcesosCollection(Collection<OrdenesDeTrabajoHasProcesos> ordenesDeTrabajoHasProcesosCollection) {
-        this.ordenesDeTrabajoHasProcesosCollection = ordenesDeTrabajoHasProcesosCollection;
-    }
-
-    @XmlTransient
     public Collection<ProcesosInternos> getProcesosInternosCollection() {
         return procesosInternosCollection;
     }
 
     public void setProcesosInternosCollection(Collection<ProcesosInternos> procesosInternosCollection) {
         this.procesosInternosCollection = procesosInternosCollection;
+    }
+
+    @XmlTransient
+    public Collection<OrdenesDeTrabajoHasTblProcesos> getOrdenesDeTrabajoHasTblProcesosCollection() {
+        return ordenesDeTrabajoHasTblProcesosCollection;
+    }
+
+    public void setOrdenesDeTrabajoHasTblProcesosCollection(Collection<OrdenesDeTrabajoHasTblProcesos> ordenesDeTrabajoHasTblProcesosCollection) {
+        this.ordenesDeTrabajoHasTblProcesosCollection = ordenesDeTrabajoHasTblProcesosCollection;
     }
 
     @Override

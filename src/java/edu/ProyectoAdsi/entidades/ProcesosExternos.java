@@ -8,9 +8,9 @@ package edu.ProyectoAdsi.entidades;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -24,45 +24,44 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Aesir936
  */
 @Entity
-@Table(name = "procesos_externos")
+@Table(name = "tbl_procesos_externos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ProcesosExternos.findAll", query = "SELECT p FROM ProcesosExternos p")})
 public class ProcesosExternos implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ProcesosExternosPK procesosExternosPK;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_procesos_externos")
+    private Integer idProcesosExternos;
     @Basic(optional = false)
     @NotNull
     @Column(name = "costo_proceso")
     private int costoProceso;
-    @JoinColumn(name = "procesos_id_procesos", referencedColumnName = "id_procesos", insertable = false, updatable = false)
+    @JoinColumn(name = "procesos_id_procesos", referencedColumnName = "id_procesos")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Procesos procesos;
+    private Procesos procesosIdProcesos;
 
     public ProcesosExternos() {
     }
 
-    public ProcesosExternos(ProcesosExternosPK procesosExternosPK) {
-        this.procesosExternosPK = procesosExternosPK;
+    public ProcesosExternos(Integer idProcesosExternos) {
+        this.idProcesosExternos = idProcesosExternos;
     }
 
-    public ProcesosExternos(ProcesosExternosPK procesosExternosPK, int costoProceso) {
-        this.procesosExternosPK = procesosExternosPK;
+    public ProcesosExternos(Integer idProcesosExternos, int costoProceso) {
+        this.idProcesosExternos = idProcesosExternos;
         this.costoProceso = costoProceso;
     }
 
-    public ProcesosExternos(int idProcesosExternos, int procesosIdProcesos) {
-        this.procesosExternosPK = new ProcesosExternosPK(idProcesosExternos, procesosIdProcesos);
+    public Integer getIdProcesosExternos() {
+        return idProcesosExternos;
     }
 
-    public ProcesosExternosPK getProcesosExternosPK() {
-        return procesosExternosPK;
-    }
-
-    public void setProcesosExternosPK(ProcesosExternosPK procesosExternosPK) {
-        this.procesosExternosPK = procesosExternosPK;
+    public void setIdProcesosExternos(Integer idProcesosExternos) {
+        this.idProcesosExternos = idProcesosExternos;
     }
 
     public int getCostoProceso() {
@@ -73,18 +72,18 @@ public class ProcesosExternos implements Serializable {
         this.costoProceso = costoProceso;
     }
 
-    public Procesos getProcesos() {
-        return procesos;
+    public Procesos getProcesosIdProcesos() {
+        return procesosIdProcesos;
     }
 
-    public void setProcesos(Procesos procesos) {
-        this.procesos = procesos;
+    public void setProcesosIdProcesos(Procesos procesosIdProcesos) {
+        this.procesosIdProcesos = procesosIdProcesos;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (procesosExternosPK != null ? procesosExternosPK.hashCode() : 0);
+        hash += (idProcesosExternos != null ? idProcesosExternos.hashCode() : 0);
         return hash;
     }
 
@@ -95,7 +94,7 @@ public class ProcesosExternos implements Serializable {
             return false;
         }
         ProcesosExternos other = (ProcesosExternos) object;
-        if ((this.procesosExternosPK == null && other.procesosExternosPK != null) || (this.procesosExternosPK != null && !this.procesosExternosPK.equals(other.procesosExternosPK))) {
+        if ((this.idProcesosExternos == null && other.idProcesosExternos != null) || (this.idProcesosExternos != null && !this.idProcesosExternos.equals(other.idProcesosExternos))) {
             return false;
         }
         return true;
@@ -103,7 +102,7 @@ public class ProcesosExternos implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.ProyectoAdsi.entidades.ProcesosExternos[ procesosExternosPK=" + procesosExternosPK + " ]";
+        return "edu.ProyectoAdsi.entidades.ProcesosExternos[ idProcesosExternos=" + idProcesosExternos + " ]";
     }
     
 }

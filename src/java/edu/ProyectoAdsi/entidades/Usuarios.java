@@ -1,37 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package edu.ProyectoAdsi.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Aesir936
- */
+
 @Entity
-@Table(name = "usuarios")
+@Table(name = "tbl_usuarios")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")})
 public class Usuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_usuarios")
+    private Integer idUsuarios;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "tipo_documento")
+    private int tipoDocumento;
+    @Size(max = 20)
+    @Column(name = "documento")
+    private String documento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -43,47 +54,83 @@ public class Usuarios implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "Primer_Apellido")
+    @Column(name = "primer_apellido")
     private String primerApellido;
     @Size(max = 45)
-    @Column(name = "Segundo_apellido")
-    private String segundoapellido;
+    @Column(name = "segundo_apellido")
+    private String segundoApellido;
+    @Size(max = 45)
+    @Column(name = "nombre_empresa")
+    private String nombreEmpresa;
+    @Size(max = 20)
+    @Column(name = "nit")
+    private String nit;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "direccion")
-    private String direccion;
+    @Column(name = "correo")
+    private String correo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "telefono")
     private String telefono;
-    @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "id_usuarios")
-    private String idUsuarios;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuarios", fetch = FetchType.LAZY)
-    private Trabajadores trabajadores;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuarios", fetch = FetchType.LAZY)
-    private Cliente cliente;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuarios", fetch = FetchType.LAZY)
-    private Gerentes gerentes;
+    @Column(name = "contrasena")
+    private String contrasena;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosIdusuarios", fetch = FetchType.LAZY)
+    private Collection<Gerentes> gerentesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblUsuariosIdUsuarios", fetch = FetchType.LAZY)
+    private Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosIdusuarios", fetch = FetchType.LAZY)
+    private Collection<Clientes> clientesCollection;
+    @JoinColumn(name = "id_tbl_direccion", referencedColumnName = "id_tbl_direccion")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Direcciones idTblDireccion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosIdusuarios", fetch = FetchType.LAZY)
+    private Collection<Trabajadores> trabajadoresCollection;
 
     public Usuarios() {
     }
 
-    public Usuarios(String idUsuarios) {
+    public Usuarios(Integer idUsuarios) {
         this.idUsuarios = idUsuarios;
     }
 
-    public Usuarios(String idUsuarios, String primerNombre, String primerApellido, String direccion, String telefono) {
+    public Usuarios(Integer idUsuarios, int tipoDocumento, String primerNombre, String primerApellido, String correo, String telefono, String contrasena) {
         this.idUsuarios = idUsuarios;
+        this.tipoDocumento = tipoDocumento;
         this.primerNombre = primerNombre;
         this.primerApellido = primerApellido;
-        this.direccion = direccion;
+        this.correo = correo;
         this.telefono = telefono;
+        this.contrasena = contrasena;
+    }
+
+    public Integer getIdUsuarios() {
+        return idUsuarios;
+    }
+
+    public void setIdUsuarios(Integer idUsuarios) {
+        this.idUsuarios = idUsuarios;
+    }
+
+    public int getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(int tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     public String getPrimerNombre() {
@@ -110,20 +157,36 @@ public class Usuarios implements Serializable {
         this.primerApellido = primerApellido;
     }
 
-    public String getSegundoapellido() {
-        return segundoapellido;
+    public String getSegundoApellido() {
+        return segundoApellido;
     }
 
-    public void setSegundoapellido(String segundoapellido) {
-        this.segundoapellido = segundoapellido;
+    public void setSegundoApellido(String segundoApellido) {
+        this.segundoApellido = segundoApellido;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getNombreEmpresa() {
+        return nombreEmpresa;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setNombreEmpresa(String nombreEmpresa) {
+        this.nombreEmpresa = nombreEmpresa;
+    }
+
+    public String getNit() {
+        return nit;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getTelefono() {
@@ -134,36 +197,56 @@ public class Usuarios implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getIdUsuarios() {
-        return idUsuarios;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setIdUsuarios(String idUsuarios) {
-        this.idUsuarios = idUsuarios;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
-    public Trabajadores getTrabajadores() {
-        return trabajadores;
+    @XmlTransient
+    public Collection<Gerentes> getGerentesCollection() {
+        return gerentesCollection;
     }
 
-    public void setTrabajadores(Trabajadores trabajadores) {
-        this.trabajadores = trabajadores;
+    public void setGerentesCollection(Collection<Gerentes> gerentesCollection) {
+        this.gerentesCollection = gerentesCollection;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    @XmlTransient
+    public Collection<UsuariosHasTblRoles> getUsuariosHasTblRolesCollection() {
+        return usuariosHasTblRolesCollection;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setUsuariosHasTblRolesCollection(Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection) {
+        this.usuariosHasTblRolesCollection = usuariosHasTblRolesCollection;
     }
 
-    public Gerentes getGerentes() {
-        return gerentes;
+    @XmlTransient
+    public Collection<Clientes> getClientesCollection() {
+        return clientesCollection;
     }
 
-    public void setGerentes(Gerentes gerentes) {
-        this.gerentes = gerentes;
+    public void setClientesCollection(Collection<Clientes> clientesCollection) {
+        this.clientesCollection = clientesCollection;
+    }
+
+    public Direcciones getIdTblDireccion() {
+        return idTblDireccion;
+    }
+
+    public void setIdTblDireccion(Direcciones idTblDireccion) {
+        this.idTblDireccion = idTblDireccion;
+    }
+
+    @XmlTransient
+    public Collection<Trabajadores> getTrabajadoresCollection() {
+        return trabajadoresCollection;
+    }
+
+    public void setTrabajadoresCollection(Collection<Trabajadores> trabajadoresCollection) {
+        this.trabajadoresCollection = trabajadoresCollection;
     }
 
     @Override
