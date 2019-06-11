@@ -22,6 +22,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     public UsuariosFacade() {
         super(Usuarios.class);
     }
+  
     @Override
     public boolean insertUsuario(Usuarios newUser){
         try {
@@ -48,6 +49,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             return false;
         }
     }
+    
        @Override
     public int consultarId(String numeroDoc) {
         try {
@@ -57,6 +59,20 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             return posicion;
         } catch (Exception e) {
             return 0;
+        }
+    }
+    
+    
+    @Override
+    public boolean asignarRol(int usuarioId, int rolId) {
+        try {
+            Query usuRol = em.createNativeQuery("Confirmar la consulta que se enviará a la B.D.");
+            usuRol.setParameter(1, usuarioId);
+            usuRol.setParameter(2, rolId);
+            usuRol.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

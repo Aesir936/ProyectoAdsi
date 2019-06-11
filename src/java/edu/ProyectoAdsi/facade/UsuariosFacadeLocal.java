@@ -8,6 +8,8 @@ import javax.ejb.Local;
 
 @Local
 public interface UsuariosFacadeLocal {
+    
+
 
     void create(Usuarios usuarios);
 
@@ -23,8 +25,10 @@ public interface UsuariosFacadeLocal {
 
     int count();
 
-    public boolean insertUsuario(Usuarios newUser);
-
     public int consultarId(String numeroDoc);
+
+    public boolean asignarRol(int usuarioId, int rolId);
+
+    public boolean insertUsuario(Usuarios newUser);
     
 }

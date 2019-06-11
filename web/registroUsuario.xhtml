@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Registro Usuario</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
@@ -11,7 +12,6 @@
     </h:head>
     <h:body>
         <!--Registrate-->
-
         <section id="Regístrate" style="background:#f2f2f2;">
             <div class="container py-5">
                 <h1 style="color: rgb(219, 129, 45); font-size: 2em">Registro de usuarios</h1>
@@ -20,7 +20,7 @@
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
                         <label for="tdl">Tipo Documento</label>
-                        <h:selectOneMenu  id="tdl" styleClass="form-control" value="#{usuarioSesion.tipoDocumento}" >
+                        <h:selectOneMenu  id="tdl" styleClass="form-control" value="#{sesionUsuario.tipoDocumento}" >
                                     <f:selectItem itemValue="0" itemLabel="Seleccione tipo de documento"></f:selectItem>
                                     <f:selectItem itemValue="1" itemLabel="CC"></f:selectItem>
                                     <f:selectItem itemValue="2" itemLabel="TI"></f:selectItem>
@@ -28,8 +28,8 @@
                         </h:selectOneMenu>
                         </div>
                         <div class="col-md-4 mb-3">
-                                <label for="documentoTC">Documento</label>
-                                <h:inputText value="#{usuarioSesion.documento}" class="form-control" id="documentoTC" maxlength="20" required="true" validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un documento"  />
+                                <label for="documentoTC">Número de documento</label>
+                                <h:inputText value="#{sesionUsuario.documento}" class="form-control" id="documentoTC" maxlength="20" required="true" validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un documento"  />
                                 <div class="valid-feedback">
                                     <h:message for="documentoTC"></h:message>
                                 </div>
@@ -38,29 +38,29 @@
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
                             <label for="validationCustom01">Primer Nombre</label>
-                            <h:inputText value="" class="form-control" id="validationCustom01" required=""/>
+                            <h:inputText value="#{sesionUsuario.primerNombre}" class="form-control" id="validationCustom01" required="true"/>
                             <div class="valid-feedback">
-                                <h:message for="apellidosId"></h:message>
+                                <h:message for="validationCustom01"></h:message>
                                 Por favor diligencie este campo.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationCustom01">Segundo Nombre</label>
-                            <h:inputText value="" class="form-control" id="validationCustom02" />
+                            <h:inputText value="#{sesionUsuario.segundoNombre}" class="form-control" id="validation02" />
                             <div class="valid-feedback">
                                 
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationCustom03">Primer Apellido</label>
-                            <h:inputText value="" class="form-control" id="validationCustom03" required=""/>
+                            <h:inputText value="#{sesionUsuario.primerApellido}" class="form-control" id="validation03" required=""/>
                             <div class="valid-feedback">
                                 Por favor diligencie este campo
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationCustom04" style="column-rule: currentColor">Segundo Apellido</label>
-                            <h:inputText value="" class="form-control" id="validationCustom04"/>
+                            <h:inputText value="#{sesionUsuario.segundoApellido}" class="form-control" id="validation04"/>
                             <div class="valid-feedback">
                                 
                             </div>
@@ -69,25 +69,22 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom05">Nombre de la Empresa</label>
-                            <h:inputText value="" class="form-control" id="validationCustom05" required=""/>
+                            <h:inputText value="#{sesionUsuario.nombreEmpresa}" class="form-control" id="validationCustom05" required=""/>
                             <div class="invalid-feedback">
                                 Por favor ingreseun nombre de empresa
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom06">Nit</label>
-                            <input type="text" class="form-control" id="validationCustom06" placeholder="" required=""/>
+                            <h:inputText value="#{sesionUsuario.nit}" class="form-control" id="validationCustom06" required=""/>
                             <div class="invalid-feedback">
                                 El número ingresado excede la longitud permitida.
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="validationCustomUsername">Correo electrónico</label>
-                            <div class="input-group">
-<!--                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                </div>-->
-                                <h:inputText value="" class="form-control" id="validationCustomUsername" html5:aria-describedby="inputGroupPrepend" required=""/>
+                            <label for="btnRegistro">Correo electrónico</label>
+                            <div class="input-group">                              
+                            <h:inputText value="#{sesionUsuario.correo}" class="form-control" id="btnRegistro" html5:aria-describedby="inputGroupPrepend" required=""/>
                                 <div class="invalid-feedback">
                                     Ingrese un correo electrónico válido.
                                 </div>
@@ -95,7 +92,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom07">Direccion</label>
-                            <h:inputText value="" class="form-control" id="validationCustom07" required=""/>
+                            <h:inputText value="#{sesionUsuario.direccion}" class="form-control" id="validationCustom07" required=""/>
                             <div class="invalid-feedback">
                                 La dirección ingresada no cumple los parámetros.
                             </div>
@@ -109,7 +106,7 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationCustom09">Telefono</label>
-                            <h:inputText value="" class="form-control" id="validationCustom09" required=""/>
+                            <h:inputText value="#{sesionUsuario.telefono}" class="form-control" id="validationCustom09" required=""/>
                             <div class="invalid-feedback">
                                 El número ingresado excede la longitud permitida. 
                             </div>
@@ -118,14 +115,14 @@
                     <div class="form-row">
                         <div class="col-md-5 mb-3" style="justify-content: center" >
                             <label for="exampleInputPassword1">Contraseña</label>
-                            <h:inputText value="" class="form-control" id="exampleInputPassword1" required=""/>
+                            <h:inputText value="#{sesionUsuario.contraseña}" html5:type="password" class="form-control" id="exampleInputPassword1" required=""/>
                             <div class="invalid-feedback">
                                 La contraseña nocumple os requisitos mínimos.
                             </div>
                         </div>
                         <div class="col-md-5 mb-3">
                             <label for="exampleInputPassword1">Confirmar Contraseña</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required=""/>
+                            <h:inputText html5:type="password" class="form-control" id="exampleInputPassword2" required=""/>
                             <div class="invalid-feedback">
                                 Las contraseñas no coinciden.
                             </div>
@@ -142,8 +139,31 @@
                             </div>
                         </div>
                     </div>
-                    <h:commandButton class="btn btn-primary" type="submit" value="Registrarse" style="background:rgb(50, 51, 142); border: none; "></h:commandButton>
+                    <br></br>
+<!--                    <h:outputLabel class="form-control" value="#{sesionUsuario.primerNombre}"></h:outputLabel>-->
+                    <h:commandButton class="btn btn-dark" type="submit" value="Registrarse prueba" action="salida.xhtml"/>
+                    <h:commandButton class="btn btn-dark" type="submit" value="Registrarse" action="#{sesionUsuario.registrarUsuario()}"/>
                     <a href="index.xhtml" class="btn btn-dark">Cancelar</a>
+                       <table>
+                    <thead>
+                        <tr>
+                            <h4>Lista de usuarios y contraseñas</h4>                           
+                        </tr>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Contraseña</th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+              
+                            <tr>
+                                <td>#{sesionUsuario.primerNombre}</td>
+                                <td>#{sesionUsuario.contraseña}</td>
+                            </tr>
+                 
+                        
+                    </tbody>
+                </table>
                 </form>  
             </div>
         </section>

@@ -2,14 +2,19 @@
 package edu.ProyectoAdsi.controlador;
 
 import edu.ProyectoAdsi.entidades.Usuarios;
+import edu.ProyectoAdsi.facade.UsuariosFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import org.primefaces.PrimeFaces;
 
 @Named(value = "sesionUsuario")
 @SessionScoped
 public class SesionUsuario implements Serializable {
+    
+     @EJB
+     UsuariosFacadeLocal usuariosfacadelocal; 
     
     private int tipoDocumento;
     private String documento;
@@ -138,7 +143,7 @@ public class SesionUsuario implements Serializable {
         this.direccion = direccion;
     }
     
-    public String ingresarUsuario() {
+    public String registrarUsuario() {
         try {
             Usuarios nuevoUsu = new Usuarios();
             nuevoUsu.setTipoDocumento(tipoDocumento);
@@ -152,18 +157,20 @@ public class SesionUsuario implements Serializable {
             nuevoUsu.setCorreo(correo);
             nuevoUsu.setTelefono(telefono);
             nuevoUsu.setContrasena(contraseña);
-
-            UsuariosFacadeLocal.insertUsuario(nuevoUsu);
-//            if (usuarioReg) {
-//                int posicion=UsuariosFacadeLocal.(documento);
-//                boolean resultado=usuariosFacadeLocal.asignarRol(posicion,3);
-//                        resultado=usuarioFacadeLocal.asignarRol(posicion,1);
-//                
-//                
-//            PrimeFaces.current().executeScript("estadoOk('" + primerNombre + " " + primerApellido + "')");           
-//            }else{
-//            PrimeFaces.current().executeScript("estadoBad('Usuario ya registrado')");
-//            }  
+            
+            
+            
+            boolean insertUsu = usuariosfacadelocal.insertUsuario(nuevoUsu);
+            if (insertUsu) {
+                int posicion=usuariosfacadelocal.consultarId(documento);
+                boolean resultado=usuariosfacadelocal.asignarRol(posicion,3);
+                        resultado=usuariosfacadelocal.asignarRol(posicion,1);
+                
+                
+            PrimeFaces.current().executeScript("estadoOk('" + primerNombre + " " + primerApellido + "')");           
+            }else{
+            PrimeFaces.current().executeScript("estadoBad('Usuario ya registrado')");
+            }  
 
             this.tipoDocumento = 0;
             this.documento = "";
