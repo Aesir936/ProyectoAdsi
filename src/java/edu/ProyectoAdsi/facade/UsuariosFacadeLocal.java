@@ -10,7 +10,6 @@ import javax.ejb.Local;
 public interface UsuariosFacadeLocal {
     
 
-
     void create(Usuarios usuarios);
 
     void edit(Usuarios usuarios);
@@ -30,5 +29,6 @@ public interface UsuariosFacadeLocal {
     public boolean asignarRol(int usuarioId, int rolId);
 
     public boolean insertUsuario(Usuarios newUser);
+
     
 }

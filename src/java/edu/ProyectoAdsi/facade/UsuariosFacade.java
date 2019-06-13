@@ -23,6 +23,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         super(Usuarios.class);
     }
   
+   
     @Override
     public boolean insertUsuario(Usuarios newUser){
         try {

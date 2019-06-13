@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registro Usuario</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    </h:head>
+    <h:body>
+        <!--Registrate-->
+        <section style="background:#f2f2f2">
+            <div class="container py-5">
+                <h1 style="color: rgb(219, 129, 45); font-size: 2em">Registro de usuarios</h1>
+                <hr/>                  
+                <h:form>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for=""> Tipo de Documento </h:outputLabel>
+                            <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.tipoDocumento}" >
+                                    <f:selectItem itemValue="0" itemLabel="Seleccione tipo de documento"></f:selectItem>
+                                    <f:selectItem itemValue="1" itemLabel="CC"></f:selectItem>
+                                    <f:selectItem itemValue="2" itemLabel="TI"></f:selectItem>
+                                    <f:selectItem itemValue="3" itemLabel="Otro"></f:selectItem>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for=""> Númereo de documento </h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.documento}" class="form-control" required=""/>
+                        </div>                           
+                    </div>                 
+                     <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for="">Primer Nombre</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.primerNombre}" class="form-control" required=""/>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for="">Segundo Nombre</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.segundoNombre}" class="form-control" />
+                        </div>                       
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for="">Primer Apellido</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.primerApellido}" class="form-control" required=""/>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for="">Segundo Apellido</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.segundoApellido}" class="form-control" />                         
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for="">Nombre de la Empresa</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.nombreEmpresa}" class="form-control" required=""/>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for="">Nit</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.nit}" class="form-control" required=""/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for="">Ciudad</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario}" class="form-control" required=""/>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for="">Direccion</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.direccion}" class="form-control" required=""/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for="btnRegistro">Correo electrónico</h:outputLabel>                                                       
+                            <h:inputText value="#{sesionUsuario.correo}" class="form-control" required=""/>                          
+                        </div>                                                
+                        <div class="col-md-3 mb-3">
+                            <h:outputLabel for="">Telefono</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.telefono}" class="form-control" required=""/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-5 mb-3" style="justify-content: center" >
+                            <h:outputLabel for="">Contraseña</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.contraseña}" html5:type="password" class="form-control" required=""/>
+                        </div>                         
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-5 mb-3">
+                            <h:outputLabel onclick="estadoOk('Camilo')" for="">Confirmar Contraseña</h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.confirmarContraseña}" html5:type="password" class="form-control" required=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required=""/>
+                            <label class="form-check-label" for="invalidCheck">Aceptar los términos y condiciones.</label>
+                        </div>
+                    </div>
+                    <h:commandButton action="#{sesionUsuario.registrarUsuario()}" class="btn btn-dark" value="Registrarse" ></h:commandButton>
+                    <a href="index.xhtml" class="btn btn-dark">Cancelar</a>
+                </h:form>  
+            </div>
+        </section>
+        <script type="text/javascript">
+             function estadoOk(a) {
+                Swal.fire(
+                        'Registro OK !',
+                        a,
+                        'success'
+                        );
+                }
+        </script>
+<!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
+    </h:body>
+</html>
+

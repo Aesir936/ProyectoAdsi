@@ -1,11 +1,13 @@
-
 package edu.ProyectoAdsi.controlador;
 
+import com.sun.xml.internal.ws.client.RequestContext;
 import edu.ProyectoAdsi.entidades.Usuarios;
 import edu.ProyectoAdsi.facade.UsuariosFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import org.primefaces.PrimeFaces;
 
@@ -27,24 +29,20 @@ public class SesionUsuario implements Serializable {
     private String correo;
     private String telefono;
     private String contraseña;
-    private int direccion;    
-   
-    public SesionUsuario() {
+    private String confirmarContraseña;
+    private int direccion;  
+    
+    List<Usuarios> lstUsuIn = new ArrayList<>();
+
+    public List<Usuarios> getLstUsuIn() {
+        return lstUsuIn;
     }
 
-    public SesionUsuario(int tipoDocumento, String documento, String primerNombre, String segundoNombre, String primerApellido, String SegundoApellido, String nombreEmpresa, String nit, String correo, String telefono, String contraseña, int direccion) {
-        this.tipoDocumento = tipoDocumento;
-        this.documento = documento;
-        this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
-        this.primerApellido = primerApellido;
-        this.SegundoApellido = SegundoApellido;
-        this.nombreEmpresa = nombreEmpresa;
-        this.nit = nit;
-        this.correo = correo;
-        this.telefono = telefono;
-        this.contraseña = contraseña;
-        this.direccion = direccion;
+    public void setLstUsuIn(List<Usuarios> lstUsuIn) {
+        this.lstUsuIn = lstUsuIn;
+    }
+    
+    public SesionUsuario() {
     }
 
     public int getTipoDocumento() {
@@ -134,6 +132,14 @@ public class SesionUsuario implements Serializable {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+    
+    public String getConfirmarContraseña() {
+        return confirmarContraseña;
+    }
+
+    public void setConfirmarContraseña(String confirmarContraseña) {
+        this.confirmarContraseña = confirmarContraseña;
+    }
 
     public int getDireccion() {
         return direccion;
@@ -145,51 +151,73 @@ public class SesionUsuario implements Serializable {
     
     public String registrarUsuario() {
         try {
-            Usuarios nuevoUsu = new Usuarios();
-            nuevoUsu.setTipoDocumento(tipoDocumento);
-            nuevoUsu.setDocumento(documento);
-            nuevoUsu.setPrimerNombre(primerNombre);
-            nuevoUsu.setSegundoNombre(segundoNombre);
-            nuevoUsu.setPrimerApellido(primerApellido);
-            nuevoUsu.setSegundoApellido(SegundoApellido);
-            nuevoUsu.setNombreEmpresa(nombreEmpresa);
-            nuevoUsu.setNit(nit);
-            nuevoUsu.setCorreo(correo);
-            nuevoUsu.setTelefono(telefono);
-            nuevoUsu.setContrasena(contraseña);
-            
-            
-            
-            boolean insertUsu = usuariosfacadelocal.insertUsuario(nuevoUsu);
-            if (insertUsu) {
-                int posicion=usuariosfacadelocal.consultarId(documento);
-                boolean resultado=usuariosfacadelocal.asignarRol(posicion,3);
-                        resultado=usuariosfacadelocal.asignarRol(posicion,1);
-                
-                
-            PrimeFaces.current().executeScript("estadoOk('" + primerNombre + " " + primerApellido + "')");           
-            }else{
-            PrimeFaces.current().executeScript("estadoBad('Usuario ya registrado')");
-            }  
+            if (contraseña.equals(confirmarContraseña)) {
 
-            this.tipoDocumento = 0;
-            this.documento = "";
-            this.primerNombre = "";
-            this.segundoNombre = "";
-            this.primerApellido = "";
-            this.SegundoApellido = "";
-            this.nombreEmpresa = "";
-            this.nit = "";
-            this.correo = "";
-            this.telefono = "";
-            this.contraseña = "";
-            this.direccion = 0;
+//            PrimeFaces.current().executeScript("estadoOk('Usuario registrado')");
+            PrimeFaces.current().executeScript("estadoOk('')");           
+
+                Usuarios nuevoUsu = new Usuarios();
+                nuevoUsu.setTipoDocumento(tipoDocumento);
+                nuevoUsu.setDocumento(documento);
+                nuevoUsu.setPrimerNombre(primerNombre);
+                nuevoUsu.setSegundoNombre(segundoNombre);
+                nuevoUsu.setPrimerApellido(primerApellido);
+                nuevoUsu.setSegundoApellido(SegundoApellido);
+                nuevoUsu.setNombreEmpresa(nombreEmpresa);
+                nuevoUsu.setNit(nit);
+                nuevoUsu.setCorreo(correo);
+                nuevoUsu.setTelefono(telefono);
+                nuevoUsu.setContrasena(contraseña);
+                
+                usuariosfacadelocal.insertUsuario(nuevoUsu);
+                
+                this.tipoDocumento = 0;
+                this.documento = "";
+                this.primerNombre = "";
+                this.segundoNombre = "";
+                this.primerApellido = "";
+                this.SegundoApellido = "";
+                this.nombreEmpresa = "";
+                this.nit = "";
+                this.correo = "";
+                this.telefono = "";
+                this.contraseña = "";
+                this.confirmarContraseña = "";
+                this.direccion = 0;
+
+            } else {
+
+                PrimeFaces.current().executeScript("contrasenasDiferentes('La clave no es la misma')");
+
+            }
+            
+            
+//            boolean insertUsu = 
+//            if (insertUsu) {
+//                int posicion=usuariosfacadelocal.consultarId(documento);
+//                boolean resultado=usuariosfacadelocal.asignarRol(posicion,3);
+//                        resultado=usuariosfacadelocal.asignarRol(posicion,1);
+//                
+//                
+//            PrimeFaces.current().executeScript("estadoOk('" + primerNombre + " " + primerApellido + "')");           
+//            }else{
+//            PrimeFaces.current().executeScript("estadoBad('Usuario ya registrado')");
+//            }  
+            
 
         } catch (Exception e) {
-            PrimeFaces.current().executeScript("estadoBad('" + primerNombre + " " + primerApellido + "')");
         }
         return "";
     }
-
+    
+//    public void registroUsuario() {
+//        Usuarios nuevoUsuario = new Usuarios(direccion, tipoDocumento, documento, primerNombre, segundoNombre, primerApellido, SegundoApellido, nombreEmpresa, nit, correo, telefono, contraseña);
+//        this.lstUsuIn.add(nuevoUsuario);
+//        this.primerNombre = "";
+//        this.contraseña = "";
+//        
+//        FacesMessage messageRegistro = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha registrado","con éxito"); 
+//    } 
+   
 }
 

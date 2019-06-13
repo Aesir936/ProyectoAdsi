@@ -99,11 +99,16 @@ public class Usuarios implements Serializable {
         this.idUsuarios = idUsuarios;
     }
 
-    public Usuarios(Integer idUsuarios, int tipoDocumento, String primerNombre, String primerApellido, String correo, String telefono, String contrasena) {
+    public Usuarios(Integer idUsuarios, int tipoDocumento, String documento,String primerNombre, String segundoNombre, String primerApellido,String segundoApellido,String nombreEmpresa,String nit,String correo, String telefono, String contrasena) {
         this.idUsuarios = idUsuarios;
         this.tipoDocumento = tipoDocumento;
+        this.documento = documento;
         this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.nombreEmpresa = nombreEmpresa;
+        this.nit = nit;
         this.correo = correo;
         this.telefono = telefono;
         this.contrasena = contrasena;
