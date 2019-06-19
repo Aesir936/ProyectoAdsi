@@ -1,7 +1,7 @@
 package edu.ProyectoAdsi.controlador;
 
-import com.sun.xml.internal.ws.client.RequestContext;
 import edu.ProyectoAdsi.entidades.Usuarios;
+import edu.ProyectoAdsi.entidades.UsuariosHasTblRoles;
 import edu.ProyectoAdsi.facade.UsuariosFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -30,7 +30,8 @@ public class SesionUsuario implements Serializable {
     private String telefono;
     private String contraseña;
     private String confirmarContraseña;
-    private int direccion;  
+    private int direccion;
+    private Usuarios usuLog;    
     
     List<Usuarios> lstUsuIn = new ArrayList<>();
 
@@ -152,10 +153,7 @@ public class SesionUsuario implements Serializable {
     public String registrarUsuario() {
         try {
             if (contraseña.equals(confirmarContraseña)) {
-
-//            PrimeFaces.current().executeScript("estadoOk('Usuario registrado')");
-            PrimeFaces.current().executeScript("estadoOk('')");           
-
+                      
                 Usuarios nuevoUsu = new Usuarios();
                 nuevoUsu.setTipoDocumento(tipoDocumento);
                 nuevoUsu.setDocumento(documento);
@@ -169,7 +167,19 @@ public class SesionUsuario implements Serializable {
                 nuevoUsu.setTelefono(telefono);
                 nuevoUsu.setContrasena(contraseña);
                 
-                usuariosfacadelocal.insertUsuario(nuevoUsu);
+                boolean insertUsu = usuariosfacadelocal.insertUsuario(nuevoUsu);
+                
+                if (insertUsu) {
+                                            
+                int posicion=usuariosfacadelocal.consultarId(documento);
+                
+                usuariosfacadelocal.asignarRol(posicion,3);
+                
+                PrimeFaces.current().executeScript("registroExitoso('Se ha registrado con exito')");
+                           
+                }else{
+                PrimeFaces.current().executeScript("registroFallido('Usuario ya registrado')");
+                }
                 
                 this.tipoDocumento = 0;
                 this.documento = "";
@@ -186,28 +196,32 @@ public class SesionUsuario implements Serializable {
                 this.direccion = 0;
 
             } else {
-
-                PrimeFaces.current().executeScript("contrasenasDiferentes('La clave no es la misma')");
-
-            }
-            
-            
-//            boolean insertUsu = 
-//            if (insertUsu) {
-//                int posicion=usuariosfacadelocal.consultarId(documento);
-//                boolean resultado=usuariosfacadelocal.asignarRol(posicion,3);
-//                        resultado=usuariosfacadelocal.asignarRol(posicion,1);
-//                
-//                
-//            PrimeFaces.current().executeScript("estadoOk('" + primerNombre + " " + primerApellido + "')");           
-//            }else{
-//            PrimeFaces.current().executeScript("estadoBad('Usuario ya registrado')");
-//            }  
-            
-
+                PrimeFaces.current().executeScript("registroFallido('Las contraseñas no coinciden')");
+            }            
         } catch (Exception e) {
         }
         return "";
+    }
+        public String inicioSesion( ){
+        try {
+            this.usuLog = usuariosfacadelocal.iniciarSesion(contraseña, documento);
+            String ruta="#";
+            if (usuLog !=null) {
+                for (UsuariosHasTblRoles objRol : usuLog.getUsuariosHasTblRolesCollection()) {
+                    ruta=objRol.getTblRolesIdTblRol().getNombreRol();
+                    break;
+                }
+   
+                return "../"+ruta+"/index.xhtml?faces-redirect=true";
+                        
+            } else {
+            PrimeFaces.current().executeScript("loginFallido('Usuario no registrado')");
+            return ""; 
+            }
+        } catch (Exception e) {
+            PrimeFaces.current().executeScript("loginFallido('Usuario no registrado')");
+            return "";           
+        }
     }
     
 //    public void registroUsuario() {

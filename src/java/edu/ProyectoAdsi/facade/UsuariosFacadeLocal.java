@@ -30,5 +30,7 @@ public interface UsuariosFacadeLocal {
 
     public boolean insertUsuario(Usuarios newUser);
 
+    public Usuarios iniciarSesion(String contrasena, String documento);
+
     
 }

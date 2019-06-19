@@ -2,6 +2,7 @@
 package edu.ProyectoAdsi.facade;
 
 import edu.ProyectoAdsi.entidades.Usuarios;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -67,13 +68,32 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     @Override
     public boolean asignarRol(int usuarioId, int rolId) {
         try {
-            Query usuRol = em.createNativeQuery("Confirmar la consulta que se enviará a la B.D.");
+            Query usuRol = em.createNativeQuery("insert into tbl_usuarios_has_tbl_roles (tbl_usuarios_id_usuarios,tbl_roles_id_tbl_rol)  values (?,?);");
             usuRol.setParameter(1, usuarioId);
             usuRol.setParameter(2, rolId);
             usuRol.executeUpdate();
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+    
+    @Override
+    public Usuarios iniciarSesion(String contrasena, String documento) {
+
+        try {
+            em.getEntityManagerFactory().getCache().evictAll();
+            Query inicioUsu = em.createQuery("SELECT f FROM Usuarios f WHERE f.contrasena = :contrasena AND f.documento = :documento");
+            inicioUsu.setParameter("contrasena", contrasena);
+            inicioUsu.setParameter("usuDocumento", documento);
+            List<Usuarios> listaResultados = inicioUsu.getResultList();
+            if (listaResultados.isEmpty()) {
+                return null;
+            } else {
+                return listaResultados.get(0);
+            }
+        } catch (Exception e) {
+            return null;
         }
     }
 }
