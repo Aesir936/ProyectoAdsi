@@ -212,7 +212,7 @@ public class SesionUsuario implements Serializable {
                     break;
                 }
    
-                return "../"+ruta+"/index.xhtml?faces-redirect=true";
+                return "/"+ruta+"/index.xhtml?faces-redirect=true";
                         
             } else {
             PrimeFaces.current().executeScript("loginFallido('Usuario no registrado')");
@@ -222,8 +222,7 @@ public class SesionUsuario implements Serializable {
             PrimeFaces.current().executeScript("loginFallido('Usuario no registrado')");
             return "";           
         }
-    }
-    
+    }    
 //    public void registroUsuario() {
 //        Usuarios nuevoUsuario = new Usuarios(direccion, tipoDocumento, documento, primerNombre, segundoNombre, primerApellido, SegundoApellido, nombreEmpresa, nit, correo, telefono, contraseña);
 //        this.lstUsuIn.add(nuevoUsuario);

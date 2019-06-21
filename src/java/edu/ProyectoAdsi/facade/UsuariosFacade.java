@@ -50,8 +50,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         } catch (Exception e) {
             return false;
         }
-    }
-    
+    }   
        @Override
     public int consultarId(String numeroDoc) {
         try {
@@ -62,9 +61,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         } catch (Exception e) {
             return 0;
         }
-    }
-    
-    
+    }   
     @Override
     public boolean asignarRol(int usuarioId, int rolId) {
         try {
@@ -76,15 +73,14 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         } catch (Exception e) {
             return false;
         }
-    }
-    
+    }   
     @Override
     public Usuarios iniciarSesion(String contrasena, String documento) {
 
         try {
             em.getEntityManagerFactory().getCache().evictAll();
-            Query inicioUsu = em.createQuery("SELECT f FROM Usuarios f WHERE f.contrasena = :contrasena AND f.documento = :documento");
-            inicioUsu.setParameter("contrasena", contrasena);
+            Query inicioUsu = em.createQuery("SELECT f FROM Usuarios f WHERE f.contrasena = :usuContrasena AND f.documento = :usuDocumento");
+            inicioUsu.setParameter("usuContrasena", contrasena);
             inicioUsu.setParameter("usuDocumento", documento);
             List<Usuarios> listaResultados = inicioUsu.getResultList();
             if (listaResultados.isEmpty()) {
