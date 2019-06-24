@@ -63,8 +63,29 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for="">Ciudad</h:outputLabel>
-                            <h:inputText value="#{sesionUsuario}" class="form-control" required=""/>
+                            <h:outputLabel for=""> Ciudad </h:outputLabel>
+                            <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.ciudad}" >
+                                <f:selectItem itemValue="0" itemLabel="Seleccione la Ciudad"></f:selectItem>
+                                <f:selectItem itemValue="1" itemLabel="Bogota"></f:selectItem>
+                                <f:selectItem itemValue="2" itemLabel="Medellin"></f:selectItem>
+                                <f:selectItem itemValue="3" itemLabel="Barranquilla"></f:selectItem>
+                                <f:selectItem itemValue="4" itemLabel="Cali"></f:selectItem>
+                                <f:selectItem itemValue="5" itemLabel="Cartagena de Indias"></f:selectItem>
+                                <f:selectItem itemValue="6" itemLabel="Cúcuta"></f:selectItem>
+                                <f:selectItem itemValue="7" itemLabel="Soacha"></f:selectItem>
+                                <f:selectItem itemValue="8" itemLabel="Ibagué"></f:selectItem>
+                                <f:selectItem itemValue="9" itemLabel="Bucaramanga"></f:selectItem>
+                                <f:selectItem itemValue="10" itemLabel="Villavicencio"></f:selectItem>
+                                <f:selectItem itemValue="11" itemLabel="Santa Marta"></f:selectItem>
+                                <f:selectItem itemValue="12" itemLabel="Bello"></f:selectItem>
+                                <f:selectItem itemValue="13" itemLabel="Valledupar"></f:selectItem>
+                                <f:selectItem itemValue="14" itemLabel="Pereira"></f:selectItem>
+                                <f:selectItem itemValue="15" itemLabel="Pasto"></f:selectItem>
+                                <f:selectItem itemValue="16" itemLabel="Manizales"></f:selectItem>
+                                <f:selectItem itemValue="17" itemLabel="Montería"></f:selectItem>
+                                <f:selectItem itemValue="18" itemLabel="Neiva"></f:selectItem>
+
+                            </h:selectOneMenu>
                         </div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Direccion</h:outputLabel>

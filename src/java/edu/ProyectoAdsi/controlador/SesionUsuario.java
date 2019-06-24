@@ -1,7 +1,9 @@
 package edu.ProyectoAdsi.controlador;
 
+import edu.ProyectoAdsi.entidades.Ciudades;
 import edu.ProyectoAdsi.entidades.Usuarios;
 import edu.ProyectoAdsi.entidades.UsuariosHasTblRoles;
+import edu.ProyectoAdsi.facade.CiudadesFacadeLocal;
 import edu.ProyectoAdsi.facade.UsuariosFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -17,6 +19,8 @@ public class SesionUsuario implements Serializable {
     
      @EJB
      UsuariosFacadeLocal usuariosfacadelocal; 
+     @EJB
+     CiudadesFacadeLocal ciudadesFacadeLocal; 
     
     private int tipoDocumento;
     private String documento;
@@ -30,7 +34,9 @@ public class SesionUsuario implements Serializable {
     private String telefono;
     private String contraseña;
     private String confirmarContraseña;
-    private int direccion;
+    private String direccion;
+    private int ciudad;
+    
     private Usuarios usuLog;    
     
     List<Usuarios> lstUsuIn = new ArrayList<>();
@@ -142,19 +148,39 @@ public class SesionUsuario implements Serializable {
         this.confirmarContraseña = confirmarContraseña;
     }
 
-    public int getDireccion() {
+    public String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(int direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
+
+    public int getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(int ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public Usuarios getUsuLog() {
+        return usuLog;
+    }
+
+    public void setUsuLog(Usuarios usuLog) {
+        this.usuLog = usuLog;
+    }
+       
+        
     public String registrarUsuario() {
         try {
             if (contraseña.equals(confirmarContraseña)) {
-                      
+                
+               Ciudades objCiudad = ciudadesFacadeLocal.find(ciudad);
+                
                 Usuarios nuevoUsu = new Usuarios();
+                nuevoUsu.setFkCiudad(objCiudad);
                 nuevoUsu.setTipoDocumento(tipoDocumento);
                 nuevoUsu.setDocumento(documento);
                 nuevoUsu.setPrimerNombre(primerNombre);
@@ -166,6 +192,8 @@ public class SesionUsuario implements Serializable {
                 nuevoUsu.setCorreo(correo);
                 nuevoUsu.setTelefono(telefono);
                 nuevoUsu.setContrasena(contraseña);
+                nuevoUsu.setDireccion(direccion);
+                
                 
                 boolean insertUsu = usuariosfacadelocal.insertUsuario(nuevoUsu);
                 
@@ -173,7 +201,7 @@ public class SesionUsuario implements Serializable {
                                             
                 int posicion=usuariosfacadelocal.consultarId(documento);
                 
-                usuariosfacadelocal.asignarRol(posicion,3);
+                usuariosfacadelocal.asignarRol(posicion,1);
                 
                 PrimeFaces.current().executeScript("registroExitoso('Se ha registrado con exito')");
                            
@@ -193,7 +221,7 @@ public class SesionUsuario implements Serializable {
                 this.telefono = "";
                 this.contraseña = "";
                 this.confirmarContraseña = "";
-                this.direccion = 0;
+                this.direccion = "";
 
             } else {
                 PrimeFaces.current().executeScript("registroFallido('Las contraseñas no coinciden')");
@@ -222,15 +250,14 @@ public class SesionUsuario implements Serializable {
             PrimeFaces.current().executeScript("loginFallido('Usuario no registrado')");
             return "";           
         }
-    }    
-//    public void registroUsuario() {
-//        Usuarios nuevoUsuario = new Usuarios(direccion, tipoDocumento, documento, primerNombre, segundoNombre, primerApellido, SegundoApellido, nombreEmpresa, nit, correo, telefono, contraseña);
-//        this.lstUsuIn.add(nuevoUsuario);
-//        this.primerNombre = "";
-//        this.contraseña = "";
-//        
-//        FacesMessage messageRegistro = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha registrado","con éxito"); 
-//    } 
+        
+        
+    }
+     //        Método para leer todos los usuarios registrados en la base de datos
+            public List<Usuarios> usuarioRegistrados() {
+
+        return usuariosfacadelocal.filtrarUsuarios(documento,nit);
+    }
    
 }
 

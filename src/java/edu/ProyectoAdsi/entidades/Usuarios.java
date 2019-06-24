@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package edu.ProyectoAdsi.entidades;
 
 import java.io.Serializable;
@@ -22,7 +26,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-
+/**
+ *
+ * @author bxs42
+ */
 @Entity
 @Table(name = "tbl_usuarios")
 @XmlRootElement
@@ -80,15 +87,20 @@ public class Usuarios implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "contrasena")
     private String contrasena;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "direccion")
+    private String direccion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosIdusuarios", fetch = FetchType.LAZY)
     private Collection<Gerentes> gerentesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblUsuariosIdUsuarios", fetch = FetchType.LAZY)
     private Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosIdusuarios", fetch = FetchType.LAZY)
     private Collection<Clientes> clientesCollection;
-    @JoinColumn(name = "id_tbl_direccion", referencedColumnName = "id_tbl_direccion")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Direcciones idTblDireccion;
+    @JoinColumn(name = "fk_ciudad", referencedColumnName = "id_ciudad")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Ciudades fkCiudad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosIdusuarios", fetch = FetchType.LAZY)
     private Collection<Trabajadores> trabajadoresCollection;
 
@@ -99,7 +111,7 @@ public class Usuarios implements Serializable {
         this.idUsuarios = idUsuarios;
     }
 
-    public Usuarios(Integer idUsuarios, int tipoDocumento, String documento,String primerNombre, String segundoNombre, String primerApellido,String segundoApellido,String nombreEmpresa,String nit,String correo, String telefono, String contrasena) {
+    public Usuarios(Integer idUsuarios, int tipoDocumento, String documento,String primerNombre, String segundoNombre, String primerApellido,String segundoApellido,String nombreEmpresa,String nit,String correo, String telefono, String contrasena, String direccion) {
         this.idUsuarios = idUsuarios;
         this.tipoDocumento = tipoDocumento;
         this.documento = documento;
@@ -112,6 +124,7 @@ public class Usuarios implements Serializable {
         this.correo = correo;
         this.telefono = telefono;
         this.contrasena = contrasena;
+        this.direccion= direccion;
     }
 
     public Integer getIdUsuarios() {
@@ -210,6 +223,14 @@ public class Usuarios implements Serializable {
         this.contrasena = contrasena;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
     @XmlTransient
     public Collection<Gerentes> getGerentesCollection() {
         return gerentesCollection;
@@ -237,12 +258,12 @@ public class Usuarios implements Serializable {
         this.clientesCollection = clientesCollection;
     }
 
-    public Direcciones getIdTblDireccion() {
-        return idTblDireccion;
+    public Ciudades getFkCiudad() {
+        return fkCiudad;
     }
 
-    public void setIdTblDireccion(Direcciones idTblDireccion) {
-        this.idTblDireccion = idTblDireccion;
+    public void setFkCiudad(Ciudades fkCiudad) {
+        this.fkCiudad = fkCiudad;
     }
 
     @XmlTransient

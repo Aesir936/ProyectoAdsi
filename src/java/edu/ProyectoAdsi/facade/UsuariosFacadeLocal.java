@@ -28,9 +28,11 @@ public interface UsuariosFacadeLocal {
 
     public boolean asignarRol(int usuarioId, int rolId);
 
+    public Usuarios iniciarSesion(String contrasena, String documento);
+
     public boolean insertUsuario(Usuarios newUser);
 
-    public Usuarios iniciarSesion(String contrasena, String documento);
+    public List<Usuarios> filtrarUsuarios(String documento, String nit);
 
     
 }

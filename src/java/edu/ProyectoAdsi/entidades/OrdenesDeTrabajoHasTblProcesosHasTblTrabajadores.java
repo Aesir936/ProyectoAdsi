@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Aesir936
+ * @author bxs42
  */
 @Entity
 @Table(name = "tbl_ordenes_de_trabajo_has_tbl_procesos_has_tbl_trabajadores")

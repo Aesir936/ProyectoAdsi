@@ -1,105 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough">
 
     <body>
 
-        <ui:composition template="../Template/completeTemplate.xhtml">
+        <ui:composition template="./../Template/completeTemplate.xhtml">
             
-            <ui:define name="content">
-                <div class="container-fluid">
-                    <!-- Header -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Tablero principal</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generar reporte</a>
-                    </div>
-
-                    <!-- Primera fila "Módulos" -->
-                    <div class="row">
-
-                        <!-- Módulo Solicitudes -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Administración de usuarios registrados</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Módulo producción -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Produción</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$10.215.000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Avance de ordenes de trabajo -->
-                    <div class="row">
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Ordenes de trabajos en proceso</div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modulos de consutas periódicas -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Consultas generales</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </ui:define> 
              <ui:define name="left">
                     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
 
@@ -132,7 +42,7 @@
                             <span>Consulta y aprueba cotizaciones en curso</span></a>
                     </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" href="admin_usu.xhtml">
+                        <a class="nav-link" href="">
                             <i class="fas fa-id-badge"></i>
                             <span>Gestión de usuarios</span></a>
                     </li>
@@ -216,6 +126,84 @@
                     </li>
                 </ul>
             </ui:define>
+
+
+            <ui:define name="content">
+                  <h:form>
+                    <div class="row">
+                        <div class="col-6"> 
+                            <label for="documentoTC">Documento</label>
+                            <h:inputText value="#{sesionUsuario.documento}" class="form-control" html5:placeholder="Numero documento"/>
+                            
+                            <label for="validationCustom01">Nit Empresa</label>
+                            <h:inputText value="#{sesionUsuario.nit}" class="form-control"  html5:placeholder="Nombres" />
+                        </div>
+
+
+                        <div class="col-6"> 
+
+                            <h:commandButton class="btn btn-success" value="Buscar" action="admin_usu">
+
+                            </h:commandButton>
+
+                            <button class="btn btn-danger" type="button" id="btnexportar" onclick="Export()">.XLS</button>
+                        </div>                            
+
+                    </div>
+
+                </h:form>
+
+                <div id="miTabla">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Documento</th>
+                                <th scope="col">Empresa</th>
+                                <th scope="col">Ciudad</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <h:form>
+                                <c:forEach var="usuario"  items="#{sesionUsuario.usuarioRegistrados()}">
+                                    <tr>
+                                        <td>#{usuario.primerNombre}</td>
+                                        <td>#{usuario.primerApellido}</td>
+                                        <td>#{usuario.correo}</td>
+                                        <td>#{usuario.documento}</td>
+                                        <td>#{usuario.nombreEmpresa}</td>
+                                        <td>#{usuario.fkCiudad.nombreCiudad}</td>
+                                                                                 
+                                     
+                                        <td>
+                                            <c:if test="#{usuario.documento != sesionUsuario.usuLog.documento}">
+
+<!--                                                <h:commandButton action="" value="Cambiar" class="btn btn-danger" ></h:commandButton>-->
+
+
+                                            </c:if>
+
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </h:form>
+                        </tbody>
+                    </table>
+                </div>
+                <script type="text/javascript">
+                    function Export() {
+                        $("#miTabla").table2excel({
+                            filename: "Table.xls"
+                        });
+                    }
+                </script>
+                
+        
+            </ui:define>
+
         </ui:composition>
 
     </body>

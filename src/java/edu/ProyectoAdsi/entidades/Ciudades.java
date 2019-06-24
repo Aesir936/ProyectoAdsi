@@ -8,7 +8,6 @@ package edu.ProyectoAdsi.entidades;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Aesir936
+ * @author bxs42
  */
 @Entity
 @Table(name = "tbl_ciudades")
@@ -37,27 +36,27 @@ public class Ciudades implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_tbl_ciudades")
-    private Integer idTblCiudades;
+    @Column(name = "id_ciudad")
+    private Integer idCiudad;
     @Size(max = 45)
     @Column(name = "nombre_ciudad")
     private String nombreCiudad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTblCiudades", fetch = FetchType.LAZY)
-    private Collection<Direcciones> direccionesCollection;
+    @OneToMany(mappedBy = "fkCiudad", fetch = FetchType.LAZY)
+    private Collection<Usuarios> usuariosCollection;
 
     public Ciudades() {
     }
 
-    public Ciudades(Integer idTblCiudades) {
-        this.idTblCiudades = idTblCiudades;
+    public Ciudades(Integer idCiudad) {
+        this.idCiudad = idCiudad;
     }
 
-    public Integer getIdTblCiudades() {
-        return idTblCiudades;
+    public Integer getIdCiudad() {
+        return idCiudad;
     }
 
-    public void setIdTblCiudades(Integer idTblCiudades) {
-        this.idTblCiudades = idTblCiudades;
+    public void setIdCiudad(Integer idCiudad) {
+        this.idCiudad = idCiudad;
     }
 
     public String getNombreCiudad() {
@@ -69,18 +68,18 @@ public class Ciudades implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Direcciones> getDireccionesCollection() {
-        return direccionesCollection;
+    public Collection<Usuarios> getUsuariosCollection() {
+        return usuariosCollection;
     }
 
-    public void setDireccionesCollection(Collection<Direcciones> direccionesCollection) {
-        this.direccionesCollection = direccionesCollection;
+    public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
+        this.usuariosCollection = usuariosCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTblCiudades != null ? idTblCiudades.hashCode() : 0);
+        hash += (idCiudad != null ? idCiudad.hashCode() : 0);
         return hash;
     }
 
@@ -91,7 +90,7 @@ public class Ciudades implements Serializable {
             return false;
         }
         Ciudades other = (Ciudades) object;
-        if ((this.idTblCiudades == null && other.idTblCiudades != null) || (this.idTblCiudades != null && !this.idTblCiudades.equals(other.idTblCiudades))) {
+        if ((this.idCiudad == null && other.idCiudad != null) || (this.idCiudad != null && !this.idCiudad.equals(other.idCiudad))) {
             return false;
         }
         return true;
@@ -99,7 +98,7 @@ public class Ciudades implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.ProyectoAdsi.entidades.Ciudades[ idTblCiudades=" + idTblCiudades + " ]";
+        return "edu.ProyectoAdsi.entidades.Ciudades[ idCiudad=" + idCiudad + " ]";
     }
     
 }

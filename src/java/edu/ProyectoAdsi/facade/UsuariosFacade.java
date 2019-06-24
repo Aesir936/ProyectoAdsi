@@ -25,11 +25,12 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     }
   
    
+
     @Override
     public boolean insertUsuario(Usuarios newUser){
         try {
             Query insertUsu=em.createNativeQuery("insert into tbl_usuarios (tipo_documento,documento, primer_nombre, segundo_nombre,primer_apellido, \n" +
-            "segundo_apellido,nombre_empresa,nit,correo, telefono, contrasena,id_tbl_direccion)values (?,?,?,?,?,?,?,?,?,?,?,1)");
+            "segundo_apellido,nombre_empresa,nit,correo, telefono, contrasena,direccion,fk_ciudad) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             
             insertUsu.setParameter(1, newUser.getTipoDocumento());
             insertUsu.setParameter(2, newUser.getDocumento());
@@ -42,6 +43,8 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             insertUsu.setParameter(9, newUser.getCorreo());
             insertUsu.setParameter(10, newUser.getTelefono());
             insertUsu.setParameter(11, newUser.getContrasena());
+            insertUsu.setParameter(12, newUser.getDireccion());
+            insertUsu.setParameter(13, newUser.getFkCiudad().getIdCiudad());
             
             
             insertUsu.executeUpdate();
@@ -88,6 +91,24 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             } else {
                 return listaResultados.get(0);
             }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Usuarios> filtrarUsuarios(String documento, String nit ) {
+        try {
+              em.getEntityManagerFactory().getCache().evictAll();
+            String consultar = "";
+            if (documento.trim().equals("") && nit.trim().equals("")) {
+                consultar = "select * from tbl_usuarios";
+            } else {
+                consultar = "select * from tbl_usuarios where documento like '" + documento + "%' and nit like '"+nit+"%' order by documento desc";
+            }
+            Query filtrarU = em.createNativeQuery(consultar, Usuarios.class);
+            List<Usuarios> resultadoC = filtrarU.getResultList();
+            return resultadoC;
         } catch (Exception e) {
             return null;
         }

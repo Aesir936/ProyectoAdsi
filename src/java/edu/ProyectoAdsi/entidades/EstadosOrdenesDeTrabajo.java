@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Aesir936
+ * @author bxs42
  */
 @Entity
 @Table(name = "tbl_estados_ordenes_de_trabajo")
