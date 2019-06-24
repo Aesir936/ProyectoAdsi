@@ -249,14 +249,25 @@ public class SesionUsuario implements Serializable {
         } catch (Exception e) {
             PrimeFaces.current().executeScript("loginFallido('Usuario no registrado')");
             return "";           
-        }
-        
-        
+        }              
     }
+        
      //        Método para leer todos los usuarios registrados en la base de datos
             public List<Usuarios> usuarioRegistrados() {
 
         return usuariosfacadelocal.filtrarUsuarios(documento,nit);
+    }
+            
+//            Método para modificar info de usuario            
+             public void actualizarUsuario(){
+    
+        try {
+            usuariosfacadelocal.edit(usuLog);
+            PrimeFaces.current().executeScript("estadoOk('" + usuLog.getPrimerNombre() + " " + usuLog.getPrimerApellido()+ "  Datos Actualizados ')");
+        } catch (Exception e) {          
+           PrimeFaces.current().executeScript("estadoBad('Usuario no actualizado')");
+        }
+    
     }
    
 }

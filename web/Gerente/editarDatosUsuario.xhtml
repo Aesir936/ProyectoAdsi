@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Template/completeTemplate.xhtml">
+
+<!--            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="top">
+                top
+            </ui:define>-->
+
+            <ui:define name="content">
+                <div class="row py-5">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <h:form>
+                            <h:messages  style="color:red;margin:8px;"/> 
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="tdl">Tipo Documento</label>
+                                    <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.usuLog.tipoDocumento}" >
+                                        <f:selectItem itemValue="0" itemLabel="Seleccione tipo de documento"></f:selectItem>
+                                        <f:selectItem itemValue="1" itemLabel="CC"></f:selectItem>
+                                        <f:selectItem itemValue="2" itemLabel="TI"></f:selectItem>
+                                        <f:selectItem itemValue="3" itemLabel="Otro"></f:selectItem>
+                                    </h:selectOneMenu>
+        <!--                            <h:selectOneMenu  id="tdl" styleClass="form-control" value="#{sesionUsuario.usuLog.documento}" >
+                                        <f:selectItem itemValue="0" itemLabel="Seleccione ...."></f:selectItem>
+                                        <f:selectItems   value="#{usuarioSesion.lstTipoDocumento()}" var="tipodocumento" itemLabel="#{tipodocumento.descripcion}" itemValue="#{tipodocumento.tdoctipoDocumentoId}"> </f:selectItems>
+                                    </h:selectOneMenu>   -->
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="documentoTC">Documento</label>
+                                    <h:inputText value="#{sesionUsuario.usuLog.documento}" class="form-control" id="documentoId" html5:placeholder="Numero documento" maxlength="20" required="true" validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un documento"  />
+                                    <div class="valid-feedback">
+                                        <h:message for="documentoId"></h:message>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom01">Primer nombre</label>
+                                    <h:inputText value="#{sesionUsuario.usuLog.primerNombre}" class="form-control" id="nombre1Id"  maxlength="20" html5:placeholder="Nombres"  required="true"  validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un nombre"  />
+                                    <div class="valid-feedback">
+                                        <h:message for="nombre1Id"></h:message>
+                                    </div>               
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom02">Segundo nombre</label>
+                                    <h:inputText value="#{sesionUsuario.usuLog.segundoNombre}" class="form-control" id="nombre2Id"  maxlength="20" html5:placeholder="Nombres"  required="true"  validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un nombre"  />
+                                    <div class="valid-feedback">
+                                        <h:message for="nombre2Id"></h:message>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom03">Primer Apellido</label>
+                                    <h:inputText value="#{sesionUsuario.usuLog.primerApellido}" class="form-control" id="primerApellidoId" html5:placeholder="Primer Apellido" maxlength="20" required="true" validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un apellido"  />
+                                    <div class="valid-feedback">
+                                        <h:message for="primerApellidoId"></h:message>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationCustom04">Segundo Apellido</label>
+                                    <h:inputText value="#{sesionUsuario.usuLog.segundoApellido}" class="form-control" id="segundoApellidoId" html5:placeholder="Segundo Apellido" maxlength="20" required="true" validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un apellido"  />
+                                    <div class="valid-feedback">
+                                        <h:message for="segundoApellidoId"></h:message>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom05">Contrasena</label>
+                                    <h:inputText value="#{sesionUsuario.usuLog.contrasena}" class="form-control" id="contrasenaId" html5:placeholder="Clave" maxlength="20" required="true"  validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese una clave"  />
+                                    <div class="valid-feedback">
+                                        <h:message for="contrasenaId"></h:message>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom06">Correo</label>
+                                    <h:inputText value="#{sesionUsuario.usuLog.correo}" class="form-control" id="correoId" html5:placeholder="Correo Electronico" maxlength="50" required="true"  validatorMessage="No debe superar 50 caracteres" requiredMessage="Ingrese una correo electronico"  />
+                                    <div class="valid-feedback">
+                                        <h:message for="correoId"></h:message>
+                                    </div>
+                                </div>
+                            </div>
+                            <h:commandButton  action="#{sesionUsuario.actualizarUsuario()}"  class="btn btn-primary" value="Actualizar"></h:commandButton>
+                        </h:form>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>               
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
