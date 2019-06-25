@@ -29,5 +29,7 @@ public interface UsuariosHasTblRolesFacadeLocal {
     List<UsuariosHasTblRoles> findRange(int[] range);
 
     int count();
+
+    public boolean eliminarPermisos(int idUsuario);
     
 }

@@ -30,7 +30,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     public boolean insertUsuario(Usuarios newUser){
         try {
             Query insertUsu=em.createNativeQuery("insert into tbl_usuarios (tipo_documento,documento, primer_nombre, segundo_nombre,primer_apellido, \n" +
-            "segundo_apellido,nombre_empresa,nit,correo, telefono, contrasena,direccion,fk_ciudad) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            "segundo_apellido,nombre_empresa,nit,correo, telefono, contrasena,direccion,estado,fk_ciudad) values (?,?,?,?,?,?,?,?,?,?,?,?,'Activo',?)");
             
             insertUsu.setParameter(1, newUser.getTipoDocumento());
             insertUsu.setParameter(2, newUser.getDocumento());
@@ -82,7 +82,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
 
         try {
             em.getEntityManagerFactory().getCache().evictAll();
-            Query inicioUsu = em.createQuery("SELECT f FROM Usuarios f WHERE f.contrasena = :usuContrasena AND f.documento = :usuDocumento");
+            Query inicioUsu = em.createQuery("SELECT f FROM Usuarios f WHERE f.contrasena = :usuContrasena AND f.documento = :usuDocumento AND f.estado = 'Activo'");
             inicioUsu.setParameter("usuContrasena", contrasena);
             inicioUsu.setParameter("usuDocumento", documento);
             List<Usuarios> listaResultados = inicioUsu.getResultList();
@@ -113,4 +113,56 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             return null;
         }
     }
+    
+    @Override
+    public boolean removerUsuario(int idUsuario) {
+
+        try {
+
+            Query removerUSu = em.createNativeQuery("DELETE from tbl_usuarios where id_usuarios = ?");
+            removerUSu.setParameter(1, idUsuario);
+            removerUSu.executeUpdate();
+
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+    
+    public boolean cambiarEstado(int idUsuario) {
+
+        try {
+
+            Query removerUSu = em.createNativeQuery("DELETE from tbl_usuarios where id_usuarios = ?");
+            removerUSu.setParameter(1, idUsuario);
+            removerUSu.executeUpdate();
+
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+    
+    @Override
+    public boolean cambiarEstado(int idUsuario, String estado) {
+
+        try {
+
+            Query removerUSu = em.createNativeQuery("UPDATE tbl_usuarios SET estado = ? where id_usuarios = ?");
+            removerUSu.setParameter(1, estado);
+            removerUSu.setParameter(2, idUsuario);
+            removerUSu.executeUpdate();
+
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
 }

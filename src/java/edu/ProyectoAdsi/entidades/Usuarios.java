@@ -92,17 +92,14 @@ public class Usuarios implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "direccion")
     private String direccion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosIdusuarios", fetch = FetchType.LAZY)
-    private Collection<Gerentes> gerentesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblUsuariosIdUsuarios", fetch = FetchType.LAZY)
-    private Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosIdusuarios", fetch = FetchType.LAZY)
-    private Collection<Clientes> clientesCollection;
+    @Size(max = 45)
+    @Column(name = "estado")
+    private String estado;
     @JoinColumn(name = "fk_ciudad", referencedColumnName = "id_ciudad")
     @ManyToOne(fetch = FetchType.LAZY)
     private Ciudades fkCiudad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosIdusuarios", fetch = FetchType.LAZY)
-    private Collection<Trabajadores> trabajadoresCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblUsuariosIdUsuarios", fetch = FetchType.LAZY)
+    private Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection;
 
     public Usuarios() {
     }
@@ -111,20 +108,15 @@ public class Usuarios implements Serializable {
         this.idUsuarios = idUsuarios;
     }
 
-    public Usuarios(Integer idUsuarios, int tipoDocumento, String documento,String primerNombre, String segundoNombre, String primerApellido,String segundoApellido,String nombreEmpresa,String nit,String correo, String telefono, String contrasena, String direccion) {
+    public Usuarios(Integer idUsuarios, int tipoDocumento, String primerNombre, String primerApellido, String correo, String telefono, String contrasena, String direccion) {
         this.idUsuarios = idUsuarios;
         this.tipoDocumento = tipoDocumento;
-        this.documento = documento;
         this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
-        this.nombreEmpresa = nombreEmpresa;
-        this.nit = nit;
         this.correo = correo;
         this.telefono = telefono;
         this.contrasena = contrasena;
-        this.direccion= direccion;
+        this.direccion = direccion;
     }
 
     public Integer getIdUsuarios() {
@@ -231,31 +223,12 @@ public class Usuarios implements Serializable {
         this.direccion = direccion;
     }
 
-    @XmlTransient
-    public Collection<Gerentes> getGerentesCollection() {
-        return gerentesCollection;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setGerentesCollection(Collection<Gerentes> gerentesCollection) {
-        this.gerentesCollection = gerentesCollection;
-    }
-
-    @XmlTransient
-    public Collection<UsuariosHasTblRoles> getUsuariosHasTblRolesCollection() {
-        return usuariosHasTblRolesCollection;
-    }
-
-    public void setUsuariosHasTblRolesCollection(Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection) {
-        this.usuariosHasTblRolesCollection = usuariosHasTblRolesCollection;
-    }
-
-    @XmlTransient
-    public Collection<Clientes> getClientesCollection() {
-        return clientesCollection;
-    }
-
-    public void setClientesCollection(Collection<Clientes> clientesCollection) {
-        this.clientesCollection = clientesCollection;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Ciudades getFkCiudad() {
@@ -267,12 +240,12 @@ public class Usuarios implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Trabajadores> getTrabajadoresCollection() {
-        return trabajadoresCollection;
+    public Collection<UsuariosHasTblRoles> getUsuariosHasTblRolesCollection() {
+        return usuariosHasTblRolesCollection;
     }
 
-    public void setTrabajadoresCollection(Collection<Trabajadores> trabajadoresCollection) {
-        this.trabajadoresCollection = trabajadoresCollection;
+    public void setUsuariosHasTblRolesCollection(Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection) {
+        this.usuariosHasTblRolesCollection = usuariosHasTblRolesCollection;
     }
 
     @Override

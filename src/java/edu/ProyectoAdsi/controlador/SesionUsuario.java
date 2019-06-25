@@ -5,6 +5,7 @@ import edu.ProyectoAdsi.entidades.Usuarios;
 import edu.ProyectoAdsi.entidades.UsuariosHasTblRoles;
 import edu.ProyectoAdsi.facade.CiudadesFacadeLocal;
 import edu.ProyectoAdsi.facade.UsuariosFacadeLocal;
+import edu.ProyectoAdsi.facade.UsuariosHasTblRolesFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -21,6 +22,8 @@ public class SesionUsuario implements Serializable {
      UsuariosFacadeLocal usuariosfacadelocal; 
      @EJB
      CiudadesFacadeLocal ciudadesFacadeLocal; 
+     @EJB
+     UsuariosHasTblRolesFacadeLocal usuariosHasTblRolesFacadeLocal; 
     
     private int tipoDocumento;
     private String documento;
@@ -35,6 +38,7 @@ public class SesionUsuario implements Serializable {
     private String contraseña;
     private String confirmarContraseña;
     private String direccion;
+    private String estado;
     private int ciudad;
     
     private Usuarios usuLog;    
@@ -164,6 +168,14 @@ public class SesionUsuario implements Serializable {
         this.ciudad = ciudad;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public Usuarios getUsuLog() {
         return usuLog;
     }
@@ -269,6 +281,40 @@ public class SesionUsuario implements Serializable {
         }
     
     }
+             
+    //            Método para eliminar usuario     
+             
+        public void eliminarUsuario(int idUsuario) {
+
+        try {
+
+            usuariosHasTblRolesFacadeLocal.eliminarPermisos(idUsuario);
+
+            usuariosfacadelocal.removerUsuario(idUsuario);
+
+        } 
+        catch (Exception e) {
+        }
+
+    }
+        
+         public void cambiarEstado(int id) {
+
+        try {
+
+            Usuarios usuCambiarEStado = usuariosfacadelocal.find(id);
+
+            if (usuCambiarEStado.getEstado().equals("Activo")) {
+                usuariosfacadelocal.cambiarEstado(id, "Inactivo");
+            } else {
+               usuariosfacadelocal.cambiarEstado(id, "Activo");
+            }
+
+        } catch (Exception e) {
+        }
+
+    }
+
    
 }
 

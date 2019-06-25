@@ -129,14 +129,16 @@
 
 
             <ui:define name="content">
-                  <h:form>
+                
+                <div class="container">
+                <h:form class="">
                     <div class="row">
                         <div class="col-6"> 
                             <label for="documentoTC">Documento</label>
                             <h:inputText value="#{sesionUsuario.documento}" class="form-control" html5:placeholder="Numero documento"/>
                             
                             <label for="validationCustom01">Nit Empresa</label>
-                            <h:inputText value="#{sesionUsuario.nit}" class="form-control"  html5:placeholder="Nombres" />
+                            <h:inputText value="#{sesionUsuario.nit}" class="form-control"  html5:placeholder="Nit" />
                         </div>
 
 
@@ -164,6 +166,7 @@
                                 <th scope="col">Empresa</th>
                                 <th scope="col">Ciudad</th>
                                 <th scope="col">Opciones</th>
+                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead> 
                         <tbody>
@@ -176,12 +179,16 @@
                                         <td>#{usuario.documento}</td>
                                         <td>#{usuario.nombreEmpresa}</td>
                                         <td>#{usuario.fkCiudad.nombreCiudad}</td>
+                                        <td>#{usuario.estado}</td>
+                                        <td>
+                                            <h:commandButton action="#{sesionUsuario.eliminarUsuario(usuario.idUsuarios)}" value="Eliminar" class="btn btn-danger"></h:commandButton>
+                                        </td>
                                                                                  
                                      
                                         <td>
                                             <c:if test="#{usuario.documento != sesionUsuario.usuLog.documento}">
 
-<!--                                                <h:commandButton action="" value="Cambiar" class="btn btn-danger" ></h:commandButton>-->
+                                                <h:commandButton action="#{sesionUsuario.cambiarEstado(usuario.idUsuarios)}" value="Cambiar" class="btn btn-danger" ></h:commandButton>
 
 
                                             </c:if>
@@ -193,14 +200,17 @@
                         </tbody>
                     </table>
                 </div>
+                    
+            </div>  
+               
                 <script type="text/javascript">
                     function Export() {
                         $("#miTabla").table2excel({
-                            filename: "Table.xls"
+                            filename: "TablaUsuarios.xls"
                         });
                     }
                 </script>
-                
+              
         
             </ui:define>
 
