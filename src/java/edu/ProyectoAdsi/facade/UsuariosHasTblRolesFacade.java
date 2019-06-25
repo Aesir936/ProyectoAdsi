@@ -46,4 +46,23 @@ public class UsuariosHasTblRolesFacade extends AbstractFacade<UsuariosHasTblRole
         }
 
     }
+    
+    @Override
+    public boolean cambiarRol(int idUsuario, int rol ) {
+
+        try {
+
+            Query removerUSu = em.createNativeQuery("UPDATE `db_siim`.`tbl_usuarios_has_tbl_roles` SET `tbl_roles_id_tbl_rol` = '?' WHERE (`tbl_usuarios_id_usuarios` = '?');");
+            removerUSu.setParameter(1, rol);
+            removerUSu.setParameter(2, idUsuario);
+            removerUSu.executeUpdate();
+
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+    
 }

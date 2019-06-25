@@ -13,10 +13,11 @@
         <!--Registrate-->
         <section style="background:#f2f2f2">
             <div class="container py-5">
-                <h1 style="color: rgb(219, 129, 45); font-size: 2em">Registro de usuarios</h1>
+                <h1 style="color: rgb(219, 129, 45); font-size: 2em; text-align: center">Registro de usuarios</h1>
                 <hr/>                  
                 <h:form>
                     <div class="form-row">
+                        <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for=""> Tipo de Documento </h:outputLabel>
                             <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.tipoDocumento}" >
@@ -31,7 +32,8 @@
                             <h:inputText value="#{sesionUsuario.documento}" class="form-control" required=""/>
                         </div>                           
                     </div>                 
-                     <div class="form-row">
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Primer Nombre</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.primerNombre}" class="form-control" required=""/>
@@ -42,6 +44,7 @@
                         </div>                       
                     </div>
                     <div class="form-row">
+                        <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Primer Apellido</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.primerApellido}" class="form-control" required=""/>
@@ -52,6 +55,7 @@
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Nombre de la Empresa</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.nombreEmpresa}" class="form-control" required=""/>
@@ -62,6 +66,7 @@
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for=""> Ciudad </h:outputLabel>
                             <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.ciudad}" >
@@ -93,6 +98,7 @@
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="btnRegistro">Correo electrónico</h:outputLabel>                                                       
                             <h:inputText value="#{sesionUsuario.correo}" class="form-control" required=""/>                          
@@ -103,25 +109,37 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-md-5 mb-3" style="justify-content: center" >
+                        <div class="col-md-4 mb-3"></div>
+                        <div class="col-md-4 mb-3" style="justify-content: center" >
                             <h:outputLabel for="">Contraseña</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.contraseña}" html5:type="password" class="form-control" required=""/>
                         </div>                         
                     </div>
                     <div class="form-row">
-                        <div class="col-md-5 mb-3">
+                        <div class="col-md-4 mb-3"></div>
+                        <div class="col-md-4 mb-3">
                             <h:outputLabel onclick="registroExitoso('asadfgh')" for="">Confirmar Contraseña</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.confirmarContraseña}" html5:type="password" class="form-control" required=""/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required=""/>
-                            <label class="form-check-label" for="invalidCheck">Aceptar los términos y condiciones.</label>
+                    <div class="form-row">
+                    <div class="col-md-3 mb-3"></div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <div class="form-check">                       
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required="true"/>
+                                <label class="form-check-label" for="invalidCheck">Aceptar los términos y condiciones.</label>
+                            </div>
                         </div>
                     </div>
-                    <h:commandButton action="#{sesionUsuario.registrarUsuario()}" class="btn btn-dark" value="Registrarse" ></h:commandButton>
-                    <a href="index.xhtml" class="btn btn-dark">Cancelar</a>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-5 mb-3"></div>
+                        <div class="col-md-3 mb-3">
+                            <h:commandButton action="#{sesionUsuario.registrarUsuario()}" class="btn btn-success" style="background-color: rgb(50, 51, 142); border: none" value="Registrarse" ></h:commandButton>
+                            <a href="index.xhtml" class="btn btn-dark">Cancelar</a>
+                        </div>
+                    </div>
                 </h:form>  
             </div>
         </section>

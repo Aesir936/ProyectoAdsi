@@ -4,6 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <body>
+
         <ui:composition template="./../Template/completeTemplate.xhtml">
             <ui:define name="left">
                 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
@@ -37,7 +38,7 @@
                             <span>Consulta y aprueba cotizaciones en curso</span></a>
                     </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="enConstruccion.xhtml">
                             <i class="fas fa-inbox"></i>
                             <span>Buzón de sugerencias</span></a>
                     </li>
@@ -118,13 +119,14 @@
                         </div>
                     </li>
                 </ul>
-                <br></br>
-                <br></br>
-                <br></br>
             </ui:define>
             <ui:define name="content">
-                Content Operario
+                <div style="max-width: 600px">
+                    <img src="../Template/assets/img/construccion.png" style="padding-left: 40%; padding-bottom: 3%; max-height: 500px"></img>
+                </div>
             </ui:define>
+
         </ui:composition>
+
     </body>
 </html>

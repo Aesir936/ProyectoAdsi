@@ -100,11 +100,11 @@
 
                 </div>
             </ui:define> 
-             <ui:define name="left">
+            <ui:define name="left">
                     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
 
                     <!-- Logo -->
-                    <a class="d-flex align-items-center justify-content-center" href="index.html">                 
+                    <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
                         <div>
                             <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
                         </div>
@@ -137,7 +137,7 @@
                             <span>Gestión de usuarios</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="enConstruccion.xhtml">
                             <i class="fas fa-inbox"></i>
                             <span>Revisar buzón de sugerencias</span></a>
                     </li>
@@ -158,8 +158,10 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Editar perfil:</h6>
-                                <a class="collapse-item" href="buttons.html">Cambiar imágen</a>
-                                <a class="collapse-item" href="cards.html">Modificar información</a>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Cambiar imágen</a>
+                                <a class="collapse-item" href="editarDatosUsuario.xhtml">
+                                    <span style="font-size: 0.8em">Modificar información personal</span>
+                                </a>
                             </div>
                         </div>
                     </li>
@@ -192,28 +194,33 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                             <i class="fas fa-fw fa-folder"></i>
-                            <span>Páginas</span>
+                            <span>Otras páginas</span>
                         </a>
                         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Páginas de inicio:</h6>
-                                <a class="collapse-item" href="login.html">Inicio de sesión</a>
-                                <a class="collapse-item" href="register.html">Registro</a>
-                                <a class="collapse-item" href="forgot-password.html">Olvido de contraseña</a>
-                                <div class="collapse-divider"></div>
+                                <a class="collapse-item" href="../index.xhtml">Inicio de sesión</a>
+                                <a class="collapse-item" href="../registro.xhtml">Registro</a>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Olvido de contraseña</a>
+<!--                                <div class="collapse-divider"></div>
                                 <h6 class="collapse-header">Otras páginas:</h6>
-                                <a class="collapse-item" href="404.html">Página de error 404</a>
-                                <a class="collapse-item" href="blank.html">Página de error 500</a>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 404</a>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 500</a>-->
                             </div>
                         </div>
                     </li>
 
                     <!-- Informes -->
                     <li class="nav-item">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="enConstruccion.xhtml">
                             <i class="fas fa-fw fa-chart-area"></i>
                             <span>Informes</span></a>
                     </li>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 </ul>
             </ui:define>
         </ui:composition>

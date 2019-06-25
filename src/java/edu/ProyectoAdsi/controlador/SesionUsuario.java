@@ -40,6 +40,7 @@ public class SesionUsuario implements Serializable {
     private String direccion;
     private String estado;
     private int ciudad;
+    private int rol;
     
     private Usuarios usuLog;    
     
@@ -175,6 +176,15 @@ public class SesionUsuario implements Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    
+    public int getRol() {
+        return rol;
+    }
+
+    public void setRol(int rol) {
+        this.rol = rol;
+    }
+
 
     public Usuarios getUsuLog() {
         return usuLog;
@@ -255,7 +265,7 @@ public class SesionUsuario implements Serializable {
                 return "/"+ruta+"/index.xhtml?faces-redirect=true";
                         
             } else {
-            PrimeFaces.current().executeScript("loginFallido('Usuario no registrado')");
+            PrimeFaces.current().executeScript("loginFallido('Usuario inactivo o no registrado')");
             return ""; 
             }
         } catch (Exception e) {
@@ -275,12 +285,13 @@ public class SesionUsuario implements Serializable {
     
         try {
             usuariosfacadelocal.edit(usuLog);
-            PrimeFaces.current().executeScript("estadoOk('" + usuLog.getPrimerNombre() + " " + usuLog.getPrimerApellido()+ "  Datos Actualizados ')");
+            PrimeFaces.current().executeScript("estadoOk('" + usuLog.getPrimerNombre() + " " + usuLog.getPrimerApellido()+ " Datos Actualizados ')");
         } catch (Exception e) {          
            PrimeFaces.current().executeScript("estadoBad('Usuario no actualizado')");
         }
     
     }
+             
              
     //            Método para eliminar usuario     
              
@@ -313,6 +324,14 @@ public class SesionUsuario implements Serializable {
         } catch (Exception e) {
         }
 
+    }
+                //            Método para cambiar rol
+        public void cambiarRol(int idUsuario, int rol) {
+        try {
+            usuariosHasTblRolesFacadeLocal.cambiarRol(idUsuario, rol);
+        } 
+        catch (Exception e) {
+        }
     }
 
    

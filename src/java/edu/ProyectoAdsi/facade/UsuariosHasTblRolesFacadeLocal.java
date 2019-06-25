@@ -31,5 +31,7 @@ public interface UsuariosHasTblRolesFacadeLocal {
     int count();
 
     public boolean eliminarPermisos(int idUsuario);
+
+    public boolean cambiarRol(int idUsuario, int rol);
     
 }
