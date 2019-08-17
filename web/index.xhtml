@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
     <h:head>
@@ -17,6 +18,8 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     </h:head>
     <h:body>
+        <f:loadBundle basename="edu.ProyectoAdsi.properties.#{idiomaController.idioma}" var="etiqueta"></f:loadBundle>
+        
         <div class="container-fluid">
             <!-- Navegación -->
             <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -30,12 +33,20 @@
                     </button>
                     <!-- Botonoes de la barra de navegación -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        
+                         <h:form class="nav-item active">
+                                <h:commandButton class="btn btn-outline-info" value="#{etiqueta['traducirbtn']}" action="#{idiomaController.cambiarIdioma()}"></h:commandButton>
+                        </h:form> 
                         <ul class="navbar-nav ml-auto">
+                             <li class="nav-item active">
+                                <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#" style="color: rgb(219, 129, 45)">Ingresar</a>
+<!--                                <a class="nav-link" id="btn-abrir-popup" style="color: rgb(219, 129, 45)">Ingresar</a>-->
+                            </li>   
                             <li class="nav-item active">
-                                <a class="nav-link" href="Landing_Page.html">Inicio </a>
+                                <a class="nav-link" href="#">#{etiqueta['Inicio']}</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="registro.xhtml" style="color:rgb(50, 51, 142)">Regístrate</a>
+                                <a class="nav-link" href="registro.xhtml" style="color:rgb(50, 51, 142)">#{etiqueta['Registro']}</a>
                             </li>
                             <li class="nav-item active">
                                 <a class="nav-link" href="#conocenos">Conócenos</a>
@@ -43,19 +54,9 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="#contactanos">Contáctanos</a>
                             </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#" style="color: rgb(219, 129, 45)">Ingresar</a>
-<!--                                <a class="nav-link" id="btn-abrir-popup" style="color: rgb(219, 129, 45)">Ingresar</a>-->
-                            </li>
-                            <!--Desplegable para Selección de idioma -->
-                            <li class="nav-item active dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Idioma</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="Landing_Page-english.html">English</a>
-                                </div>
-                            </li>
+                           
                         </ul>
+                       
                     </div>
                 </div>
             </nav>            
@@ -84,26 +85,7 @@
                                     <h:inputSecret value="#{sesionUsuario.contraseña}" required="true" class="form-control" id="inputContrasena" requiredMessage="Ingrese una clave" html5:placeholder="Ingrese su contraseña"/>
                                 </div>
                                 <a href="#" style="color: rgb(219, 129, 45)">Olvido su contraseña?</a>
-                                <p>
-                                    <h3>Usuarios</h3>
-                                    <span>
-                                        Perfil Administrador SIIM.<br></br>
-                                        Nombre:		Cristian Camilo	Méndez Rodríguez<br></br>
-                                        Documento:	10184119291<br></br>
-                                        Contraseña:	1234<br></br>
-                                        <br></br>
-                                        Perfil Gerente.<br></br>
-                                        Nombre:		Jose Daniel Bautista<br></br>
-                                        Documento:	1234567<br></br>
-                                        Contraseña:	1234<br></br>		
-                                        <br></br>
-                                         <br></br>
-                                        Perfil Cliente.<br></br>
-                                        Nombre:		Maria Consuelo Bernal<br></br>
-                                        Documento:	51976794<br></br>
-                                        Contraseña:	1234	<br></br>
-                                    </span>
-                                </p>
+                                
                             </div>
                             <div class="modal-footer" style="justify-content: center">
                                 <h:commandButton action="#{sesionUsuario.inicioSesion()}" value="Ingresar" class="btn" style="background-color: rgb(219, 129, 45); color: white"></h:commandButton>

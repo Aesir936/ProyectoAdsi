@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
 
 @Named(value = "sesionUsuario")
@@ -257,6 +258,7 @@ public class SesionUsuario implements Serializable {
             this.usuLog = usuariosfacadelocal.iniciarSesion(contraseña, documento);
             String ruta="#";
             if (usuLog !=null) {
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuLog);
                 for (UsuariosHasTblRoles objRol : usuLog.getUsuariosHasTblRolesCollection()) {
                     ruta=objRol.getTblRolesIdTblRol().getNombreRol();
                     break;
@@ -334,6 +336,21 @@ public class SesionUsuario implements Serializable {
         }
     }
 
+    public void verificarSesion(){
+    
+        try {
+           Usuarios us = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+           if (us==null){
+           FacesContext.getCurrentInstance().getExternalContext().redirect("./../accesoNegado.xhtml");
+           }
+        } catch (Exception e) {
+            //Revisar mas adelante la opcion de guardar un log con los errores presentados
+        }
+    }
+
+    public void cerrarSesion() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    }
    
 }
 

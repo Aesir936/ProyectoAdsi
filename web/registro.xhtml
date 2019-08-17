@@ -28,15 +28,15 @@
                             </h:selectOneMenu>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for=""> Númereo de documento </h:outputLabel>
-                            <h:inputText value="#{sesionUsuario.documento}" class="form-control" required=""/>
+                            <h:outputLabel for=""> Número de documento </h:outputLabel>
+                            <h:inputText value="#{sesionUsuario.documento}" class="form-control" html5:required="true"/>
                         </div>                           
                     </div>                 
                     <div class="form-row">
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Primer Nombre</h:outputLabel>
-                            <h:inputText value="#{sesionUsuario.primerNombre}" class="form-control" required=""/>
+                            <h:inputText value="#{sesionUsuario.primerNombre}" class="form-control" html5:required="true"/>
                         </div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Segundo Nombre</h:outputLabel>
@@ -47,7 +47,7 @@
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Primer Apellido</h:outputLabel>
-                            <h:inputText value="#{sesionUsuario.primerApellido}" class="form-control" required=""/>
+                            <h:inputText value="#{sesionUsuario.primerApellido}" class="form-control" html5:required="true"/>
                         </div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Segundo Apellido</h:outputLabel>
@@ -58,18 +58,18 @@
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Nombre de la Empresa</h:outputLabel>
-                            <h:inputText value="#{sesionUsuario.nombreEmpresa}" class="form-control" required=""/>
+                            <h:inputText value="#{sesionUsuario.nombreEmpresa}" class="form-control" html5:required="true"/>
                         </div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Nit</h:outputLabel>
-                            <h:inputText value="#{sesionUsuario.nit}" class="form-control" required=""/>
+                            <h:inputText value="#{sesionUsuario.nit}" class="form-control" html5:required="true"/>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for=""> Ciudad </h:outputLabel>
-                            <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.ciudad}" >
+                            <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.ciudad}"  >
                                 <f:selectItem itemValue="0" itemLabel="Seleccione la Ciudad"></f:selectItem>
                                 <f:selectItem itemValue="1" itemLabel="Bogota"></f:selectItem>
                                 <f:selectItem itemValue="2" itemLabel="Medellin"></f:selectItem>
@@ -94,32 +94,32 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Direccion</h:outputLabel>
-                            <h:inputText value="#{sesionUsuario.direccion}" class="form-control" required=""/>
+                            <h:inputText value="#{sesionUsuario.direccion}" class="form-control" html5:required="true"/>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="btnRegistro">Correo electrónico</h:outputLabel>                                                       
-                            <h:inputText value="#{sesionUsuario.correo}" class="form-control" required=""/>                          
+                            <h:inputText value="#{sesionUsuario.correo}" class="form-control" html5:required="true"/>                          
                         </div>                                                
                         <div class="col-md-3 mb-3">
                             <h:outputLabel for="">Telefono</h:outputLabel>
-                            <h:inputText value="#{sesionUsuario.telefono}" class="form-control" required=""/>
+                            <h:inputText value="#{sesionUsuario.telefono}" class="form-control" html5:required="true"/>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-4 mb-3"></div>
                         <div class="col-md-4 mb-3" style="justify-content: center" >
                             <h:outputLabel for="">Contraseña</h:outputLabel>
-                            <h:inputText value="#{sesionUsuario.contraseña}" html5:type="password" class="form-control" required=""/>
+                            <h:inputText value="#{sesionUsuario.contraseña}" html5:type="password" class="form-control" html5:required="true"/>
                         </div>                         
                     </div>
                     <div class="form-row">
                         <div class="col-md-4 mb-3"></div>
                         <div class="col-md-4 mb-3">
                             <h:outputLabel onclick="registroExitoso('asadfgh')" for="">Confirmar Contraseña</h:outputLabel>
-                            <h:inputText value="#{sesionUsuario.confirmarContraseña}" html5:type="password" class="form-control" required=""/>
+                            <h:inputText value="#{sesionUsuario.confirmarContraseña}" html5:type="password" class="form-control" html5:required="true"/>
                         </div>
                     </div>
                     <div class="form-row">
