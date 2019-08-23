@@ -6,24 +6,21 @@
 package edu.ProyectoAdsi.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bxs42
+ * @author Aesir936
  */
 @Entity
 @Table(name = "tbl_ciudades")
@@ -34,15 +31,13 @@ public class Ciudades implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_ciudad")
     private Integer idCiudad;
     @Size(max = 45)
     @Column(name = "nombre_ciudad")
     private String nombreCiudad;
-    @OneToMany(mappedBy = "fkCiudad", fetch = FetchType.LAZY)
-    private Collection<Usuarios> usuariosCollection;
 
     public Ciudades() {
     }
@@ -65,15 +60,6 @@ public class Ciudades implements Serializable {
 
     public void setNombreCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
-    }
-
-    @XmlTransient
-    public Collection<Usuarios> getUsuariosCollection() {
-        return usuariosCollection;
-    }
-
-    public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
-        this.usuariosCollection = usuariosCollection;
     }
 
     @Override

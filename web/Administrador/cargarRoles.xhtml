@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../Template/completeTemplate.xhtml">
+
+            <ui:define name="left">
+                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
+
+                    <!-- Logo -->
+                    <a class="d-flex align-items-center justify-content-center" href="index.html">                 
+                        <div>
+                            <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
+                        </div>
+                    </a>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider my-0"/>
+
+                    <!-- Tablero principal -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.xhtml">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Tablero principal</span></a>
+                    </li>
+                    <!-- División -->
+                    <hr class="sidebar-divider d-none d-md-block"></hr>
+<!--                    Gestion de usuarios-->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="">
+                            <i class="fas fa-id-badge"></i>
+                            <span>Gestión de usuarios</span></a>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!-- Cabecera -->
+                    <div class="sidebar-heading">
+                        Opciones
+                    </div>  
+                    <li class="nav-item">
+                        <a class="nav-link" href="cargarUsuariosTxt.xhtml">
+                            <i class="fas fa-arrow-alt-circle-up"></i>
+                            <span>Cargar usuarios desde .txt</span>
+                        </a>
+                    </li>
+                     <li class="nav-item active">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-arrow-alt-circle-up"></i>
+                            <span>Cargar roles desde .txt</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cargarCiudades.xhtml">
+                            <i class="fas fa-arrow-alt-circle-up"></i>
+                            <span>Cargar ciudades desde .txt</span>
+                        </a>
+                    </li>
+                </ul>  
+            </ui:define>
+
+
+            <ui:define name="content">
+                <div class="container">
+                    <br/>
+                    <h3 style="text-align: center">Cargar roles</h3>
+                    <h:form enctype="multipart/form-data" class="py-3">                 
+                        <br></br>                   
+                        <label>Seleccionar Archivo</label>
+                        <h:inputFile required="true" requiredMessage="Debe seleccionar un archivo" value="#{cargarRolesController.archiCarga}" class="form-control" validator="#{cargarRolesController.validarArchivo}"></h:inputFile>                     
+                        <br></br>
+                        <h:commandButton value="Cargar roles" class="btn btn-primary"></h:commandButton>                 
+                    </h:form>
+
+                    <!--Tabla para mostrar los archivos cargados-->
+
+                    <h:panelGroup id="tablaCat">
+                        <table class="table py-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="#{cargarRolesController.listaRoles()}" var="rol" varStatus="paso">
+                                    <tr>
+                                        <th scope="row">#{rol.idTblRol}</th>
+                                        <td>#{rol.nombreRol}</td>
+                                        <td>#{rol.descripcionRol}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

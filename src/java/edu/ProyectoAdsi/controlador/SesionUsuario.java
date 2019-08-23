@@ -253,6 +253,9 @@ public class SesionUsuario implements Serializable {
         }
         return "";
     }
+    
+    
+    
         public String inicioSesion( ){
         try {
             this.usuLog = usuariosfacadelocal.iniciarSesion(contraseña, documento);
@@ -261,19 +264,22 @@ public class SesionUsuario implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuLog);
                 for (UsuariosHasTblRoles objRol : usuLog.getUsuariosHasTblRolesCollection()) {
                     ruta=objRol.getTblRolesIdTblRol().getNombreRol();
+                    
                     break;
                 }
-   
+                limparFormulario();
                 return "/"+ruta+"/index.xhtml?faces-redirect=true";
                         
             } else {
             PrimeFaces.current().executeScript("loginFallido('Usuario inactivo o no registrado')");
             return ""; 
             }
+            
         } catch (Exception e) {
             PrimeFaces.current().executeScript("loginFallido('Usuario no registrado')");
             return "";           
-        }              
+        }   
+        
     }
         
      //        Método para leer todos los usuarios registrados en la base de datos
@@ -350,6 +356,10 @@ public class SesionUsuario implements Serializable {
 
     public void cerrarSesion() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    }
+
+    public void limparFormulario() {
+        this.documento = "";
     }
    
 }

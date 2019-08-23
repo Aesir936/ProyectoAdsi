@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../Template/completeTemplate.xhtml">
+
+            <ui:define name="left">
+              
+                 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
+
+                    <!-- Logo -->
+                    <a class="d-flex align-items-center justify-content-center" href="index.html">                 
+                        <div>
+                            <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
+                        </div>
+                    </a>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider my-0"/>
+
+                    <!-- Tablero principal -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.xhtml">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Tablero principal</span></a>
+                    </li>
+                    <!-- División -->
+                    <hr class="sidebar-divider d-none d-md-block"></hr>
+                    
+                    <li class="nav-item active">
+                        <a class="nav-link" href="admin_usu.xhtml">
+                            <i class="fas fa-id-badge"></i>
+                            <span>Gestión de usuarios</span></a>
+                    </li>
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!-- Cabecera -->
+                    <div class="sidebar-heading">
+                        Opciones
+                    </div>  
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-arrow-alt-circle-up"></i>
+                            <span>Cargar usuarios desde .txt</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cargarRoles.xhtml">
+                            <i class="fas fa-arrow-alt-circle-up"></i>
+                            <span>Cargar roles desde .txt</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cargarCiudades.xhtml">
+                            <i class="fas fa-arrow-alt-circle-up"></i>
+                            <span>Cargar ciudades desde .txt</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </ui:define>
+
+            <ui:define name="content">
+                 
+                
+                 <div class="container">
+                    <br/>
+                    <h3 style="text-align: center">Cargar usuarios</h3>
+                    <h:form enctype="multipart/form-data" class="py-3">
+                        <h:messages style="color: red"></h:messages>                  
+                        <br></br>
+                        <div class="container">
+                            <label>Seleccionar Archivo</label>
+                            <h:inputFile required="true" requiredMessage="Debe seleccionar un archivo" value="#{cargarUsuariosRequest.archiCarga}" class="form-control" validator="#{cargarUsuariosRequest.validarArchivo}"></h:inputFile>                     
+                            <br></br>
+                            <h:commandButton value="Cargar usuarios" class="btn btn-primary"></h:commandButton>
+                        </div>
+                    </h:form>
+
+                    <!--Tabla para mostrar los archivos cargados-->
+                    <h:panelGroup>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Correo</th>
+                                    <th scope="col">Rol</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="#{cargarUsuariosRequest.listaUsuarios()}" var="usu" varStatus="paso">
+                                    <tr>
+                                        <th scope="row">#{paso.index+1}</th>
+                                        <td>#{usu.primerNombre}</td>
+                                        <td>#{usu.primerApellido}</td>
+                                        <td>#{usu.correo}</td>
+                                        <td>#{usu.usuariosHasTblRolesCollection[0].tblRolesIdTblRol}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </h:panelGroup>
+                </div>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

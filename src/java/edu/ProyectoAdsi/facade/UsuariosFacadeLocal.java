@@ -38,5 +38,7 @@ public interface UsuariosFacadeLocal {
 
     public boolean cambiarEstado(int idUsuario, String estado);
 
+    public Usuarios recuperarContrasena(String documento);
+
     
 }

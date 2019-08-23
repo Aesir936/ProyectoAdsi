@@ -19,12 +19,12 @@
     </h:head>
     <h:body>
         <f:loadBundle basename="edu.ProyectoAdsi.properties.#{idiomaController.idioma}" var="etiqueta"></f:loadBundle>
-        
-        <div class="container-fluid">
+
+        <div>
             <!-- Navegación -->
             <nav class="navbar navbar-expand-md navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand" style="max-width: 80%">
+                    <a class="navbar-brand" style="max-width: 40%">
                         <img src="img/Logo DYM largo.png" alt="Logo DYM" style="width: 40%"/>
                     </a>
                     <!-- Botón para el diseño responsive en dispositivos móviles -->
@@ -33,31 +33,31 @@
                     </button>
                     <!-- Botonoes de la barra de navegación -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        
-                         <h:form class="nav-item active">
-                                <h:commandButton class="btn btn-outline-info" value="#{etiqueta['traducirbtn']}" action="#{idiomaController.cambiarIdioma()}"></h:commandButton>
-                        </h:form> 
                         <ul class="navbar-nav ml-auto">
-                             <li class="nav-item active">
-                                <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#" style="color: rgb(219, 129, 45)">Ingresar</a>
-<!--                                <a class="nav-link" id="btn-abrir-popup" style="color: rgb(219, 129, 45)">Ingresar</a>-->
-                            </li>   
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">#{etiqueta['Inicio']}</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="registro.xhtml" style="color:rgb(50, 51, 142)">#{etiqueta['Registro']}</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#conocenos">Conócenos</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#contactanos">Contáctanos</a>
-                            </li>
                            
+                                <li class="nav-item active">
+                                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#" style="color: rgb(219, 129, 45)">Ingresar</a>
+                                    <!--                                <a class="nav-link" id="btn-abrir-popup" style="color: rgb(219, 129, 45)">Ingresar</a>-->
+                                </li>   
+<!--                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">#{etiqueta['Inicio']}</a>
+                                </li>-->
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#conocenos">Conócenos</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#contactanos">Contáctanos</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="registro.xhtml" style="color:rgb(50, 51, 142)" >
+                                        <span>#{etiqueta['Registro']}</span>
+                                    </a>
+                                </li>
                         </ul>
-                       
                     </div>
+                    <h:form class="nav-item active p-3">
+                        <h:commandButton class="btn btn-outline-info" value="#{etiqueta['traducirbtn']}" action="#{idiomaController.cambiarIdioma()}" style="border-radius: 50%" ></h:commandButton>
+                    </h:form> 
                 </div>
             </nav>            
             <!-- Modal -->
@@ -77,15 +77,15 @@
                                     <label for="inputDocumento">Documento</label>
                                     <h:inputText value="#{sesionUsuario.documento}" required="true" class="form-control" id="inputDocumento" requiredMessage="Ingrese un correo"  html5:placeholder="Ingrese su número de documento" />
                                     <small id="emailHelp" class="form-text text-muted">
-                                    <h:message for="form1:exampleInputEmail1"></h:message>
+                                        <h:message for="form1:exampleInputEmail1"></h:message>
                                     </small>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputContrasena">Contraseña</label>
                                     <h:inputSecret value="#{sesionUsuario.contraseña}" required="true" class="form-control" id="inputContrasena" requiredMessage="Ingrese una clave" html5:placeholder="Ingrese su contraseña"/>
                                 </div>
-                                <a href="#" style="color: rgb(219, 129, 45)">Olvido su contraseña?</a>
-                                
+                                <a href="recuperarContrasena.xhtml" style="color: rgb(219, 129, 45)">Olvido su contraseña?</a>
+
                             </div>
                             <div class="modal-footer" style="justify-content: center">
                                 <h:commandButton action="#{sesionUsuario.inicioSesion()}" value="Ingresar" class="btn" style="background-color: rgb(219, 129, 45); color: white"></h:commandButton>
@@ -93,82 +93,71 @@
                         </h:form>
                     </div>
                 </div>
-            </div>
+            </div>                
+
+            
             <!--Header tipo carrusel-->
-            <div class="bd-example">
-                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="5"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="6"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="7"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="img/Engranes2.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
-                            <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em;text-transform: uppercase; text-shadow: 2px 2px 1px #000">                             
-                                <h5>Repuestos y partes para maquinaria</h5>
-                            </div>
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="max-height: 400px">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="max-height:400px">
+                        <img src="img/Engranes2.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                        <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em;text-transform: uppercase; text-shadow: 2px 2px 1px #000">                             
+                            <h5>Repuestos y partes para maquinaria</h5>
                         </div>
-                        <div class="carousel-item">
-                            <img src="img/Troquel_doblado.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
-                            <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                                <h5>Troqueles para Corte y Doblado</h5>
-                            </div>
+                    </div>
+                    <div class="carousel-item" style="max-height:400px">
+                        <img src="img/Troquel_doblado.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                        <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
+                            <h5>Troqueles para Corte y Doblado</h5>
                         </div>
-                        <div class="carousel-item">
-                            <img src="img/Moldes.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
-                            <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                                <h5>Moldes y Accesorios</h5>
-                                <!--                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>-->
-                            </div>
+                    </div>
+                    <div class="carousel-item" style="max-height:400px">
+                        <img src="img/Moldes.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                        <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
+                            <h5>Moldes y Accesorios</h5>
                         </div>
-                        <div class="carousel-item">
-                            <img src="img/Diseño planos.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
-                            <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                                <h5>Diseño de Troqueles, Moldes, Galgas de Calibración y Control, Dispositivos para Fabricación y Ensamble de Piezas</h5>
-                                <!--                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-                            </div>
+                    </div>
+                    <div class="carousel-item" style="max-height:400px">
+                        <img src="img/Diseño planos.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                        <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
+                            <h5>Diseño de Troqueles, Moldes, Galgas de Calibración y Control, Dispositivos para Fabricación y Ensamble de Piezas</h5>
                         </div>
-                        <div class="carousel-item">
-                            <img src="img/Fresado.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
-                            <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                                <h5>Dispositivos de ensamble</h5>
-                            </div>
+                    </div>
+                    <div class="carousel-item" style="max-height:400px">
+                        <img src="img/Fresado.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                        <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
+                            <h5>Dispositivos de ensamble</h5>
                         </div>
-                        <div class="carousel-item">
-                            <img src="img/Galgas.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
-                            <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                                <h5>Galgas para verificación</h5>
-                            </div>
+                    </div>
+                    <div class="carousel-item" style="max-height:400px">
+                        <img src="img/Galgas.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                        <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
+                            <h5>Galgas para verificación</h5>
                         </div>
-                        <div class="carousel-item">
-                            <img src="img/Soldadura.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
-                            <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                                <h5>Electrodos de soldadura y erosión</h5>
-                            </div>
+                    </div>
+                    <div class="carousel-item" style="max-height:400px">
+                        <img src="img/Soldadura.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                        <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
+                            <h5>Electrodos de soldadura y erosión</h5>
                         </div>
-                        <div class="carousel-item">
-                            <img src="img/Punzonadora.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
-                            <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                                <h5>Herramientas para punzonado de lamina</h5>
-                            </div>
+                    </div>
+                    <div class="carousel-item" style="max-height:400px">
+                        <img src="img/Punzonadora.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
+                        <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
+                            <h5>Herramientas para punzonado de lamina</h5>
                         </div>
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+                    <span class="sr-only">Anterior</span>
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>                
+                    <span class="sr-only">Siguiente</span>
+                </a>               
             </div>
+
             <!--Conócenos-->
             <section id="conocenos" class="py-2" style="background: currentColor;">
                 <div class="container" style="padding: 30px">
@@ -219,7 +208,6 @@
                 </div>
             </section>
             <!--Contactanos-->
-<!--            <div style="max-height: 100%">-->
             <section id="contactanos" class="py-2">
                 <div class="row text-center">
                     <div class="col-md-6">
@@ -285,25 +273,25 @@
                     </div>
                 </div>
             </section>
-<!--            </div>-->
+          
         </div>
         <script type="text/javascript">
-             function loginExitoso(a) {
+            function loginExitoso(a) {
                 Swal.fire(
-                        'Registro OK !',
+                        'OK !',
                         a,
                         'success'
-                        ); 
-                }
+                        );
+            }
         </script>
         <script type="text/javascript">
-                function loginFallido(a) {
+            function loginFallido(a) {
                 Swal.fire(
-                        'Oops...',
-                         a,
+                        'Algo ha sucedido...',
+                        a,
                         'error'
-                         );
-                }
+                        );
+            }
         </script>
         <!--JavaScript Bootstrap -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

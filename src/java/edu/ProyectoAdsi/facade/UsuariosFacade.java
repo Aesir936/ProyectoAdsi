@@ -65,6 +65,8 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             return 0;
         }
     }   
+    
+    
     @Override
     public boolean asignarRol(int usuarioId, int rolId) {
         try {
@@ -163,6 +165,25 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             return false;
         }
 
+    }
+    
+    
+    @Override
+    public Usuarios recuperarContrasena(String documento) {
+
+        try {
+            em.getEntityManagerFactory().getCache().evictAll();
+            Query inicioUsu = em.createQuery("SELECT f FROM Usuarios f WHERE f.documento = :usuDocumento");
+            inicioUsu.setParameter("usuDocumento", documento);
+            List<Usuarios> listaResultados = inicioUsu.getResultList();
+            if (listaResultados.isEmpty()) {
+                return null;
+            } else {
+                return listaResultados.get(0);
+            }
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }
