@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bxs42
+ * @author Aesir936
  */
 @Entity
 @Table(name = "tbl_bolsas_de_tiempo")
@@ -54,9 +54,9 @@ public class BolsasDeTiempo implements Serializable {
     @NotNull
     @Column(name = "cantidad_horas")
     private int cantidadHoras;
-    @JoinColumn(name = "tbl_clientes_codigo_clientes", referencedColumnName = "codigo_clientes")
+    @JoinColumn(name = "fk_id_cliente", referencedColumnName = "id_usuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Clientes tblClientesCodigoClientes;
+    private Usuarios fkIdCliente;
 
     public BolsasDeTiempo() {
     }
@@ -104,12 +104,12 @@ public class BolsasDeTiempo implements Serializable {
         this.cantidadHoras = cantidadHoras;
     }
 
-    public Clientes getTblClientesCodigoClientes() {
-        return tblClientesCodigoClientes;
+    public Usuarios getFkIdCliente() {
+        return fkIdCliente;
     }
 
-    public void setTblClientesCodigoClientes(Clientes tblClientesCodigoClientes) {
-        this.tblClientesCodigoClientes = tblClientesCodigoClientes;
+    public void setFkIdCliente(Usuarios fkIdCliente) {
+        this.fkIdCliente = fkIdCliente;
     }
 
     @Override

@@ -10,8 +10,60 @@
 
         <ui:composition template="./../Template/completeTemplate.xhtml">
             
-             <ui:define name="left">
-                    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
+            <ui:define name="top">
+                <nav id="navegacion" class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Boton para desplegar busqueda en pantallas pequeñas -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw" style="color: #000"></i>
+                            </a>
+                            <!-- Desplegable de busqueda para pantallas pequeñas -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar" aria-label="Search" aria-describedby="basic-addon2"/>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm" style="color: #000"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="form-inline">
+                            <h:form>
+                                <h:commandButton actionListener="#{sesionUsuario.cerrarSesion()}" value="Cerrar Sesion" action="/index.xhtml?faces-redirect=true" class="dropdown-item" style="color: red" />
+                            </h:form> 
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active"  style="color: #000" href="../index.xhtml">Inicio</a>
+                        </li>
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <!--Barra de navegacion info usuario -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline small" style="color: #000">#{sesionUsuario.usuLog.primerNombre}  #{sesionUsuario.usuLog.segundoNombre}  #{sesionUsuario.usuLog.primerApellido}</span>
+                                <img class="img-profile rounded-circle" src="../Template/assets/img/usuario.png"/>
+                            </a>
+                            <!-- Desplegable "Información del usuario" -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="editarDatosUsuario.xhtml">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Editar perfil
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </ui:define>
+            
+            
+
+            <ui:define name="left">
+                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
 
                     <!-- Logo -->
                     <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
@@ -31,26 +83,70 @@
                     </li>
                     <!-- División -->
                     <hr class="sidebar-divider d-none d-md-block"></hr>
-<!--                    <li class="nav-item">
+                    <!-- Cabecera de sección -->
+                    <div class="sidebar-heading">
+                        Administración
+                    </div>
+                    <!-- Menú Cotizaciones -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuotations" aria-expanded="true" aria-controls="collapseQuotations">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Cotizaciones</span>
+                        </a>
+                        <div id="collapseQuotations" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <!--                                <h6 class="collapse-header">Páginas de inicio:</h6>-->
+
+                                <a class="collapse-item" href="ListadoCotizaciones.xhtml">Listado de cotizaciones</a>
+                                <!--                                <a class="collapse-item" href="enConstruccion.xhtml">Olvido de contraseña</a>-->
+                                <!--                                <div class="collapse-divider"></div>
+                                                                <h6 class="collapse-header">Otras páginas:</h6>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 404</a>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 500</a>-->
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Menú ordenes de Trabajo -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorkorder" aria-expanded="true" aria-controls="collapseWorkorder">
+                            <i class="fas fa-toolbox"></i>                           
+                            <span>Ordenes de Trabajo</span>
+                        </a>
+                        <div id="collapseWorkorder" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <!--                                <h6 class="collapse-header">Páginas de inicio:</h6>-->
+                                <a class="collapse-item" href="registrarOT.xhtml">Crear orden de trabajo</a>
+                                <a class="collapse-item" href="listadoOT's.xhtml">Consultar O.T.'s</a>
+                                <!--                                <a class="collapse-item" href="enConstruccion.xhtml">Olvido de contraseña</a>-->
+                                <!--                                <div class="collapse-divider"></div>
+                                                                <h6 class="collapse-header">Otras páginas:</h6>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 404</a>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 500</a>-->
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li class="nav-item">
                         <a class="nav-link" href="">
                             <i class="fas fa-edit"></i>
-                            <span>Solicitar Cotización</span></a>
+                            <span></span></a>
                     </li>
+                      <li class="nav-item">
+                         <a class="nav-link" href="">
+                             <i class="fas fa-check-circle"></i>
+                             <span>Consulta y aprueba cotizaciones en curso</span></a>
+                     </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Consulta y aprueba cotizaciones en curso</span></a>
-                    </li>-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="admin_usu.xhtml">
                             <i class="fas fa-id-badge"></i>
                             <span>Gestión de usuarios</span></a>
                     </li>
+                    <!-- Informes -->
                     <li class="nav-item">
-                        <a class="nav-link" href="enConstruccion.xhtml">
-                            <i class="fas fa-inbox"></i>
-                            <span>Revisar buzón de sugerencias</span></a>
+                        <a class="nav-link" href="Graficas.xhtml">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Gráficos estadísticos</span></a>
                     </li>
+
                     <!-- División -->
                     <hr class="sidebar-divider"/>
 
@@ -58,7 +154,12 @@
                     <div class="sidebar-heading">
                         Interfaz
                     </div>
-
+                    <!-- Buzón -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="enConstruccion.xhtml">
+                            <i class="fas fa-inbox"></i>
+                            <span>Revisar buzón de sugerencias</span></a>
+                    </li>
                     <!-- Menú de configuración de perfil -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -68,8 +169,38 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Editar perfil:</h6>
-                                <a class="collapse-item" href="">Cambiar imágen</a>
-                                <a class="collapse-item" href="editarDatosUsuario.xhtml">Modificar información</a>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Cambiar imágen</a>
+                                <a class="collapse-item" href="editarDatosUsuario.xhtml">
+                                    <span style="font-size: 1em">Editar datos personales</span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!--Cabecera -->
+                    <div class="sidebar-heading">
+                        Enlaces
+                    </div>
+
+                    <!-- Menú páginas -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Otras páginas</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Páginas de inicio:</h6>
+                                <a class="collapse-item" href="../index.xhtml">Inicio de sesión</a>
+                                <a class="collapse-item" href="../registro.xhtml">Registro</a>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Olvido de contraseña</a>
+                                <!--                                <div class="collapse-divider"></div>
+                                                                <h6 class="collapse-header">Otras páginas:</h6>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 404</a>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 500</a>-->
                             </div>
                         </div>
                     </li>
@@ -90,131 +221,92 @@
                         </div>
                     </li>
 
-                    <!-- División -->
-                    <hr class="sidebar-divider"/>
 
-                    <!--Cabecera -->
-                    <div class="sidebar-heading">
-                        Enlaces
-                    </div>
-
-                    <!-- Menú páginas -->
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Páginas</span>
-                        </a>
-                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Páginas de inicio:</h6>
-                                <a class="collapse-item" href="../index.xhtml">Inicio de sesión</a>
-                                <a class="collapse-item" href="../registro.xhtml">Registro</a>
-                                <a class="collapse-item" href="">Olvido de contraseña</a>
-<!--                                <div class="collapse-divider"></div>
-                                <h6 class="collapse-header">Otras páginas:</h6>
-                                <a class="collapse-item" href="404.html">Página de error 404</a>
-                                <a class="collapse-item" href="blank.html">Página de error 500</a>-->
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- Informes -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Informes</span></a>
-                    </li>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 </ul>
-                  <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                  
             </ui:define>
 
+            
 
             <ui:define name="content">
-                
+                <h3 style="text-align: center">Usuarios Registrados</h3>
+                <br></br>
+                <div class="row text-center">
+                    <div class="col-2"></div>
+                    <div class="col-3">
+                        <h5 style="text-align: left">Filtrar usuarios por:</h5>
+                    </div>
+                </div>
+                <br></br>
                 <div class="container py-2">
-                <h:form class="">
-                    <div class="row">
-                        <div class="col-1"></div>
-                        <div class="col-5"> 
-                            <label for="documentoTC">Documento</label>
-                            <h:inputText value="#{sesionUsuario.documento}" class="form-control" html5:placeholder="Numero documento"/>
-                        </div>    
-                        <div class="col-5"> 
-                            <label for="validationCustom01">Nit Empresa</label>
-                            <h:inputText value="#{sesionUsuario.nit}" class="form-control"  html5:placeholder="Nit" />
+                    <h:form class="">
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-3"> 
+                                <label for="documentoTC">Documento</label>
+                                <h:inputText value="#{sesionUsuario.documento}" class="form-control" html5:placeholder="Numero documento"/>
+                            </div> 
+                            <div class="col-2"></div>
+                            <div class="col-3"> 
+                                <label for="validationCustom01">Nit Empresa</label>
+                                <h:inputText value="#{sesionUsuario.nit}" class="form-control"  html5:placeholder="Nit" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="row py-5">
-                        <div class="col-5"></div>
-                        <div class="col-2"> 
-                            <h:commandButton class="btn btn-primary" style="border: none; background-color: rgb(219, 129, 45)" value="Buscar" action="admin_usu"></h:commandButton>                           
+                        <div class="row py-5">
+                            <div class="col-5"></div>
+                            <div class="col-2 text-center"> 
+                                <h:commandButton class="btn btn-primary" style="border: none; background-color: rgb(219, 129, 45)" value="Buscar" action="admin_usu"></h:commandButton>                           
+                            </div>
                         </div>
-                        <div class="col-5"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1"></div>
-                        <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm fas fa-download fa-sm text-white-50" type="button" id="btnexportar" onclick="Export()">   Exportar listado</button>                  
-                    </div>
-
-                </h:form>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <button class=" btn btn-success text-black-100" type="button" id="btnexportar" onclick="Export()">
+                                <i class="fas fa-file-export"></i>
+                                Exportar listado
+                            </button> 
+                        </div>
+                    </h:form>
 
                     <div id="miTabla" class="py-5">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nombre usuario</th>
-                                <th scope="col">Documento</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Empresa</th>
-                                <th scope="col">Ciudad</th>
-                                <th scope="col">Estado</th>
-                                 <th scope="col">Acciones</th>
-                            </tr>
-                        </thead> 
-                        <tbody>
-                            <h:form>
-                                <c:forEach var="usuario"  items="#{sesionUsuario.usuarioRegistrados()}">
-                                    <tr>
-                                        <td>#{usuario.primerNombre} #{usuario.primerApellido}</td>
-                                        <td>#{usuario.documento}</td>
-                                        <td>#{usuario.correo}</td>
-                                        <td>#{usuario.nombreEmpresa}</td>
-                                        <td>#{usuario.fkCiudad.nombreCiudad}</td>
-                                        <td>#{usuario.estado}</td>
-<!--                                        <td>
-                                            <c:if test="#{usuario.documento != sesionUsuario.usuLog.documento}">
-                                                <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.tipoDocumento}" >
-                                                    <f:selectItem itemValue="0" itemLabel="Seleccione rol a asignar"></f:selectItem>
-                                                    <f:selectItem itemValue="1" itemLabel="Administrador"></f:selectItem>
-                                                    <f:selectItem itemValue="2" itemLabel="Gerente"></f:selectItem>
-                                                    <f:selectItem itemValue="3" itemLabel="Operario"></f:selectItem>
-                                                    <f:selectItem itemValue="4" itemLabel="Cliente"></f:selectItem>
-                                                </h:selectOneMenu>
-                                            </c:if>
-                                        </td>-->
-                                        <td>
-                                            <c:if test="#{usuario.documento != sesionUsuario.usuLog.documento}">
-                                                <h:commandButton action="#{sesionUsuario.eliminarUsuario(usuario.idUsuarios)}" value="Eliminar" class="btn btn-danger"></h:commandButton>
-                                            </c:if>
-                                        </td>                                    
-                                        <td>
-                                            <c:if test="#{usuario.documento != sesionUsuario.usuLog.documento}">
-                                                <h:commandButton action="#{sesionUsuario.cambiarEstado(usuario.idUsuarios)}" value="Cambiar estado" class="btn btn-danger" ></h:commandButton>
-                                            </c:if>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </h:form>
-                        </tbody>
-                    </table>
-                </div>
-                    
-            </div>  
-               
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre usuario</th>
+                                    <th scope="col">Documento</th>
+                                    <th scope="col">Correo</th>
+                                    <th scope="col">Empresa</th>
+                                    <th scope="col">Ciudad</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead> 
+                            <tbody>
+                                <h:form>
+                                    <c:forEach var="usuario"  items="#{sesionUsuario.usuarioRegistrados()}">
+                                        <tr>
+                                            <td>#{usuario.primerNombre} #{usuario.primerApellido}</td>
+                                            <td>#{usuario.documento}</td>
+                                            <td>#{usuario.correo}</td>
+                                            <td>#{usuario.nombreEmpresa}</td>
+                                            <td>#{usuario.fkCiudad.nombreCiudad}</td>
+                                            <td>#{usuario.estado}</td>                                   
+                                            <td>
+                                                <c:if test="#{usuario.documento != sesionUsuario.usuLog.documento}">
+                                                    <h:commandButton action="#{sesionUsuario.cambiarEstado(usuario.idUsuarios)}" value="Cambiar estado" class="btn btn-danger" ></h:commandButton>
+                                                </c:if>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </h:form>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>  
+
                 <script type="text/javascript">
                     function Export() {
                         $("#miTabla").table2excel({
@@ -222,8 +314,8 @@
                         });
                     }
                 </script>
-              
-        
+
+
             </ui:define>
 
         </ui:composition>

@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.ProyectoAdsi.facade;
 
 import edu.ProyectoAdsi.entidades.Cotizaciones;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +25,50 @@ public class CotizacionesFacade extends AbstractFacade<Cotizaciones> implements 
     public CotizacionesFacade() {
         super(Cotizaciones.class);
     }
+
+    @Override
+    public boolean crearCotizacion(Cotizaciones newCot) {
+        try {
+            Query insertCot = em.createNativeQuery("insert into tbl_cotizaciones (detalle, fecha_entrega, cantidad_piezas, id_estado_cotizacion, fk_id_cliente) values (?1,?2,?3,1,?5)");
+
+            insertCot.setParameter(1, newCot.getDetalle());
+            insertCot.setParameter(2, newCot.getFechaEntrega());
+            insertCot.setParameter(3, newCot.getCantidadPiezas());
+            insertCot.setParameter(5, newCot.getFkIdCliente().getIdUsuarios());
+
+            insertCot.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
     
+    
+    
+    @Override
+    public List<Cotizaciones> filtrarCotizaciones(int idCliente, int estadoCot) {
+        try {
+            em.getEntityManagerFactory().getCache().evictAll();
+            String consultar;
+            if (idCliente == 0 && estadoCot == 0) {
+                consultar = "select * from tbl_cotizaciones";
+            }
+            else if (idCliente == 0 && estadoCot != 0) {
+                consultar = "select * from tbl_cotizaciones where tbl_cotizaciones.id_estado_cotizacion= '" + estadoCot + "%'";
+            } 
+            else if (idCliente != 0 && estadoCot != 0) {
+                consultar = "select * from tbl_cotizaciones where tbl_cotizaciones.id_estado_cotizacion= '" + estadoCot + "%' and tbl_cotizaciones.fk_id_cliente='" + idCliente + "%' ";
+            } else {
+//              consultar = "select * from tbl_cotizaciones where documento like '" + documentoCliente + "%' and nit like '" + estado + "%' order by documento desc";
+                consultar = "SELECT * FROM db_siim.tbl_cotizaciones where tbl_cotizaciones.fk_id_cliente= '" + idCliente + "%'";
+            }
+            Query filtrarCot = em.createNativeQuery(consultar, Cotizaciones.class);
+            List<Cotizaciones> resultadoCot = filtrarCot.getResultList();
+            return resultadoCot;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

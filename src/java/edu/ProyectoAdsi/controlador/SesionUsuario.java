@@ -18,14 +18,14 @@ import org.primefaces.PrimeFaces;
 @Named(value = "sesionUsuario")
 @SessionScoped
 public class SesionUsuario implements Serializable {
-    
-     @EJB
-     UsuariosFacadeLocal usuariosfacadelocal; 
-     @EJB
-     CiudadesFacadeLocal ciudadesFacadeLocal; 
-     @EJB
-     UsuariosHasTblRolesFacadeLocal usuariosHasTblRolesFacadeLocal; 
-    
+
+    @EJB
+    UsuariosFacadeLocal usuariosfacadelocal;
+    @EJB
+    CiudadesFacadeLocal ciudadesFacadeLocal;
+    @EJB
+    UsuariosHasTblRolesFacadeLocal usuariosHasTblRolesFacadeLocal;
+
     private int tipoDocumento;
     private String documento;
     private String primerNombre;
@@ -42,9 +42,9 @@ public class SesionUsuario implements Serializable {
     private String estado;
     private int ciudad;
     private int rol;
-    
-    private Usuarios usuLog;    
-    
+
+    private Usuarios usuLog;
+
     List<Usuarios> lstUsuIn = new ArrayList<>();
 
     public List<Usuarios> getLstUsuIn() {
@@ -54,7 +54,7 @@ public class SesionUsuario implements Serializable {
     public void setLstUsuIn(List<Usuarios> lstUsuIn) {
         this.lstUsuIn = lstUsuIn;
     }
-    
+
     public SesionUsuario() {
     }
 
@@ -145,7 +145,7 @@ public class SesionUsuario implements Serializable {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    
+
     public String getConfirmarContraseña() {
         return confirmarContraseña;
     }
@@ -177,7 +177,7 @@ public class SesionUsuario implements Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
     public int getRol() {
         return rol;
     }
@@ -186,7 +186,6 @@ public class SesionUsuario implements Serializable {
         this.rol = rol;
     }
 
-
     public Usuarios getUsuLog() {
         return usuLog;
     }
@@ -194,14 +193,13 @@ public class SesionUsuario implements Serializable {
     public void setUsuLog(Usuarios usuLog) {
         this.usuLog = usuLog;
     }
-       
-        
+
     public String registrarUsuario() {
         try {
             if (contraseña.equals(confirmarContraseña)) {
-                
-               Ciudades objCiudad = ciudadesFacadeLocal.find(ciudad);
-                
+
+                Ciudades objCiudad = ciudadesFacadeLocal.find(ciudad);
+
                 Usuarios nuevoUsu = new Usuarios();
                 nuevoUsu.setFkCiudad(objCiudad);
                 nuevoUsu.setTipoDocumento(tipoDocumento);
@@ -216,22 +214,21 @@ public class SesionUsuario implements Serializable {
                 nuevoUsu.setTelefono(telefono);
                 nuevoUsu.setContrasena(contraseña);
                 nuevoUsu.setDireccion(direccion);
-                
-                
+
                 boolean insertUsu = usuariosfacadelocal.insertUsuario(nuevoUsu);
-                
+
                 if (insertUsu) {
-                                            
-                int posicion=usuariosfacadelocal.consultarId(documento);
-                
-                usuariosfacadelocal.asignarRol(posicion,1);
-                
-                PrimeFaces.current().executeScript("registroExitoso('Se ha registrado con exito')");
-                           
-                }else{
-                PrimeFaces.current().executeScript("registroFallido('Usuario ya registrado')");
+
+                    int posicion = usuariosfacadelocal.consultarId(documento);
+
+                    usuariosfacadelocal.asignarRol(posicion, 1);
+
+                    PrimeFaces.current().executeScript("registroExitoso('Se ha registrado con exito')");
+
+                } else {
+                    PrimeFaces.current().executeScript("registroFallido('Usuario ya registrado')");
                 }
-                
+
                 this.tipoDocumento = 0;
                 this.documento = "";
                 this.primerNombre = "";
@@ -248,62 +245,58 @@ public class SesionUsuario implements Serializable {
 
             } else {
                 PrimeFaces.current().executeScript("registroFallido('Las contraseñas no coinciden')");
-            }            
+            }
         } catch (Exception e) {
         }
         return "";
     }
-    
-    
-    
-        public String inicioSesion( ){
+
+    public String inicioSesion() {
         try {
             this.usuLog = usuariosfacadelocal.iniciarSesion(contraseña, documento);
-            String ruta="#";
-            if (usuLog !=null) {
+            String ruta = "#";
+            if (usuLog != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuLog);
                 for (UsuariosHasTblRoles objRol : usuLog.getUsuariosHasTblRolesCollection()) {
-                    ruta=objRol.getTblRolesIdTblRol().getNombreRol();
-                    
+                    ruta = objRol.getTblRolesIdTblRol().getNombreRol();
+
                     break;
                 }
                 limparFormulario();
-                return "/"+ruta+"/index.xhtml?faces-redirect=true";
-                        
+                return "/" + ruta + "/index.xhtml?faces-redirect=true";
+
             } else {
-            PrimeFaces.current().executeScript("loginFallido('Usuario inactivo o no registrado')");
-            return ""; 
+                PrimeFaces.current().executeScript("loginFallido('Usuario inactivo o no registrado')");
+                return "";
             }
-            
+
         } catch (Exception e) {
             PrimeFaces.current().executeScript("loginFallido('Usuario no registrado')");
-            return "";           
-        }   
-        
-    }
-        
-     //        Método para leer todos los usuarios registrados en la base de datos
-            public List<Usuarios> usuarioRegistrados() {
+            return "";
+        }
 
-        return usuariosfacadelocal.filtrarUsuarios(documento,nit);
     }
-            
+
+    //        Método para leer todos los usuarios registrados en la base de datos
+    public List<Usuarios> usuarioRegistrados() {
+
+        return usuariosfacadelocal.filtrarUsuarios(documento, nit);
+    }
+
 //            Método para modificar info de usuario            
-             public void actualizarUsuario(){
-    
+    public void actualizarUsuario() {
+
         try {
             usuariosfacadelocal.edit(usuLog);
-            PrimeFaces.current().executeScript("estadoOk('" + usuLog.getPrimerNombre() + " " + usuLog.getPrimerApellido()+ " Datos Actualizados ')");
-        } catch (Exception e) {          
-           PrimeFaces.current().executeScript("estadoBad('Usuario no actualizado')");
+            PrimeFaces.current().executeScript("estadoOk('" + usuLog.getPrimerNombre() + " " + usuLog.getPrimerApellido() + " Datos Actualizados ')");
+        } catch (Exception e) {
+            PrimeFaces.current().executeScript("estadoBad('Usuario no actualizado')");
         }
-    
+
     }
-             
-             
+
     //            Método para eliminar usuario     
-             
-        public void eliminarUsuario(int idUsuario) {
+    public void eliminarUsuario(int idUsuario) {
 
         try {
 
@@ -311,13 +304,12 @@ public class SesionUsuario implements Serializable {
 
             usuariosfacadelocal.removerUsuario(idUsuario);
 
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
         }
 
     }
-        
-         public void cambiarEstado(int id) {
+
+    public void cambiarEstado(int id) {
 
         try {
 
@@ -326,29 +318,29 @@ public class SesionUsuario implements Serializable {
             if (usuCambiarEStado.getEstado().equals("Activo")) {
                 usuariosfacadelocal.cambiarEstado(id, "Inactivo");
             } else {
-               usuariosfacadelocal.cambiarEstado(id, "Activo");
+                usuariosfacadelocal.cambiarEstado(id, "Activo");
             }
 
         } catch (Exception e) {
         }
 
     }
-                //            Método para cambiar rol
-        public void cambiarRol(int idUsuario, int rol) {
+    //            Método para cambiar rol
+
+    public void cambiarRol(int idUsuario, int rol) {
         try {
             usuariosHasTblRolesFacadeLocal.cambiarRol(idUsuario, rol);
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
         }
     }
 
-    public void verificarSesion(){
-    
+    public void verificarSesion() {
+
         try {
-           Usuarios us = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-           if (us==null){
-           FacesContext.getCurrentInstance().getExternalContext().redirect("./../accesoNegado.xhtml");
-           }
+            Usuarios us = (Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+            if (us == null) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("./../accesoNegado.xhtml");
+            }
         } catch (Exception e) {
             //Revisar mas adelante la opcion de guardar un log con los errores presentados
         }
@@ -360,7 +352,7 @@ public class SesionUsuario implements Serializable {
 
     public void limparFormulario() {
         this.documento = "";
+        this.contraseña = "";
     }
-   
-}
 
+}

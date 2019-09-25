@@ -10,18 +10,20 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bxs42
+ * @author Aesir936
  */
 @Entity
 @Table(name = "tbl_archivos_adjuntos")
@@ -32,13 +34,19 @@ public class ArchivosAdjuntos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_archivos_adjuntos")
     private Integer idArchivosAdjuntos;
-    @JoinColumn(name = "cotizaciones_id_cotizaciones", referencedColumnName = "id_cotizaciones")
+    @Size(max = 100)
+    @Column(name = "ruta")
+    private String ruta;
+    @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizaciones")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Cotizaciones cotizacionesIdCotizaciones;
+    private Cotizaciones idCotizacion;
+    @JoinColumn(name = "id_orden_trabajo", referencedColumnName = "id_ordenes_de_trabajo")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private OrdenesDeTrabajo idOrdenTrabajo;
 
     public ArchivosAdjuntos() {
     }
@@ -55,12 +63,28 @@ public class ArchivosAdjuntos implements Serializable {
         this.idArchivosAdjuntos = idArchivosAdjuntos;
     }
 
-    public Cotizaciones getCotizacionesIdCotizaciones() {
-        return cotizacionesIdCotizaciones;
+    public String getRuta() {
+        return ruta;
     }
 
-    public void setCotizacionesIdCotizaciones(Cotizaciones cotizacionesIdCotizaciones) {
-        this.cotizacionesIdCotizaciones = cotizacionesIdCotizaciones;
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+
+    public Cotizaciones getIdCotizacion() {
+        return idCotizacion;
+    }
+
+    public void setIdCotizacion(Cotizaciones idCotizacion) {
+        this.idCotizacion = idCotizacion;
+    }
+
+    public OrdenesDeTrabajo getIdOrdenTrabajo() {
+        return idOrdenTrabajo;
+    }
+
+    public void setIdOrdenTrabajo(OrdenesDeTrabajo idOrdenTrabajo) {
+        this.idOrdenTrabajo = idOrdenTrabajo;
     }
 
     @Override

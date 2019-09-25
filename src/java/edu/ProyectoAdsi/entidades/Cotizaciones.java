@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bxs42
+ * @author Aesir936
  */
 @Entity
 @Table(name = "tbl_cotizaciones")
@@ -56,17 +56,25 @@ public class Cotizaciones implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "detalle")
     private String detalle;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "plano")
-    private short plano;
+    @Column(name = "fecha_entrega")
+    @Temporal(TemporalType.DATE)
+    private Date fechaEntrega;
+    @Size(max = 10)
+    @Column(name = "cantidad_piezas")
+    private String cantidadPiezas;
+    @Size(max = 10)
+    @Column(name = "valor_unitario")
+    private String valorUnitario;
+    @Size(max = 10)
+    @Column(name = "valor_total")
+    private String valorTotal;
     @JoinColumn(name = "id_estado_cotizacion", referencedColumnName = "id_estado_cotizacion")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EstadosCotizaciones idEstadoCotizacion;
-    @JoinColumn(name = "id_ordenes_de_trabajo", referencedColumnName = "id_ordenes_de_trabajo")
+    @JoinColumn(name = "fk_id_cliente", referencedColumnName = "id_usuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private OrdenesDeTrabajo idOrdenesDeTrabajo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cotizacionesIdCotizaciones", fetch = FetchType.LAZY)
+    private Usuarios fkIdCliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCotizacion", fetch = FetchType.LAZY)
     private Collection<ArchivosAdjuntos> archivosAdjuntosCollection;
 
     public Cotizaciones() {
@@ -76,11 +84,10 @@ public class Cotizaciones implements Serializable {
         this.idCotizaciones = idCotizaciones;
     }
 
-    public Cotizaciones(Integer idCotizaciones, Date fechaCotizaciones, String detalle, short plano) {
+    public Cotizaciones(Integer idCotizaciones, Date fechaCotizaciones, String detalle) {
         this.idCotizaciones = idCotizaciones;
         this.fechaCotizaciones = fechaCotizaciones;
         this.detalle = detalle;
-        this.plano = plano;
     }
 
     public Integer getIdCotizaciones() {
@@ -107,12 +114,36 @@ public class Cotizaciones implements Serializable {
         this.detalle = detalle;
     }
 
-    public short getPlano() {
-        return plano;
+    public Date getFechaEntrega() {
+        return fechaEntrega;
     }
 
-    public void setPlano(short plano) {
-        this.plano = plano;
+    public void setFechaEntrega(Date fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
+    }
+
+    public String getCantidadPiezas() {
+        return cantidadPiezas;
+    }
+
+    public void setCantidadPiezas(String cantidadPiezas) {
+        this.cantidadPiezas = cantidadPiezas;
+    }
+
+    public String getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(String valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+
+    public String getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(String valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public EstadosCotizaciones getIdEstadoCotizacion() {
@@ -123,12 +154,12 @@ public class Cotizaciones implements Serializable {
         this.idEstadoCotizacion = idEstadoCotizacion;
     }
 
-    public OrdenesDeTrabajo getIdOrdenesDeTrabajo() {
-        return idOrdenesDeTrabajo;
+    public Usuarios getFkIdCliente() {
+        return fkIdCliente;
     }
 
-    public void setIdOrdenesDeTrabajo(OrdenesDeTrabajo idOrdenesDeTrabajo) {
-        this.idOrdenesDeTrabajo = idOrdenesDeTrabajo;
+    public void setFkIdCliente(Usuarios fkIdCliente) {
+        this.fkIdCliente = fkIdCliente;
     }
 
     @XmlTransient

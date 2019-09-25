@@ -9,12 +9,63 @@
     <body>
 
         <ui:composition template="./../Template/completeTemplate.xhtml">
+            <ui:define name="top">
+                <nav id="navegacion" class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Boton para desplegar busqueda en pantallas pequeñas -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw" style="color: #000"></i>
+                            </a>
+                            <!-- Desplegable de busqueda para pantallas pequeñas -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar" aria-label="Search" aria-describedby="basic-addon2"/>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm" style="color: #000"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="form-inline">
+                            <h:form>
+                                <h:commandButton actionListener="#{sesionUsuario.cerrarSesion()}" value="Cerrar Sesion" action="/index.xhtml?faces-redirect=true" class="dropdown-item" style="color: red" />
+                            </h:form> 
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active"  style="color: #000" href="../index.xhtml">Inicio</a>
+                        </li>
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <!--Barra de navegacion info usuario -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline small" style="color: #000">#{sesionUsuario.usuLog.primerNombre}  #{sesionUsuario.usuLog.segundoNombre}  #{sesionUsuario.usuLog.primerApellido}</span>
+                                <img class="img-profile rounded-circle" src="../Template/assets/img/usuario.png"/>
+                            </a>
+                            <!-- Desplegable "Información del usuario" -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="editarDatosUsuario.xhtml">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Editar perfil
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </ui:define>
 
-<ui:define name="left">
+
+
+           <ui:define name="left">
                 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
 
                     <!-- Logo -->
-                    <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
+                    <a class="d-flex align-items-center justify-content-center" href="index.html">                 
                         <div>
                             <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
                         </div>
@@ -29,44 +80,45 @@
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Tablero principal</span></a>
                     </li>
+
                     <!-- División -->
                     <hr class="sidebar-divider d-none d-md-block"></hr>
-<!--                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fas fa-edit"></i>
-                            <span>Solicitar Cotización</span></a>
-                    </li>
+
+                    <!--Solicitud de cotización-->
                     <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Consulta y aprueba cotizaciones en curso</span></a>
-                    </li>-->
+                        <a class="nav-link" href="SolicitudCotizacion.xhtml">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Solicitud de cotización</span></a>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider d-none d-md-block"></hr>
+
+                    <!-- Menú de configuración de perfil -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Configuración de perfil</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Editar perfil:</h6>
+                                <a class="collapse-item" href="#">Cambiar imágen</a>
+                                <a class="collapse-item" href="editarDatosUsuario.xhtml">
+                                    <span style="font-size: 1em">Editar datos personales</span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!--Buzón de sugerencias-->
                     <li class="nav-item">
                         <a class="nav-link" href="enConstruccion.xhtml">
                             <i class="fas fa-inbox"></i>
                             <span>Buzón de sugerencias</span></a>
-                    </li>
-                    <!-- División -->
-                    <hr class="sidebar-divider"/>
-
-                    <!-- Cabecera -->
-                    <li class="nav-item active">
-                        <div class="nav-link" href="">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Configuración de perfil</span>
-                        </div>
-                    </li>
-
-                    <!-- Menú de configuración de perfil -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                        <i class="far fa-file-image"></i>
-                        <span>Cambiar imágen</span>
-                        </a>
-                        <a class="nav-link" href="editarDatosUsuario.xhtml">
-                            <i class="fas fa-pencil-alt"></i>
-                            <span>Editar datos personales</span>
-                        </a>
                     </li>
 
                     <!-- División -->
@@ -86,27 +138,26 @@
                         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Páginas de inicio:</h6>
-                                <a class="collapse-item" href="../index.xhtml">Inicio de sesión</a>
-                                <a class="collapse-item" href="../registro.xhtml">Registro</a>
-                                <a class="collapse-item" href="enConstruccion.xhtml">Olvido de contraseña</a>
-<!--                                <div class="collapse-divider"></div>
-                                <h6 class="collapse-header">Otras páginas:</h6>
-                                <a class="collapse-item" href="404.html">Página de error 404</a>
-                                <a class="collapse-item" href="blank.html">Página de error 500</a>-->
+                                <a class="collapse-item" href="login.html">Inicio</a>
+                                <a class="collapse-item" href="../recuperarContrasena.xhtml">Olvido de contraseña</a>
+                                <!--                                <div class="collapse-divider"></div>
+                                                                <h6 class="collapse-header">Otras páginas:</h6>
+                                                                <a class="collapse-item" href="404.html">Página de error 404</a>
+                                                                <a class="collapse-item" href="blank.html">Página de error 500</a>-->
                             </div>
                         </div>
                     </li>
 
                     <!-- Informes -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Informes</span></a>
-                    </li>
-                    
+                    <!--                    <li class="nav-item">
+                                            <a class="nav-link" href="">
+                                                <i class="fas fa-fw fa-chart-area"></i>
+                                                <span>Informes</span></a>
+                                        </li>-->
+
                     <!-- División -->
                     <hr class="sidebar-divider"/>
-                    
+
                     <!-- Menú utilerías  -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -125,9 +176,7 @@
                 </ul>
             </ui:define>
 
-<!--            <ui:define name="top">
-                top
-            </ui:define>-->-->
+            
 
             <ui:define name="content">
                 <div class="row py-2">
@@ -135,6 +184,7 @@
                     <div class="col-md-8">
                         <h2 style="text-align: center">Actualzizar datos personales</h2>
                         <h:form>
+
                             <h:messages  style="color:red;margin:8px;"/> 
                             <div class="form-row py-3">
                                 <div class="col-md-6 mb-3">

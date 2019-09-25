@@ -9,6 +9,7 @@ import edu.ProyectoAdsi.entidades.ArchivosAdjuntos;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +29,22 @@ public class ArchivosAdjuntosFacade extends AbstractFacade<ArchivosAdjuntos> imp
     public ArchivosAdjuntosFacade() {
         super(ArchivosAdjuntos.class);
     }
+    
+    
+     @Override
+    public boolean insertarAdjunto(ArchivosAdjuntos nuevoArchivo){
+        try {
+            Query insertAdj=em.createNativeQuery("insert into tbl_archivos_adjuntos (ruta,id_cotizacion) values (?,?)");
+            
+            insertAdj.setParameter(1, nuevoArchivo.getRuta());
+            insertAdj.setParameter(2, nuevoArchivo.getIdCotizacion().getIdCotizaciones());
+                 
+            insertAdj.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }   
     
 }

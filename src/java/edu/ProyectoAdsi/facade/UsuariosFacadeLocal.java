@@ -40,5 +40,11 @@ public interface UsuariosFacadeLocal {
 
     public Usuarios recuperarContrasena(String documento);
 
+    public List<Usuarios> listadoDestinatarios(int idRol);
+
+    public List<Usuarios> consultarClientes();
+
+   
+
     
 }

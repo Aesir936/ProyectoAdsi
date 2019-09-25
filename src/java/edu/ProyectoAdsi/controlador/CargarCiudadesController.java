@@ -32,6 +32,14 @@ public class CargarCiudadesController {
      public Part getArchiCarga() {
         return archiCarga;
     }
+     
+    public List<String> getListaCiudades() {
+        return listaCiudades;
+    }
+
+    public void setListaCiudades(List<String> listaCiudades) {
+        this.listaCiudades = listaCiudades;
+    }
 
     public void setArchiCarga(Part archiCarga) throws IOException {
         this.archiCarga = archiCarga;
@@ -44,7 +52,10 @@ public class CargarCiudadesController {
 
                 String[] datosCiudades = line.split(",");
                 Ciudades objCiudad = new Ciudades();
-                objCiudad.setNombreCiudad(datosCiudades[0]);
+                int idCiudad = Integer.parseInt(datosCiudades[0]);
+                objCiudad.setIdCiudad(idCiudad);
+                objCiudad.setNombreCiudad(datosCiudades[1]);
+                
                 
                 ciudadesFacadeLocal.create(objCiudad);
             }
@@ -77,14 +88,6 @@ public class CargarCiudadesController {
         if (!listaMensajes.isEmpty()) {
             throw new ValidatorException((FacesMessage) listaMensajes);
         }
-    }
-
-    public List<String> getListaCiudades() {
-        return listaCiudades;
-    }
-
-    public void setListaCiudades(List<String> listaCiudades) {
-        this.listaCiudades = listaCiudades;
     }
 
 }

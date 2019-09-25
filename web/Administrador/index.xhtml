@@ -6,113 +6,31 @@
     <body>
 
         <ui:composition template="../Template/completeTemplate.xhtml">
-            
+
             <ui:define name="content">
                 <div class="container-fluid">
                     <!-- Header -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Tablero principal</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generar reporte</a>
+                    <div class="text-center mb-5">
+                        <h1 class="h3 mb-0 text-gray-800">Administración del sistema</h1>
                     </div>
-
-                    <!-- Primera fila "Módulos" -->
-                    <div class="row">
-
-                        <!-- Módulo Solicitudes -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Administración de usuarios registrados</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Módulo producción -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Produción</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$10.215.000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row" style="height: 25rem">
+                        <div class="col-3"></div>
+                        <img src="../img/Logo SIIM negro-naranja.svg" style="height: 100%"></img>
                     </div>
-                    <!-- Avance de ordenes de trabajo -->
-                    <div class="row">
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Ordenes de trabajos en proceso</div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modulos de consutas periódicas -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Consultas generales</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
             </ui:define> 
-            <ui:define name="left">
-                    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
 
+
+            <ui:define name="left">
+                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
                     <!-- Logo -->
                     <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
                         <div>
-                            <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
+                            <img src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
                         </div>
                     </a>
-
                     <!-- División -->
                     <hr class="sidebar-divider my-0"/>
-
                     <!-- Tablero principal -->
                     <li class="nav-item active">
                         <a class="nav-link" href="">
@@ -121,26 +39,26 @@
                     </li>
                     <!-- División -->
                     <hr class="sidebar-divider d-none d-md-block"></hr>
-<!--                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fas fa-edit"></i>
-                            <span>Solicitar Cotización</span></a>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Consulta y aprueba cotizaciones en curso</span></a>
-                    </li>-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin_usu.xhtml">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
                             <i class="fas fa-id-badge"></i>
-                            <span>Gestión de usuarios</span></a>
+                            <span>Administrar usuarios</span>
+                        </a>
+                        <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Gestión de usuarios:</h6>
+                                <a class="collapse-item" href="admin_usu.xhtml">Cambiar estado de usuario</a>
+                                <a class="collapse-item" href="cargarUsuariosTxt.xhtml">Cargar usuarios desde .txt</a>
+                                <a class="collapse-item" href="cargarCiudades.xhtml">Cargar ciudades desde .txt</a>
+                                <a class="collapse-item" href="correosMasivos.xhtml">Restablecer contraseñas</a>
+                            </div>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="enConstruccion.xhtml">
-                            <i class="fas fa-inbox"></i>
-                            <span>Revisar buzón de sugerencias</span></a>
-                    </li>
+                    <!--                    <li class="nav-item">
+                                            <a class="nav-link" href="enConstruccion.xhtml">
+                                                <i class="fas fa-inbox"></i>
+                                                <span>Revisar buzón de sugerencias</span></a>
+                                        </li>-->
                     <!-- División -->
                     <hr class="sidebar-divider"/>
 
@@ -199,23 +117,21 @@
                         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Páginas de inicio:</h6>
-                                <a class="collapse-item" href="../index.xhtml">Inicio de sesión</a>
+                                <a class="collapse-item" href="../index.xhtml">Inicio</a>
                                 <a class="collapse-item" href="../registro.xhtml">Registro</a>
-                                <a class="collapse-item" href="enConstruccion.xhtml">Olvido de contraseña</a>
-<!--                                <div class="collapse-divider"></div>
-                                <h6 class="collapse-header">Otras páginas:</h6>
-                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 404</a>
-                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 500</a>-->
+                                <a class="collapse-item" href="../recuperarContrasena.xhtml">Olvido de contraseña</a>
                             </div>
                         </div>
                     </li>
 
                     <!-- Informes -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="enConstruccion.xhtml">
+                    <li class="nav-item py-1">
+                        <a class="nav-link" href="Graficas.xhtml">
                             <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Informes</span></a>
+                            <span>Gráficas</span></a>
                     </li>
+                    <br></br>
+                    <br></br>
                     <br></br>
                     <br></br>
                     <br></br>

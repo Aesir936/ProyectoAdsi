@@ -29,5 +29,7 @@ public interface ArchivosAdjuntosFacadeLocal {
     List<ArchivosAdjuntos> findRange(int[] range);
 
     int count();
+
+    public boolean insertarAdjunto(ArchivosAdjuntos nuevoArchivo);
     
 }

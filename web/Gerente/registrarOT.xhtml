@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough">
+
+    <body>
+
+        <ui:composition template="./../Template/completeTemplate.xhtml">
+            
+            <ui:define name="top">
+                <nav id="navegacion" class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Boton para desplegar busqueda en pantallas pequeñas -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw" style="color: #000"></i>
+                            </a>
+                            <!-- Desplegable de busqueda para pantallas pequeñas -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar" aria-label="Search" aria-describedby="basic-addon2"/>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm" style="color: #000"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="form-inline">
+                            <h:form>
+                                <h:commandButton actionListener="#{sesionUsuario.cerrarSesion()}" value="Cerrar Sesion" action="/index.xhtml?faces-redirect=true" class="dropdown-item" style="color: red" />
+                            </h:form> 
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active"  style="color: #000" href="../index.xhtml">Inicio</a>
+                        </li>
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <!--Barra de navegacion info usuario -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline small" style="color: #000">#{sesionUsuario.usuLog.primerNombre}  #{sesionUsuario.usuLog.segundoNombre}  #{sesionUsuario.usuLog.primerApellido}</span>
+                                <img class="img-profile rounded-circle" src="../Template/assets/img/usuario.png"/>
+                            </a>
+                            <!-- Desplegable "Información del usuario" -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="editarDatosUsuario.xhtml">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Editar perfil
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </ui:define>
+
+            <ui:define name="left">
+                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
+
+                    <!-- Logo -->
+                    <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
+                        <div>
+                            <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
+                        </div>
+                    </a>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider my-0"/>
+
+                    <!-- Tablero principal -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.xhtml">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Tablero principal</span></a>
+                    </li>
+                    <!-- División -->
+                    <hr class="sidebar-divider d-none d-md-block"></hr>
+                    <!-- Cabecera de sección -->
+                    <div class="sidebar-heading">
+                        Administración
+                    </div>
+                    <!-- Menú Cotizaciones -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuotations" aria-expanded="true" aria-controls="collapseQuotations">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Cotizaciones</span>
+                        </a>
+                        <div id="collapseQuotations" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <!--                                <h6 class="collapse-header">Páginas de inicio:</h6>-->
+                               
+                                <a class="collapse-item" href="ListadoCotizaciones.xhtml">Listado de cotizaciones</a>
+                                <!--                                <a class="collapse-item" href="enConstruccion.xhtml">Olvido de contraseña</a>-->
+                                <!--                                <div class="collapse-divider"></div>
+                                                                <h6 class="collapse-header">Otras páginas:</h6>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 404</a>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 500</a>-->
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Menú ordenes de Trabajo -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorkorder" aria-expanded="true" aria-controls="collapseWorkorder">
+                            <i class="fas fa-toolbox"></i>
+                            <span>Ordenes de Trabajo</span>
+                        </a>
+                        <div id="collapseWorkorder" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <!--                                <h6 class="collapse-header">Páginas de inicio:</h6>-->
+                                <a class="collapse-item" href="registrarOT.xhtml">Crear orden de trabajo</a>
+                                <a class="collapse-item" href="listadoOT's.xhtml">Consultar O.T.'s</a>
+                                <!--                                <a class="collapse-item" href="enConstruccion.xhtml">Olvido de contraseña</a>-->
+                                <!--                                <div class="collapse-divider"></div>
+                                                                <h6 class="collapse-header">Otras páginas:</h6>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 404</a>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 500</a>-->
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li class="nav-item">
+                        <a class="nav-link" href="">
+                            <i class="fas fa-edit"></i>
+                            <span></span></a>
+                    </li>
+                      <li class="nav-item">
+                         <a class="nav-link" href="">
+                             <i class="fas fa-check-circle"></i>
+                             <span>Consulta y aprueba cotizaciones en curso</span></a>
+                     </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin_usu.xhtml">
+                            <i class="fas fa-id-badge"></i>
+                            <span>Gestión de usuarios</span></a>
+                    </li>
+                    <!-- Informes -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="Graficas.xhtml">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Gráficos estadísticos</span></a>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!-- Cabecera -->
+                    <div class="sidebar-heading">
+                        Interfaz
+                    </div>
+                    <!-- Buzón -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="enConstruccion.xhtml">
+                            <i class="fas fa-inbox"></i>
+                            <span>Revisar buzón de sugerencias</span></a>
+                    </li>
+                    <!-- Menú de configuración de perfil -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Configuración de perfil</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Editar perfil:</h6>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Cambiar imágen</a>
+                                <a class="collapse-item" href="editarDatosUsuario.xhtml">
+                                    <span style="font-size: 1em">Editar datos personales</span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!--Cabecera -->
+                    <div class="sidebar-heading">
+                        Enlaces
+                    </div>
+
+                    <!-- Menú páginas -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Otras páginas</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Páginas de inicio:</h6>
+                                <a class="collapse-item" href="../index.xhtml">Inicio de sesión</a>
+                                <a class="collapse-item" href="../registro.xhtml">Registro</a>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Olvido de contraseña</a>
+                                <!--                                <div class="collapse-divider"></div>
+                                                                <h6 class="collapse-header">Otras páginas:</h6>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 404</a>
+                                                                <a class="collapse-item" href="enConstruccion.xhtml">Página de error 500</a>-->
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Menú utilerías  -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            <span>Utilerías</span>
+                        </a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Descargar utilerías:</h6>
+                                <a class="collapse-item" href="">Winrar</a>
+                                <a class="collapse-item" href="">Adobe acrobat</a>
+                                <a class="collapse-item" href="">Otros...</a>
+                            </div>
+                        </div>
+                    </li>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                </ul>
+            </ui:define>
+
+            <ui:define name="content"> 
+                <script>
+                    // Add the following code if you want the name of the file appear on select
+                    $(".custom-file-label").on("change", function () {
+                        var fileName = $(this).val().split("\\").pop();
+                        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                    });
+                </script>
+                <script>
+                    PrimeFaces.locales['es'] = {
+                        closeText: 'Cerrar',
+                        prevText: 'Anterior',
+                        nextText: 'Siguiente',
+                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                        weekHeader: 'Semana',
+                        firstDay: 1,
+                        isRTL: false,
+                        showMonthAfterYear: false,
+                        yearSuffix: '',
+                        timeOnlyTitle: 'Sólo hora',
+                        timeText: 'Tiempo',
+                        hourText: 'Hora',
+                        minuteText: 'Minuto',
+                        secondText: 'Segundo',
+                        currentText: 'Fecha actual',
+                        ampm: false,
+                        month: 'Mes',
+                        week: 'Semana',
+                        day: 'Día',
+                        allDayText: 'Todo el día'
+                    };
+                </script>
+                <!-- Begin Page Content -->
+                <div class="container">
+                    <!-- Page Heading -->
+                    <h3 class="m-0 font-weight-bold text-primary" style="text-align: center">Registro de Ordenes de trabajo</h3>
+                    <br></br>
+                    <br></br>
+                    <h:form class="needs-validation" html5:novalidate='' enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom02">Documento del cliente:</label>
+                                <br></br>
+                                <p:inputText  id="validationCustom02" value="#{registroOTsession.documentoCliente}" required='true'/>
+                                <div class="invalid-feedback">
+                                    Por favor proporcione un numero valido.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <!-- Campo para la seleccion de la fecha de entrega -->
+                                <label>Fecha de entrega:</label><br/>
+                                <p:calendar style="width: 100px" value="#{registroOTsession.fechaVencimiento}" placeholder="__/__/____" locale="es" effect="fold" pattern="dd/mm/yyyy" showOn="button" required="true" navigator="true"></p:calendar>
+                                <br></br>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom05">Tiempo de fabricación:</label>
+                                <br></br>
+                                <p:inputText  id="validationCustom05" value="#{registroOTsession.tiempoFabricacion}" required='true'/>
+                                <div class="invalid-feedback">
+                                    Por favor proporcione un numero valido.
+                                </div>
+                            </div>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <div class="form-group col-md-8">
+                            <label for="comment">Descripción del proyecto o pieza:</label>
+                            <p:inputTextarea class="form-control" rows="3" id="comment" value="#{registroOTsession.detalle}" style="max-width: 25rem" required="true" requiredMessage="Por favor ingrese una descripción"/>
+                        </div>
+                       
+                        <br></br>
+                        <br></br>
+                        <h:commandButton class="btn btn-primary" action="#{registroOTsession.registrarOT()}" value="Solicitar cotización"/>
+                        <div class="row" style="height: 4.3rem"></div>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

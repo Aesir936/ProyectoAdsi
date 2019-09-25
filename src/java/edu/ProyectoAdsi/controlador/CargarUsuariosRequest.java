@@ -20,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.servlet.http.Part;
+import org.primefaces.PrimeFaces;
 
 @Named(value = "cargarUsuariosRequest")
 @RequestScoped
@@ -128,10 +129,10 @@ public class CargarUsuariosRequest {
 
         if (Archi.getSize() > 1048576) {
 
-            listaMensajes.add(new FacesMessage("El archivo es demasiado grande"));
+           PrimeFaces.current().executeScript("estadoBad('El archivo es demasiado grande')");
         }
         if (!"text/plain".equals(Archi.getContentType())) {
-            listaMensajes.add(new FacesMessage("El archivo debe poseer la extensión '.txt'"));
+            PrimeFaces.current().executeScript("estadoBad('El archivo debe poseer la extensión '.txt')");
         }
 
         if (!listaMensajes.isEmpty()) {

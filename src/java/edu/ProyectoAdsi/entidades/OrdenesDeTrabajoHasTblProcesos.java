@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bxs42
+ * @author Aesir936
  */
 @Entity
 @Table(name = "tbl_ordenes_de_trabajo_has_tbl_procesos")
@@ -43,8 +43,6 @@ public class OrdenesDeTrabajoHasTblProcesos implements Serializable {
     private Integer pkTblOrdenesDeTrabajoHasTblProcesoscol;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblOrdenesDeTrabajoHasTblProcesos", fetch = FetchType.LAZY)
     private Collection<OrdenesDeTrabajoHasTblProcesosHasTblMateriales> ordenesDeTrabajoHasTblProcesosHasTblMaterialesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblOrdenesDeTrabajoHasTblProcesoscol", fetch = FetchType.LAZY)
-    private Collection<OrdenesDeTrabajoHasTblProcesosHasTblTrabajadores> ordenesDeTrabajoHasTblProcesosHasTblTrabajadoresCollection;
     @JoinColumn(name = "id_ordenes_de_trabajo", referencedColumnName = "id_ordenes_de_trabajo")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private OrdenesDeTrabajo idOrdenesDeTrabajo;
@@ -74,15 +72,6 @@ public class OrdenesDeTrabajoHasTblProcesos implements Serializable {
 
     public void setOrdenesDeTrabajoHasTblProcesosHasTblMaterialesCollection(Collection<OrdenesDeTrabajoHasTblProcesosHasTblMateriales> ordenesDeTrabajoHasTblProcesosHasTblMaterialesCollection) {
         this.ordenesDeTrabajoHasTblProcesosHasTblMaterialesCollection = ordenesDeTrabajoHasTblProcesosHasTblMaterialesCollection;
-    }
-
-    @XmlTransient
-    public Collection<OrdenesDeTrabajoHasTblProcesosHasTblTrabajadores> getOrdenesDeTrabajoHasTblProcesosHasTblTrabajadoresCollection() {
-        return ordenesDeTrabajoHasTblProcesosHasTblTrabajadoresCollection;
-    }
-
-    public void setOrdenesDeTrabajoHasTblProcesosHasTblTrabajadoresCollection(Collection<OrdenesDeTrabajoHasTblProcesosHasTblTrabajadores> ordenesDeTrabajoHasTblProcesosHasTblTrabajadoresCollection) {
-        this.ordenesDeTrabajoHasTblProcesosHasTblTrabajadoresCollection = ordenesDeTrabajoHasTblProcesosHasTblTrabajadoresCollection;
     }
 
     public OrdenesDeTrabajo getIdOrdenesDeTrabajo() {

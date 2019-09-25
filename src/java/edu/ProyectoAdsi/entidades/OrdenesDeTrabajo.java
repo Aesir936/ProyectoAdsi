@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bxs42
+ * @author Aesir936
  */
 @Entity
 @Table(name = "tbl_ordenes_de_trabajo")
@@ -48,8 +49,8 @@ public class OrdenesDeTrabajo implements Serializable {
     private Integer idOrdenesDeTrabajo;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_Vencimiento")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "fecha_vencimiento")
+    @Temporal(TemporalType.DATE)
     private Date fechaVencimiento;
     @Basic(optional = false)
     @NotNull
@@ -58,14 +59,20 @@ public class OrdenesDeTrabajo implements Serializable {
     private Date fechaGeneracion;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "tiempo_total_fabricacion")
-    private String tiempoTotalFabricacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrdenesDeTrabajo", fetch = FetchType.LAZY)
-    private Collection<Cotizaciones> cotizacionesCollection;
-    @JoinColumn(name = "estados_ordenes_de_trabajo", referencedColumnName = "id_estados_ordenes_de_trabajo")
+    private int tiempoTotalFabricacion;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "detalle")
+    private String detalle;
+    @OneToMany(mappedBy = "idOrdenTrabajo", fetch = FetchType.LAZY)
+    private Collection<ArchivosAdjuntos> archivosAdjuntosCollection;
+    @JoinColumn(name = "fk_id_cliente", referencedColumnName = "id_usuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private EstadosOrdenesDeTrabajo estadosOrdenesDeTrabajo;
+    private Usuarios fkIdCliente;
+    @JoinColumn(name = "fk_id_estado", referencedColumnName = "id_estados_ordenes_de_trabajo")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private EstadosOrdenesDeTrabajo fkIdEstado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrdenesDeTrabajo", fetch = FetchType.LAZY)
     private Collection<OrdenesDeTrabajoHasTblProcesos> ordenesDeTrabajoHasTblProcesosCollection;
 
@@ -76,7 +83,7 @@ public class OrdenesDeTrabajo implements Serializable {
         this.idOrdenesDeTrabajo = idOrdenesDeTrabajo;
     }
 
-    public OrdenesDeTrabajo(Integer idOrdenesDeTrabajo, Date fechaVencimiento, Date fechaGeneracion, String tiempoTotalFabricacion) {
+    public OrdenesDeTrabajo(Integer idOrdenesDeTrabajo, Date fechaVencimiento, Date fechaGeneracion, int tiempoTotalFabricacion) {
         this.idOrdenesDeTrabajo = idOrdenesDeTrabajo;
         this.fechaVencimiento = fechaVencimiento;
         this.fechaGeneracion = fechaGeneracion;
@@ -107,29 +114,45 @@ public class OrdenesDeTrabajo implements Serializable {
         this.fechaGeneracion = fechaGeneracion;
     }
 
-    public String getTiempoTotalFabricacion() {
+    public int getTiempoTotalFabricacion() {
         return tiempoTotalFabricacion;
     }
 
-    public void setTiempoTotalFabricacion(String tiempoTotalFabricacion) {
+    public void setTiempoTotalFabricacion(int tiempoTotalFabricacion) {
         this.tiempoTotalFabricacion = tiempoTotalFabricacion;
     }
 
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
     @XmlTransient
-    public Collection<Cotizaciones> getCotizacionesCollection() {
-        return cotizacionesCollection;
+    public Collection<ArchivosAdjuntos> getArchivosAdjuntosCollection() {
+        return archivosAdjuntosCollection;
     }
 
-    public void setCotizacionesCollection(Collection<Cotizaciones> cotizacionesCollection) {
-        this.cotizacionesCollection = cotizacionesCollection;
+    public void setArchivosAdjuntosCollection(Collection<ArchivosAdjuntos> archivosAdjuntosCollection) {
+        this.archivosAdjuntosCollection = archivosAdjuntosCollection;
     }
 
-    public EstadosOrdenesDeTrabajo getEstadosOrdenesDeTrabajo() {
-        return estadosOrdenesDeTrabajo;
+    public Usuarios getFkIdCliente() {
+        return fkIdCliente;
     }
 
-    public void setEstadosOrdenesDeTrabajo(EstadosOrdenesDeTrabajo estadosOrdenesDeTrabajo) {
-        this.estadosOrdenesDeTrabajo = estadosOrdenesDeTrabajo;
+    public void setFkIdCliente(Usuarios fkIdCliente) {
+        this.fkIdCliente = fkIdCliente;
+    }
+
+    public EstadosOrdenesDeTrabajo getFkIdEstado() {
+        return fkIdEstado;
+    }
+
+    public void setFkIdEstado(EstadosOrdenesDeTrabajo fkIdEstado) {
+        this.fkIdEstado = fkIdEstado;
     }
 
     @XmlTransient

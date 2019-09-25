@@ -1,13 +1,12 @@
-
 package edu.ProyectoAdsi.facade;
 
 import edu.ProyectoAdsi.entidades.Usuarios;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 
 @Stateless
 public class UsuariosFacade extends AbstractFacade<Usuarios> implements UsuariosFacadeLocal {
@@ -23,15 +22,13 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     public UsuariosFacade() {
         super(Usuarios.class);
     }
-  
-   
 
     @Override
-    public boolean insertUsuario(Usuarios newUser){
+    public boolean insertUsuario(Usuarios newUser) {
         try {
-            Query insertUsu=em.createNativeQuery("insert into tbl_usuarios (tipo_documento,documento, primer_nombre, segundo_nombre,primer_apellido, \n" +
-            "segundo_apellido,nombre_empresa,nit,correo, telefono, contrasena,direccion,estado,fk_ciudad) values (?,?,?,?,?,?,?,?,?,?,?,?,'Activo',?)");
-            
+            Query insertUsu = em.createNativeQuery("insert into tbl_usuarios (tipo_documento,documento, primer_nombre, segundo_nombre,primer_apellido, \n"
+                    + "segundo_apellido,nombre_empresa,nit,correo, telefono, contrasena,direccion,estado,fk_ciudad) values (?,?,?,?,?,?,?,?,?,?,?,?,'Activo',?)");
+
             insertUsu.setParameter(1, newUser.getTipoDocumento());
             insertUsu.setParameter(2, newUser.getDocumento());
             insertUsu.setParameter(3, newUser.getPrimerNombre());
@@ -45,16 +42,16 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             insertUsu.setParameter(11, newUser.getContrasena());
             insertUsu.setParameter(12, newUser.getDireccion());
             insertUsu.setParameter(13, newUser.getFkCiudad().getIdCiudad());
-            
-            
+
             insertUsu.executeUpdate();
             return true;
 
         } catch (Exception e) {
             return false;
         }
-    }   
-       @Override
+    }
+
+    @Override
     public int consultarId(String numeroDoc) {
         try {
             Query cUsuario = em.createNativeQuery("select id_usuarios from tbl_usuarios where documento  = ?");
@@ -64,9 +61,8 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         } catch (Exception e) {
             return 0;
         }
-    }   
-    
-    
+    }
+
     @Override
     public boolean asignarRol(int usuarioId, int rolId) {
         try {
@@ -78,7 +74,8 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         } catch (Exception e) {
             return false;
         }
-    }   
+    }
+
     @Override
     public Usuarios iniciarSesion(String contrasena, String documento) {
 
@@ -97,16 +94,16 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             return null;
         }
     }
-    
+
     @Override
-    public List<Usuarios> filtrarUsuarios(String documento, String nit ) {
+    public List<Usuarios> filtrarUsuarios(String documento, String nit) {
         try {
-              em.getEntityManagerFactory().getCache().evictAll();
-            String consultar = "";
+            em.getEntityManagerFactory().getCache().evictAll();
+            String consultar;
             if (documento.trim().equals("") && nit.trim().equals("")) {
                 consultar = "select * from tbl_usuarios";
             } else {
-                consultar = "select * from tbl_usuarios where documento like '" + documento + "%' and nit like '"+nit+"%' order by documento desc";
+                consultar = "select * from tbl_usuarios where documento like '" + documento + "%' and nit like '" + nit + "%' order by documento desc";
             }
             Query filtrarU = em.createNativeQuery(consultar, Usuarios.class);
             List<Usuarios> resultadoC = filtrarU.getResultList();
@@ -115,7 +112,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             return null;
         }
     }
-    
+
     @Override
     public boolean removerUsuario(int idUsuario) {
 
@@ -132,7 +129,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         }
 
     }
-    
+
     public boolean cambiarEstado(int idUsuario) {
 
         try {
@@ -148,7 +145,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         }
 
     }
-    
+
     @Override
     public boolean cambiarEstado(int idUsuario, String estado) {
 
@@ -166,8 +163,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         }
 
     }
-    
-    
+
     @Override
     public Usuarios recuperarContrasena(String documento) {
 
@@ -186,4 +182,67 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         }
     }
 
+    /**
+     * Método para consultar la lista de usuarios a los que se enviará un correo
+     * masivo según el id del rol elegido para su envío.
+     *
+     * @param idRol
+     * @return
+     */
+    @Override
+    public List<Usuarios> listadoDestinatarios(int idRol) {
+        try {
+            List<Usuarios> lstusuarios = new ArrayList<>();
+
+            em.getEntityManagerFactory().getCache().evictAll();
+            Query ConsDest = em.createNativeQuery("SELECT primer_nombre,correo,contrasena FROM tbl_usuarios INNER JOIN tbl_usuarios_has_tbl_roles ON tbl_usuarios.id_usuarios = tbl_usuarios_has_tbl_roles.tbl_usuarios_id_usuarios WHERE tbl_roles_id_tbl_rol = ?");
+            ConsDest.setParameter(1, idRol);
+            List<Object[]> listaResultados = ConsDest.getResultList();
+
+            for (Object[] usuario : listaResultados) {
+                Usuarios usu = new Usuarios();
+                usu.setPrimerNombre((String) usuario[0]);
+                usu.setCorreo((String) usuario[1]);
+                usu.setContrasena((String) usuario[2]);
+
+                lstusuarios.add(usu);
+            }
+
+            if (lstusuarios.isEmpty()) {
+                return null;
+            } else {
+                return lstusuarios;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Usuarios> consultarClientes() {
+        try {
+            Query Clientes = em.createNativeQuery("SELECT * FROM tbl_usuarios INNER JOIN tbl_usuarios_has_tbl_roles ON tbl_usuarios.id_usuarios = tbl_usuarios_has_tbl_roles.tbl_usuarios_id_usuarios WHERE tbl_roles_id_tbl_rol = 4");
+             List<Usuarios> lstclientes = new ArrayList<>();
+             List<Object[]> listaResult = Clientes.getResultList();
+             
+             for (Object[] usuario : listaResult) {
+                 
+                Usuarios usu = new Usuarios();
+                
+                usu.setPrimerNombre((String) usuario[0]);
+//                usu.setOrdenesDeTrabajoCollection(ordenesDeTrabajoCollection);
+                
+                lstclientes.add(usu);
+            }
+
+            if (lstclientes.isEmpty()) {
+                return null;
+            } else {
+                return lstclientes;
+            }
+            
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

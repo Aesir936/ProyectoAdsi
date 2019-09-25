@@ -18,7 +18,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     </h:head>
     <h:body>
-        <f:loadBundle basename="edu.ProyectoAdsi.properties.#{idiomaController.idioma}" var="etiqueta"></f:loadBundle>
+        <f:loadBundle basename="edu.ProyectoAdsi.properties.#{idiomaController.idioma}" var="etiqueta" ></f:loadBundle>
 
         <div>
             <!-- Navegación -->
@@ -36,17 +36,17 @@
                         <ul class="navbar-nav ml-auto">
                            
                                 <li class="nav-item active">
-                                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#" style="color: rgb(219, 129, 45)">Ingresar</a>
+                                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#" style="color: rgb(219, 129, 45)">#{etiqueta['Iniciosesion']}</a>
                                     <!--                                <a class="nav-link" id="btn-abrir-popup" style="color: rgb(219, 129, 45)">Ingresar</a>-->
                                 </li>   
 <!--                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">#{etiqueta['Inicio']}</a>
+                                    <a class="nav-link" href="#"></a>
                                 </li>-->
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#conocenos">Conócenos</a>
+                                    <a class="nav-link" href="#conocenos">#{etiqueta['Conocenos']}</a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#contactanos">Contáctanos</a>
+                                    <a class="nav-link" href="#contactanos">#{etiqueta['Contactanos']}</a>
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" href="registro.xhtml" style="color:rgb(50, 51, 142)" >
@@ -66,7 +66,7 @@
                     <div class="modal-content"  style="background-color: #f2f2f2; border-radius: 20px">
                         <h:form id="form1">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel" style="color:rgb(50, 51, 142)">Iniciar Sesion</h5>
+                                <h5 class="modal-title" id="exampleModalLabel" style="color:rgb(50, 51, 142)">#{etiqueta['Iniciosesion']}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -74,21 +74,21 @@
                             <div class="modal-body">
                                 <h:messages id="mensajeValidacion" style = "color:red;margin:8px;" /> 
                                 <div class="form-group">
-                                    <label for="inputDocumento">Documento</label>
-                                    <h:inputText value="#{sesionUsuario.documento}" required="true" class="form-control" id="inputDocumento" requiredMessage="Ingrese un correo"  html5:placeholder="Ingrese su número de documento" />
+                                    <label for="inputDocumento">#{etiqueta['Documento']}</label>
+                                    <h:inputText value="#{sesionUsuario.documento}" required="true" class="form-control" id="inputDocumento" requiredMessage="Ingrese un correo"  html5:placeholder="#{etiqueta['IngreseDoc']}" />
                                     <small id="emailHelp" class="form-text text-muted">
                                         <h:message for="form1:exampleInputEmail1"></h:message>
                                     </small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputContrasena">Contraseña</label>
-                                    <h:inputSecret value="#{sesionUsuario.contraseña}" required="true" class="form-control" id="inputContrasena" requiredMessage="Ingrese una clave" html5:placeholder="Ingrese su contraseña"/>
+                                    <label for="inputContrasena">#{etiqueta['Contraseña']}</label>
+                                    <h:inputSecret value="#{sesionUsuario.contraseña}" required="true" class="form-control" id="inputContrasena" requiredMessage="Ingrese una clave" html5:placeholder="#{etiqueta['IngreseCon']}"/>
                                 </div>
-                                <a href="recuperarContrasena.xhtml" style="color: rgb(219, 129, 45)">Olvido su contraseña?</a>
+                                <a href="recuperarContrasena.xhtml" style="color: rgb(219, 129, 45)">#{etiqueta['Olvido']}</a>
 
                             </div>
                             <div class="modal-footer" style="justify-content: center">
-                                <h:commandButton action="#{sesionUsuario.inicioSesion()}" value="Ingresar" class="btn" style="background-color: rgb(219, 129, 45); color: white"></h:commandButton>
+                                <h:commandButton action="#{sesionUsuario.inicioSesion()}" value="#{etiqueta['Ingresar']}" class="btn" style="background-color: rgb(219, 129, 45); color: white"></h:commandButton>
                             </div>
                         </h:form>
                     </div>
@@ -102,59 +102,59 @@
                     <div class="carousel-item active" style="max-height:400px">
                         <img src="img/Engranes2.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
                         <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em;text-transform: uppercase; text-shadow: 2px 2px 1px #000">                             
-                            <h5>Repuestos y partes para maquinaria</h5>
+                            <h5>#{etiqueta['Repuestos']}</h5>
                         </div>
                     </div>
                     <div class="carousel-item" style="max-height:400px">
                         <img src="img/Troquel_doblado.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
                         <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                            <h5>Troqueles para Corte y Doblado</h5>
+                            <h5>#{etiqueta['Troqueles']}</h5>
                         </div>
                     </div>
                     <div class="carousel-item" style="max-height:400px">
                         <img src="img/Moldes.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
                         <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                            <h5>Moldes y Accesorios</h5>
+                            <h5>#{etiqueta['Moldes']}</h5>
                         </div>
                     </div>
                     <div class="carousel-item" style="max-height:400px">
                         <img src="img/Diseño planos.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
                         <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                            <h5>Diseño de Troqueles, Moldes, Galgas de Calibración y Control, Dispositivos para Fabricación y Ensamble de Piezas</h5>
+                            <h5>#{etiqueta['Diseño']}</h5>
                         </div>
                     </div>
                     <div class="carousel-item" style="max-height:400px">
                         <img src="img/Fresado.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
                         <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                            <h5>Dispositivos de ensamble</h5>
+                            <h5>#{etiqueta['Dispositivos']}</h5>
                         </div>
                     </div>
                     <div class="carousel-item" style="max-height:400px">
                         <img src="img/Galgas.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
                         <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                            <h5>Galgas para verificación</h5>
+                            <h5>#{etiqueta['Galgas']}</h5>
                         </div>
                     </div>
                     <div class="carousel-item" style="max-height:400px">
                         <img src="img/Soldadura.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
                         <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                            <h5>Electrodos de soldadura y erosión</h5>
+                            <h5>#{etiqueta['Electrodos']}</h5>
                         </div>
                     </div>
                     <div class="carousel-item" style="max-height:400px">
                         <img src="img/Punzonadora.jpg" style="max-height: 570px" class="d-block w-100" alt="..."/>
                         <div class="carousel-caption" style="background: #000; opacity: 0.8; filter: alpha(opacity=60); padding: 0.75em 1em; font-size: 2em; text-transform: uppercase; text-shadow: 2px 2px 1px #000">
-                            <h5>Herramientas para punzonado de lamina</h5>
+                            <h5>#{etiqueta['Herramientas']}</h5>
                         </div>
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Anterior</span>
+                    <span class="sr-only">#{etiqueta['Anterior']}</span>
                 </a>
                 <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Siguiente</span>
+                    <span class="sr-only">#{etiqueta['Siguiente']}</span>
                 </a>               
             </div>
 
@@ -166,10 +166,9 @@
                             <img src="img/Nuestra historia.png" alt="Brújula" class="img-fluid img-responsive" style="max-width: 200px; float: center; margin-left: 160px; margin-top: 30px"/>       
                         </div>
                         <div class="col-md-6">
-                            <h3 style="color: rgb(50, 51, 142)">Nuestra historia...</h3>
+                            <h3 style="color: rgb(50, 51, 142)">#{etiqueta['Historia']}</h3>
                             <hr/>
-                            <p class="text-justify" style="color: white">DYM Mecanizados S.A.S., es una empresa creada en el año 2007 especializada en mantenimiento industrial; cuyo objeto comercial se encuentra enmarcado en tres divisiones de servicio: Mantenimiento y reparación especializado de maquinaria y equipo, fabricación de máquinas formadoras de metal y/o máquinas herramientas y fabricación de otros productos elaborados en metal NCP.
-                                Nuestra organización cuenta con los recursos necesarios y propios para el desarrollo de nuestro objeto, permitiendo responder técnica y económicamente a nuestros clientes en la ejecución de nuestros servicios realizados con alto compromiso de calidad, salud ocupacional, medio ambiente y responsabilidad social. 
+                            <p class="text-justify" style="color: white">#{etiqueta['DYM']}
                             </p>
                         </div>
                     </div>    
@@ -180,11 +179,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h3>
-                                <span style="color: rgb(219, 129, 45)">Misión</span>
+                                <span style="color: rgb(219, 129, 45)">#{etiqueta['Mision']}</span>
                             </h3>
                             <hr/>
-                            <p>Basados en nuestros principios corporativos nos comprometemos hacía la excelencia en el cumplimiento y satisfacción de los requisitos establecidos por el cliente, la eficiencia, la innovación y el talento humano.
-                            </p>
+                            <p>#{etiqueta['Basados']}</p>
                         </div>
                         <div class="col-md-6">
                             <img src="img/Misión-gráfico.png" alt="Gráfico" class="img-fluid" style="max-width: 400px; float: right;"/>
@@ -199,10 +197,9 @@
                             <img src="img/Visión-mundo.png" style="max-width: 300px; margin-left: 120px; margin-top:" alt="Planeta"/>
                         </div>
                         <div class="col-md-6">
-                            <h3 style="color: rgb(50, 51, 142)">Visión</h3>
+                            <h3 style="color: rgb(50, 51, 142)">#{etiqueta['Vision']}</h3>
                             <hr/>
-                            <p style="text-align: justify; color: white">Consolidar los esfuerzos de la organización en las diferentes unidades de negocio; con el fin de incursionar en nuevos mercados a nivel nacional e internacional para obtener en el año 2020 un mayor posicionamiento y reconocimiento en la Industria. 
-                            </p>        
+                            <p style="text-align: justify; color: white">#{etiqueta['Consolidar']}</p>        
                         </div>
                     </div>    
                 </div>
@@ -215,17 +212,17 @@
                         </iframe>
                     </div>
                     <div class="col-md-6">
-                        <h2>Comunícate con nosotros</h2>
+                        <h2>#{etiqueta['Comunicate']}</h2>
                         <br/>
                         <h4>
-                            <span style="color: rgb(50, 51, 142)">División</span>
+                            <span style="color: rgb(50, 51, 142)">#{etiqueta['Division']}</span>
                             <br/>
-                            <span style="color: rgb(219, 129, 45)">Ejecutiva</span>
+                            <span style="color: rgb(219, 129, 45)">#{etiqueta['Ejecutiva']}</span>
                         </h4>
                         <p>
                             JOSE DANIEL BAUTISTA BAREÑO
                             <br/>
-                            Gerente 
+                            #{etiqueta['Gerente']}
                             <br/>
                             Móvil +57 312 449 9898
                             <br/>
@@ -233,22 +230,22 @@
                         </p>
                         <hr/>
                         <h4>
-                            <span style="color: rgb(50, 51, 142)">División</span>
+                            <span style="color: rgb(50, 51, 142)">#{etiqueta['Division']}</span>
                             <br/>
-                            <span style="color: rgb(219, 129, 45)">Administrativa</span>
+                            <span style="color: rgb(219, 129, 45)">#{etiqueta['Administrativa']}</span>
                         </h4>
                         <p>
                             LUZ MARY PARRA GUTIEREZ
                             <br/>
-                            Asistente administrativa
+                            #{etiqueta['Asistente']}
                             <br/>
                             Móvil (57) 315 783 5132 administrativa@dymmecanizados.com 
                         </p>
                         <hr/>
                         <h4>
-                            <span style="color: rgb(50, 51, 142)">División</span>
+                            <span style="color: rgb(50, 51, 142)">#{etiqueta['Division']}</span>
                             <br/>
-                            <span style="color: rgb(219, 129, 45)">Oficinas</span>
+                            <span style="color: rgb(219, 129, 45)">#{etiqueta['Oficinas']}</span>
                         </h4>
                         <p>
                             Carrera 93 No. 68 – 95 Bogotá D.C. PBX: +57 (1) 805 43 52
@@ -268,7 +265,7 @@
                     <div class="row">
                         <div class="col-md-12" style=" height:30%">
                             <img src="img/Logo SIIM.svg" class="img-responsive img-fluid" style="max-height: 40px; padding-top: 5px " alt="Logo SIIM"/>
-                            <p style="text-height:8px">Sistema de Información para la Industria Metalmecánica</p>
+                            <p style="text-height:8px">#{etiqueta['Sistema']}</p>
                         </div>
                     </div>
                 </div>

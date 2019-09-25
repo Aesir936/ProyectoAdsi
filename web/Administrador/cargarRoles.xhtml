@@ -11,58 +11,121 @@
 
             <ui:define name="left">
                 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
-
                     <!-- Logo -->
-                    <a class="d-flex align-items-center justify-content-center" href="index.html">                 
+                    <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
                         <div>
-                            <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
+                            <img src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
                         </div>
                     </a>
-
                     <!-- División -->
                     <hr class="sidebar-divider my-0"/>
-
                     <!-- Tablero principal -->
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="index.xhtml">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Tablero principal</span></a>
                     </li>
                     <!-- División -->
                     <hr class="sidebar-divider d-none d-md-block"></hr>
-<!--                    Gestion de usuarios-->
-                    <li class="nav-item active">
-                        <a class="nav-link" href="">
+                    <!--                    <li class="nav-item">
+                                            <a class="nav-link" href="admin_usu.xhtml">
+                                                <i class="fas fa-id-badge"></i>
+                                                <span>Gestión de usuarios</span></a>
+                                        </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
                             <i class="fas fa-id-badge"></i>
-                            <span>Gestión de usuarios</span></a>
+                            <span>Administrar usuarios</span>
+                        </a>
+                        <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Gestión de usuarios:</h6>
+                                <a class="collapse-item" href="admin_usu.xhtml">Cambiar estado de usuario</a>
+                                <a class="collapse-item" href="cargarUsuariosTxt.xhtml">Cargar usuarios desde .txt</a>
+                                <a class="collapse-item" href="cargarCiudades.xhtml">Cargar ciudades desde .txt</a>
+                                <a class="collapse-item" href="correosMasivos.xhtml">Restablecer contraseñas</a>
+                            </div>
+                        </div>
                     </li>
-
+<!--                    <li class="nav-item">
+                        <a class="nav-link" href="enConstruccion.xhtml">
+                            <i class="fas fa-inbox"></i>
+                            <span>Revisar buzón de sugerencias</span></a>
+                    </li>-->
                     <!-- División -->
                     <hr class="sidebar-divider"/>
 
                     <!-- Cabecera -->
                     <div class="sidebar-heading">
-                        Opciones
-                    </div>  
+                        Interfaz
+                    </div>
+
+                    <!-- Menú de configuración de perfil -->
                     <li class="nav-item">
-                        <a class="nav-link" href="cargarUsuariosTxt.xhtml">
-                            <i class="fas fa-arrow-alt-circle-up"></i>
-                            <span>Cargar usuarios desde .txt</span>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Configuración de perfil</span>
                         </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Editar perfil:</h6>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Cambiar imágen</a>
+                                <a class="collapse-item" href="editarDatosUsuario.xhtml">
+                                    <span style="font-size: 0.8em">Modificar información personal</span>
+                                </a>
+                            </div>
+                        </div>
                     </li>
-                     <li class="nav-item active">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-arrow-alt-circle-up"></i>
-                            <span>Cargar roles desde .txt</span>
-                        </a>
-                    </li>
+
+                    <!-- Menú utilerías  -->
                     <li class="nav-item">
-                        <a class="nav-link" href="cargarCiudades.xhtml">
-                            <i class="fas fa-arrow-alt-circle-up"></i>
-                            <span>Cargar ciudades desde .txt</span>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            <span>Utilerías</span>
                         </a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Descargar utilerías:</h6>
+                                <a class="collapse-item" href="">Winrar</a>
+                                <a class="collapse-item" href="">Adobe acrobat</a>
+                                <a class="collapse-item" href="">Otros...</a>
+                            </div>
+                        </div>
                     </li>
-                </ul>  
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!--Cabecera -->
+                    <div class="sidebar-heading">
+                        Enlaces
+                    </div>
+
+                    <!-- Menú páginas -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Otras páginas</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Páginas de inicio:</h6>
+                                <a class="collapse-item" href="../index.xhtml">Inicio</a>
+                                <a class="collapse-item" href="../registro.xhtml">Registro</a>
+                                <a class="collapse-item" href="../recuperarContrasena.xhtml">Olvido de contraseña</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Informes -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="Graficas.xhtml">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Gráficas</span></a>
+                    </li>
+                    <br></br>
+                    <br></br>
+                </ul>
             </ui:define>
 
 
@@ -73,7 +136,7 @@
                     <h:form enctype="multipart/form-data" class="py-3">                 
                         <br></br>                   
                         <label>Seleccionar Archivo</label>
-                        <h:inputFile required="true" requiredMessage="Debe seleccionar un archivo" value="#{cargarRolesController.archiCarga}" class="form-control" validator="#{cargarRolesController.validarArchivo}"></h:inputFile>                     
+                        <h:inputFile required="true" requiredMessage="Debe seleccionar un archivo" value="#{cargarRolesController.archiCarga}" validator="#{cargarRolesController.validarArchivo}"></h:inputFile>                     
                         <br></br>
                         <h:commandButton value="Cargar roles" class="btn btn-primary"></h:commandButton>                 
                     </h:form>

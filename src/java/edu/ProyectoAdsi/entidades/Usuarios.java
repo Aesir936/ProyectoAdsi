@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bxs42
+ * @author Aesir936
  */
 @Entity
 @Table(name = "tbl_usuarios")
@@ -95,11 +95,19 @@ public class Usuarios implements Serializable {
     @Size(max = 45)
     @Column(name = "estado")
     private String estado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkIdCliente", fetch = FetchType.LAZY)
+    private Collection<BolsasDeTiempo> bolsasDeTiempoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkIdCliente", fetch = FetchType.LAZY)
+    private Collection<Cotizaciones> cotizacionesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblUsuariosIdUsuarios", fetch = FetchType.LAZY)
+    private Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkIdCliente", fetch = FetchType.LAZY)
+    private Collection<OrdenesDeTrabajo> ordenesDeTrabajoCollection;
     @JoinColumn(name = "fk_ciudad", referencedColumnName = "id_ciudad")
     @ManyToOne(fetch = FetchType.LAZY)
     private Ciudades fkCiudad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblUsuariosIdUsuarios", fetch = FetchType.LAZY)
-    private Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkIdUsuario", fetch = FetchType.LAZY)
+    private Collection<FotosPerfil> fotosPerfilCollection;
 
     public Usuarios() {
     }
@@ -231,12 +239,22 @@ public class Usuarios implements Serializable {
         this.estado = estado;
     }
 
-    public Ciudades getFkCiudad() {
-        return fkCiudad;
+    @XmlTransient
+    public Collection<BolsasDeTiempo> getBolsasDeTiempoCollection() {
+        return bolsasDeTiempoCollection;
     }
 
-    public void setFkCiudad(Ciudades fkCiudad) {
-        this.fkCiudad = fkCiudad;
+    public void setBolsasDeTiempoCollection(Collection<BolsasDeTiempo> bolsasDeTiempoCollection) {
+        this.bolsasDeTiempoCollection = bolsasDeTiempoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Cotizaciones> getCotizacionesCollection() {
+        return cotizacionesCollection;
+    }
+
+    public void setCotizacionesCollection(Collection<Cotizaciones> cotizacionesCollection) {
+        this.cotizacionesCollection = cotizacionesCollection;
     }
 
     @XmlTransient
@@ -246,6 +264,32 @@ public class Usuarios implements Serializable {
 
     public void setUsuariosHasTblRolesCollection(Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection) {
         this.usuariosHasTblRolesCollection = usuariosHasTblRolesCollection;
+    }
+
+    @XmlTransient
+    public Collection<OrdenesDeTrabajo> getOrdenesDeTrabajoCollection() {
+        return ordenesDeTrabajoCollection;
+    }
+
+    public void setOrdenesDeTrabajoCollection(Collection<OrdenesDeTrabajo> ordenesDeTrabajoCollection) {
+        this.ordenesDeTrabajoCollection = ordenesDeTrabajoCollection;
+    }
+
+    public Ciudades getFkCiudad() {
+        return fkCiudad;
+    }
+
+    public void setFkCiudad(Ciudades fkCiudad) {
+        this.fkCiudad = fkCiudad;
+    }
+
+    @XmlTransient
+    public Collection<FotosPerfil> getFotosPerfilCollection() {
+        return fotosPerfilCollection;
+    }
+
+    public void setFotosPerfilCollection(Collection<FotosPerfil> fotosPerfilCollection) {
+        this.fotosPerfilCollection = fotosPerfilCollection;
     }
 
     @Override

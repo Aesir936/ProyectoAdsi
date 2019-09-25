@@ -7,18 +7,15 @@
 
         <ui:composition template="./../Template/completeTemplate.xhtml">
             <ui:define name="left">
-                    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
-
+                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
                     <!-- Logo -->
-                    <a class="d-flex align-items-center justify-content-center" href="index.html">                 
+                    <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
                         <div>
-                            <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
+                            <img src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
                         </div>
                     </a>
-
                     <!-- División -->
                     <hr class="sidebar-divider my-0"/>
-
                     <!-- Tablero principal -->
                     <li class="nav-item active">
                         <a class="nav-link" href="index.xhtml">
@@ -27,26 +24,31 @@
                     </li>
                     <!-- División -->
                     <hr class="sidebar-divider d-none d-md-block"></hr>
-<!--                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fas fa-edit"></i>
-                            <span>Solicitar Cotización</span></a>
-                    </li>
+                    <!--                    <li class="nav-item">
+                                            <a class="nav-link" href="admin_usu.xhtml">
+                                                <i class="fas fa-id-badge"></i>
+                                                <span>Gestión de usuarios</span></a>
+                                        </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Consulta y aprueba cotizaciones en curso</span></a>
-                    </li>-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin_usu.xhtml">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
                             <i class="fas fa-id-badge"></i>
-                            <span>Gestión de usuarios</span></a>
+                            <span>Administrar usuarios</span>
+                        </a>
+                        <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Gestión de usuarios:</h6>
+                                <a class="collapse-item" href="admin_usu.xhtml">Cambiar estado de usuario</a>
+                                <a class="collapse-item" href="cargarUsuariosTxt.xhtml">Cargar usuarios desde .txt</a>
+                                <a class="collapse-item" href="cargarCiudades.xhtml">Cargar ciudades desde .txt</a>
+                                <a class="collapse-item" href="correosMasivos.xhtml">Restablecer contraseñas</a>
+                            </div>
+                        </div>
                     </li>
-                    <li class="nav-item">
+<!--                    <li class="nav-item">
                         <a class="nav-link" href="enConstruccion.xhtml">
                             <i class="fas fa-inbox"></i>
                             <span>Revisar buzón de sugerencias</span></a>
-                    </li>
+                    </li>-->
                     <!-- División -->
                     <hr class="sidebar-divider"/>
 
@@ -64,8 +66,10 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Editar perfil:</h6>
-                                <a class="collapse-item" href="">Cambiar imágen</a>
-                                <a class="collapse-item" href="editarDatosUsuario.xhtml">Modificar información</a>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Cambiar imágen</a>
+                                <a class="collapse-item" href="editarDatosUsuario.xhtml">
+                                    <span style="font-size: 0.8em">Modificar información personal</span>
+                                </a>
                             </div>
                         </div>
                     </li>
@@ -98,30 +102,31 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                             <i class="fas fa-fw fa-folder"></i>
-                            <span>Páginas</span>
+                            <span>Otras páginas</span>
                         </a>
                         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Páginas de inicio:</h6>
-                                <a class="collapse-item" href="../index.xhtml">Inicio de sesión</a>
+                                <a class="collapse-item" href="../index.xhtml">Inicio</a>
                                 <a class="collapse-item" href="../registro.xhtml">Registro</a>
-                                <a class="collapse-item" href="">Olvido de contraseña</a>
-<!--                                <div class="collapse-divider"></div>
-                                <h6 class="collapse-header">Otras páginas:</h6>
-                                <a class="collapse-item" href="">Página de error 404</a>
-                                <a class="collapse-item" href="">Página de error 500</a>-->
+                                <a class="collapse-item" href="../recuperarContrasena.xhtml">Olvido de contraseña</a>
                             </div>
                         </div>
                     </li>
 
                     <!-- Informes -->
                     <li class="nav-item">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="Graficas.xhtml">
                             <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Informes</span></a>
+                            <span>Gráficas</span></a>
                     </li>
+                    <br></br>
+                    <br></br>
                 </ul>
             </ui:define>
+            
+            
+            
             <ui:define name="content">
                 <div style="max-width: 600px">
                     <img src="../Template/assets/img/construccion.png" style="padding-left: 40%; padding-bottom: 3%; max-height: 500px"></img>

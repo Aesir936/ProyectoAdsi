@@ -29,5 +29,9 @@ public interface OrdenesDeTrabajoFacadeLocal {
     List<OrdenesDeTrabajo> findRange(int[] range);
 
     int count();
+
+    public boolean insertOT(OrdenesDeTrabajo nuevoOT);
+
+    public List<OrdenesDeTrabajo> filtrarOT(int idCliente, int estadoOT);
     
 }

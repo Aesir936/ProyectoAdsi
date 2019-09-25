@@ -29,5 +29,9 @@ public interface CotizacionesFacadeLocal {
     List<Cotizaciones> findRange(int[] range);
 
     int count();
+
+    public boolean crearCotizacion(Cotizaciones newCot);
+
+    public List<Cotizaciones> filtrarCotizaciones(int idCliente, int estadoCot);
     
 }
