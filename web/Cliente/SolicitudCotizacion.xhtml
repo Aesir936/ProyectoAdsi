@@ -124,8 +124,8 @@
                     </li>
                 </ul>
             </ui:define>
-            
-            
+
+
 
             <ui:define name="top">
                 <nav id="navegacion" class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
@@ -176,64 +176,40 @@
                     </ul>
                 </nav>
             </ui:define>
-            
-            
+
+
 
             <ui:define name="content">
-                  <script>
-                // Add the following code if you want the name of the file appear on select
+                <script>
+                    // Código paravisualizar el nombre del archivo seleccionado en el inputfile personalizado
                     $(".custom-file-label").on("change", function () {
                         var fileName = $(this).val().split("\\").pop();
                         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
                     });
                 </script>
-                <script>
-                    PrimeFaces.locales['es'] = {
-                        closeText: 'Cerrar',
-                        prevText: 'Anterior',
-                        nextText: 'Siguiente',
-                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-                        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-                        weekHeader: 'Semana',
-                        firstDay: 1,
-                        isRTL: false,
-                        showMonthAfterYear: false,
-                        yearSuffix: '',
-                        timeOnlyTitle: 'Sólo hora',
-                        timeText: 'Tiempo',
-                        hourText: 'Hora',
-                        minuteText: 'Minuto',
-                        secondText: 'Segundo',
-                        currentText: 'Fecha actual',
-                        ampm: false,
-                        month: 'Mes',
-                        week: 'Semana',
-                        day: 'Día',
-                        allDayText: 'Todo el día'
-                    };
-                </script>
+                
                 <!-- Begin Page Content -->
                 <div class="container">
                     <!-- Page Heading -->
                     <h3 class="m-0 font-weight-bold text-primary" style="text-align: center">Solicitud Cotizacion</h3>
                     <br></br>
                     <br></br>
-                    <h:form class="needs-validation" html5:novalidate='' enctype="multipart/form-data">
+                    <h:form class="needs-validation"  enctype="multipart/form-data">
+                        <h:message for="input-group" id="mensajeValidacion" style="color:red"></h:message>
                         <!-- Campo para la seleccion de la fecha de entrega -->
                         <label>Elija la fecha de entrega de su proyecto:</label><br/>
-                        <p:calendar style="width: 100px" value="#{cotizacionSession.fechaEntrega}" placeholder="__/__/____" locale="es" effect="fold" pattern="dd/mm/yyyy" showOn="button" required="true" navigator="true"></p:calendar>
+                        <!--                        <p:calendar style="width: 100px" value="" placeholder="__/__/____" locale="es" effect="explode" pattern="dd/mm/yyyy" showOn="button" required="true" ></p:calendar>-->
+                        <div class="input-group date fechacoti">
+                            <p:inputText required='true' requiredMessage="Elija una fecha" value="#{cotizacionSession.fechaEntrega}" class="form-control input-group-addon" style="max-width: 15em"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span></p:inputText>
+                        </div>
+                        <br></br>
                         <br></br>
                         <div class="form-row">
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom05">Cantidad de Piezas</label>
                                 <br></br>
                                 <p:inputText  id="validationCustom05" value="#{cotizacionSession.cantPiezas}" required='true'/>
-                                <div class="invalid-feedback">
-                                    Por favor proporcione un numero valido.
-                                </div>
+                                
                             </div>
                         </div>
 

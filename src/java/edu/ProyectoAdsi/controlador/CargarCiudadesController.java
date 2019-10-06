@@ -1,4 +1,3 @@
-
 package edu.ProyectoAdsi.controlador;
 
 import edu.ProyectoAdsi.entidades.Ciudades;
@@ -15,6 +14,7 @@ import javax.faces.validator.ValidatorException;
 import javax.servlet.http.Part;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import org.primefaces.PrimeFaces;
 
 @Named(value = "cargarCiudadesController")
 @RequestScoped
@@ -22,17 +22,17 @@ public class CargarCiudadesController {
 
     public CargarCiudadesController() {
     }
-    
+
     @EJB
     CiudadesFacadeLocal ciudadesFacadeLocal;
 
     private Part archiCarga;
     private List<String> listaCiudades = new ArrayList<>();
-    
-     public Part getArchiCarga() {
+
+    public Part getArchiCarga() {
         return archiCarga;
     }
-     
+
     public List<String> getListaCiudades() {
         return listaCiudades;
     }
@@ -55,9 +55,11 @@ public class CargarCiudadesController {
                 int idCiudad = Integer.parseInt(datosCiudades[0]);
                 objCiudad.setIdCiudad(idCiudad);
                 objCiudad.setNombreCiudad(datosCiudades[1]);
-                
-                
+
                 ciudadesFacadeLocal.create(objCiudad);
+                
+                PrimeFaces.current().executeScript("estadoOk('Nuevas ciudades agregadas...')");
+
             }
         } catch (Exception e) {
 
@@ -79,10 +81,10 @@ public class CargarCiudadesController {
 
         if (Archi.getSize() > 1024) {
 
-            listaMensajes.add(new FacesMessage("El archivo es demasiado grande"));
+                PrimeFaces.current().executeScript("estadoBad('El archivo es demasiadogrande')");
         }
         if (!"text/plain".equals(Archi.getContentType())) {
-            listaMensajes.add(new FacesMessage("El documento no es .txt"));
+                PrimeFaces.current().executeScript("estadoBad('El archivo debe poseer la extensión .txt')");
         }
 
         if (!listaMensajes.isEmpty()) {

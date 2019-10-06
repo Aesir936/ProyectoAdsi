@@ -55,7 +55,7 @@ public class ReportesRequest {
             Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/db_siim", "root", "123456");
                JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), params, conexion);
             HttpServletResponse hsr = (HttpServletResponse) ec.getResponse();
-            hsr.addHeader("Content-disposition", "attachment; filename=reporte.pdf");
+            hsr.addHeader("Content-disposition", "attachment; filename=Reporte General de Cotizaciones.pdf");
             ServletOutputStream os = hsr.getOutputStream();
             JasperExportManager.exportReportToPdfStream(jp, os);
             os.flush();

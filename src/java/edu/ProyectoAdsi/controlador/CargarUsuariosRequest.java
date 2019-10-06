@@ -40,27 +40,8 @@ public class CargarUsuariosRequest {
     private List<String> listaCategoria = new ArrayList<>();
     private Usuarios usuLog;
 
-    private String contrasena;
-    private String correo;
-
     public Part getArchiCarga() {
         return archiCarga;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
     }
 
     public Usuarios getUsuLog() {
@@ -109,14 +90,16 @@ public class CargarUsuariosRequest {
                 Ciudad.setIdCiudad(idCiudad);
                 Usu.setFkCiudad(Ciudad);
                 usuariosfacadelocal.create(Usu);
-                
+
                 int idRol = Integer.parseInt(datosUsu[14]);
-                Roles rol=rolesFacadeLocal.find(idRol); 
+                Roles rol = rolesFacadeLocal.find(idRol);
 
                 UsuariosHasTblRoles usurol = new UsuariosHasTblRoles();
                 usurol.setTblUsuariosIdUsuarios(Usu);
                 usurol.setTblRolesIdTblRol(rol);
                 usuariosHasTblRolesFacadeLocal.create(usurol);
+
+                PrimeFaces.current().executeScript("estadoOk('Usuarios cargados correctamente')");
 
             }
         } catch (Exception e) {
@@ -129,10 +112,10 @@ public class CargarUsuariosRequest {
 
         if (Archi.getSize() > 1048576) {
 
-           PrimeFaces.current().executeScript("estadoBad('El archivo es demasiado grande')");
+            PrimeFaces.current().executeScript("estadoBad('El archivo es demasiado grande')");
         }
         if (!"text/plain".equals(Archi.getContentType())) {
-            PrimeFaces.current().executeScript("estadoBad('El archivo debe poseer la extensión '.txt')");
+            PrimeFaces.current().executeScript("estadoBad('El archivo debe poseer la extensión .txt')");
         }
 
         if (!listaMensajes.isEmpty()) {

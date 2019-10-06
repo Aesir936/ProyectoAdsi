@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import static java.util.Comparator.comparing;
@@ -46,7 +47,7 @@ public class CotizacionSession implements Serializable {
     public CotizacionSession() {
     }
 
-    private Date fechaEntrega;
+    private String fechaEntrega;
     private String cantPiezas;
     private String descripcion;
     private Part adjunto;
@@ -54,12 +55,12 @@ public class CotizacionSession implements Serializable {
     private final String folder = "C:\\Users\\Aesir936\\Documents\\NetBeansProjects\\ProyectoAdsi\\web\\ArchivosCotizacion";
     private String docCliente;
     private int estadoCot;
-    
-    public Date getFechaEntrega() {
+    private int preciounitario;
+    public String getFechaEntrega() {
         return fechaEntrega;
     }
 
-    public void setFechaEntrega(Date fechaEntrega) {
+    public void setFechaEntrega(String fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
 
@@ -111,6 +112,15 @@ public class CotizacionSession implements Serializable {
         this.estadoCot = estadoCot;
     }
 
+    public int getPreciounitario() {
+        return preciounitario;
+    }
+
+    public void setPreciounitario(int preciounitario) {
+        this.preciounitario = preciounitario;
+    }
+
+
 //    Método para guardar los archivos adjuntos ed las cotizaciones
     public boolean guardarArchivo() {
         try (InputStream input = adjunto.getInputStream()) {
@@ -135,6 +145,19 @@ public class CotizacionSession implements Serializable {
 
         return false;
     }
+     public static Date ParseFecha(String fecha)
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
 
 //    Método para registrar las cotizaciones
     public String registrarCotizacion() {
@@ -142,21 +165,21 @@ public class CotizacionSession implements Serializable {
             Cotizaciones nuevaCot = new Cotizaciones();
             nuevaCot.setCantidadPiezas(cantPiezas);
             nuevaCot.setDetalle(descripcion);
-            nuevaCot.setFechaEntrega(fechaEntrega);
+            Date fecha = ParseFecha(fechaEntrega);
+            nuevaCot.setFechaEntrega(fecha);
             nuevaCot.setFkIdCliente(sesionUsuario.getUsuLog());
             boolean insertCoti = cotizacionesFacadeLocal.crearCotizacion(nuevaCot);
 
             if (insertCoti == true) {
                 List<Cotizaciones> listaCoti = cotizacionesFacadeLocal.findAll();
-                this.idCot = listaCoti.stream().max(comparing(Cotizaciones::getIdCotizaciones)).get();               
-                boolean archivoOk = guardarArchivo();
+                this.idCot = listaCoti.stream().max(comparing(Cotizaciones::getIdCotizaciones)).get();
                 PrimeFaces.current().executeScript("estadoOk('Su solicitud de cotización se ha registrado con exito')");
 
             } else {
                 PrimeFaces.current().executeScript("estadoBad('No se ha podido registrar su solicitud, intentelo nuevamente')");
             }
 
-            this.fechaEntrega = null;
+            this.fechaEntrega = "";
             this.cantPiezas = "";
             this.descripcion = "";
             this.adjunto = null;
@@ -173,5 +196,4 @@ public class CotizacionSession implements Serializable {
         int idCliente = usuariosFacadeLocal.consultarId(docCliente);
         return cotizacionesFacadeLocal.filtrarCotizaciones(idCliente,estadoCot);
     }
-
 }

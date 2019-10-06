@@ -9,7 +9,7 @@
     <body>
 
         <ui:composition template="./../Template/completeTemplate.xhtml">
-            
+
             <ui:define name="top">
                 <nav id="navegacion" class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
                     <!-- Topbar Navbar -->
@@ -59,8 +59,8 @@
                     </ul>
                 </nav>
             </ui:define>
-            
-            
+
+
 
             <ui:define name="left">
                 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
@@ -229,7 +229,7 @@
                 </ul>
             </ui:define>
 
-            
+
 
             <ui:define name="content">
                 <h3 style="text-align: center">Usuarios Registrados</h3>
@@ -295,7 +295,43 @@
                                             <td>#{usuario.estado}</td>                                   
                                             <td>
                                                 <c:if test="#{usuario.documento != sesionUsuario.usuLog.documento}">
-                                                    <h:commandButton action="#{sesionUsuario.cambiarEstado(usuario.idUsuarios)}" value="Cambiar estado" class="btn btn-danger" ></h:commandButton>
+
+                                                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#" style="color: rgb(219, 129, 45)">Cotizar</a>
+
+
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content"  style="background-color: #f2f2f2; border-radius: 20px">
+                                                                <h:form id="form1">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel" style="color:rgb(50, 51, 142)">#{etiqueta['Iniciosesion']}</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <h:messages id="mensajeValidacion" style = "color:red; margin:8px;" /> 
+                                                                        <div class="form-group">
+                                                                            <label for="inputDocumento">#{etiqueta['Documento']}</label>
+                                                                            <h:inputText value="#{sesionUsuario.documento}" required="true" class="form-control" id="inputDocumento" requiredMessage="Ingrese un correo"  html5:placeholder="#{etiqueta['IngreseDoc']}" />
+                                                                            <small id="emailHelp" class="form-text text-muted">
+                                                                                <h:message for="form1:exampleInputEmail1"></h:message>
+                                                                            </small>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="inputContrasena">#{etiqueta['Contraseña']}</label>
+                                                                            <h:inputSecret value="#{sesionUsuario.contraseña}" required="true" class="form-control" id="inputContrasena" requiredMessage="Ingrese una clave" html5:placeholder="#{etiqueta['IngreseCon']}"/>
+                                                                        </div>
+                                                                        <a href="recuperarContrasena.xhtml" style="color: rgb(219, 129, 45)">#{etiqueta['Olvido']}</a>
+
+                                                                    </div>
+                                                                    <div class="modal-footer" style="justify-content: center">
+                                                                        <h:commandButton action="#{sesionUsuario.inicioSesion()}" value="#{etiqueta['Ingresar']}" class="btn" style="background-color: rgb(219, 129, 45); color: white"></h:commandButton>
+                                                                    </div>
+                                                                </h:form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </c:if>
                                             </td>
                                         </tr>

@@ -9,7 +9,7 @@
 
     <body>
         <ui:composition template="./../Template/completeTemplate.xhtml">
-            
+
             <ui:define name="top">
                 <nav id="navegacion" class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
                     <!-- Topbar Navbar -->
@@ -59,7 +59,7 @@
                     </ul>
                 </nav>
             </ui:define>
-            
+
             <ui:define name="left">
                 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
 
@@ -248,9 +248,10 @@
                                 <label for="documentoTC">Estado cotizacion</label>
                                 <h:selectOneMenu styleClass="form-control" value="#{cotizacionSession.estadoCot}" style="max-height:2.1rem " >
                                     <f:selectItem itemValue="0" itemLabel="Elija el estado"></f:selectItem>
-                                    <f:selectItem itemValue="1" itemLabel="Activa"></f:selectItem>
-                                    <f:selectItem itemValue="2" itemLabel="Rechazada"></f:selectItem>
+                                    <f:selectItem itemValue="1" itemLabel="Pendiente"></f:selectItem>
+                                    <f:selectItem itemValue="2" itemLabel="Activa"></f:selectItem>
                                     <f:selectItem itemValue="3" itemLabel="Aprobada"></f:selectItem>
+                                    <f:selectItem itemValue="4" itemLabel="Rechazada"></f:selectItem>
                                 </h:selectOneMenu>
                                 <!--                                <label for="validationCustom01">Estado cotización</label>
                                                                 <h:inputText value="" class="form-control" style="max-height: 2rem" html5:placeholder="Nit" />-->
@@ -289,19 +290,99 @@
                                                 <th scope="col">Fecha Registro</th>
                                                 <th scope="col">Fecha entrega</th>
                                                 <th scope="col">Estado</th>
+                                                <th scope="col">Generar</th>                                                
                                             </tr>
                                         </thead> 
                                         <tbody>
                                             <c:forEach items="#{cotizacionSession.filtrarCotizaciones()}" var="cot" varStatus="paso">
                                                 <tr>
                                                     <th scope="row">#{paso.index+1}</th>
-                                                    <td>#{cot.fkIdCliente.primerNombre}</td>
+                                                    <td>#{cot.fkIdCliente.primerNombre}   #{cot.fkIdCliente.primerApellido}</td>
                                                     <td>#{cot.fkIdCliente.documento}</td>
                                                     <td>#{cot.cantidadPiezas}</td>
                                                     <td>#{cot.fechaCotizaciones}</td>
                                                     <td>#{cot.fechaEntrega}</td>
-                                                    <td>#{cot.idEstadoCotizacion.nombreEstadoCotizacion}</td>                                               
+                                                    <td>#{cot.idEstadoCotizacion.nombreEstadoCotizacion}</td>
+                                                    <td>
+                                                        <c:if test="#{cot.idEstadoCotizacion.nombreEstadoCotizacion == 'Pendiente'}" >
+                                                            <a class="nav-link" data-toggle="modal" data-target="#exampleModal#{paso.index+1}" href="#" style="color: rgb(219, 129, 45)">Cotizar</a>
+                                                        </c:if>
+                                                    </td>
+                                                    <td>
+                                                        <div class="modal fade" id="exampleModal#{paso.index+1}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content"  style="background-color: #f2f2f2; border-radius: 20px">
+                                                                    <h:form id="form1">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel" style="color:rgb(50, 51, 142)">Cotizar solicitud</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <h:messages id="mensajeValidacion" style = "color:red; margin:8px;" /> 
+                                                                            <div class="form-group">
+                                                                                <h4 class="text-center" style="color: rgb(219, 129, 45)">Datos de la solicitud</h4>
+                                                                                <div class="row text-center">
+                                                                                    <div class="col-4">
+                                                                                        <span style="color: blue">Solicitud Nº:</span>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <span style="color: blue">Cliente:</span>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <span style="color: blue">Cantidad piezas:</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row text-center">
+                                                                                    <div class="col-4">
+                                                                                        <span>#{cot.idCotizaciones}</span>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <span>#{cot.fkIdCliente.primerNombre}   #{cot.fkIdCliente.primerApellido}</span>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <span>#{cot.cantidadPiezas}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <br></br>
+                                                                                <div class="row text-center">
+                                                                                    <div class="col-4">
+                                                                                        <span style="color: blue">Detalle:</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row text-center">
+                                                                                    <div class="col-4">
+                                                                                        <h:outputText value="#{cot.detalle}"></h:outputText>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <hr class="sidebar-divider"/>
+                                                                                <h4 style="color: rgb(219, 129, 45)" class="text-center">Cotizar</h4>
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <label for="inputPrecioUnitario" style="padding-right: 15%">Precio unitario</label>
+                                                                                        <h:inputText value="#{cotizacionSession.preciounitario}" required="true" class="form-control" id="inputPrecioUnitario" requiredMessage="Ingrese el precio por unidad"  html5:placeholder="" />
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <label for="inputPrecioTotal">Precio Total</label>
+                                                                                        <h:inputText  required="true" class="form-control" id="inputPrecioTotal" requiredMessage="Ingrese el precio por total" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!--                                                                                <div class="row">
+                                                                                                                                                                    <h:inputTextarea class="form-control" requiredMessage="Ingrese el precio por total" required="true"></h:inputTextarea>
+                                                                                                                                                                </div>-->
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer" style="justify-content: center">
+                                                                            <h:commandButton action="#{cotizacionSession.setIdCot(idCot)}" value="Generar cotización" class="btn" style="background-color: rgb(219, 129, 45); color: white"></h:commandButton>
+                                                                        </div>
+                                                                    </h:form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
+
                                             </c:forEach>
                                         </tbody>
                                     </table>

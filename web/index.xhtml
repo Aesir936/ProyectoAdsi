@@ -34,25 +34,21 @@
                     <!-- Botonoes de la barra de navegación -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                           
-                                <li class="nav-item active">
-                                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#" style="color: rgb(219, 129, 45)">#{etiqueta['Iniciosesion']}</a>
-                                    <!--                                <a class="nav-link" id="btn-abrir-popup" style="color: rgb(219, 129, 45)">Ingresar</a>-->
-                                </li>   
-<!--                                <li class="nav-item active">
-                                    <a class="nav-link" href="#"></a>
-                                </li>-->
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#conocenos">#{etiqueta['Conocenos']}</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#contactanos">#{etiqueta['Contactanos']}</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="registro.xhtml" style="color:rgb(50, 51, 142)" >
-                                        <span>#{etiqueta['Registro']}</span>
-                                    </a>
-                                </li>
+
+                            <li class="nav-item active">
+                                <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#" style="color: rgb(219, 129, 45)">#{etiqueta['Iniciosesion']}</a>
+                            </li>   
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#conocenos">#{etiqueta['Conocenos']}</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#contactanos">#{etiqueta['Contactanos']}</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="registro.xhtml" style="color:rgb(50, 51, 142)" >
+                                    <span>#{etiqueta['Registro']}</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <h:form class="nav-item active p-3">
@@ -72,7 +68,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <h:messages id="mensajeValidacion" style = "color:red;margin:8px;" /> 
+                                <h:messages id="mensajeValidacion" style = "color:red; margin:8px;" /> 
                                 <div class="form-group">
                                     <label for="inputDocumento">#{etiqueta['Documento']}</label>
                                     <h:inputText value="#{sesionUsuario.documento}" required="true" class="form-control" id="inputDocumento" requiredMessage="Ingrese un correo"  html5:placeholder="#{etiqueta['IngreseDoc']}" />
@@ -91,11 +87,38 @@
                                 <h:commandButton action="#{sesionUsuario.inicioSesion()}" value="#{etiqueta['Ingresar']}" class="btn" style="background-color: rgb(219, 129, 45); color: white"></h:commandButton>
                             </div>
                         </h:form>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-6">
+                                <br/>
+                                Perfil Administrador SIIM.<br/>
+                                <br/>
+                                Nombre:		Cristian Camilo	Méndez Rodríguez<br/>
+                                Documento:	10184119291<br/>
+                                Contraseña:	1234<br/>
+                                <br/>
+                                <br/>
+                                Perfil Gerente. <br/>
+                                <br/>
+                                Nombre:		Jose Daniel Bautista<br/>
+                                Documento:	1234567<br/>
+                                Contraseña:	1234<br/>
+                                <br/>
+                                <br/>
+                                Perfil Cliente.<br/>
+                                <br/>
+                                Nombre:		Maria Consuelo Bernal<br/>
+                                Documento:	51976794<br/>
+                                Contraseña:	1234			<br/>
+                                <br/>
+                                <br/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>                
 
-            
+
             <!--Header tipo carrusel-->
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="max-height: 400px">
                 <div class="carousel-inner">
@@ -270,7 +293,7 @@
                     </div>
                 </div>
             </section>
-          
+
         </div>
         <script type="text/javascript">
             function loginExitoso(a) {
