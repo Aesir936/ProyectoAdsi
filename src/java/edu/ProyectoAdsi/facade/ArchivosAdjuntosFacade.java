@@ -34,10 +34,10 @@ public class ArchivosAdjuntosFacade extends AbstractFacade<ArchivosAdjuntos> imp
      @Override
     public boolean insertarAdjunto(ArchivosAdjuntos nuevoArchivo){
         try {
-            Query insertAdj=em.createNativeQuery("insert into tbl_archivos_adjuntos (ruta,id_cotizacion) values (?,?)");
+            Query insertAdj=em.createNativeQuery("insert into tbl_archivos_adjuntos (ruta,id_cotizaciones) values (?,?)");
             
             insertAdj.setParameter(1, nuevoArchivo.getRuta());
-            insertAdj.setParameter(2, nuevoArchivo.getIdCotizacion().getIdCotizaciones());
+            insertAdj.setParameter(2, nuevoArchivo.getIdCotizaciones().getIdCotizaciones());
                  
             insertAdj.executeUpdate();
             return true;

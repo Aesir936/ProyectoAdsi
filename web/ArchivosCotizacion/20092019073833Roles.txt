@@ -1,3 +1,0 @@
-Gerente,Permisos administrativos
-Operario,Permisos limitados
-Cliente,Permisos restringidos

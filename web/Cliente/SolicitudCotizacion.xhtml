@@ -11,7 +11,7 @@
         <ui:composition template="./../Template/completeTemplate.xhtml">
 
             <ui:define name="left">
-                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
+                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142); height: 100%" >
 
                     <!-- Logo -->
                     <a class="d-flex align-items-center justify-content-center" href="index.html">                 
@@ -212,12 +212,14 @@
                                 
                             </div>
                         </div>
-
+                        <br></br>
+                        <br></br>
                         <div class="form-group col-md-8">
                             <label for="comment">Descripción del proyecto o pieza:</label>
                             <p:inputTextarea class="form-control" rows="3" id="comment" value="#{cotizacionSession.descripcion}" style="max-width: 25rem" required="true" requiredMessage="Por favor ingrese una descripción"/>
                         </div>
-                        <p>*Adjunte planos o fotos en formato pdf o jpg únicamente</p>
+                        <br></br>
+                        <p>*Adjunte planos, fotos o archivos que considere necesarios.</p>
 
                         <div class="custom-file col-md-3">
                             <h:inputFile class="custom-file-input" id="customFile" value="#{cotizacionSession.adjunto}"/>

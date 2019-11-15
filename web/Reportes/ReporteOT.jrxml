@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9730b94a-6fd7-4e07-aca8-e99b8385f980">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="documento" class="java.lang.String">
@@ -18,14 +18,14 @@
 FROM
      `tbl_usuarios` tbl_usuarios INNER JOIN `tbl_ordenes_de_trabajo` tbl_ordenes_de_trabajo ON tbl_usuarios.`id_usuarios` = tbl_ordenes_de_trabajo.`fk_id_cliente`
      INNER JOIN `tbl_estados_ordenes_de_trabajo` tbl_estados_ordenes_de_trabajo ON tbl_ordenes_de_trabajo.`fk_id_estado` = tbl_estados_ordenes_de_trabajo.`id_estados_ordenes_de_trabajo`
- where
-     tbl_usuarios.`documento`=$P{documento};]]>
+where
+tbl_usuarios.`documento`=$P{documento};]]>
 	</queryString>
 	<field name="tbl_usuarios_documento" class="java.lang.String"/>
 	<field name="tbl_usuarios_primer_nombre" class="java.lang.String"/>
 	<field name="tbl_usuarios_primer_apellido" class="java.lang.String"/>
 	<field name="tbl_ordenes_de_trabajo_id_ordenes_de_trabajo" class="java.lang.Integer"/>
-	<field name="tbl_ordenes_de_trabajo_fecha_vencimiento" class="java.lang.String"/>
+	<field name="tbl_ordenes_de_trabajo_fecha_vencimiento" class="java.sql.Date"/>
 	<field name="tbl_ordenes_de_trabajo_fecha_generacion" class="java.sql.Timestamp"/>
 	<field name="tbl_estados_ordenes_de_trabajo_nombre_estado_orden_de_trabajo" class="java.lang.String"/>
 	<background>
@@ -40,14 +40,14 @@ FROM
 				</textElement>
 				<text><![CDATA[REPORTE DE ORDENES DE TRABAJO]]></text>
 			</staticText>
-			<image>
-				<reportElement x="13" y="10" width="117" height="30" uuid="f4a76acf-81d6-4d59-9659-17a291063752"/>
-				<imageExpression><![CDATA["C:\\Users\\Aesir936\\Documents\\NetBeansProjects\\ProyectoAdsi\\web\\img\\Logo DYM largo.png"]]></imageExpression>
-			</image>
 			<textField pattern="MMMMM dd, yyyy">
 				<reportElement x="443" y="10" width="100" height="20" uuid="580a6987-2b14-4424-94d8-b2e3eb600033"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="0" y="0" width="143" height="42" uuid="0fc34eb1-8262-465d-9528-c97e514ef267"/>
+				<imageExpression><![CDATA["C:\\Andres\\sena\\FASE IV A\\DESARROLLO WEB\\proyectoAdsi\\web\\img\\Logo DYM largo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -55,13 +55,6 @@ FROM
 	</pageHeader>
 	<columnHeader>
 		<band height="22" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="2" width="61" height="20" uuid="9315010e-8c11-4cb2-8a14-3eaa78571832"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[# OT]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="61" y="2" width="82" height="20" uuid="c226ead3-f6eb-47d9-8cfa-a78ff099a67d"/>
 				<textElement>
@@ -103,6 +96,13 @@ FROM
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="61" height="20" uuid="9315010e-8c11-4cb2-8a14-3eaa78571832"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[# OT]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

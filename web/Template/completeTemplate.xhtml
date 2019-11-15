@@ -109,6 +109,12 @@
                 }, false);
             })();
         </script>
+        <script>
+            function validarSiNumero(numero){
+            if (!/^([0-9])*$/.test(numero))
+            estadoBad("El valor " + numero + " no es un número");
+  }
+        </script>
     </h:body>
 
 </html>

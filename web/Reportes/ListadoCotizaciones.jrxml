@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cotizaciones" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="814b542c-4d48-4c06-9c41-4a6ce51e6958">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_estados_cotizaciones.`nombre_estado_cotizacion` AS tbl_estados_cotizaciones_nombre_estado_cotizacion,
+     tbl_cotizaciones.`fecha_cotizaciones` AS tbl_cotizaciones_fecha_cotizaciones,
+     tbl_cotizaciones.`fecha_entrega` AS tbl_cotizaciones_fecha_entrega,
+     tbl_cotizaciones.`cantidad_piezas` AS tbl_cotizaciones_cantidad_piezas,
+     tbl_usuarios.`documento` AS tbl_usuarios_documento,
+     tbl_usuarios.`primer_nombre` AS tbl_usuarios_primer_nombre,
+     tbl_usuarios.`primer_apellido` AS tbl_usuarios_primer_apellido,
+     tbl_usuarios.`correo` AS tbl_usuarios_correo,
+     tbl_usuarios.`telefono` AS tbl_usuarios_telefono,
+     tbl_cotizaciones.`valor_total` AS tbl_cotizaciones_valor_total
+FROM
+     `tbl_estados_cotizaciones` tbl_estados_cotizaciones INNER JOIN `tbl_cotizaciones` tbl_cotizaciones ON tbl_estados_cotizaciones.`id_estado_cotizacion` = tbl_cotizaciones.`id_estado_cotizacion`
+     INNER JOIN `tbl_usuarios` tbl_usuarios ON tbl_cotizaciones.`fk_id_cliente` = tbl_usuarios.`id_usuarios`]]>
+	</queryString>
+	<field name="tbl_estados_cotizaciones_nombre_estado_cotizacion" class="java.lang.String"/>
+	<field name="tbl_cotizaciones_fecha_cotizaciones" class="java.sql.Timestamp"/>
+	<field name="tbl_cotizaciones_fecha_entrega" class="java.sql.Date"/>
+	<field name="tbl_cotizaciones_cantidad_piezas" class="java.lang.String"/>
+	<field name="tbl_usuarios_documento" class="java.lang.String"/>
+	<field name="tbl_usuarios_primer_nombre" class="java.lang.String"/>
+	<field name="tbl_usuarios_primer_apellido" class="java.lang.String"/>
+	<field name="tbl_usuarios_correo" class="java.lang.String"/>
+	<field name="tbl_usuarios_telefono" class="java.lang.String"/>
+	<field name="tbl_cotizaciones_valor_total" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="122" splitType="Stretch">
+			<staticText>
+				<reportElement x="233" y="61" width="146" height="34" uuid="8b6e66d0-ffd8-451c-8fa6-8b6ef2dd35bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Cotizaciones]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="461" y="13" width="100" height="20" uuid="608046f5-c7d5-4704-a98b-2487719b0660"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="12" y="0" width="161" height="23" uuid="aaba7a35-262c-444f-8b8b-688bf311555a"/>
+				<imageExpression><![CDATA["C:\\Andres\\sena\\FASE IV A\\DESARROLLO WEB\\proyectoAdsi\\web\\img\\Logo DYM largo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="67" height="20" uuid="d53ea3ee-d265-4608-9827-c26511ea8788"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="67" y="0" width="70" height="20" uuid="10472baf-1b5f-4f39-9533-4f586d22bc78"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="0" width="58" height="20" uuid="5ccc4c72-3c6a-4fd9-9976-291acadf8ac0"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="0" width="65" height="20" uuid="7041eac1-3067-4f28-8376-3288a9c9440c"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="262" y="0" width="66" height="20" uuid="3d7e3fa5-4307-402a-8905-4a41fb970e6a"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Piezas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="328" y="0" width="100" height="20" uuid="5bcae4e3-6aef-49dc-8157-62a242771837"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha reg. cot.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="0" width="76" height="20" uuid="38ae0235-3656-419a-85ee-31cc6a6c0926"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[F. Entrega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="0" width="68" height="20" uuid="7c0bbba9-51e2-4eec-b7fc-f27ea2023358"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="67" height="20" uuid="f2cb27f5-810f-473e-97df-ca1f53cd3d60"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbl_usuarios_documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="0" width="70" height="20" uuid="0b74ebbf-3b0f-4370-9887-a694a2ad0835"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbl_usuarios_primer_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="0" width="60" height="20" uuid="bcc7f967-a9d0-453f-b79e-b6ca8ff258fb"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbl_usuarios_primer_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="197" y="0" width="65" height="20" uuid="94b031ad-b339-4f17-bf84-19352a8a276a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbl_usuarios_telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="0" width="66" height="20" uuid="63ab541a-3605-48ac-8d3b-84cb6b2795bc"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbl_cotizaciones_cantidad_piezas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="0" width="100" height="20" uuid="988c4ea7-ef0a-4046-8d3d-548c57f94bc9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbl_cotizaciones_fecha_cotizaciones}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="428" y="0" width="76" height="20" uuid="5423817a-3c6e-4ecd-951f-7681ebe04a64"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbl_cotizaciones_fecha_entrega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="504" y="0" width="68" height="20" uuid="211edadb-6950-43d2-b916-6dcad493ee20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbl_estados_cotizaciones_nombre_estado_cotizacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="521" y="28" width="40" height="20" uuid="4acb160e-70e5-43f2-80dd-1c186bd0fdb3"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="28" width="80" height="20" uuid="b7895976-7e6b-4cc7-a511-3b2e0f09a66c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="32" splitType="Stretch"/>
+	</summary>
+</jasperReport>

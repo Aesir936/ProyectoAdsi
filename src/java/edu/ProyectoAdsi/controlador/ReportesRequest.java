@@ -33,7 +33,7 @@ public class ReportesRequest {
     }
     
     private String documento;
-    
+        
      public String getDocumento() {
         return documento;
     }
@@ -43,12 +43,13 @@ public class ReportesRequest {
     }
     
     
+    
     public  void  imprimirPdf() throws ClassNotFoundException, SQLException{
     
     try {
             FacesContext fc = FacesContext.getCurrentInstance();
             ExternalContext ec = fc.getExternalContext();
-            File jasper = new File(ec.getRealPath("/Reportes/Cotizaciones.jasper"));
+            File jasper = new File(ec.getRealPath("/Reportes/ListadoCotizaciones.jasper"));
              Map<String, Object> params = new HashMap<>();
 //            params.put("logo", ec.getRealPath("/resources/img/user-perfil.png"));
             Class.forName("com.mysql.jdbc.Driver");
@@ -94,5 +95,32 @@ public class ReportesRequest {
         } catch (IOException ex) {
             ex.printStackTrace();
         }    
+    }  
+
+     public  void  generarCotizacion(int idCotizacion) throws ClassNotFoundException, SQLException{
+    
+    try {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            ExternalContext ec = fc.getExternalContext();
+            File jasper = new File(ec.getRealPath("/Reportes/Cotizaciones.jasper"));
+             Map<String, Object> params = new HashMap<>();
+            params.put("IdCotizacion", idCotizacion);
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/db_siim", "root", "123456");
+               JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), params, conexion);
+            HttpServletResponse hsr = (HttpServletResponse) ec.getResponse();
+            hsr.addHeader("Content-disposition", "attachment; filename=Reporte individual de ordenes de trabajo "+idCotizacion+".pdf");
+            ServletOutputStream os = hsr.getOutputStream();
+            JasperExportManager.exportReportToPdfStream(jp, os);
+            os.flush();
+            os.close();
+            fc.responseComplete();
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }    
     }      
+
+    
 }

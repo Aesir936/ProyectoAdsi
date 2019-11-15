@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Aesir936
+ * @author bxs42
  */
 @Entity
 @Table(name = "tbl_archivos_adjuntos")
@@ -41,9 +41,9 @@ public class ArchivosAdjuntos implements Serializable {
     @Size(max = 100)
     @Column(name = "ruta")
     private String ruta;
-    @JoinColumn(name = "id_cotizacion", referencedColumnName = "id_cotizaciones")
+    @JoinColumn(name = "id_cotizaciones", referencedColumnName = "id_cotizaciones")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Cotizaciones idCotizacion;
+    private Cotizaciones idCotizaciones;
     @JoinColumn(name = "id_orden_trabajo", referencedColumnName = "id_ordenes_de_trabajo")
     @ManyToOne(fetch = FetchType.LAZY)
     private OrdenesDeTrabajo idOrdenTrabajo;
@@ -71,12 +71,12 @@ public class ArchivosAdjuntos implements Serializable {
         this.ruta = ruta;
     }
 
-    public Cotizaciones getIdCotizacion() {
-        return idCotizacion;
+    public Cotizaciones getIdCotizaciones() {
+        return idCotizaciones;
     }
 
-    public void setIdCotizacion(Cotizaciones idCotizacion) {
-        this.idCotizacion = idCotizacion;
+    public void setIdCotizaciones(Cotizaciones idCotizaciones) {
+        this.idCotizaciones = idCotizaciones;
     }
 
     public OrdenesDeTrabajo getIdOrdenTrabajo() {

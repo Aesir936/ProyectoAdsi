@@ -61,7 +61,7 @@
             </ui:define>
 
             <ui:define name="left">
-                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
+                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142); height: 100%" >
 
                     <!-- Logo -->
                     <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
@@ -320,7 +320,7 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <h:messages id="mensajeValidacion" style = "color:red; margin:8px;" /> 
+<!--                                                                            <h:messages id="mensajeValidacion" style = "color:red; margin:8px;" /> -->
                                                                             <div class="form-group">
                                                                                 <h4 class="text-center" style="color: rgb(219, 129, 45)">Datos de la solicitud</h4>
                                                                                 <div class="row text-center">
@@ -361,20 +361,22 @@
                                                                                 <div class="row">
                                                                                     <div class="col-6">
                                                                                         <label for="inputPrecioUnitario" style="padding-right: 15%">Precio unitario</label>
-                                                                                        <h:inputText value="#{cotizacionSession.preciounitario}" required="true" class="form-control" id="inputPrecioUnitario" requiredMessage="Ingrese el precio por unidad"  html5:placeholder="" />
+                                                                                        <h:inputText value="#{cotizacionSession.precioUnitario}" html5:onChange="validarSiNumero(this.value)" required="true" class="form-control" id="inputPrecioUnitario" html5:placeholder="" />
                                                                                     </div>
                                                                                     <div class="col-6">
                                                                                         <label for="inputPrecioTotal">Precio Total</label>
-                                                                                        <h:inputText  required="true" class="form-control" id="inputPrecioTotal" requiredMessage="Ingrese el precio por total" />
+                                                                                        <h:inputText required="true" class="form-control" id="inputPrecioTotal" value="#{cotizacionSession.precioTotal}" html5:onChange="validarSiNumero(this.value)"/>
                                                                                     </div>
                                                                                 </div>
-                                                                                <!--                                                                                <div class="row">
-                                                                                                                                                                    <h:inputTextarea class="form-control" requiredMessage="Ingrese el precio por total" required="true"></h:inputTextarea>
-                                                                                                                                                                </div>-->
+                                                                                <br></br>
+                                                                                <div class="row">
+                                                                                    <label for="comentarios" style="margin-left: 5%">Comentarios</label>
+                                                                                    <h:inputTextarea id="comentarios" class="form-control" rows="3" style="margin:0 5%" value="#{cotizacionSession.comentarios}"></h:inputTextarea>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer" style="justify-content: center">
-                                                                            <h:commandButton action="#{cotizacionSession.setIdCot(idCot)}" value="Generar cotización" class="btn" style="background-color: rgb(219, 129, 45); color: white"></h:commandButton>
+                                                                            <h:commandButton action="#{cotizacionSession.generarCotizacion(cot.idCotizaciones)}" value="Generar cotización" class="btn" style="background-color: rgb(219,129, 45); color: white"></h:commandButton>
                                                                         </div>
                                                                     </h:form>
                                                                 </div>

@@ -33,5 +33,9 @@ public interface CotizacionesFacadeLocal {
     public boolean crearCotizacion(Cotizaciones newCot);
 
     public List<Cotizaciones> filtrarCotizaciones(int idCliente, int estadoCot);
+
+    public boolean generarCotizacion(Cotizaciones cotGenerada);
+
+    
     
 }

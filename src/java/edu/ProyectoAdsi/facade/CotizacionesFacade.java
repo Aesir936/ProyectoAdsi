@@ -42,9 +42,7 @@ public class CotizacionesFacade extends AbstractFacade<Cotizaciones> implements 
         } catch (Exception e) {
             return false;
         }
-    }
-    
-    
+    }  
     
     @Override
     public List<Cotizaciones> filtrarCotizaciones(int idCliente, int estadoCot) {
@@ -70,5 +68,22 @@ public class CotizacionesFacade extends AbstractFacade<Cotizaciones> implements 
             return null;
         }
     }
+    
+     @Override
+    public boolean generarCotizacion(Cotizaciones cotGenerada) {
+        try {
+            Query updateCot = em.createNativeQuery("UPDATE tbl_cotizaciones SET valor_unitario = ?1, valor_total = ?2, comentarios = ?3, id_estado_cotizacion = 2 WHERE id_cotizaciones  =?4");
 
+            updateCot.setParameter(1,cotGenerada.getValorUnitario());
+            updateCot.setParameter(2,cotGenerada.getValorTotal());
+            updateCot.setParameter(3,cotGenerada.getComentarios());
+            updateCot.setParameter(4,cotGenerada.getIdCotizaciones());
+            
+            updateCot.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

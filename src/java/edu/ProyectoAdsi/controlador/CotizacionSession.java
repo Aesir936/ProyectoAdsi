@@ -43,6 +43,8 @@ public class CotizacionSession implements Serializable {
     UsuariosFacadeLocal usuariosFacadeLocal;
     @Inject
     SesionUsuario sesionUsuario;
+    @Inject
+    ReportesRequest reportesRequest;
 
     public CotizacionSession() {
     }
@@ -52,10 +54,12 @@ public class CotizacionSession implements Serializable {
     private String descripcion;
     private Part adjunto;
     private Cotizaciones idCot;
-    private final String folder = "C:\\Users\\Aesir936\\Documents\\NetBeansProjects\\ProyectoAdsi\\web\\ArchivosCotizacion";
+    private final String folder = "C:\\Andres\\sena\\FASE IV A\\DESARROLLO WEB\\proyectoAdsi\\web\\ArchivosCotizacion";
     private String docCliente;
     private int estadoCot;
-    private int preciounitario;
+    private int precioUnitario;
+    private int precioTotal;
+    private String comentarios ; 
     public String getFechaEntrega() {
         return fechaEntrega;
     }
@@ -111,14 +115,31 @@ public class CotizacionSession implements Serializable {
     public void setEstadoCot(int estadoCot) {
         this.estadoCot = estadoCot;
     }
-
-    public int getPreciounitario() {
-        return preciounitario;
+    
+    public int getPrecioUnitario() {
+        return precioUnitario;
     }
 
-    public void setPreciounitario(int preciounitario) {
-        this.preciounitario = preciounitario;
+    public void setPrecioUnitario(int precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
+
+    public int getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(int precioTotal) {
+        this.precioTotal = precioTotal;
+    }
+
+    public String getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
+    
 
 
 //    Método para guardar los archivos adjuntos ed las cotizaciones
@@ -132,8 +153,8 @@ public class CotizacionSession implements Serializable {
 
             ArchivosAdjuntos objAdjunto = new ArchivosAdjuntos();
 
-            objAdjunto.setRuta("archivosCotizacion/" + fileName);
-            objAdjunto.setIdCotizacion(idCot);
+            objAdjunto.setRuta("ArchivosCotizacion/" + fileName);
+            objAdjunto.setIdCotizaciones(idCot);
 
             archivosAdjuntosFacadeLocal.insertarAdjunto(objAdjunto);
 
@@ -173,6 +194,7 @@ public class CotizacionSession implements Serializable {
             if (insertCoti == true) {
                 List<Cotizaciones> listaCoti = cotizacionesFacadeLocal.findAll();
                 this.idCot = listaCoti.stream().max(comparing(Cotizaciones::getIdCotizaciones)).get();
+                guardarArchivo();
                 PrimeFaces.current().executeScript("estadoOk('Su solicitud de cotización se ha registrado con exito')");
 
             } else {
@@ -195,5 +217,33 @@ public class CotizacionSession implements Serializable {
     public List<Cotizaciones> filtrarCotizaciones() {
         int idCliente = usuariosFacadeLocal.consultarId(docCliente);
         return cotizacionesFacadeLocal.filtrarCotizaciones(idCliente,estadoCot);
+    }
+
+    public String generarCotizacion(int idCotizacion){
+        
+        try {
+            Cotizaciones cotGenerada = new Cotizaciones();
+            cotGenerada.setValorUnitario(precioUnitario);
+            cotGenerada.setValorTotal(precioTotal);
+            cotGenerada.setComentarios(comentarios);
+            cotGenerada.setIdCotizaciones(idCotizacion);
+            boolean updateCoti = cotizacionesFacadeLocal.generarCotizacion(cotGenerada);
+                
+            
+            if(updateCoti == true){
+            PrimeFaces.current().executeScript("estadoOk('La cotización se ha generado con exito')");
+            
+                if(updateCoti == true){                
+                reportesRequest.generarCotizacion(idCotizacion);
+                }            
+            }else{
+            PrimeFaces.current().executeScript("estadoOk('La cotización no ha sido generada')");
+            }
+        }
+         catch (Exception e) {
+            PrimeFaces.current().executeScript("estadoBad('Algo ha salido mal... intentalo nuevamente')");
+            return "";
+        }
+        return null;       
     }
 }

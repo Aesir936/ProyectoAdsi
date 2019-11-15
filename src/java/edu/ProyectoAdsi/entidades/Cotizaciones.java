@@ -6,10 +6,8 @@
 package edu.ProyectoAdsi.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,18 +18,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Aesir936
+ * @author bxs42
  */
 @Entity
 @Table(name = "tbl_cotizaciones")
@@ -57,25 +53,24 @@ public class Cotizaciones implements Serializable {
     @Column(name = "detalle")
     private String detalle;
     @Column(name = "fecha_entrega")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEntrega;
     @Size(max = 10)
     @Column(name = "cantidad_piezas")
     private String cantidadPiezas;
-    @Size(max = 10)
     @Column(name = "valor_unitario")
-    private String valorUnitario;
-    @Size(max = 10)
+    private Integer valorUnitario;
     @Column(name = "valor_total")
-    private String valorTotal;
+    private Integer valorTotal;
+    @Size(max = 500)
+    @Column(name = "comentarios")
+    private String comentarios;
     @JoinColumn(name = "id_estado_cotizacion", referencedColumnName = "id_estado_cotizacion")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EstadosCotizaciones idEstadoCotizacion;
     @JoinColumn(name = "fk_id_cliente", referencedColumnName = "id_usuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuarios fkIdCliente;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCotizacion", fetch = FetchType.LAZY)
-    private Collection<ArchivosAdjuntos> archivosAdjuntosCollection;
 
     public Cotizaciones() {
     }
@@ -130,20 +125,28 @@ public class Cotizaciones implements Serializable {
         this.cantidadPiezas = cantidadPiezas;
     }
 
-    public String getValorUnitario() {
+    public Integer getValorUnitario() {
         return valorUnitario;
     }
 
-    public void setValorUnitario(String valorUnitario) {
+    public void setValorUnitario(Integer valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 
-    public String getValorTotal() {
+    public Integer getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(String valorTotal) {
+    public void setValorTotal(Integer valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public String getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
     }
 
     public EstadosCotizaciones getIdEstadoCotizacion() {
@@ -160,15 +163,6 @@ public class Cotizaciones implements Serializable {
 
     public void setFkIdCliente(Usuarios fkIdCliente) {
         this.fkIdCliente = fkIdCliente;
-    }
-
-    @XmlTransient
-    public Collection<ArchivosAdjuntos> getArchivosAdjuntosCollection() {
-        return archivosAdjuntosCollection;
-    }
-
-    public void setArchivosAdjuntosCollection(Collection<ArchivosAdjuntos> archivosAdjuntosCollection) {
-        this.archivosAdjuntosCollection = archivosAdjuntosCollection;
     }
 
     @Override

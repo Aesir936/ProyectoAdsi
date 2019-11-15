@@ -1,5 +1,0 @@
-2,1013156094,Danna,Gabriela,Mendez,Chitiva,Avianca,80947437453-3,0@0.com,3132918204,1234,Mosquera,Activo,1,2
-1,52976798,María,Consuelo,Chitiva,Bernal,Itau,809487453-2,0@0.com,3132918203,1234,Mosquera,Activo,1,1
-1,1018411929,Cristian,Camilo,Méndez,Rodríguez,SIIM,1018411929-7,ccmendez92@misena.edu.co,3112962035,1234,Mosquera,Activo,1,1
-2,802324434,Andres,Johan,Vanegas,García,SIIM,809067663-3,0@0.com,3133434345,1234,Mosquera,Activo,1
-1,51833234,Myriam, ,Rodriguez,Ramirez,Hogar,123245,mrodriguez@hotmail.com,3012655897,1234,Cr 101 a,Activo,1
