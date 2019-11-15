@@ -247,3 +247,7 @@ public class CotizacionSession implements Serializable {
         return null;       
     }
 }
+
+public void listarDocumeto(){
+
+}
