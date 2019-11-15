@@ -197,3 +197,7 @@ public class CotizacionSession implements Serializable {
         return cotizacionesFacadeLocal.filtrarCotizaciones(idCliente,estadoCot);
     }
 }
+
+public void listarDocumeto(){
+
+}
