@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Aesir936
+ * @author bxs42
  */
 @Entity
 @Table(name = "tbl_ciudades")
@@ -32,15 +32,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ciudades.findAll", query = "SELECT c FROM Ciudades c")})
 public class Ciudades implements Serializable {
 
+    @Size(max = 45)
+    @Column(name = "nombre_ciudad")
+    private String nombreCiudad;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_ciudad")
     private Integer idCiudad;
-    @Size(max = 45)
-    @Column(name = "nombre_ciudad")
-    private String nombreCiudad;
     @OneToMany(mappedBy = "fkCiudad", fetch = FetchType.LAZY)
     private Collection<Usuarios> usuariosCollection;
 
@@ -100,5 +101,6 @@ public class Ciudades implements Serializable {
     public String toString() {
         return "edu.ProyectoAdsi.entidades.Ciudades[ idCiudad=" + idCiudad + " ]";
     }
-    
+
+        
 }

@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Template/completeTemplate.xhtml">
+
+            <ui:define name="left">
+                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142); height: 100%" >
+
+                    <!-- Logo -->
+                    <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
+                        <div>
+                            <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
+                        </div>
+                    </a>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider my-0"/>
+
+                    <!-- Tablero principal -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.xhtml">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Tablero principal</span></a>
+                    </li>
+                    <!-- División -->
+                    <hr class="sidebar-divider d-none d-md-block"></hr>
+                    <!-- Cabecera de sección -->
+                    <div class="sidebar-heading">
+                        Administración
+                    </div>
+                    <!-- Menú Cotizaciones -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuotations" aria-expanded="true" aria-controls="collapseQuotations">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Cotizaciones</span>
+                        </a>
+                        <div id="collapseQuotations" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <!--                                <h6 class="collapse-header">Páginas de inicio:</h6>-->
+
+                                <a class="collapse-item" href="ListadoCotizaciones.xhtml">Listado de cotizaciones</a>
+
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Menú ordenes de Trabajo -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorkorder" aria-expanded="true" aria-controls="collapseWorkorder">
+                            <i class="fad fa-user-hard-hat"></i>                            <span>Ordenes de Trabajo</span>
+                        </a>
+                        <div id="collapseWorkorder" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <!--                                <h6 class="collapse-header">Páginas de inicio:</h6>-->
+                                <a class="collapse-item" href="registrarOT.xhtml">Crear orden de trabajo</a>
+                                <a class="collapse-item" href="listadoOT's.xhtml">Consultar O.T.'s</a>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin_usu.xhtml">
+                            <i class="fas fa-id-badge"></i>
+                            <span>Gestión de usuarios</span></a>
+                    </li>
+                    <!-- Informes -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="Graficas.xhtml">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Gráficos estadísticos</span></a>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!-- Cabecera -->
+                    <div class="sidebar-heading">
+                        Interfaz
+                    </div>
+                    <!-- Buzón -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="enConstruccion.xhtml">
+                            <i class="fas fa-inbox"></i>
+                            <span>Revisar buzón de sugerencias</span></a>
+                    </li>
+                    <!-- Menú de configuración de perfil -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Configuración de perfil</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Editar perfil:</h6>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Cambiar imágen</a>
+                                <a class="collapse-item" href="editarDatosUsuario.xhtml">
+                                    <span style="font-size: 1em">Editar datos personales</span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!--Cabecera -->
+                    <div class="sidebar-heading">
+                        Enlaces
+                    </div>
+
+                    <!-- Menú páginas -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Otras páginas</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Páginas de inicio:</h6>
+                                <a class="collapse-item" href="../index.xhtml">Inicio de sesión</a>
+                                <a class="collapse-item" href="../registro.xhtml">Registro</a>
+                                <a class="collapse-item" href="enConstruccion.xhtml">Olvido de contraseña</a>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Menú utilerías  -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            <span>Utilerías</span>
+                        </a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Descargar utilerías:</h6>
+                                <a class="collapse-item" href="">Winrar</a>
+                                <a class="collapse-item" href="">Adobe acrobat</a>
+                                <a class="collapse-item" href="">Otros...</a>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                </ul>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:body>
+                    <!--Registrate-->
+                    <section style="background:#f2f2f2">
+                        <div class="container py-5">
+                            <h1 style="color: rgb(219, 129, 45); font-size: 2em; text-align: center">Registro de Operarios</h1>
+                            <hr/>                  
+                            <h:form>
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3"></div>
+                                    <div class="col-md-3 mb-3">
+                                        <h:outputLabel for=""> Tipo de Documento </h:outputLabel>
+                                        <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.tipoDocumento}" >
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione tipo de documento"></f:selectItem>
+                                            <f:selectItem itemValue="1" itemLabel="CC"></f:selectItem>
+                                            <f:selectItem itemValue="2" itemLabel="TI"></f:selectItem>
+                                            <f:selectItem itemValue="3" itemLabel="Otro"></f:selectItem>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <h:outputLabel for=""> Número de documento </h:outputLabel>
+                                        <h:inputText value="#{sesionUsuario.documento}" class="form-control" html5:required="true"/>
+                                    </div>                           
+                                </div>                 
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3"></div>
+                                    <div class="col-md-3 mb-3">
+                                        <h:outputLabel for="">Primer Nombre</h:outputLabel>
+                                        <h:inputText value="#{sesionUsuario.primerNombre}" class="form-control" html5:required="true"/>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <h:outputLabel for="">Segundo Nombre</h:outputLabel>
+                                        <h:inputText value="#{sesionUsuario.segundoNombre}" class="form-control" />
+                                    </div>                       
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3"></div>
+                                    <div class="col-md-3 mb-3">
+                                        <h:outputLabel for="">Primer Apellido</h:outputLabel>
+                                        <h:inputText value="#{sesionUsuario.primerApellido}" class="form-control" html5:required="true"/>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <h:outputLabel for="">Segundo Apellido</h:outputLabel>
+                                        <h:inputText value="#{sesionUsuario.segundoApellido}" class="form-control" />                         
+                                    </div>
+                                </div>                    
+
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3"></div>
+                                    <div class="col-md-3 mb-3">
+                                        <h:outputLabel for="btnRegistro">Correo electrónico</h:outputLabel>                                                       
+                                        <h:inputText value="#{sesionUsuario.correo}" class="form-control" html5:required="true"/>                          
+                                    </div>                                                
+                                    <div class="col-md-3 mb-3">
+                                        <h:outputLabel for="">Telefono</h:outputLabel>
+                                        <h:inputText value="#{sesionUsuario.telefono}" class="form-control" html5:required="true"/>
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3"></div>
+                                    <div class="col-md-3 mb-3">
+                                        <h:outputLabel for="">Direccion</h:outputLabel>
+                                        <h:inputText value="#{sesionUsuario.direccion}" class="form-control" html5:required="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3"></div>
+                                    <div class="col-md-4 mb-3" style="justify-content: center" >
+                                        <h:outputLabel for="">Contraseña</h:outputLabel>
+                                        <h:inputText value="#{sesionUsuario.contraseña}" html5:type="password" class="form-control" html5:required="true"/>
+                                    </div>                         
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3"></div>
+                                    <div class="col-md-4 mb-3">
+                                        <h:outputLabel onclick="registroExitoso('asadfgh')" for="">Confirmar Contraseña</h:outputLabel>
+                                        <h:inputText value="#{sesionUsuario.confirmarContraseña}" html5:type="password" class="form-control" html5:required="true"/>
+                                    </div>
+                                </div>
+
+                                <br></br>
+                                <br></br>
+                                <div class="form-row">
+                                    <div class="col-md-5 mb-3"></div>
+                                    <div class="col-md-3 mb-3">
+                                        <h:commandButton action="#{sesionUsuario.registrarOperario()}" class="btn btn-success" style="background-color: rgb(50, 51, 142); border: none" value="Registrarse" ></h:commandButton>
+                                        <a href="index.xhtml" class="btn btn-dark">Cancelar</a>
+                                    </div>
+                                </div>
+                            </h:form>  
+                        </div>
+                    </section>
+                    <script type="text/javascript">
+                        function registroExitoso(a) {
+                            Swal.fire(
+                                    'Registro OK !',
+                                    a,
+                                    'success'
+                                    );
+                        }
+                    </script>
+                    <script type="text/javascript">
+                        function registroFallido(a) {
+                            Swal.fire(
+                                    'Oops...',
+                                    a,
+                                    'error'
+                                    );
+                        }
+                    </script>
+
+                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                </h:body>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

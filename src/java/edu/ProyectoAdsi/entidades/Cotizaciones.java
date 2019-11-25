@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package edu.ProyectoAdsi.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,12 +16,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -71,6 +71,8 @@ public class Cotizaciones implements Serializable {
     @JoinColumn(name = "fk_id_cliente", referencedColumnName = "id_usuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuarios fkIdCliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCotizaciones", fetch = FetchType.LAZY)
+    private Collection<ArchivosAdjuntos> archivosAdjuntosCollection;
 
     public Cotizaciones() {
     }
@@ -163,6 +165,15 @@ public class Cotizaciones implements Serializable {
 
     public void setFkIdCliente(Usuarios fkIdCliente) {
         this.fkIdCliente = fkIdCliente;
+    }
+
+    @XmlTransient
+    public Collection<ArchivosAdjuntos> getArchivosAdjuntosCollection() {
+        return archivosAdjuntosCollection;
+    }
+
+    public void setArchivosAdjuntosCollection(Collection<ArchivosAdjuntos> archivosAdjuntosCollection) {
+        this.archivosAdjuntosCollection = archivosAdjuntosCollection;
     }
 
     @Override

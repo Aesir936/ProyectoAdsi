@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
-;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
@@ -248,6 +247,4 @@ public class CotizacionSession implements Serializable {
     }
 }
 
-public void listarDocumeto(){
 
-}

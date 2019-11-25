@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Aesir936
+ * @author bxs42
  */
 @Entity
 @Table(name = "tbl_bolsas_de_tiempo")
@@ -46,17 +46,13 @@ public class BolsasDeTiempo implements Serializable {
     @Column(name = "fecha_activacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActivacion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "valor_hora")
-    private int valorHora;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "cantidad_horas")
-    private int cantidadHoras;
-    @JoinColumn(name = "fk_id_cliente", referencedColumnName = "id_usuarios")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Usuarios fkIdCliente;
+    @Column(name = "ultima_compra")
+    private Integer ultimaCompra;
+    @Column(name = "horas_restantes")
+    private Integer horasRestantes;
+    @JoinColumn(name = "fk_id_usuario", referencedColumnName = "id_usuarios")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Usuarios fkIdUsuario;
 
     public BolsasDeTiempo() {
     }
@@ -65,11 +61,9 @@ public class BolsasDeTiempo implements Serializable {
         this.idBolsasDeTiempo = idBolsasDeTiempo;
     }
 
-    public BolsasDeTiempo(Integer idBolsasDeTiempo, Date fechaActivacion, int valorHora, int cantidadHoras) {
+    public BolsasDeTiempo(Integer idBolsasDeTiempo, Date fechaActivacion) {
         this.idBolsasDeTiempo = idBolsasDeTiempo;
         this.fechaActivacion = fechaActivacion;
-        this.valorHora = valorHora;
-        this.cantidadHoras = cantidadHoras;
     }
 
     public Integer getIdBolsasDeTiempo() {
@@ -88,28 +82,28 @@ public class BolsasDeTiempo implements Serializable {
         this.fechaActivacion = fechaActivacion;
     }
 
-    public int getValorHora() {
-        return valorHora;
+    public Integer getUltimaCompra() {
+        return ultimaCompra;
     }
 
-    public void setValorHora(int valorHora) {
-        this.valorHora = valorHora;
+    public void setUltimaCompra(Integer ultimaCompra) {
+        this.ultimaCompra = ultimaCompra;
     }
 
-    public int getCantidadHoras() {
-        return cantidadHoras;
+    public Integer getHorasRestantes() {
+        return horasRestantes;
     }
 
-    public void setCantidadHoras(int cantidadHoras) {
-        this.cantidadHoras = cantidadHoras;
+    public void setHorasRestantes(Integer horasRestantes) {
+        this.horasRestantes = horasRestantes;
     }
 
-    public Usuarios getFkIdCliente() {
-        return fkIdCliente;
+    public Usuarios getFkIdUsuario() {
+        return fkIdUsuario;
     }
 
-    public void setFkIdCliente(Usuarios fkIdCliente) {
-        this.fkIdCliente = fkIdCliente;
+    public void setFkIdUsuario(Usuarios fkIdUsuario) {
+        this.fkIdUsuario = fkIdUsuario;
     }
 
     @Override

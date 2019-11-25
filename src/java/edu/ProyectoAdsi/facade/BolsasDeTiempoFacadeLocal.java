@@ -29,5 +29,11 @@ public interface BolsasDeTiempoFacadeLocal {
     List<BolsasDeTiempo> findRange(int[] range);
 
     int count();
+
+    public boolean generarBolsa(int idCliente);
+
+    public List<BolsasDeTiempo> consultarBolsas(int idCliente);
+
+    public boolean recargarBolsa(int idCliente, int horasRestantes);
     
 }

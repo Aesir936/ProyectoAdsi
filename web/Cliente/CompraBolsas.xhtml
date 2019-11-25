@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -39,14 +39,14 @@
                             <i class="fas fa-file-invoice-dollar"></i>
                             <span>Solicitud de cotización</span></a>
                     </li>
-                    
+
                     <!--Compra de Bolsas-->
                     <li class="nav-item">
                         <a class="nav-link" href="CompraBolsas.xhtml">
                             <i class="fas fa-file-invoice-dollar"></i>
                             <span>Solicitar Bolsa de Tiempo</span></a>
                     </li>
-                    
+
                     <!-- División -->
                     <hr class="sidebar-divider d-none d-md-block"></hr>
 
@@ -96,7 +96,7 @@
                                 <h6 class="collapse-header">Páginas de inicio:</h6>
                                 <a class="collapse-item" href="login.html">Inicio</a>
                                 <a class="collapse-item" href="../recuperarContrasena.xhtml">Olvido de contraseña</a>
-                               
+
                             </div>
                         </div>
                     </li>
@@ -122,109 +122,73 @@
                 </ul>
             </ui:define>
 
+            <ui:define name="content">
 
-
-            <ui:define name="top">
-                <nav id="navegacion" class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Boton para desplegar busqueda en pantallas pequeñas -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw" style="color: #000"></i>
-                            </a>
-                            <!-- Desplegable de busqueda para pantallas pequeñas -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar" aria-label="Search" aria-describedby="basic-addon2"/>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm" style="color: #000"></i>
-                                            </button>
+                <div class="container py-2">
+                    <h3 class="m-0 font-weight-bold text-primary" style="text-align: center">Mi Bolsa</h3>
+                    <c:forEach items="#{compraBolsasession.consultarBolsa()}" var="cot" varStatus="paso">
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <span>#{cot.fechaActivacion}</span><br></br>
+                                                <span>#{cot.horasRestantes}</span><br></br>
+                                                <span>#{cot.ultimaCompra}</span><br></br>                                                
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-file-invoice-dollar" style="font-size: 3rem"></i>
+                                            
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
-                        </li>
-                        <li class="form-inline">
-                            <h:form>
-                                <h:commandButton actionListener="#{sesionUsuario.cerrarSesion()}" value="Cerrar Sesion" action="/index.xhtml?faces-redirect=true" class="dropdown-item" style="color: red" />
-                            </h:form> 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active"  style="color: #000" href="../index.xhtml">Inicio</a>
-                        </li>
-                        <div class="topbar-divider d-none d-sm-block"></div>
-                        <!--Barra de navegacion info usuario -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline small" style="color: #000">#{sesionUsuario.usuLog.primerNombre}  #{sesionUsuario.usuLog.segundoNombre}  #{sesionUsuario.usuLog.primerApellido}</span>
-                                <img class="img-profile rounded-circle" src="../Template/assets/img/usuario.png"/>
-                            </a>
-                            <!-- Desplegable "Información del usuario" -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="editarDatosUsuario.xhtml">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Editar perfil
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-            </ui:define>
+                        </div>
+                    </c:forEach>
 
 
-
-            <ui:define name="content">
-                <script>
-                    // Código paravisualizar el nombre del archivo seleccionado en el inputfile personalizado
-                    $(".custom-file-label").on("change", function () {
-                        var fileName = $(this).val().split("\\").pop();
-                        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                    });
-                </script>
                 
                 <!-- Begin Page Content -->
-                <div class="container">
+             
                     <!-- Page Heading -->
-                    <h3 class="m-0 font-weight-bold text-primary" style="text-align: center">Solicitud Cotizacion</h3>
-                    <br></br>
+                    <h5 class="m-0 font-weight-bold text-primary" style="text-align: center">Recargar Bolsa</h5>
                     <br></br>
                     <h:form class="needs-validation"  enctype="multipart/form-data">
                         <h:message for="input-group" id="mensajeValidacion" style="color:red"></h:message>
-                        <!-- Campo para la seleccion de la fecha de entrega -->
-                        <label>Elija la fecha de entrega de su proyecto:</label><br/>
-                        
-                        <div class="input-group date fechacoti">
-                            <p:inputText required='true' requiredMessage="Elija una fecha" value="#{cotizacionSession.fechaEntrega}" class="form-control input-group-addon" style="max-width: 15em"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span></p:inputText>
-                        </div>
+                        <script type="text/javascript">
+//<![CDATA[
+                            function makeArray() {
+                                for (i = 0; i < makeArray.arguments.length; i++)
+                                    this[i + 1] = makeArray.arguments[i];
+                            }
+                            var months = new makeArray('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo',
+                                    'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+                            var date = new Date();
+                            var day = date.getDate();
+                            var month = date.getMonth() + 1;
+                            var yy = date.getYear();
+                            var year = (yy < 1000) ? yy + 1900 : yy;
+                            document.write("Hoy es " + day + " de " + months[month] + " del " + year);
+//]]>
+                        </script>    
                         <br></br>
                         <br></br>
                         <div class="form-row">
+                            
                             <div class="col-md-3 mb-3">
-                                <label for="validationCustom05">Cantidad de Piezas</label>
+                                <label for="validationCustom05">Cantidad de Horas</label>
                                 <br></br>
-                                <p:inputText  id="validationCustom05" value="#{cotizacionSession.cantPiezas}" required='true'/>
-                                
+                                <p:inputText  id="validationCustom05" value="#{compraBolsasession.recarga}" required='true'/>
+
                             </div>
                         </div>
                         <br></br>
-                        <br></br>
-                        <div class="form-group col-md-8">
-                            <label for="comment">Descripción del proyecto o pieza:</label>
-                            <p:inputTextarea class="form-control" rows="3" id="comment" value="#{cotizacionSession.descripcion}" style="max-width: 25rem" required="true" requiredMessage="Por favor ingrese una descripción"/>
-                        </div>
-                        <br></br>
-                        <p>*Adjunte planos, fotos o archivos que considere necesarios.</p>
-
-                        <div class="custom-file col-md-3">
-                            <h:inputFile class="custom-file-input" id="customFile" value="#{cotizacionSession.adjunto}"/>
-                            <label class="custom-file-label" style="height: 2rem" for="customFile">Elija un archivo</label>
-                        </div>
-                        <br></br>
-                        <br></br>
-                        <h:commandButton class="btn btn-primary" action="#{cotizacionSession.registrarCotizacion()}" value="Solicitar cotización"/>
+                        <br></br>                       
+                        <h:commandButton class="btn btn-primary" action="#{compraBolsasession.recargarBolsa()}" value="Solicitar Bolsa de Tiempo"/>
                         <br></br>
                         <br></br>
                     </h:form>

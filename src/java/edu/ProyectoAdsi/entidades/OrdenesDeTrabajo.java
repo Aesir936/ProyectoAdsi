@@ -6,8 +6,10 @@
 package edu.ProyectoAdsi.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,19 +20,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author bxs42
  */
 @Entity
-@Table(name = "tbl_ordenes_de_trabajo", catalog = "db_siim", schema = "")
+@Table(name = "tbl_ordenes_de_trabajo")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OrdenesDeTrabajo.findAll", query = "SELECT o FROM OrdenesDeTrabajo o")})
@@ -59,12 +63,16 @@ public class OrdenesDeTrabajo implements Serializable {
     @Size(max = 50)
     @Column(name = "detalle")
     private String detalle;
+    @OneToMany(mappedBy = "idOrdenTrabajo", fetch = FetchType.LAZY)
+    private Collection<ArchivosAdjuntos> archivosAdjuntosCollection;
     @JoinColumn(name = "fk_id_estado", referencedColumnName = "id_estados_ordenes_de_trabajo")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EstadosOrdenesDeTrabajo fkIdEstado;
     @JoinColumn(name = "fk_id_cliente", referencedColumnName = "id_usuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuarios fkIdCliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrdenesDeTrabajo", fetch = FetchType.LAZY)
+    private Collection<OrdenesDeTrabajoHasTblProcesos> ordenesDeTrabajoHasTblProcesosCollection;
 
     public OrdenesDeTrabajo() {
     }
@@ -120,6 +128,15 @@ public class OrdenesDeTrabajo implements Serializable {
         this.detalle = detalle;
     }
 
+    @XmlTransient
+    public Collection<ArchivosAdjuntos> getArchivosAdjuntosCollection() {
+        return archivosAdjuntosCollection;
+    }
+
+    public void setArchivosAdjuntosCollection(Collection<ArchivosAdjuntos> archivosAdjuntosCollection) {
+        this.archivosAdjuntosCollection = archivosAdjuntosCollection;
+    }
+
     public EstadosOrdenesDeTrabajo getFkIdEstado() {
         return fkIdEstado;
     }
@@ -134,6 +151,15 @@ public class OrdenesDeTrabajo implements Serializable {
 
     public void setFkIdCliente(Usuarios fkIdCliente) {
         this.fkIdCliente = fkIdCliente;
+    }
+
+    @XmlTransient
+    public Collection<OrdenesDeTrabajoHasTblProcesos> getOrdenesDeTrabajoHasTblProcesosCollection() {
+        return ordenesDeTrabajoHasTblProcesosCollection;
+    }
+
+    public void setOrdenesDeTrabajoHasTblProcesosCollection(Collection<OrdenesDeTrabajoHasTblProcesos> ordenesDeTrabajoHasTblProcesosCollection) {
+        this.ordenesDeTrabajoHasTblProcesosCollection = ordenesDeTrabajoHasTblProcesosCollection;
     }
 
     @Override

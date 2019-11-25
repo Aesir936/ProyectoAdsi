@@ -44,7 +44,6 @@ public interface UsuariosFacadeLocal {
 
     public List<Usuarios> consultarClientes();
 
-   
+    public boolean insertOperario(Usuarios newOper);  
 
-    
 }
