@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bxs42
+ * @author cristian
  */
 @Entity
 @Table(name = "tbl_cotizaciones")
@@ -65,6 +65,9 @@ public class Cotizaciones implements Serializable {
     @Size(max = 500)
     @Column(name = "comentarios")
     private String comentarios;
+    @Size(max = 500)
+    @Column(name = "comentario_cliente")
+    private String comentarioCliente;
     @JoinColumn(name = "id_estado_cotizacion", referencedColumnName = "id_estado_cotizacion")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EstadosCotizaciones idEstadoCotizacion;
@@ -147,6 +150,14 @@ public class Cotizaciones implements Serializable {
 
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public String getComentarioCliente() {
+        return comentarioCliente;
+    }
+
+    public void setComentarioCliente(String comentarioCliente) {
+        this.comentarioCliente = comentarioCliente;
     }
 
     public EstadosCotizaciones getIdEstadoCotizacion() {

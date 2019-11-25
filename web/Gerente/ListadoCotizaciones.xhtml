@@ -304,9 +304,16 @@
                                                     <td>#{cot.fechaEntrega}</td>
                                                     <td>#{cot.idEstadoCotizacion.nombreEstadoCotizacion}</td>
                                                     <td>
-                                                        <c:if test="#{cot.idEstadoCotizacion.nombreEstadoCotizacion == 'Pendiente'}" >
-                                                            <a class="nav-link" data-toggle="modal" data-target="#exampleModal#{paso.index+1}" href="#" style="color: rgb(219, 129, 45)">Cotizar</a>
-                                                        </c:if>
+                                                        <c:choose>
+                                                            <c:when test="#{cot.idEstadoCotizacion.nombreEstadoCotizacion == 'Pendiente'}">
+                                                                <a class="nav-link" data-toggle="modal" data-target="#exampleModal#{paso.index+1}" href="#" style="color: rgb(219, 129, 45)">Cotizar</a>
+                                                            </c:when>
+                                                            <c:when test="#{cot.idEstadoCotizacion.nombreEstadoCotizacion == 'Activa'}">
+                                                                <h:form>
+                                                                    <h:commandLink value="Generar pdf" action="#{reportesRequest.generarCotizacion(cot.idCotizaciones)}" style="color: rgb(219, 129, 45)"/>
+                                                                </h:form>
+                                                            </c:when>
+                                                        </c:choose>
                                                     </td>
                                                     <td>
                                                         <div class="modal fade" id="exampleModal#{paso.index+1}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
@@ -320,7 +327,7 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-<!--                                                                            <h:messages id="mensajeValidacion" style = "color:red; margin:8px;" /> -->
+                                                                            <!--                                                                            <h:messages id="mensajeValidacion" style = "color:red; margin:8px;" /> -->
                                                                             <div class="form-group">
                                                                                 <h4 class="text-center" style="color: rgb(219, 129, 45)">Datos de la solicitud</h4>
                                                                                 <div class="row text-center">
@@ -376,6 +383,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer" style="justify-content: center">
+                                                                            <h:commandButton action="#{cotizacionSession.rechazarCot(cot.idCotizaciones)}" value="Rechazar  solicitud" class="btn" style="background-color: blue; color: black"></h:commandButton>
                                                                             <h:commandButton action="#{cotizacionSession.generarCotizacion(cot.idCotizaciones)}" value="Generar cotización" class="btn" style="background-color: rgb(219,129, 45); color: white"></h:commandButton>
                                                                         </div>
                                                                     </h:form>

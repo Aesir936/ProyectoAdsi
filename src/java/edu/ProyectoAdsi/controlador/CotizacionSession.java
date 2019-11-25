@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
-;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
@@ -29,8 +28,6 @@ import org.primefaces.PrimeFaces;
  *
  * @author Aesir936
  */
-
-
 @Named(value = "cotizacionSession")
 @SessionScoped
 public class CotizacionSession implements Serializable {
@@ -45,7 +42,8 @@ public class CotizacionSession implements Serializable {
     SesionUsuario sesionUsuario;
     @Inject
     ReportesRequest reportesRequest;
-
+    @Inject
+     registroOTsession oTsession;
     public CotizacionSession() {
     }
 
@@ -54,12 +52,14 @@ public class CotizacionSession implements Serializable {
     private String descripcion;
     private Part adjunto;
     private Cotizaciones idCot;
-    private final String folder = "C:\\Andres\\sena\\FASE IV A\\DESARROLLO WEB\\proyectoAdsi\\web\\ArchivosCotizacion";
+    private final String folder = "/home/cristian/NetBeansProjects/ProyectoAdsi/web/ArchivosCotizacion";
     private String docCliente;
     private int estadoCot;
     private int precioUnitario;
     private int precioTotal;
-    private String comentarios ; 
+    private String comentarios;
+    private String comentarioCliente;
+
     public String getFechaEntrega() {
         return fechaEntrega;
     }
@@ -99,7 +99,7 @@ public class CotizacionSession implements Serializable {
     public void setIdCot(Cotizaciones idCot) {
         this.idCot = idCot;
     }
-    
+
     public String getDocCliente() {
         return docCliente;
     }
@@ -115,7 +115,7 @@ public class CotizacionSession implements Serializable {
     public void setEstadoCot(int estadoCot) {
         this.estadoCot = estadoCot;
     }
-    
+
     public int getPrecioUnitario() {
         return precioUnitario;
     }
@@ -139,8 +139,14 @@ public class CotizacionSession implements Serializable {
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
     }
-    
 
+    public String getComentarioCliente() {
+        return comentarioCliente;
+    }
+
+    public void setComentarioCliente(String comentarioCliente) {
+        this.comentarioCliente = comentarioCliente;
+    }
 
 //    Método para guardar los archivos adjuntos ed las cotizaciones
     public boolean guardarArchivo() {
@@ -166,15 +172,13 @@ public class CotizacionSession implements Serializable {
 
         return false;
     }
-     public static Date ParseFecha(String fecha)
-    {
+
+    public static Date ParseFecha(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaDate = null;
         try {
             fechaDate = formato.parse(fecha);
-        } 
-        catch (ParseException ex) 
-        {
+        } catch (ParseException ex) {
             System.out.println(ex);
         }
         return fechaDate;
@@ -192,9 +196,11 @@ public class CotizacionSession implements Serializable {
             boolean insertCoti = cotizacionesFacadeLocal.crearCotizacion(nuevaCot);
 
             if (insertCoti == true) {
+                if (adjunto != null) {
+                    guardarArchivo();
+                }
                 List<Cotizaciones> listaCoti = cotizacionesFacadeLocal.findAll();
                 this.idCot = listaCoti.stream().max(comparing(Cotizaciones::getIdCotizaciones)).get();
-                guardarArchivo();
                 PrimeFaces.current().executeScript("estadoOk('Su solicitud de cotización se ha registrado con exito')");
 
             } else {
@@ -212,15 +218,20 @@ public class CotizacionSession implements Serializable {
         }
         return null;
     }
-    
-    
+
     public List<Cotizaciones> filtrarCotizaciones() {
         int idCliente = usuariosFacadeLocal.consultarId(docCliente);
-        return cotizacionesFacadeLocal.filtrarCotizaciones(idCliente,estadoCot);
+        return cotizacionesFacadeLocal.filtrarCotizaciones(idCliente, estadoCot);
     }
 
-    public String generarCotizacion(int idCotizacion){
-        
+    public List<Cotizaciones> listarCotizaciones() {
+        int idCliente = sesionUsuario.getUsuLog().getIdUsuarios();
+        return cotizacionesFacadeLocal.filtrarCotizaciones(idCliente, estadoCot);
+
+    }
+
+    public String generarCotizacion(int idCotizacion) {
+
         try {
             Cotizaciones cotGenerada = new Cotizaciones();
             cotGenerada.setValorUnitario(precioUnitario);
@@ -228,26 +239,47 @@ public class CotizacionSession implements Serializable {
             cotGenerada.setComentarios(comentarios);
             cotGenerada.setIdCotizaciones(idCotizacion);
             boolean updateCoti = cotizacionesFacadeLocal.generarCotizacion(cotGenerada);
-                
-            
-            if(updateCoti == true){
-            PrimeFaces.current().executeScript("estadoOk('La cotización se ha generado con exito')");
-            
-                if(updateCoti == true){                
-                reportesRequest.generarCotizacion(idCotizacion);
-                }            
-            }else{
-            PrimeFaces.current().executeScript("estadoOk('La cotización no ha sido generada')");
+
+            if (updateCoti == true) {
+                PrimeFaces.current().executeScript("estadoOk('La cotización se ha generado con exito')");
+            } else {
+                PrimeFaces.current().executeScript("estadoOk('La cotización no ha sido generada')");
             }
-        }
-         catch (Exception e) {
+        } catch (Exception e) {
             PrimeFaces.current().executeScript("estadoBad('Algo ha salido mal... intentalo nuevamente')");
             return "";
         }
-        return null;       
+        return null;
     }
-}
 
-public void listarDocumeto(){
+    public void rechazarCot(int idCot) {
+        boolean rCot = cotizacionesFacadeLocal.rechazarCot(idCot);
+        if (rCot == true) {
+            PrimeFaces.current().executeScript("estadoOk('La soliciud se ha rechazado')");
+        }
+    }
+
+//    Método para que un cliente aprueb una cotización generada porla empresa
+    public void aprobarCotCliente(int idCot) {
+        boolean update = cotizacionesFacadeLocal.aprobarCotCliente(idCot);
+
+        if (update == true) {
+            boolean crearOt=oTsession.registrarOT();
+            PrimeFaces.current().executeScript("estadoOk('Cotización APROBADA')");
+        } else {
+            PrimeFaces.current().executeScript("estadoOk('No pudo procesarse tu solicitud, intentalo de nuevo o comunicate con nosotros.')");
+        }
+    }
+
+    public void rechazarCotCliente(int idCot) {
+        boolean update = cotizacionesFacadeLocal.rechazarCotCliente(comentarioCliente, idCot);
+
+        if (update == true) {
+            PrimeFaces.current().executeScript("estadoOk('Cotización RECHAZADA')");
+        } else {
+            PrimeFaces.current().executeScript("estadoBad('No pudo procesarse tu solicitud, intentalo de nuevo o comunicate con nosotros.')");
+        }
+        comentarioCliente = "";
+    }
 
 }

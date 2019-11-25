@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bxs42
+ * @author cristian
  */
 @Entity
-@Table(name = "tbl_ordenes_de_trabajo", catalog = "db_siim", schema = "")
+@Table(name = "tbl_ordenes_de_trabajo")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OrdenesDeTrabajo.findAll", query = "SELECT o FROM OrdenesDeTrabajo o")})
@@ -44,21 +44,24 @@ public class OrdenesDeTrabajo implements Serializable {
     private Integer idOrdenesDeTrabajo;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_vencimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechaVencimiento;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha_generacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaGeneracion;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "tiempo_total_fabricacion")
-    private int tiempoTotalFabricacion;
-    @Size(max = 50)
+    @Column(name = "fecha_entrega")
+    @Temporal(TemporalType.DATE)
+    private Date fechaEntrega;
+    @Size(max = 500)
     @Column(name = "detalle")
     private String detalle;
+    @Size(max = 10)
+    @Column(name = "cantidad_piezas")
+    private String cantidadPiezas;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "tiempo_total_fabricacion")
+    private int tiempoTotalFabricacion;
     @JoinColumn(name = "fk_id_estado", referencedColumnName = "id_estados_ordenes_de_trabajo")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EstadosOrdenesDeTrabajo fkIdEstado;
@@ -73,10 +76,10 @@ public class OrdenesDeTrabajo implements Serializable {
         this.idOrdenesDeTrabajo = idOrdenesDeTrabajo;
     }
 
-    public OrdenesDeTrabajo(Integer idOrdenesDeTrabajo, Date fechaVencimiento, Date fechaGeneracion, int tiempoTotalFabricacion) {
+    public OrdenesDeTrabajo(Integer idOrdenesDeTrabajo, Date fechaGeneracion, Date fechaEntrega, int tiempoTotalFabricacion) {
         this.idOrdenesDeTrabajo = idOrdenesDeTrabajo;
-        this.fechaVencimiento = fechaVencimiento;
         this.fechaGeneracion = fechaGeneracion;
+        this.fechaEntrega = fechaEntrega;
         this.tiempoTotalFabricacion = tiempoTotalFabricacion;
     }
 
@@ -88,14 +91,6 @@ public class OrdenesDeTrabajo implements Serializable {
         this.idOrdenesDeTrabajo = idOrdenesDeTrabajo;
     }
 
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
-    }
-
     public Date getFechaGeneracion() {
         return fechaGeneracion;
     }
@@ -104,12 +99,12 @@ public class OrdenesDeTrabajo implements Serializable {
         this.fechaGeneracion = fechaGeneracion;
     }
 
-    public int getTiempoTotalFabricacion() {
-        return tiempoTotalFabricacion;
+    public Date getFechaEntrega() {
+        return fechaEntrega;
     }
 
-    public void setTiempoTotalFabricacion(int tiempoTotalFabricacion) {
-        this.tiempoTotalFabricacion = tiempoTotalFabricacion;
+    public void setFechaEntrega(Date fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
     }
 
     public String getDetalle() {
@@ -118,6 +113,22 @@ public class OrdenesDeTrabajo implements Serializable {
 
     public void setDetalle(String detalle) {
         this.detalle = detalle;
+    }
+
+    public String getCantidadPiezas() {
+        return cantidadPiezas;
+    }
+
+    public void setCantidadPiezas(String cantidadPiezas) {
+        this.cantidadPiezas = cantidadPiezas;
+    }
+
+    public int getTiempoTotalFabricacion() {
+        return tiempoTotalFabricacion;
+    }
+
+    public void setTiempoTotalFabricacion(int tiempoTotalFabricacion) {
+        this.tiempoTotalFabricacion = tiempoTotalFabricacion;
     }
 
     public EstadosOrdenesDeTrabajo getFkIdEstado() {

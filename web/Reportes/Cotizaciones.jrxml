@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1ff9d9b5-8f0e-499c-ac8a-fac6ef575c20">
-	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="IdCotizacion" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -55,17 +55,6 @@ tbl_cotizaciones.`id_cotizaciones`= $P{IdCotizacion};]]>
 	</background>
 	<title>
 		<band height="344" splitType="Stretch">
-			<image>
-				<reportElement x="23" y="17" width="156" height="38" uuid="322da82d-f225-4c72-8d98-132b9767fa2c"/>
-				<imageExpression><![CDATA["C:\\Andres\\sena\\FASE IV A\\DESARROLLO WEB\\proyectoAdsi\\web\\img\\Logo DYM largo.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="382" y="33" width="135" height="22" uuid="24c6af38-be62-4cc9-a04e-073bb290087d"/>
-				<textElement>
-					<font fontName="Arial" size="18" isBold="true" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[COTIZACION]]></text>
-			</staticText>
 			<textField pattern="MMMMM dd, yyyy">
 				<reportElement x="455" y="55" width="100" height="20" uuid="2c57deac-b980-40ab-ad00-a68b4b60d85d"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>

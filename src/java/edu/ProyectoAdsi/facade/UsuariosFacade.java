@@ -230,7 +230,6 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
                 Usuarios usu = new Usuarios();
                 
                 usu.setPrimerNombre((String) usuario[0]);
-//                usu.setOrdenesDeTrabajoCollection(ordenesDeTrabajoCollection);
                 
                 lstclientes.add(usu);
             }

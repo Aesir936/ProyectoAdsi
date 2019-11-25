@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.ProyectoAdsi.facade;
 
 import edu.ProyectoAdsi.entidades.Cotizaciones;
@@ -36,6 +31,11 @@ public interface CotizacionesFacadeLocal {
 
     public boolean generarCotizacion(Cotizaciones cotGenerada);
 
+    public boolean rechazarCot(int idCot);
+
+    public boolean aprobarCotCliente(int idCot);
+
+    public boolean rechazarCotCliente(String comentario, int idCot);
     
     
 }

@@ -1,7 +1,9 @@
 package edu.ProyectoAdsi.controlador;
 
+import edu.ProyectoAdsi.entidades.Cotizaciones;
 import edu.ProyectoAdsi.entidades.OrdenesDeTrabajo;
 import edu.ProyectoAdsi.entidades.Usuarios;
+import edu.ProyectoAdsi.facade.CotizacionesFacadeLocal;
 import edu.ProyectoAdsi.facade.OrdenesDeTrabajoFacadeLocal;
 import edu.ProyectoAdsi.facade.UsuariosFacadeLocal;
 import javax.inject.Named;
@@ -25,19 +27,21 @@ public class registroOTsession implements Serializable {
      */
     public registroOTsession() {
     }
-    
+
     @EJB
     UsuariosFacadeLocal usuariosFacadeLocal;
     @EJB
     OrdenesDeTrabajoFacadeLocal ordenesDeTrabajoFacadeLocal;
-    
+    @EJB
+    CotizacionesFacadeLocal cotizacionesFacadeLocal;
+
     private String documentoCliente;
     private Date fechaVencimiento;
     private String tiempoFabricacion;
     private String detalle;
     private int estadoOT;
-    
-     public String getDocumentoCliente() {
+
+    public String getDocumentoCliente() {
         return documentoCliente;
     }
 
@@ -77,43 +81,66 @@ public class registroOTsession implements Serializable {
         this.estadoOT = estadoOT;
     }
 
+    public boolean registrarOT() {
+        try {
+            int idCliente = usuariosFacadeLocal.consultarId(documentoCliente);
 
-    
-    
-    
-   public String registrarOT() {
-        try {                
-                int idCliente=usuariosFacadeLocal.consultarId(documentoCliente);                  
-                
-                Usuarios usu = new Usuarios();
-                usu=usuariosFacadeLocal.find(idCliente);  
-                
-                OrdenesDeTrabajo nuevoOT = new OrdenesDeTrabajo();
-                nuevoOT.setFechaVencimiento(fechaVencimiento);
-                nuevoOT.setFkIdCliente(usu);
-                int tiempo=Integer.parseInt(tiempoFabricacion);
-                nuevoOT.setTiempoTotalFabricacion(tiempo);
-                nuevoOT.setDetalle(detalle);
-                
-                boolean insertOT = ordenesDeTrabajoFacadeLocal.insertOT(nuevoOT);
+            Usuarios usu = new Usuarios();
+            usu = usuariosFacadeLocal.find(idCliente);
+
+            OrdenesDeTrabajo nuevoOT = new OrdenesDeTrabajo();
+            nuevoOT.setFechaEntrega(fechaVencimiento);
+            nuevoOT.setFkIdCliente(usu);
+            int tiempo = Integer.parseInt(tiempoFabricacion);
+            nuevoOT.setTiempoTotalFabricacion(tiempo);
+            nuevoOT.setDetalle(detalle);
+
+            boolean insertOT = ordenesDeTrabajoFacadeLocal.insertOT(nuevoOT);
 
             if (insertOT) {
-                                                           
+
                 PrimeFaces.current().executeScript("estadoOk('Se ha registrado la orden de trabajo')");
-                           
-                }else{
+                return true;
+            } else {
                 PrimeFaces.current().executeScript("estadoBad('Orden de trabajo no registrada')");
-                }             
-            }            
-        catch (Exception e) {
+                return false;
+            }
+        } catch (Exception e) {
         }
-        return "";
+        return false;
     }
-   
-   public List<OrdenesDeTrabajo> filtrarOT() {
+
+    public List<OrdenesDeTrabajo> filtrarOT() {
         int idCliente = usuariosFacadeLocal.consultarId(documentoCliente);
-        return ordenesDeTrabajoFacadeLocal.filtrarOT(idCliente,estadoOT);
+        return ordenesDeTrabajoFacadeLocal.filtrarOT(idCliente, estadoOT);
     }
 
-}
+    
+    public boolean registrarOTAutomat(int idCot) {
+        try {
+            Cotizaciones cot = cotizacionesFacadeLocal.find(idCot);
+            Usuarios cliente=usuariosFacadeLocal.find(cot.getFkIdCliente());
+            OrdenesDeTrabajo nuevoOT = new OrdenesDeTrabajo();
+            nuevoOT.setFechaEntrega(cot.getFechaEntrega());
+            nuevoOT.setDetalle(cot.getDetalle());
+            nuevoOT.setCantidadPiezas(cot.getCantidadPiezas());
+            nuevoOT.setFkIdCliente(cliente);
+            int tiempo = Integer.parseInt(tiempoFabricacion);
+            nuevoOT.setTiempoTotalFabricacion(tiempo);
+            nuevoOT.setDetalle(detalle);
 
+            boolean insertOT = ordenesDeTrabajoFacadeLocal.insertOT(nuevoOT);
+
+            if (insertOT) {
+
+                PrimeFaces.current().executeScript("estadoOk('Se ha registrado la orden de trabajo')");
+                return true;
+            } else {
+                PrimeFaces.current().executeScript("estadoBad('Orden de trabajo no registrada')");
+                return false;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+}

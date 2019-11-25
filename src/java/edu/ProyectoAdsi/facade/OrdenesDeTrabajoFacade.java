@@ -36,7 +36,7 @@ public class OrdenesDeTrabajoFacade extends AbstractFacade<OrdenesDeTrabajo> imp
         try {
             Query insertOT = em.createNativeQuery("insert into tbl_ordenes_de_trabajo (fecha_vencimiento,tiempo_total_fabricacion,fk_id_estado,fk_id_cliente,detalle) values (?1,?2,1,?4,?5)");
 
-            insertOT.setParameter(1, nuevoOT.getFechaVencimiento());
+            insertOT.setParameter(1, nuevoOT.getFechaEntrega()  );
             insertOT.setParameter(2, nuevoOT.getTiempoTotalFabricacion());
             insertOT.setParameter(4, nuevoOT.getFkIdCliente().getIdUsuarios());
             insertOT.setParameter(5, nuevoOT.getDetalle());

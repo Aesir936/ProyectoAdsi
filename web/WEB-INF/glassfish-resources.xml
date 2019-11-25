@@ -10,6 +10,5 @@
         <property name="URL" value="jdbc:mysql://localhost:3306/db_siim?zeroDateTimeBehavior=convertToNull"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="java:app/jndi_ProyectoAdsi" object-type="user" pool-name="mysql_db_siim_admin_siimPool"/>
     <jdbc-resource enabled="true" jndi-name="java:app/jndi_proyectoAdsi" object-type="user" pool-name="mysql_db_siim_admin_siimPool"/>
 </resources>

@@ -61,7 +61,7 @@
 
 
             <ui:define name="left">
-                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
+                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142); height: 100%" >
 
                     <!-- Logo -->
                     <a class="d-flex align-items-center justify-content-center" href="index.html">                 
@@ -83,11 +83,18 @@
                     <!-- División -->
                     <hr class="sidebar-divider d-none d-md-block"></hr>
 
-                    <!--Solicitud de cotización-->
+                    <!-- Menú Solicitudes y cotizaciones -->
                     <li class="nav-item">
-                        <a class="nav-link" href="SolicitudCotizacion.xhtml">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuotation" aria-expanded="true" aria-controls="collapseUtilities">
                             <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Solicitud de cotización</span></a>
+                            <span>Cotizaciones</span>
+                        </a>
+                        <div id="collapseQuotation" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="SolicitudCotizacion.xhtml">Solcitar cotización</a>
+                                <a class="collapse-item" href="ListadoSolicitudes.xhtml">Consultar  solicitudes</a>
+                            </div>
+                        </div>
                     </li>
 
                     <!-- División -->
@@ -113,11 +120,97 @@
                     <!-- División -->
                     <hr class="sidebar-divider"/>
 
-                    <!--Buzón de sugerencias-->
+                    <!--Cabecera -->
+                    <div class="sidebar-heading">
+                        Enlaces
+                    </div>
+
+                    <!-- Menú páginas -->
                     <li class="nav-item">
-                        <a class="nav-link" href="enConstruccion.xhtml">
-                            <i class="fas fa-inbox"></i>
-                            <span>Buzón de sugerencias</span></a>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Páginas</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Páginas de inicio:</h6>
+                                <a class="collapse-item" href="login.html">Inicio</a>
+                                <a class="collapse-item" href="../recuperarContrasena.xhtml">Olvido de contraseña</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <hr class="sidebar-divider"/>
+
+                    <!-- Menú utilerías  -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            <span>Utilerías</span>
+                        </a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Descargar utilerías:</h6>
+                                <a class="collapse-item" href="">Winrar</a>
+                                <a class="collapse-item" href="">Adobe acrobat</a>
+                                <a class="collapse-item" href="">Otros...</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>      <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142); height: 100%" >
+
+                    <!-- Logo -->
+                    <a class="d-flex align-items-center justify-content-center" href="index.html">                 
+                        <div>
+                            <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
+                        </div>
+                    </a>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider my-0"/>
+
+                    <!-- Tablero principal -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.xhtml">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Tablero principal</span></a>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider d-none d-md-block"></hr>
+
+                    <!-- Menú Solicitudes y cotizaciones -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuotation" aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Cotizaciones</span>
+                        </a>
+                        <div id="collapseQuotation" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="SolicitudCotizacion.xhtml">Solcitar cotización</a>
+                                <a class="collapse-item" href="ListadoSolicitudes.xhtml">Consultar  solicitudes</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider d-none d-md-block"></hr>
+
+                    <!-- Menú de configuración de perfil -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Configuración de perfil</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Editar perfil:</h6>
+                                <a class="collapse-item" href="#">Cambiar imágen</a>
+                                <a class="collapse-item" href="editarDatosUsuario.xhtml">
+                                    <span style="font-size: 1em">Editar datos personales</span>
+                                </a>
+                            </div>
+                        </div>
                     </li>
 
                     <!-- División -->
@@ -139,22 +232,10 @@
                                 <h6 class="collapse-header">Páginas de inicio:</h6>
                                 <a class="collapse-item" href="login.html">Inicio</a>
                                 <a class="collapse-item" href="../recuperarContrasena.xhtml">Olvido de contraseña</a>
-                                <!--                                <div class="collapse-divider"></div>
-                                                                <h6 class="collapse-header">Otras páginas:</h6>
-                                                                <a class="collapse-item" href="404.html">Página de error 404</a>
-                                                                <a class="collapse-item" href="blank.html">Página de error 500</a>-->
                             </div>
                         </div>
                     </li>
 
-                    <!-- Informes -->
-                    <!--                    <li class="nav-item">
-                                            <a class="nav-link" href="">
-                                                <i class="fas fa-fw fa-chart-area"></i>
-                                                <span>Informes</span></a>
-                                        </li>-->
-
-                    <!-- División -->
                     <hr class="sidebar-divider"/>
 
                     <!-- Menú utilerías  -->
@@ -172,7 +253,7 @@
                             </div>
                         </div>
                     </li>
-                </ul>
+                </ul>      
             </ui:define>
 
 

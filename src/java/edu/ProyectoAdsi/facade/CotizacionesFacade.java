@@ -42,8 +42,8 @@ public class CotizacionesFacade extends AbstractFacade<Cotizaciones> implements 
         } catch (Exception e) {
             return false;
         }
-    }  
-    
+    }
+
     @Override
     public List<Cotizaciones> filtrarCotizaciones(int idCliente, int estadoCot) {
         try {
@@ -51,14 +51,11 @@ public class CotizacionesFacade extends AbstractFacade<Cotizaciones> implements 
             String consultar;
             if (idCliente == 0 && estadoCot == 0) {
                 consultar = "select * from tbl_cotizaciones";
-            }
-            else if (idCliente == 0 && estadoCot != 0) {
+            } else if (idCliente == 0 && estadoCot != 0) {
                 consultar = "select * from tbl_cotizaciones where tbl_cotizaciones.id_estado_cotizacion= '" + estadoCot + "%'";
-            } 
-            else if (idCliente != 0 && estadoCot != 0) {
+            } else if (idCliente != 0 && estadoCot != 0) {
                 consultar = "select * from tbl_cotizaciones where tbl_cotizaciones.id_estado_cotizacion= '" + estadoCot + "%' and tbl_cotizaciones.fk_id_cliente='" + idCliente + "%' ";
             } else {
-//              consultar = "select * from tbl_cotizaciones where documento like '" + documentoCliente + "%' and nit like '" + estado + "%' order by documento desc";
                 consultar = "SELECT * FROM db_siim.tbl_cotizaciones where tbl_cotizaciones.fk_id_cliente= '" + idCliente + "%'";
             }
             Query filtrarCot = em.createNativeQuery(consultar, Cotizaciones.class);
@@ -68,22 +65,63 @@ public class CotizacionesFacade extends AbstractFacade<Cotizaciones> implements 
             return null;
         }
     }
-    
-     @Override
+
+    @Override
     public boolean generarCotizacion(Cotizaciones cotGenerada) {
         try {
             Query updateCot = em.createNativeQuery("UPDATE tbl_cotizaciones SET valor_unitario = ?1, valor_total = ?2, comentarios = ?3, id_estado_cotizacion = 2 WHERE id_cotizaciones  =?4");
 
-            updateCot.setParameter(1,cotGenerada.getValorUnitario());
-            updateCot.setParameter(2,cotGenerada.getValorTotal());
-            updateCot.setParameter(3,cotGenerada.getComentarios());
-            updateCot.setParameter(4,cotGenerada.getIdCotizaciones());
-            
+            updateCot.setParameter(1, cotGenerada.getValorUnitario());
+            updateCot.setParameter(2, cotGenerada.getValorTotal());
+            updateCot.setParameter(3, cotGenerada.getComentarios());
+            updateCot.setParameter(4, cotGenerada.getIdCotizaciones());
+
             updateCot.executeUpdate();
             return true;
 
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public boolean rechazarCot(int idCot) {
+        try {
+            Query rCot = em.createNativeQuery("UPDATE tbl_cotizaciones SET id_estado_cotizacion = 4 WHERE id_cotizaciones = ?");
+            rCot.setParameter(1, idCot);
+
+            rCot.executeUpdate();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    @Override
+    public boolean aprobarCotCliente(int idCot) {
+        try {
+            Query actualizarCot = em.createNativeQuery("UPDATE tbl_cotizaciones SET id_estado_cotizacion = 3 WHERE id_cotizaciones = ?1");
+            actualizarCot.setParameter(1, idCot);
+
+            actualizarCot.executeUpdate();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+//    Método para registrar una cotización rechazada por el cliente y el comentario dejado por él
+    @Override
+    public boolean rechazarCotCliente(String comentario, int idCot) {
+        try {
+            Query actualizarCot = em.createNativeQuery("UPDATE tbl_cotizaciones SET id_estado_cotizacion = 5, comentario_cliente = ?1 WHERE id_cotizaciones  = ?2");
+            actualizarCot.setParameter(1, comentario);
+            actualizarCot.setParameter(2, idCot);
+
+            actualizarCot.executeUpdate();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
     }
 }
