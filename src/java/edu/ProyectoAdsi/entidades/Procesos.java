@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Aesir936
+ * @author bxs42
  */
 @Entity
 @Table(name = "tbl_procesos")
@@ -44,10 +44,6 @@ public class Procesos implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre_procesos")
     private String nombreProcesos;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procesosIdProcesos", fetch = FetchType.LAZY)
-    private Collection<ProcesosExternos> procesosExternosCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procesosIdProcesos", fetch = FetchType.LAZY)
-    private Collection<ProcesosInternos> procesosInternosCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProcesos", fetch = FetchType.LAZY)
     private Collection<OrdenesDeTrabajoHasTblProcesos> ordenesDeTrabajoHasTblProcesosCollection;
 
@@ -77,24 +73,6 @@ public class Procesos implements Serializable {
 
     public void setNombreProcesos(String nombreProcesos) {
         this.nombreProcesos = nombreProcesos;
-    }
-
-    @XmlTransient
-    public Collection<ProcesosExternos> getProcesosExternosCollection() {
-        return procesosExternosCollection;
-    }
-
-    public void setProcesosExternosCollection(Collection<ProcesosExternos> procesosExternosCollection) {
-        this.procesosExternosCollection = procesosExternosCollection;
-    }
-
-    @XmlTransient
-    public Collection<ProcesosInternos> getProcesosInternosCollection() {
-        return procesosInternosCollection;
-    }
-
-    public void setProcesosInternosCollection(Collection<ProcesosInternos> procesosInternosCollection) {
-        this.procesosInternosCollection = procesosInternosCollection;
     }
 
     @XmlTransient

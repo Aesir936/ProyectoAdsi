@@ -46,7 +46,14 @@
                             </div>
                         </div>
                     </li>
-
+                    
+                    <!--Compra de Bolsas-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="CompraBolsas.xhtml">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Solicitar Bolsa de Tiempo</span></a>
+                    </li>
+                    
                     <!-- División -->
                     <hr class="sidebar-divider d-none d-md-block"></hr>
 
@@ -180,6 +187,16 @@
                     <br></br>
                     <br></br>
                     <h:form class="needs-validation"  enctype="multipart/form-data">
+
+                        <h:message for="input-group" id="mensajeValidacion" style="color:red"></h:message>
+                        <!-- Campo para la seleccion de la fecha de entrega -->
+                        <label>Elija la fecha de entrega de su proyecto:</label><br/>
+                        
+                        <div class="input-group date fechacoti">
+                            <p:inputText required='true' requiredMessage="Elija una fecha" value="#{cotizacionSession.fechaEntrega}" class="form-control input-group-addon" style="max-width: 15em"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span></p:inputText>
+                        </div>
+                        <br></br>
+                        <br></br>
                         <div class="form-row">
                             <div class="form-group col-md-2"></div>
                             <div class="col-md-3 mb-3 ">

@@ -3,6 +3,7 @@ package edu.ProyectoAdsi.controlador;
 import edu.ProyectoAdsi.entidades.Ciudades;
 import edu.ProyectoAdsi.entidades.Usuarios;
 import edu.ProyectoAdsi.entidades.UsuariosHasTblRoles;
+import edu.ProyectoAdsi.facade.BolsasDeTiempoFacadeLocal;
 import edu.ProyectoAdsi.facade.CiudadesFacadeLocal;
 import edu.ProyectoAdsi.facade.UsuariosFacadeLocal;
 import edu.ProyectoAdsi.facade.UsuariosHasTblRolesFacadeLocal;
@@ -25,6 +26,8 @@ public class SesionUsuario implements Serializable {
     CiudadesFacadeLocal ciudadesFacadeLocal;
     @EJB
     UsuariosHasTblRolesFacadeLocal usuariosHasTblRolesFacadeLocal;
+    @EJB
+    BolsasDeTiempoFacadeLocal bolsasDeTiempoFacadeLocal;
 
     private int tipoDocumento;
     private String documento;
@@ -221,8 +224,9 @@ public class SesionUsuario implements Serializable {
 
                     int posicion = usuariosfacadelocal.consultarId(documento);
 
-                    usuariosfacadelocal.asignarRol(posicion, 1);
-
+                    usuariosfacadelocal.asignarRol(posicion, 4);
+                    bolsasDeTiempoFacadeLocal.generarBolsa(posicion);
+                    
                     PrimeFaces.current().executeScript("registroExitoso('Se ha registrado con exito')");
 
                 } else {
@@ -247,6 +251,7 @@ public class SesionUsuario implements Serializable {
                 PrimeFaces.current().executeScript("registroFallido('Las contraseñas no coinciden')");
             }
         } catch (Exception e) {
+                 PrimeFaces.current().executeScript("registroFallido('No se pudo registrar.')");
         }
         return "";
     }
@@ -354,5 +359,59 @@ public class SesionUsuario implements Serializable {
         this.documento = "";
         this.contraseña = "";
     }
+    
+    public String registrarOperario() {
+        try {
+            if (contraseña.equals(confirmarContraseña)) {
+
+                Ciudades objCiudad = ciudadesFacadeLocal.find(ciudad);
+
+                Usuarios nuevoOpe = new Usuarios();
+                nuevoOpe.setFkCiudad(objCiudad);
+                nuevoOpe.setTipoDocumento(tipoDocumento);
+                nuevoOpe.setDocumento(documento);
+                nuevoOpe.setPrimerNombre(primerNombre);
+                nuevoOpe.setSegundoNombre(segundoNombre);
+                nuevoOpe.setPrimerApellido(primerApellido);
+                nuevoOpe.setSegundoApellido(SegundoApellido);      
+                nuevoOpe.setCorreo(correo);
+                nuevoOpe.setTelefono(telefono);
+                nuevoOpe.setContrasena(contraseña);
+                nuevoOpe.setDireccion(direccion);
+
+                boolean insertOpe = usuariosfacadelocal.insertOperario(nuevoOpe);
+
+                if (insertOpe) {
+
+                    int posicion = usuariosfacadelocal.consultarId(documento);
+
+                    usuariosfacadelocal.asignarRol(posicion, 3);                    
+                    PrimeFaces.current().executeScript("registroExitoso('Se ha registrado con exito')");
+
+                } else {
+                    PrimeFaces.current().executeScript("registroFallido('Usuario ya registrado')");
+                }
+
+                this.tipoDocumento = 0;
+                this.documento = "";
+                this.primerNombre = "";
+                this.segundoNombre = "";
+                this.primerApellido = "";
+                this.SegundoApellido = "";
+                this.correo = "";
+                this.telefono = "";
+                this.contraseña = "";
+                this.confirmarContraseña = "";
+                this.direccion = "";
+
+            } else {
+                PrimeFaces.current().executeScript("registroFallido('Las contraseñas no coinciden')");
+            }
+        } catch (Exception e) {
+                 PrimeFaces.current().executeScript("registroFallido('No se pudo registrar.')");
+        }
+        return "";
+    }
+
 
 }

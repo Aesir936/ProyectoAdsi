@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../Template/completeTemplate.xhtml">
+
+            <ui:define name="left">
+                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142); height: 100%" >
+
+                    <!-- Logo -->
+                    <a class="d-flex align-items-center justify-content-center" href="index.html">                 
+                        <div>
+                            <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
+                        </div>
+                    </a>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider my-0"/>
+
+                    <!-- Tablero principal -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.xhtml">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Tablero principal</span></a>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider d-none d-md-block"></hr>
+
+                    <!--Solicitud de cotización-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="SolicitudCotizacion.xhtml">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Solicitud de cotización</span></a>
+                    </li>
+
+                    <!--Compra de Bolsas-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="CompraBolsas.xhtml">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Solicitar Bolsa de Tiempo</span></a>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider d-none d-md-block"></hr>
+
+                    <!-- Menú de configuración de perfil -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Configuración de perfil</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Editar perfil:</h6>
+                                <a class="collapse-item" href="#">Cambiar imágen</a>
+                                <a class="collapse-item" href="editarDatosUsuario.xhtml">
+                                    <span style="font-size: 1em">Editar datos personales</span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!--Buzón de sugerencias-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="enConstruccion.xhtml">
+                            <i class="fas fa-inbox"></i>
+                            <span>Buzón de sugerencias</span></a>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!--Cabecera -->
+                    <div class="sidebar-heading">
+                        Enlaces
+                    </div>
+
+                    <!-- Menú páginas -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Páginas</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Páginas de inicio:</h6>
+                                <a class="collapse-item" href="login.html">Inicio</a>
+                                <a class="collapse-item" href="../recuperarContrasena.xhtml">Olvido de contraseña</a>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- División -->
+                    <hr class="sidebar-divider"/>
+
+                    <!-- Menú utilerías  -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            <span>Utilerías</span>
+                        </a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Descargar utilerías:</h6>
+                                <a class="collapse-item" href="">Winrar</a>
+                                <a class="collapse-item" href="">Adobe acrobat</a>
+                                <a class="collapse-item" href="">Otros...</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <div class="container py-2">
+                    <h3 class="m-0 font-weight-bold text-primary" style="text-align: center">Mi Bolsa</h3>
+                    <c:forEach items="#{compraBolsasession.consultarBolsa()}" var="cot" varStatus="paso">
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <span>#{cot.fechaActivacion}</span><br></br>
+                                                <span>#{cot.horasRestantes}</span><br></br>
+                                                <span>#{cot.ultimaCompra}</span><br></br>                                                
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-file-invoice-dollar" style="font-size: 3rem"></i>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+
+
+                
+                <!-- Begin Page Content -->
+             
+                    <!-- Page Heading -->
+                    <h5 class="m-0 font-weight-bold text-primary" style="text-align: center">Recargar Bolsa</h5>
+                    <br></br>
+                    <h:form class="needs-validation"  enctype="multipart/form-data">
+                        <h:message for="input-group" id="mensajeValidacion" style="color:red"></h:message>
+                        <script type="text/javascript">
+//<![CDATA[
+                            function makeArray() {
+                                for (i = 0; i < makeArray.arguments.length; i++)
+                                    this[i + 1] = makeArray.arguments[i];
+                            }
+                            var months = new makeArray('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo',
+                                    'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+                            var date = new Date();
+                            var day = date.getDate();
+                            var month = date.getMonth() + 1;
+                            var yy = date.getYear();
+                            var year = (yy < 1000) ? yy + 1900 : yy;
+                            document.write("Hoy es " + day + " de " + months[month] + " del " + year);
+//]]>
+                        </script>    
+                        <br></br>
+                        <br></br>
+                        <div class="form-row">
+                            
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom05">Cantidad de Horas</label>
+                                <br></br>
+                                <p:inputText  id="validationCustom05" value="#{compraBolsasession.recarga}" required='true'/>
+
+                            </div>
+                        </div>
+                        <br></br>
+                        <br></br>                       
+                        <h:commandButton class="btn btn-primary" action="#{compraBolsasession.recargarBolsa()}" value="Solicitar Bolsa de Tiempo"/>
+                        <br></br>
+                        <br></br>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

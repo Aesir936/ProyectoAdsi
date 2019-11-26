@@ -244,4 +244,29 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
             return null;
         }
     }
+    
+    @Override
+    public boolean insertOperario(Usuarios newOper) {
+        try {
+            Query insertOpe = em.createNativeQuery("insert into tbl_usuarios (tipo_documento,documento, primer_nombre, segundo_nombre,primer_apellido, \n"
+                    + "segundo_apellido,correo, telefono, contrasena,direccion,estado) values (?,?,?,?,?,?,?,?,?,?,'Activo')");
+
+            insertOpe.setParameter(1, newOper.getTipoDocumento());
+            insertOpe.setParameter(2, newOper.getDocumento());
+            insertOpe.setParameter(3, newOper.getPrimerNombre());
+            insertOpe.setParameter(4, newOper.getSegundoNombre());
+            insertOpe.setParameter(5, newOper.getPrimerApellido());
+            insertOpe.setParameter(6, newOper.getSegundoApellido());
+            insertOpe.setParameter(7, newOper.getCorreo());
+            insertOpe.setParameter(8, newOper.getTelefono());
+            insertOpe.setParameter(9, newOper.getContrasena());
+            insertOpe.setParameter(10, newOper.getDireccion());
+            
+            insertOpe.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

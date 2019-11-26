@@ -98,7 +98,6 @@ public class registroOTsession implements Serializable {
             boolean insertOT = ordenesDeTrabajoFacadeLocal.insertOT(nuevoOT);
 
             if (insertOT) {
-
                 PrimeFaces.current().executeScript("estadoOk('Se ha registrado la orden de trabajo')");
                 return true;
             } else {
