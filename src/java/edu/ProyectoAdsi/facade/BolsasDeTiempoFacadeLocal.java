@@ -34,6 +34,6 @@ public interface BolsasDeTiempoFacadeLocal {
 
     public List<BolsasDeTiempo> consultarBolsas(int idCliente);
 
-    public boolean recargarBolsa(int idCliente, int horasRestantes);
+    public boolean recargarBolsa(int idCliente, int horasRestantes, int recarga) ;
     
 }

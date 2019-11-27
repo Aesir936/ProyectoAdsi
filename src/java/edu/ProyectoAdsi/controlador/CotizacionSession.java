@@ -43,7 +43,8 @@ public class CotizacionSession implements Serializable {
     @Inject
     ReportesRequest reportesRequest;
     @Inject
-     registroOTsession oTsession;
+    registroOTsession oTsession;
+
     public CotizacionSession() {
     }
 
@@ -59,6 +60,7 @@ public class CotizacionSession implements Serializable {
     private int precioTotal;
     private String comentarios;
     private String comentarioCliente;
+    private int horasFabricacion;
 
     public String getFechaEntrega() {
         return fechaEntrega;
@@ -146,6 +148,14 @@ public class CotizacionSession implements Serializable {
 
     public void setComentarioCliente(String comentarioCliente) {
         this.comentarioCliente = comentarioCliente;
+    }
+
+    public int getHorasFabricacion() {
+        return horasFabricacion;
+    }
+
+    public void setHorasFabricacion(int horasFabricacion) {
+        this.horasFabricacion = horasFabricacion;
     }
 
 //    Método para guardar los archivos adjuntos ed las cotizaciones
@@ -238,6 +248,7 @@ public class CotizacionSession implements Serializable {
             cotGenerada.setValorTotal(precioTotal);
             cotGenerada.setComentarios(comentarios);
             cotGenerada.setIdCotizaciones(idCotizacion);
+            cotGenerada.setHorasFabricacion(horasFabricacion);
             boolean updateCoti = cotizacionesFacadeLocal.generarCotizacion(cotGenerada);
 
             if (updateCoti == true) {
@@ -253,21 +264,26 @@ public class CotizacionSession implements Serializable {
     }
 
     public void rechazarCot(int idCot) {
-        boolean rCot = cotizacionesFacadeLocal.rechazarCot(idCot);
-        if (rCot == true) {
-            PrimeFaces.current().executeScript("estadoOk('La soliciud se ha rechazado')");
+        try {
+            boolean rCot = cotizacionesFacadeLocal.rechazarCot(idCot, comentarios);
+            if (rCot == true) {
+                PrimeFaces.current().executeScript("estadoOk('La soliciud se ha rechazado')");
+            }
+        } catch (Exception e) {
+            PrimeFaces.current().executeScript("estadoBad('La soliciud no se pudo procesar')");
         }
+
     }
 
 //    Método para que un cliente aprueb una cotización generada porla empresa
     public void aprobarCotCliente(int idCot) {
         boolean update = cotizacionesFacadeLocal.aprobarCotCliente(idCot);
-
-        if (update == true) {
-            boolean crearOt=oTsession.registrarOT();
+        boolean crearOt = oTsession.registrarOTAutomat(idCot);
+        
+        if (update == true && crearOt == true) {
             PrimeFaces.current().executeScript("estadoOk('Cotización APROBADA')");
         } else {
-            PrimeFaces.current().executeScript("estadoOk('No pudo procesarse tu solicitud, intentalo de nuevo o comunicate con nosotros.')");
+            PrimeFaces.current().executeScript("estadoBad('No pudo procesarse tu solicitud, intentalo de nuevo o comunicate con nosotros.')");
         }
     }
 

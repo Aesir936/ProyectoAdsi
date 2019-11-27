@@ -14,7 +14,7 @@
                 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142); height: 100%" >
 
                     <!-- Logo -->
-                    <a class="d-flex align-items-center justify-content-center" href="index.html">                 
+                    <a class="d-flex align-items-center justify-content-center" href="#">                 
                         <div>
                             <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
                         </div>
@@ -31,20 +31,30 @@
                     </li>
 
                     <!-- División -->
-                    <hr class="sidebar-divider d-none d-md-block"></hr>
+                    <hr class="sidebar-divider my-0"/>
 
-                    <!--Solicitud de cotización-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="SolicitudCotizacion.xhtml">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Solicitud de cotización</span></a>
+                    <!-- Mi bolsa -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="CompraBolsas.xhtml">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Mi bolsa</span></a>
                     </li>
 
-                    <!--Compra de Bolsas-->
+                    <!-- División -->
+                    <hr class="sidebar-divider d-none d-md-block"></hr>
+
+                    <!-- Menú Solicitudes y cotizaciones -->
                     <li class="nav-item">
-                        <a class="nav-link" href="CompraBolsas.xhtml">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuotation" aria-expanded="true" aria-controls="collapseUtilities">
                             <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Solicitar Bolsa de Tiempo</span></a>
+                            <span style="font-size: 0.8em">Solicitudes y Cotizaciones</span>
+                        </a>
+                        <div id="collapseQuotation" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="SolicitudCotizacion.xhtml">Solcitar cotización</a>
+                                <a class="collapse-item" href="ListadoSolicitudes.xhtml">Consultar  solicitudes</a>
+                            </div>
+                        </div>
                     </li>
 
                     <!-- División -->
@@ -70,16 +80,6 @@
                     <!-- División -->
                     <hr class="sidebar-divider"/>
 
-                    <!--Buzón de sugerencias-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="enConstruccion.xhtml">
-                            <i class="fas fa-inbox"></i>
-                            <span>Buzón de sugerencias</span></a>
-                    </li>
-
-                    <!-- División -->
-                    <hr class="sidebar-divider"/>
-
                     <!--Cabecera -->
                     <div class="sidebar-heading">
                         Enlaces
@@ -96,12 +96,10 @@
                                 <h6 class="collapse-header">Páginas de inicio:</h6>
                                 <a class="collapse-item" href="login.html">Inicio</a>
                                 <a class="collapse-item" href="../recuperarContrasena.xhtml">Olvido de contraseña</a>
-
                             </div>
                         </div>
                     </li>
 
-                    <!-- División -->
                     <hr class="sidebar-divider"/>
 
                     <!-- Menú utilerías  -->
@@ -119,76 +117,79 @@
                             </div>
                         </div>
                     </li>
-                </ul>
+                </ul>      
             </ui:define>
 
             <ui:define name="content">
 
                 <div class="container py-2">
                     <h3 class="m-0 font-weight-bold text-primary" style="text-align: center">Mi Bolsa</h3>
+                    <br></br>
                     <c:forEach items="#{compraBolsasession.consultarBolsa()}" var="cot" varStatus="paso">
-                        
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                <span>#{cot.fechaActivacion}</span><br></br>
-                                                <span>#{cot.horasRestantes}</span><br></br>
-                                                <span>#{cot.ultimaCompra}</span><br></br>                                                
+                        <div class="row">
+                            <div class="col-xl-1 col-md-6 mb-4"></div>
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    <span>Fecha Activación: #{cot.fechaActivacion}</span><br></br>
+                                                    <span>Saldo actual: #{cot.horasRestantes} horas</span><br></br>
+                                                    <span>Última recarga: #{cot.ultimaCompra} horas</span><br></br>                                                
+                                                </div>
+
                                             </div>
-                                            
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-file-invoice-dollar" style="font-size: 3rem"></i>
-                                            
+                                            <div class="col-auto">
+                                                <i class="fas fa-shopping-bag" style="font-size: 3rem"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
+                    <br></br>
+                    <!-- Begin Page Content -->
 
-
-                
-                <!-- Begin Page Content -->
-             
                     <!-- Page Heading -->
                     <h5 class="m-0 font-weight-bold text-primary" style="text-align: center">Recargar Bolsa</h5>
                     <br></br>
                     <h:form class="needs-validation"  enctype="multipart/form-data">
-                        <h:message for="input-group" id="mensajeValidacion" style="color:red"></h:message>
-                        <script type="text/javascript">
-//<![CDATA[
-                            function makeArray() {
-                                for (i = 0; i < makeArray.arguments.length; i++)
-                                    this[i + 1] = makeArray.arguments[i];
-                            }
-                            var months = new makeArray('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo',
-                                    'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
-                            var date = new Date();
-                            var day = date.getDate();
-                            var month = date.getMonth() + 1;
-                            var yy = date.getYear();
-                            var year = (yy < 1000) ? yy + 1900 : yy;
-                            document.write("Hoy es " + day + " de " + months[month] + " del " + year);
-//]]>
-                        </script>    
+                        <div class="form-row">
+                            <div class="col-md-1 mb-3"></div>
+                            <script type="text/javascript">
+    //<![CDATA[
+                                function makeArray() {
+                                    for (i = 0; i < makeArray.arguments.length; i++)
+                                        this[i + 1] = makeArray.arguments[i];
+                                }
+                                var months = new makeArray('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo',
+                                        'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+                                var date = new Date();
+                                var day = date.getDate();
+                                var month = date.getMonth() + 1;
+                                var yy = date.getYear();
+                                var year = (yy < 1000) ? yy + 1900 : yy;
+                                document.write("Hoy es " + day + " de " + months[month] + " del " + year);
+    //]]>
+                            </script> 
+                        </div>
                         <br></br>
                         <br></br>
                         <div class="form-row">
-                            
+                            <div class="col-md-1 mb-3"></div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom05">Cantidad de Horas</label>
                                 <br></br>
                                 <p:inputText  id="validationCustom05" value="#{compraBolsasession.recarga}" required='true'/>
-
                             </div>
                         </div>
                         <br></br>
-                        <br></br>                       
-                        <h:commandButton class="btn btn-primary" action="#{compraBolsasession.recargarBolsa()}" value="Solicitar Bolsa de Tiempo"/>
+                        <div class="form-row">
+                            <div class="col-md-1 mb-3"></div>                    
+                            <h:commandButton class="btn btn-primary" action="#{compraBolsasession.recargarBolsa()}" value="Recargar mi bolsa"/>
+                        </div>
                         <br></br>
                         <br></br>
                     </h:form>

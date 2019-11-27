@@ -8,6 +8,7 @@ package edu.ProyectoAdsi.entidades;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,45 +27,52 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author cristian
  */
 @Entity
-@Table(name = "tbl_ciudades")
+@Table(name = "tbl_tipos_documento")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Ciudades.findAll", query = "SELECT c FROM Ciudades c")})
-public class Ciudades implements Serializable {
+    @NamedQuery(name = "TiposDocumento.findAll", query = "SELECT t FROM TiposDocumento t")})
+public class TiposDocumento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_ciudad")
-    private Integer idCiudad;
-    @Size(max = 45)
-    @Column(name = "nombre_ciudad")
-    private String nombreCiudad;
-    @OneToMany(mappedBy = "fkCiudad", fetch = FetchType.LAZY)
+    @Column(name = "id_tipo_documento")
+    private Integer idTipoDocumento;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "nombre")
+    private String nombre;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkTipoDocumento", fetch = FetchType.LAZY)
     private Collection<Usuarios> usuariosCollection;
 
-    public Ciudades() {
+    public TiposDocumento() {
     }
 
-    public Ciudades(Integer idCiudad) {
-        this.idCiudad = idCiudad;
+    public TiposDocumento(Integer idTipoDocumento) {
+        this.idTipoDocumento = idTipoDocumento;
     }
 
-    public Integer getIdCiudad() {
-        return idCiudad;
+    public TiposDocumento(Integer idTipoDocumento, String nombre) {
+        this.idTipoDocumento = idTipoDocumento;
+        this.nombre = nombre;
     }
 
-    public void setIdCiudad(Integer idCiudad) {
-        this.idCiudad = idCiudad;
+    public Integer getIdTipoDocumento() {
+        return idTipoDocumento;
     }
 
-    public String getNombreCiudad() {
-        return nombreCiudad;
+    public void setIdTipoDocumento(Integer idTipoDocumento) {
+        this.idTipoDocumento = idTipoDocumento;
     }
 
-    public void setNombreCiudad(String nombreCiudad) {
-        this.nombreCiudad = nombreCiudad;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @XmlTransient
@@ -79,18 +87,18 @@ public class Ciudades implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idCiudad != null ? idCiudad.hashCode() : 0);
+        hash += (idTipoDocumento != null ? idTipoDocumento.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ciudades)) {
+        if (!(object instanceof TiposDocumento)) {
             return false;
         }
-        Ciudades other = (Ciudades) object;
-        if ((this.idCiudad == null && other.idCiudad != null) || (this.idCiudad != null && !this.idCiudad.equals(other.idCiudad))) {
+        TiposDocumento other = (TiposDocumento) object;
+        if ((this.idTipoDocumento == null && other.idTipoDocumento != null) || (this.idTipoDocumento != null && !this.idTipoDocumento.equals(other.idTipoDocumento))) {
             return false;
         }
         return true;
@@ -98,7 +106,7 @@ public class Ciudades implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.ProyectoAdsi.entidades.Ciudades[ idCiudad=" + idCiudad + " ]";
+        return "edu.ProyectoAdsi.entidades.TiposDocumento[ idTipoDocumento=" + idTipoDocumento + " ]";
     }
     
 }

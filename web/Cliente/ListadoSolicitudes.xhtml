@@ -38,7 +38,7 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuotation" aria-expanded="true" aria-controls="collapseUtilities">
                             <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Cotizaciones</span>
+                            <span style="font-size: 0.8em">Solicitudes y Cotizaciones</span>
                         </a>
                         <div id="collapseQuotation" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
@@ -192,7 +192,7 @@
                                                     <!--Modal para mostrar la información de las solicitudes de cotizacion hechas por el cliente y 
                                                     rechazadas por la empresa-->
 
-                                                    <div class="modal fade" id="modalRechazadas#{paso.index+1}" tabindex="-1" role="dialog" aria-labelledby="modalRechazadasLabel" aria-hidden="false">
+                                                    <div class="modal fade" id="modalRechazadas#{paso.index+1}" tabindex="1" role="dialog" aria-labelledby="modalRechazadasLabel" aria-hidden="false">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content"  style="background-color: #f2f2f2; border-radius: 20px">
                                                                 <h:form id="form1">
@@ -355,7 +355,16 @@
                             filename: "Listado de solicitudes.xls"
                         });
                     }
+
+
+                    jQuery(document).ready(function () {
+                        jQuery('#modalRechazadas').on('hidden.bs.modal', function (e) {
+                            jQuery(this).removeData('bs.modal');
+                            jQuery(this).find('.modal-content').empty();
+                        })
+                    })
                 </script>
+
             </ui:define>
 
         </ui:composition>

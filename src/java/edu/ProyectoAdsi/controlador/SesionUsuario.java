@@ -1,6 +1,7 @@
 package edu.ProyectoAdsi.controlador;
 
 import edu.ProyectoAdsi.entidades.Ciudades;
+import edu.ProyectoAdsi.entidades.TiposDocumento;
 import edu.ProyectoAdsi.entidades.Usuarios;
 import edu.ProyectoAdsi.entidades.UsuariosHasTblRoles;
 import edu.ProyectoAdsi.facade.BolsasDeTiempoFacadeLocal;
@@ -205,7 +206,9 @@ public class SesionUsuario implements Serializable {
 
                 Usuarios nuevoUsu = new Usuarios();
                 nuevoUsu.setFkCiudad(objCiudad);
-                nuevoUsu.setTipoDocumento(tipoDocumento);
+                TiposDocumento doc = new TiposDocumento();
+                doc.setIdTipoDocumento(tipoDocumento);
+                nuevoUsu.setFkTipoDocumento(doc);
                 nuevoUsu.setDocumento(documento);
                 nuevoUsu.setPrimerNombre(primerNombre);
                 nuevoUsu.setSegundoNombre(segundoNombre);
@@ -224,13 +227,17 @@ public class SesionUsuario implements Serializable {
 
                     int posicion = usuariosfacadelocal.consultarId(documento);
 
-                    usuariosfacadelocal.asignarRol(posicion, 4);
-                    bolsasDeTiempoFacadeLocal.generarBolsa(posicion);
+                    usuariosfacadelocal.asignarRol(posicion, 3);
+                    boolean nuevaBolsa = bolsasDeTiempoFacadeLocal.generarBolsa(posicion);
                     
                     PrimeFaces.current().executeScript("registroExitoso('Se ha registrado con exito')");
-
+//                    if (insertUsu==true) {
+//                        FacesContext contex = FacesContext.getCurrentInstance();
+//                        contex.getExternalContext().redirect("index.xhtml");
+//                    }
+                    
                 } else {
-                    PrimeFaces.current().executeScript("registroFallido('Usuario ya registrado')");
+                    PrimeFaces.current().executeScript("registroFallido('Intenta nuevamente o comunicate con nosotros')");
                 }
 
                 this.tipoDocumento = 0;
@@ -251,7 +258,7 @@ public class SesionUsuario implements Serializable {
                 PrimeFaces.current().executeScript("registroFallido('Las contraseñas no coinciden')");
             }
         } catch (Exception e) {
-                 PrimeFaces.current().executeScript("registroFallido('No se pudo registrar.')");
+            PrimeFaces.current().executeScript("registroFallido('No se pudo registrar.')");
         }
         return "";
     }
@@ -359,7 +366,7 @@ public class SesionUsuario implements Serializable {
         this.documento = "";
         this.contraseña = "";
     }
-    
+
     public String registrarOperario() {
         try {
             if (contraseña.equals(confirmarContraseña)) {
@@ -368,12 +375,14 @@ public class SesionUsuario implements Serializable {
 
                 Usuarios nuevoOpe = new Usuarios();
                 nuevoOpe.setFkCiudad(objCiudad);
-                nuevoOpe.setTipoDocumento(tipoDocumento);
+                TiposDocumento doc = new TiposDocumento();
+                doc.setIdTipoDocumento(tipoDocumento);
+                nuevoOpe.setFkTipoDocumento(doc);
                 nuevoOpe.setDocumento(documento);
                 nuevoOpe.setPrimerNombre(primerNombre);
                 nuevoOpe.setSegundoNombre(segundoNombre);
                 nuevoOpe.setPrimerApellido(primerApellido);
-                nuevoOpe.setSegundoApellido(SegundoApellido);      
+                nuevoOpe.setSegundoApellido(SegundoApellido);
                 nuevoOpe.setCorreo(correo);
                 nuevoOpe.setTelefono(telefono);
                 nuevoOpe.setContrasena(contraseña);
@@ -385,7 +394,7 @@ public class SesionUsuario implements Serializable {
 
                     int posicion = usuariosfacadelocal.consultarId(documento);
 
-                    usuariosfacadelocal.asignarRol(posicion, 3);                    
+                    usuariosfacadelocal.asignarRol(posicion, 4);
                     PrimeFaces.current().executeScript("registroExitoso('Se ha registrado con exito')");
 
                 } else {
@@ -408,10 +417,9 @@ public class SesionUsuario implements Serializable {
                 PrimeFaces.current().executeScript("registroFallido('Las contraseñas no coinciden')");
             }
         } catch (Exception e) {
-                 PrimeFaces.current().executeScript("registroFallido('No se pudo registrar.')");
+            PrimeFaces.current().executeScript("registroFallido('No se pudo registrar.')");
         }
         return "";
     }
-
 
 }

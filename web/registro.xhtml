@@ -24,7 +24,9 @@
                                     <f:selectItem itemValue="0" itemLabel="Seleccione tipo de documento"></f:selectItem>
                                     <f:selectItem itemValue="1" itemLabel="CC"></f:selectItem>
                                     <f:selectItem itemValue="2" itemLabel="TI"></f:selectItem>
-                                    <f:selectItem itemValue="3" itemLabel="Otro"></f:selectItem>
+                                    <f:selectItem itemValue="3" itemLabel="NIT"></f:selectItem>
+                                    <f:selectItem itemValue="4" itemLabel="Cédula de extranjería"></f:selectItem>
+                                    <f:selectItem itemValue="5" itemLabel="Pasaporte"></f:selectItem>
                             </h:selectOneMenu>
                         </div>
                         <div class="col-md-3 mb-3">
@@ -122,24 +124,13 @@
                             <h:inputText value="#{sesionUsuario.confirmarContraseña}" html5:type="password" class="form-control" html5:required="true"/>
                         </div>
                     </div>
-<!--                    <div class="form-row">
-                    <div class="col-md-3 mb-3"></div>
-                    <div class="col-md-3 mb-3">
-                        <div class="form-group">
-                            <div class="form-check">                       
-                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required="true"/>
-                                <label class="form-check-label" for="invalidCheck">Aceptar los términos y condiciones.</label>
-                            </div>
-                        </div>
-                    </div>
-                    </div>-->
                     <br></br>
                     <br></br>
                     <div class="form-row">
                         <div class="col-md-5 mb-3"></div>
                         <div class="col-md-3 mb-3">
                             <h:commandButton action="#{sesionUsuario.registrarUsuario()}" class="btn btn-success" style="background-color: rgb(50, 51, 142); border: none" value="Registrarse" ></h:commandButton>
-                            <a href="index.xhtml" class="btn btn-dark">Cancelar</a>
+                            <a href="index.xhtml" class="btn btn-dark">Cancelar / Volver</a>
                         </div>
                     </div>
                 </h:form>  

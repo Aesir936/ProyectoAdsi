@@ -73,7 +73,7 @@ public class Bolsasession implements Serializable {
             }
 
         } catch (Exception e) {
-            PrimeFaces.current().executeScript("registroFallido('Algo ha salido mal... intentalo nuevamente')");
+            PrimeFaces.current().executeScript("estadoBad('Algo ha salido mal... intentalo nuevamente')");
             return "";
         }
         return null;
@@ -97,12 +97,18 @@ public class Bolsasession implements Serializable {
         Usuarios cliente = sesionUsuario.getUsuLog();
         int idCliente = cliente.getIdUsuarios();
         int horasRestantes = bolsa.getHorasRestantes();
-        int horasActuales = 0;
+        int horasActuales;
         horasActuales = recarga + horasRestantes;
-        bolsasDeTiempoFacadeLocal.recargarBolsa(idCliente, horasActuales);
-        
+        boolean recBolsa = bolsasDeTiempoFacadeLocal.recargarBolsa(idCliente, horasActuales, recarga);
+
+            if (recBolsa == true) {
+                PrimeFaces.current().executeScript("estadoOk('Su recarga se ha registrado con exito')");
+
+            } else {
+                PrimeFaces.current().executeScript("estadoBad('No se ha podido registrar su recarga de tiempo, intentelo nuevamente')");
+            }
          } catch (Exception e) {
-            return;
+             PrimeFaces.current().executeScript("estadoBad('No se ha podido registrar su recarga de tiempo, intentelo nuevamente')");
         }
     }
     

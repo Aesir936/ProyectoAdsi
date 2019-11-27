@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bxs42
+ * @author cristian
  */
 @Entity
 @Table(name = "tbl_bolsas_de_tiempo")

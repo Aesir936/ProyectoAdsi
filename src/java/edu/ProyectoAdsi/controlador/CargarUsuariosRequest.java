@@ -2,6 +2,7 @@ package edu.ProyectoAdsi.controlador;
 
 import edu.ProyectoAdsi.entidades.Ciudades;
 import edu.ProyectoAdsi.entidades.Roles;
+import edu.ProyectoAdsi.entidades.TiposDocumento;
 import edu.ProyectoAdsi.entidades.Usuarios;
 import edu.ProyectoAdsi.entidades.UsuariosHasTblRoles;
 import edu.ProyectoAdsi.facade.RolesFacadeLocal;
@@ -72,7 +73,9 @@ public class CargarUsuariosRequest {
                 String[] datosUsu = line.split(",");
                 Usuarios Usu = new Usuarios();
                 int tipoDoc = Integer.parseInt(datosUsu[0]);
-                Usu.setTipoDocumento(tipoDoc);
+                TiposDocumento doc = new TiposDocumento();
+                doc.setIdTipoDocumento(tipoDoc);
+                Usu.setFkTipoDocumento(doc);
                 Usu.setDocumento(datosUsu[1]);
                 Usu.setPrimerNombre(datosUsu[2]);
                 Usu.setSegundoNombre(datosUsu[3]);
@@ -91,7 +94,7 @@ public class CargarUsuariosRequest {
                 Usu.setFkCiudad(Ciudad);
                 usuariosfacadelocal.create(Usu);
 
-                int idRol = Integer.parseInt(datosUsu[14]);
+                int idRol = 3;
                 Roles rol = rolesFacadeLocal.find(idRol);
 
                 UsuariosHasTblRoles usurol = new UsuariosHasTblRoles();

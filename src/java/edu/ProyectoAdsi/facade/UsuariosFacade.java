@@ -26,17 +26,17 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     @Override
     public boolean insertUsuario(Usuarios newUser) {
         try {
-            Query insertUsu = em.createNativeQuery("insert into tbl_usuarios (tipo_documento,documento, primer_nombre, segundo_nombre,primer_apellido, \n"
-                    + "segundo_apellido,nombre_empresa,nit,correo, telefono, contrasena,direccion,estado,fk_ciudad) values (?,?,?,?,?,?,?,?,?,?,?,?,'Activo',?)");
+            Query insertUsu = em.createNativeQuery("insert into tbl_usuarios (fk_tipo_documento,documento, primer_nombre, segundo_nombre,primer_apellido, \n"
+                    + "segundo_apellido,nombre_empresa,nit,correo, telefono, contrasena,direccion,estado,fk_ciudad) values (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,'Activo',?13)");
 
-            insertUsu.setParameter(1, newUser.getTipoDocumento());
+            insertUsu.setParameter(1, newUser.getFkTipoDocumento().getIdTipoDocumento());
             insertUsu.setParameter(2, newUser.getDocumento());
             insertUsu.setParameter(3, newUser.getPrimerNombre());
             insertUsu.setParameter(4, newUser.getSegundoNombre());
             insertUsu.setParameter(5, newUser.getPrimerApellido());
             insertUsu.setParameter(6, newUser.getSegundoApellido());
             insertUsu.setParameter(7, newUser.getNombreEmpresa());
-            insertUsu.setParameter(8, newUser.getNit());
+                insertUsu.setParameter(8, newUser.getNit());
             insertUsu.setParameter(9, newUser.getCorreo());
             insertUsu.setParameter(10, newUser.getTelefono());
             insertUsu.setParameter(11, newUser.getContrasena());
@@ -248,10 +248,10 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     @Override
     public boolean insertOperario(Usuarios newOper) {
         try {
-            Query insertOpe = em.createNativeQuery("insert into tbl_usuarios (tipo_documento,documento, primer_nombre, segundo_nombre,primer_apellido, \n"
+            Query insertOpe = em.createNativeQuery("insert into tbl_usuarios (fk_tipo_documento,documento, primer_nombre, segundo_nombre,primer_apellido, \n"
                     + "segundo_apellido,correo, telefono, contrasena,direccion,estado) values (?,?,?,?,?,?,?,?,?,?,'Activo')");
 
-            insertOpe.setParameter(1, newOper.getTipoDocumento());
+            insertOpe.setParameter(1, newOper.getFkTipoDocumento());
             insertOpe.setParameter(2, newOper.getDocumento());
             insertOpe.setParameter(3, newOper.getPrimerNombre());
             insertOpe.setParameter(4, newOper.getSegundoNombre());

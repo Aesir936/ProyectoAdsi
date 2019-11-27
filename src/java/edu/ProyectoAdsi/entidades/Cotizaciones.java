@@ -6,8 +6,10 @@
 package edu.ProyectoAdsi.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,12 +20,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -68,12 +72,16 @@ public class Cotizaciones implements Serializable {
     @Size(max = 500)
     @Column(name = "comentario_cliente")
     private String comentarioCliente;
+    @Column(name = "horas_fabricacion")
+    private Integer horasFabricacion;
     @JoinColumn(name = "id_estado_cotizacion", referencedColumnName = "id_estado_cotizacion")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EstadosCotizaciones idEstadoCotizacion;
     @JoinColumn(name = "fk_id_cliente", referencedColumnName = "id_usuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuarios fkIdCliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCotizaciones", fetch = FetchType.LAZY)
+    private Collection<ArchivosAdjuntos> archivosAdjuntosCollection;
 
     public Cotizaciones() {
     }
@@ -160,6 +168,14 @@ public class Cotizaciones implements Serializable {
         this.comentarioCliente = comentarioCliente;
     }
 
+    public Integer getHorasFabricacion() {
+        return horasFabricacion;
+    }
+
+    public void setHorasFabricacion(Integer horasFabricacion) {
+        this.horasFabricacion = horasFabricacion;
+    }
+
     public EstadosCotizaciones getIdEstadoCotizacion() {
         return idEstadoCotizacion;
     }
@@ -174,6 +190,15 @@ public class Cotizaciones implements Serializable {
 
     public void setFkIdCliente(Usuarios fkIdCliente) {
         this.fkIdCliente = fkIdCliente;
+    }
+
+    @XmlTransient
+    public Collection<ArchivosAdjuntos> getArchivosAdjuntosCollection() {
+        return archivosAdjuntosCollection;
+    }
+
+    public void setArchivosAdjuntosCollection(Collection<ArchivosAdjuntos> archivosAdjuntosCollection) {
+        this.archivosAdjuntosCollection = archivosAdjuntosCollection;
     }
 
     @Override

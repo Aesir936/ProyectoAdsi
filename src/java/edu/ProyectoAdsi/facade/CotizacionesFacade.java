@@ -69,12 +69,13 @@ public class CotizacionesFacade extends AbstractFacade<Cotizaciones> implements 
     @Override
     public boolean generarCotizacion(Cotizaciones cotGenerada) {
         try {
-            Query updateCot = em.createNativeQuery("UPDATE tbl_cotizaciones SET valor_unitario = ?1, valor_total = ?2, comentarios = ?3, id_estado_cotizacion = 2 WHERE id_cotizaciones  =?4");
+            Query updateCot = em.createNativeQuery("UPDATE tbl_cotizaciones SET valor_unitario = ?1, valor_total = ?2, comentarios = ?3,horas_fabricacion = ?4, id_estado_cotizacion = 2 WHERE id_cotizaciones  =?5");
 
             updateCot.setParameter(1, cotGenerada.getValorUnitario());
             updateCot.setParameter(2, cotGenerada.getValorTotal());
             updateCot.setParameter(3, cotGenerada.getComentarios());
-            updateCot.setParameter(4, cotGenerada.getIdCotizaciones());
+            updateCot.setParameter(4, cotGenerada.getHorasFabricacion());
+            updateCot.setParameter(5, cotGenerada.getIdCotizaciones());
 
             updateCot.executeUpdate();
             return true;
@@ -85,10 +86,11 @@ public class CotizacionesFacade extends AbstractFacade<Cotizaciones> implements 
     }
 
     @Override
-    public boolean rechazarCot(int idCot) {
+    public boolean rechazarCot(int idCot, String comentario) {
         try {
-            Query rCot = em.createNativeQuery("UPDATE tbl_cotizaciones SET id_estado_cotizacion = 4 WHERE id_cotizaciones = ?");
-            rCot.setParameter(1, idCot);
+            Query rCot = em.createNativeQuery("UPDATE tbl_cotizaciones SET comentarios = ?1, id_estado_cotizacion = 4 WHERE id_cotizaciones = ?2");
+            rCot.setParameter(1, comentario);
+            rCot.setParameter(2, idCot);
 
             rCot.executeUpdate();
             return true;

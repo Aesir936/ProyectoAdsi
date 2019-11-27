@@ -31,7 +31,7 @@ public interface CotizacionesFacadeLocal {
 
     public boolean generarCotizacion(Cotizaciones cotGenerada);
 
-    public boolean rechazarCot(int idCot);
+    public boolean rechazarCot(int idCot, String comentario);
 
     public boolean aprobarCotCliente(int idCot);
 

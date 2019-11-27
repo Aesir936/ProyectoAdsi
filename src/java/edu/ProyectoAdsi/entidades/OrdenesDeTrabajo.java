@@ -6,8 +6,10 @@
 package edu.ProyectoAdsi.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,12 +20,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -44,30 +48,33 @@ public class OrdenesDeTrabajo implements Serializable {
     private Integer idOrdenesDeTrabajo;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "fecha_entrega")
+    @Temporal(TemporalType.DATE)
+    private Date fechaEntrega;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "fecha_generacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaGeneracion;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_entrega")
-    @Temporal(TemporalType.DATE)
-    private Date fechaEntrega;
+    @Column(name = "tiempo_total_fabricacion")
+    private int tiempoTotalFabricacion;
     @Size(max = 500)
     @Column(name = "detalle")
     private String detalle;
-    @Size(max = 10)
     @Column(name = "cantidad_piezas")
-    private String cantidadPiezas;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "tiempo_total_fabricacion")
-    private int tiempoTotalFabricacion;
-    @JoinColumn(name = "fk_id_estado", referencedColumnName = "id_estados_ordenes_de_trabajo")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private EstadosOrdenesDeTrabajo fkIdEstado;
+    private Integer cantidadPiezas;
+    @OneToMany(mappedBy = "idOrdenTrabajo", fetch = FetchType.LAZY)
+    private Collection<ArchivosAdjuntos> archivosAdjuntosCollection;
     @JoinColumn(name = "fk_id_cliente", referencedColumnName = "id_usuarios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuarios fkIdCliente;
+    @JoinColumn(name = "fk_id_estado", referencedColumnName = "id_estados_ordenes_de_trabajo")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private EstadosOrdenesDeTrabajo fkIdEstado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrdenesDeTrabajo", fetch = FetchType.LAZY)
+    private Collection<OrdenesDeTrabajoHasTblProcesos> ordenesDeTrabajoHasTblProcesosCollection;
 
     public OrdenesDeTrabajo() {
     }
@@ -76,10 +83,10 @@ public class OrdenesDeTrabajo implements Serializable {
         this.idOrdenesDeTrabajo = idOrdenesDeTrabajo;
     }
 
-    public OrdenesDeTrabajo(Integer idOrdenesDeTrabajo, Date fechaGeneracion, Date fechaEntrega, int tiempoTotalFabricacion) {
+    public OrdenesDeTrabajo(Integer idOrdenesDeTrabajo, Date fechaEntrega, Date fechaGeneracion, int tiempoTotalFabricacion) {
         this.idOrdenesDeTrabajo = idOrdenesDeTrabajo;
-        this.fechaGeneracion = fechaGeneracion;
         this.fechaEntrega = fechaEntrega;
+        this.fechaGeneracion = fechaGeneracion;
         this.tiempoTotalFabricacion = tiempoTotalFabricacion;
     }
 
@@ -91,14 +98,6 @@ public class OrdenesDeTrabajo implements Serializable {
         this.idOrdenesDeTrabajo = idOrdenesDeTrabajo;
     }
 
-    public Date getFechaGeneracion() {
-        return fechaGeneracion;
-    }
-
-    public void setFechaGeneracion(Date fechaGeneracion) {
-        this.fechaGeneracion = fechaGeneracion;
-    }
-
     public Date getFechaEntrega() {
         return fechaEntrega;
     }
@@ -107,20 +106,12 @@ public class OrdenesDeTrabajo implements Serializable {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public String getDetalle() {
-        return detalle;
+    public Date getFechaGeneracion() {
+        return fechaGeneracion;
     }
 
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
-    }
-
-    public String getCantidadPiezas() {
-        return cantidadPiezas;
-    }
-
-    public void setCantidadPiezas(String cantidadPiezas) {
-        this.cantidadPiezas = cantidadPiezas;
+    public void setFechaGeneracion(Date fechaGeneracion) {
+        this.fechaGeneracion = fechaGeneracion;
     }
 
     public int getTiempoTotalFabricacion() {
@@ -131,12 +122,29 @@ public class OrdenesDeTrabajo implements Serializable {
         this.tiempoTotalFabricacion = tiempoTotalFabricacion;
     }
 
-    public EstadosOrdenesDeTrabajo getFkIdEstado() {
-        return fkIdEstado;
+    public String getDetalle() {
+        return detalle;
     }
 
-    public void setFkIdEstado(EstadosOrdenesDeTrabajo fkIdEstado) {
-        this.fkIdEstado = fkIdEstado;
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
+    public Integer getCantidadPiezas() {
+        return cantidadPiezas;
+    }
+
+    public void setCantidadPiezas(Integer cantidadPiezas) {
+        this.cantidadPiezas = cantidadPiezas;
+    }
+
+    @XmlTransient
+    public Collection<ArchivosAdjuntos> getArchivosAdjuntosCollection() {
+        return archivosAdjuntosCollection;
+    }
+
+    public void setArchivosAdjuntosCollection(Collection<ArchivosAdjuntos> archivosAdjuntosCollection) {
+        this.archivosAdjuntosCollection = archivosAdjuntosCollection;
     }
 
     public Usuarios getFkIdCliente() {
@@ -145,6 +153,23 @@ public class OrdenesDeTrabajo implements Serializable {
 
     public void setFkIdCliente(Usuarios fkIdCliente) {
         this.fkIdCliente = fkIdCliente;
+    }
+
+    public EstadosOrdenesDeTrabajo getFkIdEstado() {
+        return fkIdEstado;
+    }
+
+    public void setFkIdEstado(EstadosOrdenesDeTrabajo fkIdEstado) {
+        this.fkIdEstado = fkIdEstado;
+    }
+
+    @XmlTransient
+    public Collection<OrdenesDeTrabajoHasTblProcesos> getOrdenesDeTrabajoHasTblProcesosCollection() {
+        return ordenesDeTrabajoHasTblProcesosCollection;
+    }
+
+    public void setOrdenesDeTrabajoHasTblProcesosCollection(Collection<OrdenesDeTrabajoHasTblProcesos> ordenesDeTrabajoHasTblProcesosCollection) {
+        this.ordenesDeTrabajoHasTblProcesosCollection = ordenesDeTrabajoHasTblProcesosCollection;
     }
 
     @Override

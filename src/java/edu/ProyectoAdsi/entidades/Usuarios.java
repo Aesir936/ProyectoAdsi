@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bxs42
+ * @author cristian
  */
 @Entity
 @Table(name = "tbl_usuarios")
@@ -37,10 +37,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")})
 public class Usuarios implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "tipo_documento")
-    private int tipoDocumento;
+    @Column(name = "id_usuarios")
+    private Integer idUsuarios;
     @Size(max = 20)
     @Column(name = "documento")
     private String documento;
@@ -67,12 +69,12 @@ public class Usuarios implements Serializable {
     @Column(name = "nit")
     private String nit;
     @Basic(optional = false)
-    @NotNull()
+    @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "correo")
     private String correo;
     @Basic(optional = false)
-    @NotNull()
+    @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "telefono")
     private String telefono;
@@ -89,12 +91,6 @@ public class Usuarios implements Serializable {
     @Size(max = 45)
     @Column(name = "estado")
     private String estado;
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_usuarios")
-    private Integer idUsuarios;
     @OneToMany(mappedBy = "fkIdUsuario", fetch = FetchType.LAZY)
     private Collection<BolsasDeTiempo> bolsasDeTiempoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkIdCliente", fetch = FetchType.LAZY)
@@ -103,6 +99,9 @@ public class Usuarios implements Serializable {
     private Collection<UsuariosHasTblRoles> usuariosHasTblRolesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkIdCliente", fetch = FetchType.LAZY)
     private Collection<OrdenesDeTrabajo> ordenesDeTrabajoCollection;
+    @JoinColumn(name = "fk_tipo_documento", referencedColumnName = "id_tipo_documento")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private TiposDocumento fkTipoDocumento;
     @JoinColumn(name = "fk_ciudad", referencedColumnName = "id_ciudad")
     @ManyToOne(fetch = FetchType.LAZY)
     private Ciudades fkCiudad;
@@ -114,9 +113,8 @@ public class Usuarios implements Serializable {
         this.idUsuarios = idUsuarios;
     }
 
-    public Usuarios(Integer idUsuarios, int tipoDocumento, String primerNombre, String primerApellido, String correo, String telefono, String contrasena, String direccion) {
+    public Usuarios(Integer idUsuarios, String primerNombre, String primerApellido, String correo, String telefono, String contrasena, String direccion) {
         this.idUsuarios = idUsuarios;
-        this.tipoDocumento = tipoDocumento;
         this.primerNombre = primerNombre;
         this.primerApellido = primerApellido;
         this.correo = correo;
@@ -133,12 +131,12 @@ public class Usuarios implements Serializable {
         this.idUsuarios = idUsuarios;
     }
 
-    public int getTipoDocumento() {
-        return tipoDocumento;
+    public String getDocumento() {
+        return documento;
     }
 
-    public void setTipoDocumento(int tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     public String getPrimerNombre() {
@@ -180,23 +178,7 @@ public class Usuarios implements Serializable {
     public void setNombreEmpresa(String nombreEmpresa) {
         this.nombreEmpresa = nombreEmpresa;
     }
-    
-    public Ciudades getFkCiudad() {
-        return fkCiudad;
-    }
 
-    public void setFkCiudad(Ciudades fkCiudad) {
-        this.fkCiudad = fkCiudad;
-    }
-    
-    public String getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
-    }
-    
     public String getNit() {
         return nit;
     }
@@ -243,7 +225,7 @@ public class Usuarios implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }  
+    }
 
     @XmlTransient
     public Collection<BolsasDeTiempo> getBolsasDeTiempoCollection() {
@@ -281,7 +263,22 @@ public class Usuarios implements Serializable {
         this.ordenesDeTrabajoCollection = ordenesDeTrabajoCollection;
     }
 
-    
+    public TiposDocumento getFkTipoDocumento() {
+        return fkTipoDocumento;
+    }
+
+    public void setFkTipoDocumento(TiposDocumento fkTipoDocumento) {
+        this.fkTipoDocumento = fkTipoDocumento;
+    }
+
+    public Ciudades getFkCiudad() {
+        return fkCiudad;
+    }
+
+    public void setFkCiudad(Ciudades fkCiudad) {
+        this.fkCiudad = fkCiudad;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -305,6 +302,6 @@ public class Usuarios implements Serializable {
     @Override
     public String toString() {
         return "edu.ProyectoAdsi.entidades.Usuarios[ idUsuarios=" + idUsuarios + " ]";
-    }   
+    }
     
 }

@@ -67,13 +67,14 @@ public class BolsasDeTiempoFacade extends AbstractFacade<BolsasDeTiempo> impleme
     
     
     @Override
-    public boolean recargarBolsa(int idCliente, int horasRestantes) {
+    public boolean recargarBolsa(int idCliente, int horasRestantes, int recarga) {
         
         try {           
             
-            Query updateBol = em.createNativeQuery("UPDATE tbl_bolsas_de_tiempo SET horas_restantes = ?1 WHERE fk_id_usuario = ?2");
+            Query updateBol = em.createNativeQuery("UPDATE tbl_bolsas_de_tiempo SET horas_restantes = ?1, ultima_compra = ?2 WHERE fk_id_usuario = ?3");
             updateBol.setParameter(1,horasRestantes);
-            updateBol.setParameter(2,idCliente);
+            updateBol.setParameter(2,recarga);
+            updateBol.setParameter(3,idCliente);
             updateBol.executeUpdate();
             return true;
 

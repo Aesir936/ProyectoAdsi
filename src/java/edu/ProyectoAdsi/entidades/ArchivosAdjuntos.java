@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bxs42
+ * @author cristian
  */
 @Entity
 @Table(name = "tbl_archivos_adjuntos")

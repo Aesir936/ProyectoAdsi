@@ -34,12 +34,13 @@ public class OrdenesDeTrabajoFacade extends AbstractFacade<OrdenesDeTrabajo> imp
     @Override
     public boolean insertOT(OrdenesDeTrabajo nuevoOT) {
         try {
-            Query insertOT = em.createNativeQuery("insert into tbl_ordenes_de_trabajo (fecha_vencimiento,tiempo_total_fabricacion,fk_id_estado,fk_id_cliente,detalle) values (?1,?2,1,?4,?5)");
+            Query insertOT = em.createNativeQuery("insert into tbl_ordenes_de_trabajo (fecha_entrega,tiempo_total_fabricacion,detalle,cantidad_piezas,fk_id_estado,fk_id_cliente) values (?1,?2,?3,?4,1,?5)");
 
             insertOT.setParameter(1, nuevoOT.getFechaEntrega());
             insertOT.setParameter(2, nuevoOT.getTiempoTotalFabricacion());
-            insertOT.setParameter(4, nuevoOT.getFkIdCliente().getIdUsuarios());
-            insertOT.setParameter(5, nuevoOT.getDetalle());
+            insertOT.setParameter(3, nuevoOT.getDetalle());
+            insertOT.setParameter(4, nuevoOT.getCantidadPiezas());
+            insertOT.setParameter(5, nuevoOT.getFkIdCliente().getIdUsuarios());
 
             insertOT.executeUpdate();
             return true;

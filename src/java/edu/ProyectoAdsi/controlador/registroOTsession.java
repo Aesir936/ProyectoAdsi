@@ -22,9 +22,6 @@ import org.primefaces.PrimeFaces;
 @SessionScoped
 public class registroOTsession implements Serializable {
 
-    /**
-     * Creates a new instance of pruebasession
-     */
     public registroOTsession() {
     }
 
@@ -118,16 +115,19 @@ public class registroOTsession implements Serializable {
     public boolean registrarOTAutomat(int idCot) {
         try {
             Cotizaciones cot = cotizacionesFacadeLocal.find(idCot);
-            Usuarios cliente=usuariosFacadeLocal.find(cot.getFkIdCliente());
+            int idCliente = cot.getFkIdCliente().getIdUsuarios();
+            Usuarios cliente = new Usuarios();
+            cliente = usuariosFacadeLocal.find(idCliente);
+            
             OrdenesDeTrabajo nuevoOT = new OrdenesDeTrabajo();
+            
             nuevoOT.setFechaEntrega(cot.getFechaEntrega());
+            nuevoOT.setTiempoTotalFabricacion(cot.getHorasFabricacion());
             nuevoOT.setDetalle(cot.getDetalle());
-            nuevoOT.setCantidadPiezas(cot.getCantidadPiezas());
+            int piezas = Integer.parseInt(cot.getCantidadPiezas());
+            nuevoOT.setCantidadPiezas(piezas);
             nuevoOT.setFkIdCliente(cliente);
-            int tiempo = Integer.parseInt(tiempoFabricacion);
-            nuevoOT.setTiempoTotalFabricacion(tiempo);
-            nuevoOT.setDetalle(detalle);
-
+            
             boolean insertOT = ordenesDeTrabajoFacadeLocal.insertOT(nuevoOT);
 
             if (insertOT) {
