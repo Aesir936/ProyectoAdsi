@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9730b94a-6fd7-4e07-aca8-e99b8385f980">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="documento" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_usuarios.`documento` AS tbl_usuarios_documento,
+     tbl_usuarios.`primer_nombre` AS tbl_usuarios_primer_nombre,
+     tbl_usuarios.`primer_apellido` AS tbl_usuarios_primer_apellido,
+     tbl_ordenes_de_trabajo.`id_ordenes_de_trabajo` AS tbl_ordenes_de_trabajo_id_ordenes_de_trabajo,
+     tbl_ordenes_de_trabajo.`fecha_entrega` AS tbl_ordenes_de_trabajo_fecha_entrega,
+     tbl_ordenes_de_trabajo.`fecha_generacion` AS tbl_ordenes_de_trabajo_fecha_generacion,
+     tbl_estados_ordenes_de_trabajo.`nombre_estado_orden_de_trabajo` AS tbl_estados_ordenes_de_trabajo_nombre_estado_orden_de_trabajo
+FROM
+     `tbl_usuarios` tbl_usuarios INNER JOIN `tbl_ordenes_de_trabajo` tbl_ordenes_de_trabajo ON tbl_usuarios.`id_usuarios` = tbl_ordenes_de_trabajo.`fk_id_cliente`
+     INNER JOIN `tbl_estados_ordenes_de_trabajo` tbl_estados_ordenes_de_trabajo ON tbl_ordenes_de_trabajo.`fk_id_estado` = tbl_estados_ordenes_de_trabajo.`id_estados_ordenes_de_trabajo`
+WHERE
+     tbl_usuarios.`documento` = $P{documento}]]>
+	</queryString>
+	<field name="tbl_usuarios_documento" class="java.lang.String"/>
+	<field name="tbl_usuarios_primer_nombre" class="java.lang.String"/>
+	<field name="tbl_usuarios_primer_apellido" class="java.lang.String"/>
+	<field name="tbl_ordenes_de_trabajo_id_ordenes_de_trabajo" class="java.lang.Integer"/>
+	<field name="tbl_ordenes_de_trabajo_fecha_entrega" class="java.sql.Date"/>
+	<field name="tbl_ordenes_de_trabajo_fecha_generacion" class="java.sql.Timestamp"/>
+	<field name="tbl_estados_ordenes_de_trabajo_nombre_estado_orden_de_trabajo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="108" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="443" y="10" width="100" height="20" uuid="580a6987-2b14-4424-94d8-b2e3eb600033"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="61" height="20" uuid="76b597a0-aafe-4a2a-ba91-37fdbf30a24b"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[# O.T]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="2" width="82" height="20" uuid="017aaa44-4ad9-4a99-8261-6eec9c3466cf"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="2" width="73" height="20" uuid="673f71f7-a08c-4414-a289-069fe453cf0c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="2" width="75" height="20" uuid="fc8e43c9-dd8e-428b-9fb6-e819e45e8d3b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="2" width="100" height="20" uuid="81639109-2c23-4d52-b348-d3f91f10864b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Generacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="2" width="100" height="20" uuid="a112b05f-c36d-4547-9eb8-516f5eb7d667"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Entrega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="491" y="2" width="64" height="20" uuid="f4c383f2-e16a-4de7-b771-ce1dc5629dd2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="11" width="61" height="20" uuid="79485b5e-7339-4f3a-abab-ea57cadf522f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbl_ordenes_de_trabajo_id_ordenes_de_trabajo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="61" y="11" width="82" height="20" uuid="814a3173-f43e-4225-bbba-0dd7f4cca61b"/>
+				<textFieldExpression><![CDATA[$F{tbl_usuarios_documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="11" width="73" height="20" uuid="eacef58c-54f0-4792-9035-206423677470"/>
+				<textFieldExpression><![CDATA[$F{tbl_usuarios_primer_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="11" width="75" height="20" uuid="6901291d-641a-497f-8171-40362195c7d3"/>
+				<textFieldExpression><![CDATA[$F{tbl_usuarios_primer_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="291" y="11" width="100" height="20" uuid="bf14bd31-a959-4186-8bc1-85b84dcb6f3a"/>
+				<textFieldExpression><![CDATA[$F{tbl_ordenes_de_trabajo_fecha_generacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="11" width="100" height="20" uuid="a06dcdd6-b0d3-4e70-bfc8-6f9b41d351ee"/>
+				<textFieldExpression><![CDATA[$F{tbl_ordenes_de_trabajo_fecha_entrega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="491" y="11" width="64" height="20" uuid="58e80ae5-d266-4b7c-85e0-05be33ae62c4"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tbl_estados_ordenes_de_trabajo_nombre_estado_orden_de_trabajo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="57" splitType="Stretch">
+			<textField>
+				<reportElement x="423" y="37" width="80" height="20" uuid="281c025e-4a14-4b9e-a609-e4c6ec59b7fe"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="503" y="37" width="40" height="20" uuid="dd0ea39b-8dcb-4637-8393-1783dfacb022"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
