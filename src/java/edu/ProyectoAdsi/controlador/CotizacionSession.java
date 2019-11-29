@@ -205,12 +205,14 @@ public class CotizacionSession implements Serializable {
             nuevaCot.setFkIdCliente(sesionUsuario.getUsuLog());
             boolean insertCoti = cotizacionesFacadeLocal.crearCotizacion(nuevaCot);
 
+            List<Cotizaciones> listaCoti = cotizacionesFacadeLocal.findAll();
+            this.idCot = listaCoti.stream().max(comparing(Cotizaciones::getIdCotizaciones)).get();
+
             if (insertCoti == true) {
                 if (adjunto != null) {
                     guardarArchivo();
                 }
-                List<Cotizaciones> listaCoti = cotizacionesFacadeLocal.findAll();
-                this.idCot = listaCoti.stream().max(comparing(Cotizaciones::getIdCotizaciones)).get();
+
                 PrimeFaces.current().executeScript("estadoOk('Su solicitud de cotización se ha registrado con exito')");
 
             } else {
@@ -277,11 +279,14 @@ public class CotizacionSession implements Serializable {
 
 //    Método para que un cliente aprueb una cotización generada porla empresa
     public void aprobarCotCliente(int idCot) {
-        boolean update = cotizacionesFacadeLocal.aprobarCotCliente(idCot);
+
         boolean crearOt = oTsession.registrarOTAutomat(idCot);
-        
-        if (update == true && crearOt == true) {
-            PrimeFaces.current().executeScript("estadoOk('Cotización APROBADA')");
+
+        if (crearOt == true) {
+            boolean update = cotizacionesFacadeLocal.aprobarCotCliente(idCot);
+            if (crearOt == true) {
+                PrimeFaces.current().executeScript("estadoOk('Cotización APROBADA')");
+            }
         } else {
             PrimeFaces.current().executeScript("estadoBad('No pudo procesarse tu solicitud, intentalo de nuevo o comunicate con nosotros.')");
         }

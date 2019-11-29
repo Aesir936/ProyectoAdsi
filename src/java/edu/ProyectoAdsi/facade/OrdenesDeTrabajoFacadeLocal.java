@@ -33,5 +33,9 @@ public interface OrdenesDeTrabajoFacadeLocal {
     public boolean insertOT(OrdenesDeTrabajo nuevoOT);
 
     public List<OrdenesDeTrabajo> filtrarOT(int idCliente, int estadoOT);
+
+    public int idUltimaOT();
+
+    public boolean rechazarCot(int idOt);
     
 }

@@ -31,5 +31,9 @@ public interface ArchivosAdjuntosFacadeLocal {
     int count();
 
     public boolean insertarAdjunto(ArchivosAdjuntos nuevoArchivo);
-    
+
+    public boolean actualizarAdjunto(ArchivosAdjuntos nuevoArchivo);
+
+    public List<ArchivosAdjuntos> buscarAdjunto(int idCot);
+
 }

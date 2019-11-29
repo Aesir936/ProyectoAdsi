@@ -9,7 +9,7 @@
     <body>
 
         <ui:composition template="./TemplateGerente/templateGerente.xhtml">
-            
+
             <ui:define name="content"> 
                 <script>
                     // Add the following code if you want the name of the file appear on select
@@ -77,14 +77,17 @@
                                 </div>
                             </div>
                         </div>
-                        <br></br>
-                        <br></br>
-                        <div class="form-group col-md-8">
-                            <label for="comment">Descripción del proyecto o pieza:</label>
-                            <p:inputTextarea class="form-control" rows="3" id="comment" value="#{registroOTsession.detalle}" style="max-width: 25rem" required="true" requiredMessage="Por favor ingrese una descripción"/>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                            <label for="inputCPiezas">Cantidad de piezas:</label>
+                            <br></br>
+                            <p:inputText  id="inputCPiezas" value="#{registroOTsession.cantidadPiezas}" required='true'/>
+                            </div>
                         </div>
-                       
-                        <br></br>
+                        <div class="col-md-8">
+                            <label for="comment">Descripción del proyecto o pieza:</label>
+                            <p:inputTextarea rows="6" id="comment" value="#{registroOTsession.detalle}" style="width: 75%" required="true"/>
+                        </div>
                         <br></br>
                         <h:commandButton class="btn btn-primary" action="#{registroOTsession.registrarOT()}" value="Registrar Orden"/>
                         <div class="row" style="height: 4.3rem"></div>

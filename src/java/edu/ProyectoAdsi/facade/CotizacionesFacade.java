@@ -29,12 +29,12 @@ public class CotizacionesFacade extends AbstractFacade<Cotizaciones> implements 
     @Override
     public boolean crearCotizacion(Cotizaciones newCot) {
         try {
-            Query insertCot = em.createNativeQuery("insert into tbl_cotizaciones (detalle, fecha_entrega, cantidad_piezas, id_estado_cotizacion, fk_id_cliente) values (?1,?2,?3,1,?5)");
+            Query insertCot = em.createNativeQuery("insert into tbl_cotizaciones (detalle, fecha_entrega, cantidad_piezas, horas_fabricacion, id_estado_cotizacion, fk_id_cliente) values (?1,?2,?3,0,1,?4)");
 
             insertCot.setParameter(1, newCot.getDetalle());
             insertCot.setParameter(2, newCot.getFechaEntrega());
             insertCot.setParameter(3, newCot.getCantidadPiezas());
-            insertCot.setParameter(5, newCot.getFkIdCliente().getIdUsuarios());
+            insertCot.setParameter(4, newCot.getFkIdCliente().getIdUsuarios());
 
             insertCot.executeUpdate();
             return true;
@@ -95,8 +95,9 @@ public class CotizacionesFacade extends AbstractFacade<Cotizaciones> implements 
             rCot.executeUpdate();
             return true;
         } catch (Exception e) {
+            return false;
         }
-        return false;
+        
     }
 
     @Override

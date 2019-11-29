@@ -68,23 +68,21 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
+                                                <th scope="col">Nº Cotización</th>
                                                 <th scope="col">Nombre cliente</th>
                                                 <th scope="col">Documento</th>
-                                                <th scope="col"># Piezas</th>
                                                 <th scope="col">Fecha Registro</th>
                                                 <th scope="col">Fecha entrega</th>
                                                 <th scope="col">Estado</th>
-                                                <th scope="col">Generar</th>                                                
+                                                <th scope="col">Acción</th>                                                
                                             </tr>
                                         </thead> 
                                         <tbody>
                                             <c:forEach items="#{cotizacionSession.filtrarCotizaciones()}" var="cot" varStatus="paso">
                                                 <tr>
-                                                    <th scope="row">#{paso.index+1}</th>
+                                                    <th scope="row">#{cot.idCotizaciones}</th>
                                                     <td>#{cot.fkIdCliente.primerNombre}   #{cot.fkIdCliente.primerApellido}</td>
                                                     <td>#{cot.fkIdCliente.documento}</td>
-                                                    <td>#{cot.cantidadPiezas}</td>
                                                     <td>#{cot.fechaCotizaciones}</td>
                                                     <td>#{cot.fechaEntrega}</td>
                                                     <td>#{cot.idEstadoCotizacion.nombreEstadoCotizacion}</td>
@@ -100,7 +98,7 @@
                                                             </c:when>
                                                         </c:choose>
                                                     </td>
-                                                    <td>
+                                                    
                                                         <div class="modal fade" id="exampleModal#{paso.index+1}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content"  style="background-color: #f2f2f2; border-radius: 20px">
@@ -181,7 +179,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </td>
                                                 </tr>
 
                                             </c:forEach>

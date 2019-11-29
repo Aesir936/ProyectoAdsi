@@ -5,24 +5,25 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./TemplateGerente/templateGerente.xhtml">
-            
-            
+
+
             <ui:define name="content">
                 <div class="container py-2">
                     <h3 style="text-align: center">Listado de Ordenes de Trabajo</h3>
-                <br></br>
-                <div class="row text-center">
-                    <div class="col-2"></div>
-                    <div class="col-3">
-                        <h5 style="text-align: left">Filtrar ordenes por:</h5>
+                    <br></br>
+                    <div class="row text-center">
+                        <div class="col-2"></div>
+                        <div class="col-3">
+                            <h5 style="text-align: left">Filtrar ordenes por:</h5>
+                        </div>
                     </div>
-                </div>
-                <br></br>
+                    <br></br>
                     <h:form>
                         <div class="row">
                             <div class="col-2"></div>
@@ -34,13 +35,11 @@
                             <div class="col-3">
                                 <label for="documentoTC">Estado orden</label>
                                 <h:selectOneMenu styleClass="form-control" value="#{registroOTsession.estadoOT}" style="max-height:2.1rem " >
-                                    <f:selectItem itemValue="0" itemLabel="Elija el estado"></f:selectItem>
+                                    <f:selectItem itemValue="0" itemLabel="Todas"></f:selectItem>
                                     <f:selectItem itemValue="1" itemLabel="En proceso"></f:selectItem>
                                     <f:selectItem itemValue="2" itemLabel="Terminada"></f:selectItem>
                                     <f:selectItem itemValue="3" itemLabel="Cancelada"></f:selectItem>
                                 </h:selectOneMenu>
-                                <!--                                <label for="validationCustom01">Estado cotización</label>
-                                                                <h:inputText value="" class="form-control" style="max-height: 2rem" html5:placeholder="Nit" />-->
                             </div>
                         </div>
                         <br></br>
@@ -63,29 +62,134 @@
 
                     <div id="miTabla" class="py-3">
                         <table class="table table-hover">
-
                             <tbody>
                                 <h:panelGroup>
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
+                                                <th scope="col">Nº orden</th>
                                                 <th scope="col">Nombre cliente</th>
                                                 <th scope="col">Documento</th>
                                                 <th scope="col">Fecha Registro</th>
                                                 <th scope="col">Fecha entrega</th>
                                                 <th scope="col">Estado</th>
+                                                <th scope="col">Acción</th>
                                             </tr>
                                         </thead> 
                                         <tbody>
                                             <c:forEach items="#{registroOTsession.filtrarOT()}" var="ot" varStatus="paso">
                                                 <tr>
-                                                    <th scope="row">#{paso.index+1}</th>
-                                                    <td>#{ot.fkIdCliente.primerNombre}</td>
+                                                    <th scope="row">#{ot.idOrdenesDeTrabajo}</th>
+                                                    <td>#{ot.fkIdCliente.primerNombre} #{ot.fkIdCliente.primerApellido}</td>
                                                     <td>#{ot.fkIdCliente.documento}</td>
                                                     <td>#{ot.fechaGeneracion}</td>
                                                     <td>#{ot.fechaEntrega}</td>
-                                                    <td>#{ot.fkIdEstado.nombreEstadoOrdenDeTrabajo}</td>                                               
+                                                    <td>#{ot.fkIdEstado.nombreEstadoOrdenDeTrabajo}</td>
+
+                                                    <c:if test="#{ot.fkIdEstado.nombreEstadoOrdenDeTrabajo == 'En proceso'}">
+                                                        <td>
+                                                            <h:form>
+                                                                <h:commandButton value="Cancelar" class="btn btn-primary" action="#{registroOTsession.cancelarOT(ot.idOrdenesDeTrabajo)}" />
+                                                            </h:form>
+                                                        </td>
+                                                        <td>
+                                                            <a class="nav-link" data-toggle="modal" data-target="#modalOT#{ot.idOrdenesDeTrabajo}" href="#" style="color: rgb(219, 129, 45)">Modificar</a>
+                                                        </td>
+                                                    </c:if>
+
+                                                    <div class="modal fade" id="modalOT#{ot.idOrdenesDeTrabajo}" tabindex="-1" role="dialog" aria-labelledby="modalOT" aria-hidden="false">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content"  style="background-color: #f2f2f2; border-radius: 20px; width: 125%">
+                                                                <h:form id="form1">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="modalGeneradasLabel" style="color:rgb(50, 51, 142)">Detalle de la cotización</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <h4 class="text-center" style="color: rgb(219, 129, 45)">Datos de la Orden</h4>
+                                                                            <div class="row text-center">
+                                                                                <div class="col-md-5">
+                                                                                    <span style="color: blue">Nº de orden:</span>
+                                                                                    <br></br>
+                                                                                    <span id="idOT">#{ot.idOrdenesDeTrabajo}</span>
+                                                                                </div>
+                                                                                <div class="col-md-7 mb-1">
+                                                                                    <span style="color: blue">Cliente:</span>
+                                                                                    <br></br>
+                                                                                    <span>#{ot.fkIdCliente.primerNombre} #{ot.fkIdCliente.primerApellido}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br></br>
+                                                                            <div class="row text-center mb-3 pl-4"> 
+                                                                                <div class="col-md-6 input-group">
+                                                                                    <span style="color: blue">Fecha de entrega actual:</span>
+                                                                                    <br></br>
+                                                                                    <span>#{ot.fechaEntrega}</span>
+                                                                                </div>                                                                             
+                                                                                <div class="col-md-6 input-group date fechacoti pl-4" >
+                                                                                    <span style="color: blue">Nueva fecha entrega:</span><br></br>
+                                                                                    <p:inputText value="#{registroOTsession.nvaFechaVencimiento}" class="input-group-addon" style="max-height: 45%" ></p:inputText>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row text-center pl-4">
+                                                                                <div class="col-md-6 input-group">
+                                                                                    <span style="color: blue">cantidad de piezas:</span>
+                                                                                </div>
+                                                                                <div class="col-md-6 input-group pl-4" >
+                                                                                    <span style="color: blue">Nueva cantidad de piezas</span><br></br>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row text-center mb-3 pl-5">
+                                                                                <div class="col-md-6 input-group">
+                                                                                    <br></br>
+                                                                                    <span>#{ot.cantidadPiezas}</span>
+                                                                                </div>
+                                                                                <div class="col-md-6 input-group">
+                                                                                    <h:inputText value="#{registroOTsession.cantidadPiezas}" class="input-group-addon" ></h:inputText>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row text-center pl-4">
+                                                                                <div class="col-md-6 input-group">
+                                                                                    <span style="color: blue">Tiempo de fabricación actual:</span>
+                                                                                </div>
+                                                                                <div class="col-md-6 input-group pl-4" >
+                                                                                    <span style="color: blue">Nuevo tiempo de fabricación</span><br></br>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row text-center mb-3 pl-5">
+                                                                                <div class="col-md-6 input-group">
+                                                                                    <br></br>
+                                                                                    <span>#{ot.tiempoTotalFabricacion}</span>
+                                                                                </div>
+                                                                                <div class="col-md-6 input-group">
+                                                                                    <h:inputText value="#{registroOTsession.tiempoFabricacion}" class="input-group-addon" ></h:inputText>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row text-center mb-3">
+                                                                                <span style="color: blue; padding-left: 6%">Detalle de la orden:</span>
+                                                                                <span class="form-control" style="margin:0 5%; height: 6rem; width: 80%; text-align: justify">#{ot.detalle}</span>
+                                                                            </div>
+                                                                            <div class="row text-center mb-3">
+                                                                                <span style="color: blue; padding-left: 6%">Nuevo detalle:</span>
+                                                                                <h:inputText value="#{registroOTsession.detalle}" id="comentariosNuevos" class="form-control" style="margin:0 5%; height: 6rem; width: 80%; text-align: justify" />
+                                                                            </div>
+                                                                            <br></br>
+                                                                            <div class="row">
+                                                                                <div class="col-5"></div>
+                                                                                <h:commandButton value="Actulizar orden" class="btn-dark" action="#{registroOTsession.modificarOT(ot.idOrdenesDeTrabajo)}" style="color: black"/>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </h:form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -94,9 +198,7 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>  
-
                 <script type="text/javascript">
                     function Export() {
                         $("#miTabla").table2excel({
@@ -110,3 +212,4 @@
 
     </body>
 </html>
+

@@ -49,12 +49,9 @@ public class OrdenesDeTrabajoFacade extends AbstractFacade<OrdenesDeTrabajo> imp
             return false;
         }
     }
-        
-        
-        
 
     @Override
-    public List<OrdenesDeTrabajo> filtrarOT(int idCliente, int estadoOT){
+    public List<OrdenesDeTrabajo> filtrarOT(int idCliente, int estadoOT) {
         try {
             em.getEntityManagerFactory().getCache().evictAll();
             String consultar;
@@ -72,6 +69,30 @@ public class OrdenesDeTrabajoFacade extends AbstractFacade<OrdenesDeTrabajo> imp
             return resultadoOT;
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    @Override
+    public int idUltimaOT() {
+        try {
+            Query cUltimaOT = em.createNativeQuery("SELECT max(id_ordenes_de_trabajo) FROM tbl_ordenes_de_trabajo;");
+            int idOT = (int) cUltimaOT.getSingleResult();
+            return idOT;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public boolean rechazarCot(int idOt) {
+        try {
+            Query rechazarOT = em.createNativeQuery("UPDATE tbl_ordenes_de_trabajo SET fk_id_estado = 3 WHERE id_ordenes_de_trabajo = ?1");
+            rechazarOT.setParameter(1, idOt);
+
+            rechazarOT.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
