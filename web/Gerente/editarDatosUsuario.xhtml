@@ -12,34 +12,27 @@
           
 
             <ui:define name="content">
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <h4 class="form-inline col-6">Editar mis datos personales</h4>
-                </div>
-                <br></br>
-                <div class="row py-2">
-                    <div class="col-md-3"></div>
+               <div class="row py-2">
+                    <div class="col-md-2"></div>
                     <div class="col-md-8">
+                        <h2 style="text-align: center">#{etiqueta['Actualizar']}</h2>
                         <h:form>
                             <h:messages  style="color:red;margin:8px;"/> 
-                            <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="tdl">Tipo Documento</label>
+                            <div class="form-row py-3">
+                                <div class="col-md-6 mb-3">
+                                    <label for="tdl">#{etiqueta['TipoD']}</label>
                                     <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.usuLog.fkTipoDocumento.idTipoDocumento}" >
-                                         <f:selectItem itemValue="0" itemLabel="Seleccione tipo de documento"></f:selectItem>
+                                        <f:selectItem itemValue="0" itemLabel="#{etiqueta['Seleccione']}"></f:selectItem>
                                     <f:selectItem itemValue="1" itemLabel="CC"></f:selectItem>
                                     <f:selectItem itemValue="2" itemLabel="TI"></f:selectItem>
                                     <f:selectItem itemValue="3" itemLabel="NIT"></f:selectItem>
                                     <f:selectItem itemValue="4" itemLabel="Cédula de extranjería"></f:selectItem>
                                     <f:selectItem itemValue="5" itemLabel="Pasaporte"></f:selectItem>
                                     </h:selectOneMenu>
+        
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="documentoTC">Documento</label>
+                                <div class="col-md-6 mb-3">
+                                    <label for="documentoTC">#{etiqueta['Documento']}</label>
                                     <h:inputText value="#{sesionUsuario.usuLog.documento}" class="form-control" id="documentoId" html5:placeholder="Numero documento" maxlength="20" required="true" validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un documento"  />
                                     <div class="valid-feedback">
                                         <h:message for="documentoId"></h:message>
@@ -47,15 +40,15 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom01">Primer nombre</label>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">#{etiqueta['PrimerN']}</label>
                                     <h:inputText value="#{sesionUsuario.usuLog.primerNombre}" class="form-control" id="nombre1Id"  maxlength="20" html5:placeholder="Nombres"  required="true"  validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un nombre"  />
                                     <div class="valid-feedback">
                                         <h:message for="nombre1Id"></h:message>
                                     </div>               
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom02">Segundo nombre</label>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">#{etiqueta['SegundoN']}</label>
                                     <h:inputText value="#{sesionUsuario.usuLog.segundoNombre}" class="form-control" id="nombre2Id"  maxlength="20" html5:placeholder="Nombres"  required="true"  validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un nombre"  />
                                     <div class="valid-feedback">
                                         <h:message for="nombre2Id"></h:message>
@@ -63,15 +56,15 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom03">Primer Apellido</label>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom03">#{etiqueta['PrimerA']}</label>
                                     <h:inputText value="#{sesionUsuario.usuLog.primerApellido}" class="form-control" id="primerApellidoId" html5:placeholder="Primer Apellido" maxlength="20" required="true" validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un apellido"  />
                                     <div class="valid-feedback">
                                         <h:message for="primerApellidoId"></h:message>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom04">Segundo Apellido</label>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom04">#{etiqueta['SegundoA']}</label>
                                     <h:inputText value="#{sesionUsuario.usuLog.segundoApellido}" class="form-control" id="segundoApellidoId" html5:placeholder="Segundo Apellido" maxlength="20" required="true" validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese un apellido"  />
                                     <div class="valid-feedback">
                                         <h:message for="segundoApellidoId"></h:message>
@@ -79,26 +72,33 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom05">Contrasena</label>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom05">#{etiqueta['Contraseña']}</label>
                                     <h:inputText value="#{sesionUsuario.usuLog.contrasena}" class="form-control" id="contrasenaId" html5:placeholder="Clave" maxlength="20" required="true"  validatorMessage="No debe superar 20 caracteres" requiredMessage="Ingrese una clave"  />
                                     <div class="valid-feedback">
                                         <h:message for="contrasenaId"></h:message>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="validationCustom06">Correo</label>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom06">#{etiqueta['Correo']}</label>
                                     <h:inputText value="#{sesionUsuario.usuLog.correo}" class="form-control" id="correoId" html5:placeholder="Correo Electronico" maxlength="50" required="true"  validatorMessage="No debe superar 50 caracteres" requiredMessage="Ingrese una correo electronico"  />
                                     <div class="valid-feedback">
                                         <h:message for="correoId"></h:message>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                         
                             <br></br>
-                            <h:commandButton  action="#{sesionUsuario.actualizarUsuario()}"  class="btn btn-primary" value="Actualizar"></h:commandButton>
+                            <div class="form-row">
+                                <div class="col-md-5 mb-3"></div>
+                                <div class="col-md-2 mb-3">
+                                    <h:commandButton  action="#{sesionUsuario.actualizarUsuario()}"  class="btn btn-primary" value="#{etiqueta['ActualizarS']}"></h:commandButton>
+                                </div> 
+                                <div class="col-md-5 mb-3"></div>
+                            </div>
                         </h:form>
                     </div>
-                </div>               
+                    <div class="col-md-2"></div>
+                </div>
             </ui:define>
         </ui:composition>
     </body>

@@ -49,44 +49,44 @@
                 <!-- Begin Page Content -->
                 <div class="container">
                     <!-- Page Heading -->
-                    <h3 class="m-0 font-weight-bold text-primary" style="text-align: center">Registro de Ordenes de trabajo</h3>
+                    <h3 class="m-0 font-weight-bold text-primary" style="text-align: center">#{etiqueta['RegistroOT']}</h3>
                     <br></br>
                     <br></br>
                     <h:form class="needs-validation" html5:novalidate='' enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="col-md-3 mb-3">
-                                <label for="validationCustom02">Documento del cliente:</label>
+                                <label for="validationCustom02">#{etiqueta['DocumentoCl']}</label>
                                 <br></br>
                                 <p:inputText  id="validationCustom02" value="#{registroOTsession.documentoCliente}" required='true'/>
                                 <div class="invalid-feedback">
-                                    Por favor proporcione un numero valido.
+                                   #{etiqueta['Porfavor']}
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <!-- Campo para la seleccion de la fecha de entrega -->
-                                <label>Fecha de entrega:</label><br/>
+                                <label>  #{etiqueta['FechaE']}</label><br/>
                                 <p:calendar style="width: 100px" value="#{registroOTsession.fechaVencimiento}" placeholder="__/__/____" locale="es" effect="fold" pattern="dd/mm/yyyy" showOn="button" required="true" navigator="true"></p:calendar>
                                 <br></br>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="validationCustom05">Tiempo de fabricación:</label>
+                                <label for="validationCustom05"> #{etiqueta['TiempoF']}</label>
                                 <br></br>
                                 <p:inputText  id="validationCustom05" value="#{registroOTsession.tiempoFabricacion}" required='true'/>
                                 <div class="invalid-feedback">
-                                    Por favor proporcione un numero valido.
+                                    #{etiqueta['Porfavor']}
                                 </div>
                             </div>
                         </div>
                         <br></br>
                         <br></br>
                         <div class="form-group col-md-8">
-                            <label for="comment">Descripción del proyecto o pieza:</label>
+                            <label for="comment"> #{etiqueta['DescripcionP']}</label>
                             <p:inputTextarea class="form-control" rows="3" id="comment" value="#{registroOTsession.detalle}" style="max-width: 25rem" required="true" requiredMessage="Por favor ingrese una descripción"/>
                         </div>
                        
                         <br></br>
                         <br></br>
-                        <h:commandButton class="btn btn-primary" action="#{registroOTsession.registrarOT()}" value="Registrar Orden"/>
+                        <h:commandButton class="btn btn-primary" action="#{registroOTsession.registrarOT()}" value="#{etiqueta['RegistrarOT']}"/>
                         <div class="row" style="height: 4.3rem"></div>
                     </h:form>
                 </div>

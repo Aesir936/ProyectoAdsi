@@ -14,7 +14,7 @@
             <ui:define name="content">
 
                 <div class="container py-2">
-                    <h3 class="m-0 font-weight-bold text-primary" style="text-align: center">Mi Bolsa</h3>
+                    <h3 class="m-0 font-weight-bold text-primary" style="text-align: center">#{etiqueta['Mibolsa']}</h3>
                     <br></br>
                     <c:forEach items="#{compraBolsasession.consultarBolsa()}" var="cot" varStatus="paso">
                         <div class="row">
@@ -25,9 +25,9 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    <span>Fecha Activación: #{cot.fechaActivacion}</span><br></br>
-                                                    <span>Saldo actual: #{cot.horasRestantes} horas</span><br></br>
-                                                    <span>Última recarga: #{cot.ultimaCompra} horas</span><br></br>                                                
+                                                    <span>#{etiqueta['FechaA']} #{cot.fechaActivacion}</span><br></br>
+                                                    <span>#{etiqueta['SaldoA']} #{cot.horasRestantes} horas</span><br></br>
+                                                    <span>#{etiqueta['UltimaR']} #{cot.ultimaCompra} horas</span><br></br>                                                
                                                 </div>
 
                                             </div>
@@ -44,7 +44,7 @@
                     <!-- Begin Page Content -->
 
                     <!-- Page Heading -->
-                    <h5 class="m-0 font-weight-bold text-primary" style="text-align: center">Recargar Bolsa</h5>
+                    <h5 class="m-0 font-weight-bold text-primary" style="text-align: center">#{etiqueta['RecargarB']}</h5>
                     <br></br>
                     <h:form class="needs-validation"  enctype="multipart/form-data">
                         <div class="form-row">
@@ -71,7 +71,7 @@
                         <div class="form-row">
                             <div class="col-md-1 mb-3"></div>
                             <div class="col-md-3 mb-3">
-                                <label for="validationCustom05">Cantidad de Horas</label>
+                                <label for="validationCustom05">#{etiqueta['CantidadHoras']}</label>
                                 <br></br>
                                 <p:inputText  id="validationCustom05" value="#{compraBolsasession.recarga}" required='true'/>
                             </div>
@@ -79,7 +79,7 @@
                         <br></br>
                         <div class="form-row">
                             <div class="col-md-1 mb-3"></div>                    
-                            <h:commandButton class="btn btn-primary" action="#{compraBolsasession.recargarBolsa()}" value="Recargar mi bolsa"/>
+                            <h:commandButton class="btn btn-primary" action="#{compraBolsasession.recargarBolsa()}" value="#{etiqueta['RecargarB']}"/>
                         </div>
                         <br></br>
                         <br></br>

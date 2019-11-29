@@ -145,9 +145,9 @@
                             chartBar.render();
                         };
                     </script>
-                    <h3 class="form-group text-center"> Informes y estadísticas</h3>
+                    <h3 class="form-group text-center"> #{etiqueta['InformesE']}</h3>
                     <br></br>
-                    <h5 class="form-group"> Generación de informes:</h5>
+                    <h5 class="form-group">#{etiqueta['GeneracionI']}</h5>
                     <br></br>
                     <div class="row">
                         <div class="col-1"></div>
@@ -155,24 +155,24 @@
                         <h:form>
                             <h:graphicImage>
                                 <i class="far fa-file-pdf" style="font-size: 1.5rem; padding-right: 1em"></i>
-                                <h:commandLink rendered="#{!task.IS_SEEN}" value="Generar informe de cotizaciones  " action="#{reportesRequest.imprimirPdf()}"></h:commandLink>
+                                <h:commandLink rendered="#{!task.IS_SEEN}" value="#{etiqueta['GenerarCo']}" action="#{reportesRequest.imprimirPdf()}"></h:commandLink>
                             </h:graphicImage>
                         </h:form> 
                     </div>
                     <div class="col-4">
                         <h:form>
-                            <h:inputText html5:placeholder="Digite documento cliente" class="form-control text-center" value="#{reportesRequest.documento}"></h:inputText>
+                            <h:inputText html5:placeholder="#{etiqueta['DigiteD']}" class="form-control text-center" value="#{reportesRequest.documento}"></h:inputText>
                             <br/>
                             <h:graphicImage>
                                 <i class="far fa-file-pdf pl-4" style="font-size: 1.5rem; padding-right: 1em"></i>
-                                <h:commandLink rendered="#{!task.IS_SEEN}" value="Generar informe de O.T. por cliente" action="#{reportesRequest.imprimirParametro()}"></h:commandLink>
+                                <h:commandLink rendered="#{!task.IS_SEEN}" value="#{etiqueta['GenerarOT']}" action="#{reportesRequest.imprimirParametro()}"></h:commandLink>
                             </h:graphicImage>
                         </h:form>
                     </div>
                 </div>
                 <br></br>
                 <br></br>
-                <h5 class="form-group"> Gráficos estadísticos:</h5>
+                <h5 class="form-group">#{etiqueta['GraficosEs']}</h5>
                 <br></br>
                 <div class="row" style="height: 25rem">
                     <div class="col-1"></div>

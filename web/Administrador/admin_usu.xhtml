@@ -8,136 +8,16 @@
 
     <body>
 
-        <ui:composition template="./../Template/completeTemplate.xhtml">
+        <ui:composition template="./TemplateAdministrador/templateAdministrador.xhtml">
 
-            <ui:define name="left">
-                <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142; height: 100%" >
-                    <!-- Logo -->
-                    <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
-                        <div>
-                            <img src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
-                        </div>
-                    </a>
-                    <!-- División -->
-                    <hr class="sidebar-divider my-0"/>
-                    <!-- Tablero principal -->
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.xhtml">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Tablero principal</span></a>
-                    </li>
-                    <!-- División -->
-                    <hr class="sidebar-divider d-none d-md-block"></hr>
-                    <!--                    <li class="nav-item">
-                                            <a class="nav-link" href="admin_usu.xhtml">
-                                                <i class="fas fa-id-badge"></i>
-                                                <span>Gestión de usuarios</span></a>
-                                        </li>-->
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
-                            <i class="fas fa-id-badge"></i>
-                            <span>Administrar usuarios</span>
-                        </a>
-                        <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Gestión de usuarios:</h6>
-                                <a class="collapse-item" href="admin_usu.xhtml">Cambiar estado de usuario</a>
-                                <a class="collapse-item" href="cargarUsuariosTxt.xhtml">Cargar usuarios desde .txt</a>
-                                <a class="collapse-item" href="cargarCiudades.xhtml">Cargar ciudades desde .txt</a>
-                                <a class="collapse-item" href="correosMasivos.xhtml">Restablecer contraseñas</a>
-                            </div>
-                        </div>
-                    </li>
-<!--                    <li class="nav-item">
-                        <a class="nav-link" href="enConstruccion.xhtml">
-                            <i class="fas fa-inbox"></i>
-                            <span>Revisar buzón de sugerencias</span></a>
-                    </li>-->
-                    <!-- División -->
-                    <hr class="sidebar-divider"/>
-
-                    <!-- Cabecera -->
-                    <div class="sidebar-heading">
-                        Interfaz
-                    </div>
-
-                    <!-- Menú de configuración de perfil -->
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Configuración de perfil</span>
-                        </a>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Editar perfil:</h6>
-                                <a class="collapse-item" href="enConstruccion.xhtml">Cambiar imágen</a>
-                                <a class="collapse-item" href="editarDatosUsuario.xhtml">
-                                    <span style="font-size: 0.8em">Modificar información personal</span>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- Menú utilerías  -->
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            <span>Utilerías</span>
-                        </a>
-                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Descargar utilerías:</h6>
-                                <a class="collapse-item" href="">Winrar</a>
-                                <a class="collapse-item" href="">Adobe acrobat</a>
-                                <a class="collapse-item" href="">Otros...</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- División -->
-                    <hr class="sidebar-divider"/>
-
-                    <!--Cabecera -->
-                    <div class="sidebar-heading">
-                        Enlaces
-                    </div>
-
-                    <!-- Menú páginas -->
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Otras páginas</span>
-                        </a>
-                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Páginas de inicio:</h6>
-                                <a class="collapse-item" href="../index.xhtml">Inicio</a>
-                                <a class="collapse-item" href="../registro.xhtml">Registro</a>
-                                <a class="collapse-item" href="../recuperarContrasena.xhtml">Olvido de contraseña</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- Informes -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="Graficas.xhtml">
-                            <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Gráficas</span></a>
-                    </li>
-                    <br></br>
-                    <br></br>
-                </ul>
-            </ui:define>
-
-            
-
+         
             <ui:define name="content">
-                <h3 style="text-align: center">Usuarios Registrados</h3>
+                <h3 style="text-align: center">#{etiqueta['UsuariosR']}</h3>
                 <br></br>
                 <div class="row text-center">
                     <div class="col-2"></div>
                     <div class="col-3">
-                        <h5 style="text-align: left">Filtrar usuarios por:</h5>
+                        <h5 style="text-align: left">#{etiqueta['FiltrarU']}</h5>
                     </div>
                 </div>
                 <br></br>
@@ -146,26 +26,26 @@
                         <div class="row">
                             <div class="col-2"></div>
                             <div class="col-3"> 
-                                <label for="documentoTC">Documento</label>
-                                <h:inputText value="#{sesionUsuario.documento}" class="form-control" html5:placeholder="Numero documento"/>
+                                <label for="documentoTC">#{etiqueta['Documento']}</label>
+                                <h:inputText value="#{sesionUsuario.documento}" class="form-control" html5:placeholder="#{etiqueta['Numero']}"/>
                             </div> 
                             <div class="col-2"></div>
                             <div class="col-3"> 
-                                <label for="validationCustom01">Nit Empresa</label>
+                                <label for="validationCustom01">Nit</label>
                                 <h:inputText value="#{sesionUsuario.nit}" class="form-control"  html5:placeholder="Nit" />
                             </div>
                         </div>
                         <div class="row py-5">
                             <div class="col-5"></div>
                             <div class="col-2 text-center"> 
-                                <h:commandButton class="btn btn-primary" style="border: none; background-color: rgb(219, 129, 45)" value="Buscar" action="admin_usu"></h:commandButton>                           
+                                <h:commandButton class="btn btn-primary" style="border: none; background-color: rgb(219, 129, 45)" value="#{etiqueta['Buscar']}" action="admin_usu"></h:commandButton>                           
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-2"></div>
                             <button class=" btn btn-success text-black-100" type="button" id="btnexportar" onclick="Export()">
                                 <i class="fas fa-file-export"></i>
-                                Exportar listado
+                                #{etiqueta['ExportarL']}
                             </button> 
                         </div>
                     </h:form>
@@ -174,13 +54,13 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Nombre usuario</th>
-                                    <th scope="col">Documento</th>
-                                    <th scope="col">Correo</th>
-                                    <th scope="col">Empresa</th>
-                                    <th scope="col">Ciudad</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col"> #{etiqueta['NombreU']}</th>
+                                    <th scope="col">#{etiqueta['Documento']}</th>
+                                    <th scope="col">#{etiqueta['Correo']}</th>
+                                    <th scope="col">#{etiqueta['Empresa']}</th>
+                                    <th scope="col">#{etiqueta['Ciudad']}</th>
+                                    <th scope="col">#{etiqueta['Estado']}</th>
+                                    <th scope="col">#{etiqueta['Acciones']}</th>
                                 </tr>
                             </thead> 
                             <tbody>

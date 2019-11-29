@@ -13,12 +13,12 @@
             
             <ui:define name="content">
                 <div class="container py-2">
-                    <h3 style="text-align: center">Listado de cotizaciones</h3>
+                    <h3 style="text-align: center">#{etiqueta['ListadoC']}</h3>
                     <br></br>
                     <div class="row text-center">
                         <div class="col-2"></div>
                         <div class="col-3">
-                            <h5 style="text-align: left">Filtrar cotizaciones por:</h5>
+                            <h5 style="text-align: left">#{etiqueta['FiltrarCot']}</h5>
                         </div>
                     </div>
                     <br></br>
@@ -26,18 +26,18 @@
                         <div class="row">
                             <div class="col-2"></div>
                             <div class="col-3"> 
-                                <label for="documentoTC">Documento cliente</label>
-                                <h:inputText value="#{cotizacionSession.docCliente}" class="form-control" style="max-height: 2rem" html5:placeholder="Numero documento"/>
+                                <label for="documentoTC">#{etiqueta['DocumentoCl']}</label>
+                                <h:inputText value="#{cotizacionSession.docCliente}" class="form-control" style="max-height: 2rem" html5:placeholder="#{etiqueta['Numero']}"/>
                             </div>
                             <div class="col-2"></div>
                             <div class="col-3">
-                                <label for="documentoTC">Estado cotizacion</label>
+                                <label for="documentoTC">#{etiqueta['EstadoCot']}</label>
                                 <h:selectOneMenu styleClass="form-control" value="#{cotizacionSession.estadoCot}" style="max-height:2.1rem " >
-                                    <f:selectItem itemValue="0" itemLabel="Elija el estado"></f:selectItem>
-                                    <f:selectItem itemValue="1" itemLabel="Pendiente"></f:selectItem>
-                                    <f:selectItem itemValue="2" itemLabel="Activa"></f:selectItem>
-                                    <f:selectItem itemValue="3" itemLabel="Aprobada"></f:selectItem>
-                                    <f:selectItem itemValue="4" itemLabel="Rechazada"></f:selectItem>
+                                    <f:selectItem itemValue="0" itemLabel="#{etiqueta['ElijaEs']}"></f:selectItem>
+                                    <f:selectItem itemValue="1" itemLabel="#{etiqueta['Pendientes']}"></f:selectItem>
+                                    <f:selectItem itemValue="2" itemLabel="#{etiqueta['Activa']}"></f:selectItem>
+                                    <f:selectItem itemValue="3" itemLabel="#{etiqueta['Aprobadas']}"></f:selectItem>
+                                    <f:selectItem itemValue="4" itemLabel="#{etiqueta['Rechazadas']}"></f:selectItem>
                                 </h:selectOneMenu>
 
                             </div>
@@ -46,7 +46,7 @@
                         <div class="row py-3">
                             <div class="col-5"></div>
                             <div class="col-2 text-center"> 
-                                <h:commandButton class="btn btn-primary" style="border: none; background-color: rgb(219, 129, 45)" value="Buscar" action="ListadoCotizaciones"></h:commandButton>                           
+                                <h:commandButton class="btn btn-primary" style="border: none; background-color: rgb(219, 129, 45)" value="#{etiqueta['Buscar']}" action="ListadoCotizaciones"></h:commandButton>                           
                             </div>
                             <div class="col-5"></div>
                         </div>
@@ -54,7 +54,7 @@
                             <div class="col-1"></div>
                             <button class=" btn btn-success text-black-100" type="button" id="btnexportar" onclick="Export()">
                                 <i class="fas fa-file-export"></i>
-                                Exportar listado
+                            #{etiqueta['ExportarL']}
                             </button>                  
                         </div>
 
@@ -69,13 +69,13 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Nombre cliente</th>
-                                                <th scope="col">Documento</th>
-                                                <th scope="col"># Piezas</th>
-                                                <th scope="col">Fecha Registro</th>
-                                                <th scope="col">Fecha entrega</th>
-                                                <th scope="col">Estado</th>
-                                                <th scope="col">Generar</th>                                                
+                                                <th scope="col">#{etiqueta['NombreCl']}</th>
+                                                <th scope="col">#{etiqueta['Documento']}</th>
+                                                <th scope="col">#{etiqueta['Piezas']}</th>
+                                                <th scope="col">#{etiqueta['FechaR']}</th>
+                                                <th scope="col">#{etiqueta['FechaE']}</th>
+                                                <th scope="col">#{etiqueta['Estado']}</th>
+                                                <th scope="col">#{etiqueta['Generar']}</th>                                                
                                             </tr>
                                         </thead> 
                                         <tbody>
@@ -95,7 +95,7 @@
                                                             </c:when>
                                                             <c:when test="#{cot.idEstadoCotizacion.nombreEstadoCotizacion == 'Activa'}">
                                                                 <h:form>
-                                                                    <h:commandLink value="Generar pdf" action="#{reportesRequest.generarCotizacion(cot.idCotizaciones)}" style="color: rgb(219, 129, 45)"/>
+                                                                    <h:commandLink value="#{etiqueta['Generarpdf']}" action="#{reportesRequest.generarCotizacion(cot.idCotizaciones)}" style="color: rgb(219, 129, 45)"/>
                                                                 </h:form>
                                                             </c:when>
                                                         </c:choose>
@@ -106,7 +106,7 @@
                                                                 <div class="modal-content"  style="background-color: #f2f2f2; border-radius: 20px">
                                                                     <h:form id="form1">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel" style="color:rgb(50, 51, 142)">Cotizar solicitud</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel" style="color:rgb(50, 51, 142)">#{etiqueta['CotizarSol']}</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
@@ -114,16 +114,16 @@
                                                                         <div class="modal-body">
                                                                             <!--                                                                            <h:messages id="mensajeValidacion" style = "color:red; margin:8px;" /> -->
                                                                             <div class="form-group">
-                                                                                <h4 class="text-center" style="color: rgb(219, 129, 45)">Datos de la solicitud</h4>
+                                                                                <h4 class="text-center" style="color: rgb(219, 129, 45)">#{etiqueta['DatoS']}</h4>
                                                                                 <div class="row text-center">
                                                                                     <div class="col-4">
-                                                                                        <span style="color: blue">Solicitud Nº:</span>
+                                                                                        <span style="color: blue">#{etiqueta['Solicitud']}</span>
                                                                                     </div>
                                                                                     <div class="col-4">
-                                                                                        <span style="color: blue">Cliente:</span>
+                                                                                        <span style="color: blue">#{etiqueta['Cliente']}</span>
                                                                                     </div>
                                                                                     <div class="col-4">
-                                                                                        <span style="color: blue">Cantidad piezas:</span>
+                                                                                        <span style="color: blue">#{etiqueta['CantidadP']}</span>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row text-center">
@@ -140,7 +140,7 @@
                                                                                 <br></br>
                                                                                 <div class="row text-center">
                                                                                     <div class="col-4">
-                                                                                        <span style="color: blue">Detalle:</span>
+                                                                                        <span style="color: blue">#{etiqueta['Detalle']}</span>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row text-center">
@@ -149,33 +149,33 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <hr class="sidebar-divider"/>
-                                                                                <h4 style="color: rgb(219, 129, 45)" class="text-center">Cotizar</h4>
+                                                                                <h4 style="color: rgb(219, 129, 45)" class="text-center">#{etiqueta['Cotizacion']}</h4>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
-                                                                                        <label for="inputPrecioUnitario" style="padding-right: 15%">Precio unitario</label>
+                                                                                        <label for="inputPrecioUnitario" style="padding-right: 15%">#{etiqueta['PrecioU']}</label>
                                                                                         <h:inputText value="#{cotizacionSession.precioUnitario}" html5:onChange="validarSiNumero(this.value)" required="true" class="form-control" id="inputPrecioUnitario" html5:placeholder="" />
                                                                                     </div>
                                                                                     <div class="col-6">
-                                                                                        <label for="inputPrecioTotal">Precio Total</label>
+                                                                                        <label for="inputPrecioTotal">#{etiqueta['PrecioT']}</label>
                                                                                         <h:inputText required="true" class="form-control" id="inputPrecioTotal" value="#{cotizacionSession.precioTotal}" html5:onChange="validarSiNumero(this.value)"/>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
-                                                                                        <label for="inputHoras" style="padding-right: 15%">Total horas fabricación</label>
+                                                                                        <label for="inputHoras" style="padding-right: 15%">#{etiqueta['TotalH']}</label>
                                                                                         <h:inputText value="#{cotizacionSession.horasFabricacion}" html5:onChange="validarSiNumero(this.value)" required="true" class="form-control" id="inputHoras"/>
                                                                                     </div>
                                                                                 </div>
                                                                                 <br></br>
                                                                                 <div class="row">
-                                                                                    <label for="comentarios" style="margin-left: 5%">Comentarios</label>
+                                                                                    <label for="comentarios" style="margin-left: 5%">#{etiqueta['Comentarios']}</label>
                                                                                     <h:inputTextarea id="comentarios" class="form-control" rows="3" style="margin:0 5%" value="#{cotizacionSession.comentarios}"></h:inputTextarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer" style="justify-content: center">
-                                                                            <h:commandButton action="#{cotizacionSession.rechazarCot(cot.idCotizaciones)}" value="Rechazar  solicitud" class="btn" style="background-color: blue; color: black"></h:commandButton>
-                                                                            <h:commandButton action="#{cotizacionSession.generarCotizacion(cot.idCotizaciones)}" value="Generar cotización" class="btn" style="background-color: rgb(219,129, 45); color: white"></h:commandButton>
+                                                                            <h:commandButton action="#{cotizacionSession.rechazarCot(cot.idCotizaciones)}" value="#{etiqueta['RechazarS']}" class="btn" style="background-color: blue; color: black"></h:commandButton>
+                                                                            <h:commandButton action="#{cotizacionSession.generarCotizacion(cot.idCotizaciones)}" value="#{etiqueta['GenerarCot']}" class="btn" style="background-color: rgb(219,129, 45); color: white"></h:commandButton>
                                                                         </div>
                                                                     </h:form>
                                                                 </div>
