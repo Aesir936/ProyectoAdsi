@@ -15,12 +15,12 @@
 
             <ui:define name="content">
                 <div class="container py-2">
-                    <h3 style="text-align: center">Listado de Ordenes de Trabajo</h3>
+                    <h3 style="text-align: center"> #{etiqueta['ListadoOT']}</h3>
                     <br></br>
                     <div class="row text-center">
                         <div class="col-2"></div>
                         <div class="col-3">
-                            <h5 style="text-align: left">Filtrar ordenes por:</h5>
+                            <h5 style="text-align: left">#{etiqueta['FiltrarOT']}</h5>
                         </div>
                     </div>
                     <br></br>
@@ -28,17 +28,17 @@
                         <div class="row">
                             <div class="col-2"></div>
                             <div class="col-3"> 
-                                <label for="documentoTC">Documento cliente</label>
+                                <label for="documentoTC">#{etiqueta['DocumentoCl']}</label>
                                 <h:inputText value="#{registroOTsession.documentoCliente}" class="form-control" style="max-height: 2rem" html5:placeholder="Numero documento"/>
                             </div>
                             <div class="col-2"></div>
                             <div class="col-3">
-                                <label for="documentoTC">Estado orden</label>
+                                <label for="documentoTC">#{etiqueta['EstadoOr']}</label>
                                 <h:selectOneMenu styleClass="form-control" value="#{registroOTsession.estadoOT}" style="max-height:2.1rem " >
-                                    <f:selectItem itemValue="0" itemLabel="Todas"></f:selectItem>
-                                    <f:selectItem itemValue="1" itemLabel="En proceso"></f:selectItem>
-                                    <f:selectItem itemValue="2" itemLabel="Terminada"></f:selectItem>
-                                    <f:selectItem itemValue="3" itemLabel="Cancelada"></f:selectItem>
+                                    <f:selectItem itemValue="0" itemLabel="#{etiqueta['ElijaEs']}"></f:selectItem>
+                                    <f:selectItem itemValue="1" itemLabel="#{etiqueta['Proceso']}"></f:selectItem>
+                                    <f:selectItem itemValue="2" itemLabel="#{etiqueta['Terminada']}"></f:selectItem>
+                                    <f:selectItem itemValue="3" itemLabel="#{etiqueta['Cancelada']}"></f:selectItem>
                                 </h:selectOneMenu>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                         <div class="row py-3">
                             <div class="col-5"></div>
                             <div class="col-2 text-center"> 
-                                <h:commandButton class="btn btn-primary" style="border: none; background-color: rgb(219, 129, 45)" value="Buscar" action="listadoOT's"></h:commandButton>                           
+                                <h:commandButton class="btn btn-primary" style="border: none; background-color: rgb(219, 129, 45)" value="#{etiqueta['Buscar']}" action="listadoOT's"></h:commandButton>                           
                             </div>
                             <div class="col-5"></div>
                         </div>
@@ -54,7 +54,7 @@
                             <div class="col-1"></div>
                             <button class=" btn btn-success text-black-100" type="button" id="btnexportar" onclick="Export()">
                                 <i class="fas fa-file-export"></i>
-                                Exportar listado
+                                #{etiqueta['ExportarL']}
                             </button>                  
                         </div>
 
@@ -68,11 +68,11 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nº orden</th>
-                                                <th scope="col">Nombre cliente</th>
-                                                <th scope="col">Documento</th>
-                                                <th scope="col">Fecha Registro</th>
-                                                <th scope="col">Fecha entrega</th>
-                                                <th scope="col">Estado</th>
+                                                <th scope="col">#{etiqueta['NombreCl']}</th>
+                                                <th scope="col">#{etiqueta['Documento']}</th>
+                                                <th scope="col">#{etiqueta['FechaR']}</th>
+                                                <th scope="col">#{etiqueta['FechaE']}</th>
+                                                <th scope="col">#{etiqueta['Estado']}</th>
                                                 <th scope="col">Acción</th>
                                             </tr>
                                         </thead> 

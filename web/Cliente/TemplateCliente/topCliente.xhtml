@@ -5,7 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition>
 
-       <nav id="navegacion" class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
+      <nav id="navegacion" class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Boton para desplegar busqueda en pantallas pequeñas -->
@@ -17,7 +17,7 @@
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar" aria-label="Search" aria-describedby="basic-addon2"/>
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="#{etiqueta['Buscar']}" aria-label="Search" aria-describedby="basic-addon2"/>
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm" style="color: #000"></i>
@@ -29,11 +29,11 @@
                         </li>
                         <li class="form-inline">
                             <h:form>
-                                <h:commandButton actionListener="#{sesionUsuario.cerrarSesion()}" value="Cerrar Sesion" action="/index.xhtml?faces-redirect=true" class="dropdown-item" style="color: red" />
+                                <h:commandButton actionListener="#{sesionUsuario.cerrarSesion()}" value="#{etiqueta['CerrarS']}" action="/index.xhtml?faces-redirect=true" class="dropdown-item" style="color: red" />
                             </h:form> 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active"  style="color: #000" href="../index.xhtml">Inicio</a>
+                            <a class="nav-link active"  style="color: #000" href="../index.xhtml">#{etiqueta['Inicio']}</a>
                         </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!--Barra de navegacion info usuario -->
@@ -46,13 +46,12 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="editarDatosUsuario.xhtml">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Editar perfil
+                                   #{etiqueta['EditarP']}
                                 </a>
                             </div>
                         </li>
                     </ul>
                 </nav>
-
     </ui:composition>
 </html>
 

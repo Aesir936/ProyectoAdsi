@@ -6,53 +6,45 @@
 
     <ui:component>
        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: rgb(50, 51, 142); height: 100%" >
-
                     <!-- Logo -->
-                    <a class="d-flex align-items-center justify-content-center" href="#">                 
+                    <a class="d-flex align-items-center justify-content-center" href="../index.xhtml">                 
                         <div>
-                            <img id="" src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
+                            <img src="../Template/assets/img/Logo SIIM blanco-naranja.svg" style="max-width: 80px;"></img>
                         </div>
                     </a>
-
                     <!-- División -->
                     <hr class="sidebar-divider my-0"/>
-
                     <!-- Tablero principal -->
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.xhtml">
+                        <a class="nav-link" href="">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>#{etiqueta['Tablero']}</span></a>
                     </li>
-                    
-                    <!-- División -->
-                    <hr class="sidebar-divider my-0"/>
-
-                    <!-- Mi bolsa -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="CompraBolsas.xhtml">
-                            <i class="fas fa-shopping-bag"></i>
-                            <span>#{etiqueta['Mibolsa']}</span></a>
-                    </li>
-
                     <!-- División -->
                     <hr class="sidebar-divider d-none d-md-block"></hr>
-
-                    <!-- Menú Solicitudes y cotizaciones -->
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuotation" aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                            <span style="font-size: 0.8em">#{etiqueta['SolicitudesCotizaciones']}</span>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
+                            <i class="fas fa-id-badge"></i>
+                            <span>#{etiqueta['AdministrarU']}</span>
                         </a>
-                        <div id="collapseQuotation" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                        <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="SolicitudCotizacion.xhtml">#{etiqueta['Solicitarcot']}</a>
-                                <a class="collapse-item" href="ListadoSolicitudes.xhtml">#{etiqueta['ConsultarS']}</a>
+                                <h6 class="collapse-header">#{etiqueta['Gestion']}</h6>
+                                <a class="collapse-item" href="admin_usu.xhtml">#{etiqueta['CambiarE']}</a>
+                                <a class="collapse-item" href="cargarUsuariosTxt.xhtml">#{etiqueta['CargarU']}</a>
+                                <a class="collapse-item" href="cargarCiudades.xhtml">#{etiqueta['CargarC']}</a>
+                                <a class="collapse-item" href="correosMasivos.xhtml">#{etiqueta['RecuperarC']}</a>
                             </div>
                         </div>
                     </li>
-
+                    
                     <!-- División -->
-                    <hr class="sidebar-divider d-none d-md-block"></hr>
+                    <hr class="sidebar-divider"/>
+
+                    <!-- Cabecera -->
+                    <div class="sidebar-heading">
+                        #{etiqueta['Interfaz']}
+                    </div>
 
                     <!-- Menú de configuración de perfil -->
                     <li class="nav-item">
@@ -64,37 +56,47 @@
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">#{etiqueta['EditarP']}</h6>
                                 <a class="collapse-item" href="editarDatosUsuario.xhtml">
-                                    <span style="font-size: 1em">#{etiqueta['Editardatos']}</span>
+                                    <span style="font-size: 0.8em">#{etiqueta['ModificarIP']}</span>
                                 </a>
                             </div>
                         </div>
                     </li>
 
-                    <!-- División -->
-                    <hr class="sidebar-divider"/>
-
                     <!--Cabecera -->
                     <div class="sidebar-heading">
-                        #{etiqueta['Enlaces']}
+                       #{etiqueta['Enlaces']}
                     </div>
 
                     <!-- Menú páginas -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                             <i class="fas fa-fw fa-folder"></i>
-                            <span>#{etiqueta['Paginas']}</span>
+                            <span>#{etiqueta['OtrasP']}</span>
                         </a>
                         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">#{etiqueta['PaginasI']}</h6>
-                                <a class="collapse-item" href="index.xhtml">#{etiqueta['Inicio']}</a>
-                                <a class="collapse-item" href="../recuperarContrasena.xhtml">#{etiqueta['Olvido']}</a>
+                                <a class="collapse-item" href="../index.xhtml">#{etiqueta['Inicio']}</a>
+                                <a class="collapse-item" href="../registro.xhtml">#{etiqueta['Registro']}</a>
+                                <a class="collapse-item" href="../recuperarContrasena.xhtml">#{etiqueta['RecordarC']}</a>
                             </div>
                         </div>
                     </li>
 
-                                                      
-                </ul>      
+                    <!-- Informes -->
+                    <li class="nav-item py-1">
+                        <a class="nav-link" href="Graficas.xhtml">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>#{etiqueta['Graficas']}</span></a>
+                    </li>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                </ul>
     </ui:component>
 
 

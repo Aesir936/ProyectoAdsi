@@ -5,23 +5,24 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Registro Usuario</title>
+        <title>#{etiqueta['RegistroU']}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     </h:head>
     <h:body>
+        <f:loadBundle basename="edu.ProyectoAdsi.properties.#{idiomaController.idioma}" var="etiqueta" ></f:loadBundle>
         <!--Registrate-->
         <section style="background:#f2f2f2">
             <div class="container py-5">
-                <h1 style="color: rgb(219, 129, 45); font-size: 2em; text-align: center">Registro de usuarios</h1>
+                <h1 style="color: rgb(219, 129, 45); font-size: 2em; text-align: center">#{etiqueta['RegistroU']}</h1>
                 <hr/>                  
                 <h:form>
                     <div class="form-row">
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for=""> Tipo de Documento </h:outputLabel>
+                            <h:outputLabel for=""> #{etiqueta['TipoD']} </h:outputLabel>
                             <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.tipoDocumento}" >
-                                    <f:selectItem itemValue="0" itemLabel="Seleccione tipo de documento"></f:selectItem>
+                                    <f:selectItem itemValue="0" itemLabel="#{etiqueta['Seleccione']}"></f:selectItem>
                                     <f:selectItem itemValue="1" itemLabel="CC"></f:selectItem>
                                     <f:selectItem itemValue="2" itemLabel="TI"></f:selectItem>
                                     <f:selectItem itemValue="3" itemLabel="NIT"></f:selectItem>
@@ -30,36 +31,36 @@
                             </h:selectOneMenu>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for=""> Número de documento </h:outputLabel>
+                            <h:outputLabel for="">#{etiqueta['Numero']} </h:outputLabel>
                             <h:inputText value="#{sesionUsuario.documento}" class="form-control" html5:required="true"/>
                         </div>                           
                     </div>                 
                     <div class="form-row">
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for="">Primer Nombre</h:outputLabel>
+                            <h:outputLabel for="">#{etiqueta['PrimerN']}</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.primerNombre}" class="form-control" html5:required="true"/>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel>Segundo Nombre</h:outputLabel>
+                            <h:outputLabel>#{etiqueta['SegundoN']}</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.segundoNombre}" class="form-control" />
                         </div>                       
                     </div>
                     <div class="form-row">
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for="">Primer Apellido</h:outputLabel>
+                            <h:outputLabel for="">#{etiqueta['PrimerA']}</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.primerApellido}" class="form-control" html5:required="true"/>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for="">Segundo Apellido</h:outputLabel>
+                            <h:outputLabel for="">#{etiqueta['SegundoA']}</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.segundoApellido}" class="form-control" />                         
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for="">Nombre de la Empresa</h:outputLabel>
+                            <h:outputLabel for="">#{etiqueta['NombreE']}</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.nombreEmpresa}" class="form-control" html5:required="true"/>
                         </div>
                         <div class="col-md-3 mb-3">
@@ -70,9 +71,9 @@
                     <div class="form-row">
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for=""> Ciudad </h:outputLabel>
+                            <h:outputLabel for=""> #{etiqueta['Ciudad']} </h:outputLabel>
                             <h:selectOneMenu styleClass="form-control" value="#{sesionUsuario.ciudad}"  >
-                                <f:selectItem itemValue="0" itemLabel="Seleccione la Ciudad"></f:selectItem>
+                                <f:selectItem itemValue="0" itemLabel="#{etiqueta['SeleccioneC']}"></f:selectItem>
                                 <f:selectItem itemValue="1" itemLabel="Bogota"></f:selectItem>
                                 <f:selectItem itemValue="2" itemLabel="Medellin"></f:selectItem>
                                 <f:selectItem itemValue="3" itemLabel="Barranquilla"></f:selectItem>
@@ -95,32 +96,32 @@
                             </h:selectOneMenu>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for="">Direccion</h:outputLabel>
+                            <h:outputLabel for="">#{etiqueta['Direccion']}</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.direccion}" class="form-control" html5:required="true"/>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-3 mb-3"></div>
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for="btnRegistro">Correo electrónico</h:outputLabel>                                                       
+                            <h:outputLabel for="btnRegistro">#{etiqueta['Correo']}</h:outputLabel>                                                       
                             <h:inputText value="#{sesionUsuario.correo}" class="form-control" html5:required="true"/>                          
                         </div>                                                
                         <div class="col-md-3 mb-3">
-                            <h:outputLabel for="">Telefono</h:outputLabel>
+                            <h:outputLabel for="">#{etiqueta['Telefono']}</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.telefono}" class="form-control" html5:required="true"/>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-4 mb-3"></div>
                         <div class="col-md-4 mb-3" style="justify-content: center" >
-                            <h:outputLabel for="">Contraseña</h:outputLabel>
+                            <h:outputLabel for="">#{etiqueta['Contraseña']}</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.contraseña}" html5:type="password" class="form-control" html5:required="true"/>
                         </div>                         
                     </div>
                     <div class="form-row">
                         <div class="col-md-4 mb-3"></div>
                         <div class="col-md-4 mb-3">
-                            <h:outputLabel onclick="registroExitoso('asadfgh')" for="">Confirmar Contraseña</h:outputLabel>
+                            <h:outputLabel for="">#{etiqueta['ConfirmarC']}</h:outputLabel>
                             <h:inputText value="#{sesionUsuario.confirmarContraseña}" html5:type="password" class="form-control" html5:required="true"/>
                         </div>
                     </div>
@@ -129,8 +130,8 @@
                     <div class="form-row">
                         <div class="col-md-5 mb-3"></div>
                         <div class="col-md-3 mb-3">
-                            <h:commandButton action="#{sesionUsuario.registrarUsuario()}" class="btn btn-success" style="background-color: rgb(50, 51, 142); border: none" value="Registrarse" ></h:commandButton>
-                            <a href="index.xhtml" class="btn btn-dark">Cancelar / Volver</a>
+                            <h:commandButton action="#{sesionUsuario.registrarUsuario()}" class="btn btn-success" style="background-color: rgb(50, 51, 142); border: none" value="#{etiqueta['Registrarse']}" ></h:commandButton>
+                            <a href="index.xhtml" class="btn btn-dark">#{etiqueta['CancelarV']}</a>
                         </div>
                     </div>
                 </h:form>  
@@ -139,8 +140,8 @@
         <script type="text/javascript">
              function registroExitoso(a) {
                 Swal.fire(
-                        'Registro OK !',
-                        a,
+                        'OK !',
+                        '#{etiqueta['RegistroOK']}',
                         'success'
                         ); 
                 }
@@ -148,8 +149,8 @@
         <script type="text/javascript">
                 function registroFallido(a) {
                 Swal.fire(
-                        'Oops...',
-                         a,
+                        '#{etiqueta['Falla']}',
+                        '#{etiqueta['Intenta']}',
                         'error'
                          );
                 }

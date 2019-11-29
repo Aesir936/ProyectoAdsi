@@ -4,9 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
     <h:head>
-       <title>SIIM</title>
+        <title>SIIM</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -29,12 +28,11 @@
     </h:head>
 
     <h:body>
-        <f:loadBundle basename="edu.ProyectoAdsi.properties.#{idiomaController.idioma}" var="etiqueta" ></f:loadBundle>  
-        
+        <f:loadBundle basename="edu.ProyectoAdsi.properties.#{idiomaController.idioma}" var="etiqueta" ></f:loadBundle>
         <div id="wrapper">
             <div id="left">
                 <ui:insert name="left">
-                    <ui:include src="leftGerente.xhtml"></ui:include>    
+                    <ui:include src="leftAdministrador.xhtml"></ui:include>    
                 </ui:insert>
             </div>
 
@@ -42,18 +40,18 @@
                 <div id="content">
                     <div id="top">
                         <ui:insert name="top">
-                            <ui:include src="topGerente.xhtml"></ui:include>
+                            <ui:include src="topAdministrador.xhtml"></ui:include>
                         </ui:insert>
                     </div>
                     <div id="content" class="left_content">
                         <ui:insert name="content">
-                            <ui:include src="contentGerente.xhtml"></ui:include>
+                            <ui:include src="contentAdministrador.xhtml"></ui:include>
                         </ui:insert>
                     </div>
                 </div>
                 <div>
                     <ui:insert name="bottom">
-                        <ui:include src="bottomGerente.xhtml"></ui:include>
+                        <ui:include src="bottomAdministrador.xhtml"></ui:include>
                     </ui:insert>
                 </div>
             </div>
@@ -118,7 +116,6 @@
             estadoBad("El valor " + numero + " no es un número");
   }
         </script>
-
     </h:body>
 
 </html>

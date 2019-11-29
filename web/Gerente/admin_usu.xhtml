@@ -11,12 +11,12 @@
         <ui:composition template="./TemplateGerente/templateGerente.xhtml">
 
             <ui:define name="content">
-                <h3 style="text-align: center">Usuarios Registrados</h3>
+                <h3 style="text-align: center">#{etiqueta['UsuariosR']}</h3>
                 <br></br>
                 <div class="row text-center">
                     <div class="col-2"></div>
                     <div class="col-3">
-                        <h5 style="text-align: left">Filtrar usuarios por:</h5>
+                        <h5 style="text-align: left">#{etiqueta['FiltrarU']}</h5>
                     </div>
                 </div>
                 <br></br>
@@ -25,26 +25,26 @@
                         <div class="row">
                             <div class="col-2"></div>
                             <div class="col-3"> 
-                                <label for="documentoTC">Documento</label>
+                                <label for="documentoTC">#{etiqueta['Documento']}</label>
                                 <h:inputText value="#{sesionUsuario.documento}" class="form-control" html5:placeholder="Numero documento"/>
                             </div> 
                             <div class="col-2"></div>
                             <div class="col-3"> 
-                                <label for="validationCustom01">Nit Empresa</label>
+                                <label for="validationCustom01">Nit</label>
                                 <h:inputText value="#{sesionUsuario.nit}" class="form-control"  html5:placeholder="Nit" />
                             </div>
                         </div>
                         <div class="row py-5">
                             <div class="col-5"></div>
                             <div class="col-2 text-center"> 
-                                <h:commandButton class="btn btn-primary" style="border: none; background-color: rgb(219, 129, 45)" value="Buscar" action="admin_usu"></h:commandButton>                           
+                                <h:commandButton class="btn btn-primary" style="border: none; background-color: rgb(219, 129, 45)" value="#{etiqueta['Buscar']}" action="admin_usu"></h:commandButton>                           
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-2"></div>
                             <button class=" btn btn-success text-black-100" type="button" id="btnexportar" onclick="Export()">
                                 <i class="fas fa-file-export"></i>
-                                Exportar listado
+                                #{etiqueta['ExportarL']}
                             </button> 
                         </div>
                     </h:form>
@@ -53,13 +53,13 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Nombre usuario</th>
-                                    <th scope="col">Documento</th>
-                                    <th scope="col">Correo</th>
-                                    <th scope="col">Empresa</th>
-                                    <th scope="col">Ciudad</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col">#{etiqueta['NombreU']}</th>
+                                    <th scope="col">#{etiqueta['Documento']}</th>
+                                    <th scope="col">#{etiqueta['CorreoA']}</th>
+                                    <th scope="col">#{etiqueta['Empresa']}</th>
+                                    <th scope="col">#{etiqueta['Ciudad']}</th>
+                                    <th scope="col">#{etiqueta['Estado']}</th>
+                                    <th scope="col">#{etiqueta['Acciones']}</th>
                                 </tr>
                             </thead> 
                             <tbody>
@@ -76,10 +76,10 @@
                                             <c:if test="#{usuario.documento != sesionUsuario.usuLog.documento}">
 
                                                 <td>                                                        
-                                                    <h:commandButton action="#{sesionUsuario.eliminarUsuario(usuario.idUsuarios)}" value="Eliminar" class="btn btn-danger"></h:commandButton>                                                       
+                                                    <h:commandButton action="#{sesionUsuario.eliminarUsuario(usuario.idUsuarios)}" value="#{etiqueta['Eliminar']}" class="btn btn-danger"></h:commandButton>                                                       
                                                 </td>                                    
                                                 <td>
-                                                    <h:commandButton action="#{sesionUsuario.cambiarEstado(usuario.idUsuarios)}" value="Cambiar estado" class="btn btn-danger" ></h:commandButton>
+                                                    <h:commandButton action="#{sesionUsuario.cambiarEstado(usuario.idUsuarios)}" value="#{etiqueta['CambiarEst']}" class="btn btn-danger" ></h:commandButton>
                                                 </td>
                                             </c:if>                                            
                                         </tr>

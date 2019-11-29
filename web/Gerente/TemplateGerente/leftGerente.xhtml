@@ -21,23 +21,23 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="index.xhtml">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Tablero principal</span></a>
+                            <span>#{etiqueta['Tablero']}</span></a>
                     </li>
                     <!-- División -->
                     <hr class="sidebar-divider d-none d-md-block"></hr>
                     <!-- Cabecera de sección -->
                     <div class="sidebar-heading">
-                      Gerente
+                      #{etiqueta['Gerente']}
                     </div>
                     <!-- Menú Cotizaciones -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQuotations" aria-expanded="true" aria-controls="collapseQuotations">
                             <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Cotizaciones</span>
+                            <span> #{etiqueta['Cotizacion']}</span>
                         </a>
                         <div id="collapseQuotations" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="ListadoCotizaciones.xhtml">Listado de cotizaciones</a>
+                                <a class="collapse-item" href="ListadoCotizaciones.xhtml">#{etiqueta['ListadoC']}</a>
                             </div>
                         </div>
                     </li>
@@ -45,13 +45,13 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorkorder" aria-expanded="true" aria-controls="collapseWorkorder">
                             <i class="fas fa-toolbox"></i>
-                            <span>Ordenes de Trabajo</span>
+                            <span>#{etiqueta['OrdenesT']}</span>
                         </a>
                         <div id="collapseWorkorder" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <!--                                <h6 class="collapse-header">Páginas de inicio:</h6>-->
-                                <a class="collapse-item" href="registrarOT.xhtml">Crear orden de trabajo</a>
-                                <a class="collapse-item" href="listadoOT's.xhtml">Consultar O.T.'s</a>
+                                <a class="collapse-item" href="registrarOT.xhtml">#{etiqueta['CrearOT']}</a>
+                                <a class="collapse-item" href="listadoOT's.xhtml">#{etiqueta['ConsultarOT']}</a>
                                
                             </div>
                         </div>
@@ -60,35 +60,31 @@
                     <li class="nav-item">
                         <a class="nav-link" href="admin_usu.xhtml">
                             <i class="fas fa-id-badge"></i>
-                            <span>Gestión de usuarios</span></a>
+                            <span>#{etiqueta['Gestion']}</span></a>
                     </li>
                     <!-- Informes -->
                     <li class="nav-item">
                         <a class="nav-link" href="Graficas.xhtml">
                             <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Gráficos estadísticos</span></a>
+                            <span>#{etiqueta['GraficosE']}</span></a>
                     </li>
 
                     <!-- División -->
                     <hr class="sidebar-divider"/>
 
-                    <!-- Cabecera -->
-                    <div class="sidebar-heading">
-                        Interfaz
-                    </div>
                                         
                     <!-- Menú de configuración de perfil -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                             <i class="fas fa-fw fa-cog"></i>
-                            <span>Configuración de perfil</span>
+                            <span>#{etiqueta['ConfiguracionP']}</span>
                         </a>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Editar perfil:</h6>
+                                <h6 class="collapse-header">#{etiqueta['EditarP']}</h6>
 <!--                                <a class="collapse-item" href="enConstruccion.xhtml">Cambiar imágen</a>-->
                                 <a class="collapse-item" href="editarDatosUsuario.xhtml">
-                                    <span style="font-size: 1em">Editar datos personales</span>
+                                    <span style="font-size: 1em">#{etiqueta['Editardatos']}</span>
                                 </a>
                             </div>
                         </div>
@@ -97,22 +93,18 @@
                     <!-- División -->
                     <hr class="sidebar-divider"/>
 
-                    <!--Cabecera -->
-                    <div class="sidebar-heading">
-                        Enlaces
-                    </div>
-
+                    
                     <!-- Menú páginas -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                             <i class="fas fa-fw fa-folder"></i>
-                            <span>Otras páginas</span>
+                            <span>#{etiqueta['OtrasP']}</span>
                         </a>
                         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Páginas de inicio:</h6>
-                                <a class="collapse-item" href="../index.xhtml">Inicio</a>                                
-                                <a class="collapse-item" href="../recuperarContrasena.xhtml">Recordar contraseña</a>
+                                <h6 class="collapse-header">#{etiqueta['PaginasI']}</h6>
+                                <a class="collapse-item" href="../index.xhtml">#{etiqueta['Inicio']}</a>                                
+                                <a class="collapse-item" href="../recuperarContrasena.xhtml">#{etiqueta['RecordarC']}</a>
                                 
                             </div>
                         </div>
